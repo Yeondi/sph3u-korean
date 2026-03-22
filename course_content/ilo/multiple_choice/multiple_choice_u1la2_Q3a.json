@@ -1,0 +1,55 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "Beginning of Multiple Choice 1 interactive activity.",
+    "iloEndText": "End of Multiple Choice 1 interactive activity.",
+    "iloStartLink": "Enter interactive activity Multiple Choice 1 or press link to skip to end of activity.",
+    "iloEndLink": "Press link to return to start of interactive activity Multiple Choice 1.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "A 280 Hz buzzer produces sound waves 1.21 m long. What is the temperature?"
+                ],
+                "ariaLabel": "A 280 Hz buzzer produces sound waves 1.21 m long. What is the temperature?"
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "6.8 °C"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. Use the universal wave equation first to find the speed. v = fλ, where the frequency is 280 Hz and the wavelength is 1.21 m. Once you know the speed, use the speed of sound in air equation to find the temperature. Go back to example 3 if you need to see how to do this.",
+                    "ariaLabel": "6.8 °C"
+                },
+                {
+                    "answer": [
+                        "340 °C"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. Use the universal wave equation first to find the speed. v = fλ, where the frequency is 280 Hz and the wavelength is 1.21 m. Once you know the speed, use the speed of sound in air equation to find the temperature. Go back to example 3 if you need to see how to do this.",
+                    "ariaLabel": "340 °C"
+                },
+                {
+                    "answer": [
+                        "4.0 °C"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. Use the universal wave equation first to find the speed. v = fλ, where the frequency is 280 Hz and the wavelength is 1.21 m. Once you know the speed, use the speed of sound in air equation to find the temperature. Go back to example 3 if you need to see how to do this.",
+                    "ariaLabel": "4.0 °C"
+                },
+                {
+                    "answer": [
+                        "12 °C"
+                    ],
+                    "correct": true,
+                    "feedback": "Correct.",
+                    "ariaLabel": "12 °C"
+                }
+            ]
+        }
+    ]
+}

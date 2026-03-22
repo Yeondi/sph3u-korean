@@ -1,0 +1,55 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "Beginning of Multiple Choice 1 interactive activity.",
+    "iloEndText": "End of Multiple Choice 1 interactive activity.",
+    "iloStartLink": "Enter interactive activity Multiple Choice 1 or press link to skip to end of activity.",
+    "iloEndLink": "Press link to return to start of interactive activity Multiple Choice 1.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "How much less intense is a concert with an intensity of 110 dB compared to a jet taking off with an intensity of 130 dB?"
+                ],
+                "ariaLabel": "How much less intense is a concert with an intensity of 110 dB compared to a jet taking off with an intensity of 130 dB?"
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "20 times less intense"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. 130 - 110 = 20 dB. That means the sound is 10² = 100 times less intense.",
+                    "ariaLabel": "20 times less intense"
+                },
+                {
+                    "answer": [
+                        "2 times less intense"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. 130 - 110 = 20 dB. That means the sound is 10² = 100 times less intense.",
+                    "ariaLabel": "2 times less intense"
+                },
+                {
+                    "answer": [
+                        "200 times less intense"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. 130 - 110 = 20 dB. That means the sound is 10² = 100 times less intense.",
+                    "ariaLabel": "200 times less intense"
+                },
+                {
+                    "answer": [
+                        "100 times less intense"
+                    ],
+                    "correct": true,
+                    "feedback": "Correct.",
+                    "ariaLabel": "100 times less intense"
+                }
+            ]
+        }
+    ]
+}

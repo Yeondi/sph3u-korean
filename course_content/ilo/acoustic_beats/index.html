@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>음향 맥놀이</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    
+    <link href="css/ilc_main.css" rel="stylesheet" >
+    <link href="css/main.css" rel="stylesheet" />
+
+    <!-- Stylesheet Overrides -->
+    <style type="text/css">
+
+        /* QA Fix: Slightly Smaller Buttons */
+        .cta-large
+        {
+            font-size: 18px;
+        }
+
+        /* QA Fix: Slightly Smaller Copy */
+        .qa
+        {
+            font-size: 0.95em;
+            line-height: 145%;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div id="mainContainer">
+         <!--div id="instructionsMask"></div-->
+    <!-- <div id="instructionsContainer" data-markdown-id="instructions" data-markdown-processed="false"></div> -->
+        <!--div id="instructionsContainer" data-lang-id="instructions" data-lang-processed="false"></div-->
+        <div id="instructions">
+            <h1><big><big>음향 맥놀이</big></big></h1>
+<p class="qa">거의 동일한 진동수를 가진 두 소리가 동시에 발생하면, 음파는 놀라운 방식으로 서로 간섭합니다. 그 결과 규칙적이고 뚜렷한 ‘우우우’ 또는 맥놀이 소리가 납니다. 거의 동일한 진동수를 가진 세 번째 소리를 추가하면 더 복잡한 간섭 패턴이 생깁니다.</p>
+<p class="qa"><b>참고</b>: 오른쪽 그래프는 차이를 볼 수 있도록 느리게 표시되어 있습니다.</p>
+<ul class="qa" style="padding-left: 18px;">
+    <li>버튼을 눌러 해당 음을 들어 보세요.</li>
+    <li>다시 누르면 소리가 꺼집니다.</li>
+    <li>두 개의 다른 버튼을 눌러 두 음을 함께 들어 보세요. 발생하는 간섭 맥놀이를 들어 보세요.</li>
+    <li>세 버튼을 모두 눌러 간섭 패턴을 들어 보세요.</li>
+</ul>
+
+        </div> 
+      
+        <!--canvas alt="A horseshoe magnet with the north pole at the top of the screen, and a circuit consisting of a battery and a loop of wire" id="game-canvas" width="540" height="330" tabindex="-1"></canvas-->
+        
+        <div class="arrange-horizontally">
+        
+            <div alt="3" id="phaser-Container" tabindex="-1"></div>
+            <div id="ui" class="arrange-vertically">
+                <div>
+                    <p>
+                        <label for="start440"><span>440Hz</span></label> 
+                    </p>         
+                    <button id="start440" class="btn cta-large">음 재생</button>
+                </div>
+                <div>
+                    <p>
+                        <label for="start4405"><span>440.5Hz</span></label> 
+                    </p>         
+                    <button id="start4405" class="btn cta-large">음 재생</button>
+                </div>
+                <div>
+                    <p>
+                        <label for="start441"><span>441Hz</span></label> 
+                    </p>         
+                    <button id="start441" class="btn cta-large">음 재생</button>
+                </div>
+            <br/>
+            <br/>
+                <div>
+                    <p>
+                        <label for="stopAll" style="margin-top: 20px;"><span>합성음</span></label> 
+                    </p>         
+                    <button id="stopAllButton" class="btn cta-large">모두 정지</button>
+                </div>               
+            </div>
+        </div>
+        
+    </div>
+</body>
+        
+<script src="libraries/marked.min.js"></script>        
+<script src="https://use.fontawesome.com/dd511ff0f4.js"></script>
+<script src="libraries/phaser.min.js"></script>
+<!--script src="js/languageLoader.js"></script-->
+<script src="js/app.js"></script>
+
+
+</html>

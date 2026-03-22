@@ -1,0 +1,55 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "Beginning of Multiple Choice 1 interactive activity.",
+    "iloEndText": "End of Multiple Choice 1 interactive activity.",
+    "iloStartLink": "Enter interactive activity Multiple Choice 1 or press link to skip to end of activity.",
+    "iloEndLink": "Press link to return to start of interactive activity Multiple Choice 1.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "How much more intense is a 110 dB sound heard at a rock concert than a 60 dB sound heard during normal conversation?"
+                ],
+                "ariaLabel": "How much more intense is a 110 dB sound heard at a rock concert than a 60 dB sound heard during normal conversation?"
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "50 times more intense"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. 110 – 60 = 50 dB. That means the sound is 10⁵ times more intense.",
+                    "ariaLabel": "50 times more intense"
+                },
+                {
+                    "answer": [
+                        "5 times more intense"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. 110 – 60 = 50 dB. That means the sound is 10⁵ times more intense.",
+                    "ariaLabel": "5 times more intense"
+                },
+                {
+                    "answer": [
+                        "10<sup>5</sup> times more intense"
+                    ],
+                    "correct": true,
+                    "feedback": "Correct.",
+                    "ariaLabel": "10<sup>5</sup> times more intense"
+                },
+                {
+                    "answer": [
+                        "500 times more intense"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. 110 – 60 = 50 dB. That means the sound is 10⁵ times more intense.",
+                    "ariaLabel": "500 times more intense"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "department": "sec",
+    "pairs": 5,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "You did it! Way to go!",
+    "basePath": "../assets/img",
+    "columnRatio": "1:2",
+    "items": [
+      {
+        "first": ["", "", "a"],
+        "second": ["", "", "1 λ"]
+      },
+      {
+        "first": ["", "", "b"],
+        "second": ["", "", "crest"]
+      },
+      {
+        "first": ["", "", "c"],
+        "second": ["", "", "amplitude"]
+      },
+      {
+        "first": ["", "", "d"],
+        "second": ["", "", "trough"]
+      },
+      {
+        "first": ["", "", "e"],
+        "second": ["", "", "2 λ"]
+      }     
+    ],
+    "iloStartLink": "Enter interactive activity Matching 1 or press link to skip to end of activity.",
+    "iloStartText": "Beginning of Matching 1 interactive activity.",
+    "iloEndLink": "Press link to return to start of interactive activity Matching 1.",
+    "iloEndText": "End of Matching 1 interactive activity."
+
+  }
+  
+  

@@ -1,0 +1,55 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "Beginning of Multiple Choice 1 interactive activity.",
+    "iloEndText": "End of Multiple Choice 1 interactive activity.",
+    "iloStartLink": "Enter interactive activity Multiple Choice 1 or press link to skip to end of activity.",
+    "iloEndLink": "Press link to return to start of interactive activity Multiple Choice 1.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "A siren with a frequency of 500 Hz is activated at 10.0°C. What is the speed of the sound?"
+                ],
+                "ariaLabel": "A siren with a frequency of 500 Hz is activated at 10.0°C. What is the speed of the sound?"
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "50 m/s"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. The 500 Hz is not needed to find the speed. The formula is v = 332 m/s + (0.59 m/s · °C) × T, where T is 10.0°C.",
+                    "ariaLabel": "50 m/s"
+                },
+                {
+                    "answer": [
+                        "510 m/s"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. The 500 Hz is not needed to find the speed. The formula is v = 332 m/s + (0.59 m/s · °C) × T, where T is 10.0°C.",
+                    "ariaLabel": "510 m/s"
+                },
+                {
+                    "answer": [
+                        "338 m/s"
+                    ],
+                    "correct": true,
+                    "feedback": "Correct.",
+                    "ariaLabel": "338 m/s"
+                },
+                {
+                    "answer": [
+                        "342 m/s"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. The 500 Hz is not needed to find the speed. The formula is v = 332 m/s + (0.59 m/s · °C) × T, where T is 10.0°C.",
+                    "ariaLabel": "342 m/s"
+                }
+            ]
+        }
+    ]
+}

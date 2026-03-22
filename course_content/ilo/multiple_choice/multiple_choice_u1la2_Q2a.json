@@ -1,0 +1,55 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "Beginning of Multiple Choice 1 interactive activity.",
+    "iloEndText": "End of Multiple Choice 1 interactive activity.",
+    "iloStartLink": "Enter interactive activity Multiple Choice 1 or press link to skip to end of activity.",
+    "iloEndLink": "Press link to return to start of interactive activity Multiple Choice 1.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "Considering the same sound as question 1, a siren with a frequency of 500 Hz is activated at 10.0°C. What is the wavelength of the sound?"
+                ],
+                "ariaLabel": "Considering the same sound as question 1, a siren with a frequency of 500 Hz is activated at 10.0°C. What is the wavelength of the sound?"
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "0.7 m"
+                    ],
+                    "correct": true,
+                    "feedback": "Correct.",
+                    "ariaLabel": "0.7 m"
+                },
+                {
+                    "answer": [
+                        "2 m"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. Use the universal wave equation. The wavelength equals the speed divided by the frequency, so 338 m/s is divided by 500 Hz.",
+                    "ariaLabel": "2 m"
+                },
+                {
+                    "answer": [
+                        "3 m"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. Use the universal wave equation. The wavelength equals the speed divided by the frequency, so 338 m/s is divided by 500 Hz.",
+                    "ariaLabel": "3 m"
+                },
+                {
+                    "answer": [
+                        "0.3 m"
+                    ],
+                    "correct": false,
+                    "feedback": "Incorrect. Use the universal wave equation. The wavelength equals the speed divided by the frequency, so 338 m/s is divided by 500 Hz.",
+                    "ariaLabel": "0.3 m"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,3322 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>학습 활동 1.2: 파동의 전달</title>
+
+    <style>
+        /* Reader Tabs*/
+        ul.nav.reader_tab {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .reader_tab>li>a {
+            background-color: #31708f;
+            border: 1px solid #c0c9cb;
+            text-align: center;
+            padding: 5px;
+            color: #fff;
+        }
+
+        .reader_tab>li>a:hover {
+            color: #333;
+        }
+
+        .reader_tab-body {
+            border-right: 1px solid grey;
+            border-top: 1px solid grey;
+            padding: 40px;
+        }
+
+        .reader_tab-body p {
+            padding: 20px 40px 0 0;
+        }
+
+        table,
+        th,
+        td {
+            width: 10%;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../assets/css/ilc_core_temp.css">
+</head>
+
+<body>
+    <noscript>
+        <div class="alert alert-warning clearfix" role="alert">
+            <p>
+                <strong>경고!</strong> 최상의 교육 경험을 보장하기 위해, 이 학습 활동에는 자바스크립트가 활성화되어야 하는 요소가 포함되어 있습니다.
+            </p>
+        </div>
+    </noscript>
+
+    <section id="ilcLearningGoals" class="hidden">
+        <h2>학습 목표</h2>
+        <p>우리는 다음을 학습합니다:</p>
+        <ul>
+            <li>인간이 음파를 듣는 방법 이해하기</li>
+            <li>소리 에너지의 데시벨 척도와 로그 이해하기</li>
+            <li>주어진 데이터로부터 공기나 물과 같은 매질에서의 음속, 파장, 진동수 계산하기</li>
+            <li>움직이는 음원의 도플러 효과 파악하기</li>
+            <li>음파가 자연과 기계에서 어떻게 사용되고 적용되는지 설명하기</li>
+            <li>시간이 지남에 따라 큰 소리에 노출되면 영구적인 청력 손실을 초래할 수 있음을 이해하기</li>
+        </ul>
+        <h2>성취 기준</h2>
+        <p>나는 다음을 할 수 있습니다:</p>
+        <ul>
+            <li>공기 중 음속을 계산하고 관련 문제를 풀 수 있다</li>
+            <li>음속이 매질에 따라 달라지는 이유를 설명할 수 있다</li>
+            <li>도플러 효과를 설명하고 움직이는 음원과 관련된 문제를 풀 수 있다</li>
+            <li>음파의 전달과 관련된 다양한 응용을 설명할 수 있다</li>
+        </ul>
+    </section>
+
+
+    <main id="mainContent" class="container">
+        <section id="mindsOn">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_01.02_mindsOn.jpg" alt="Minds On" class="img-responsive" style="width:100%;">
+                </h1>
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>어휘: 음파의 물리학과 관련된 다음 용어들을 노트에 기록하세요. 학습 활동을 완료하면서 각 어휘의 정의와 핵심 용어를 채워 넣으세요. </p>
+
+                            <ul>
+                                <li>소음 (noise)</li>
+                                <li>진동수 (frequency)</li>
+                                <li>헤르츠 (hertz)</li>
+                                <li>데시벨 (dB)</li>
+                                <li>로그 척도 (logarithmic scale)</li>
+                                <li>도플러 효과 (Doppler effect)</li>
+                                <li>밀도 (density)</li>
+                                <li>초음파 (ultrasonic)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+
+                    <h2>일상 속의 소리</h2>
+                    <p>많은 인간과 다른 동물들은 서로 의사소통하고 환경에 대한 중요한 정보를 얻기 위해 소리를 사용합니다. 소리는 의도적으로 조합되어 음악을 만들어 우리의 삶을 풍요롭게 할 수 있습니다. 그러나 기계에서도 소리가 발생하며, 이러한 소리는 사람과 동물 모두에게 불쾌감을 줍니다. 많은 작업 환경에서 소리의 세기가 너무 커져 건강 문제가 될 수 있습니다. 소음성 난청은 큰 소리에 장시간 노출되어 발생할 수 있습니다. 큰 소리가 발생하는 환경에서 일하는 사람들은 노출을 최소화하기 위한 예방 조치를 취해야 합니다. </p>
+
+                    <p>이어폰을 통해 음악을 재생하는 휴대용 음악 재생 장치(스마트폰 등)도 청력 손실이 발생하지 않도록 안전한 범위 내의 음량으로 재생해야 합니다. </p>
+
+                    <p>소리는 많은 방식으로 우리의 삶에 영향을 미칩니다. 하지만 소리가 실제로 어떻게 작동하는지 알고 있나요? 음파의 속도를 결정하는 것은 무엇일까요? 산업과 제조에서 소리의 응용이 있으며, 의사들이 부상 치료에 소리를 사용한다는 것을 알고 있었나요? 이 학습 활동에서는 소리의 주요 원리와 몇 가지 응용에 대해 배울 것입니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>탐구: 실 전화기 활동</h4>
+                            <p>기체, 액체, 고체 등 다양한 매질을 통해 소리가 어떻게 전달되는지 탐구할 것입니다. 사실, 소리가 액체와 고체에서 얼마나 잘 전달되는지 놀랄 수 있습니다. 다음 실 전화기 활동을 살펴보고, 가능하다면 직접 해 보세요.</p>
+                            <img src="../assets/img/sph3u_01.02.01.svg" alt="Two children speaking on a string telephone" class="img-responsive callout-image center-block">
+                        </div>
+                    </div>
+                    <p>활동을 시작하기 전에 다음 질문들에 대해 생각해 보세요:</p>
+                    <ul>
+                        <li>별도의 방에 있는 두 사람이 서로의 소리를 들을 수 있다고 생각하나요?</li>
+                        <li>소리를 내기 위해 무엇이 진동하고 있나요?</li>
+                        <li>어떤 메커니즘이 사람들에게 소리를 듣게 해 주나요?</li>
+                    </ul>
+                    <h4>준비물</h4>
+                    <ul>
+                        <li>큰 종이컵 2개 (일회용 플라스틱 컵도 가능)</li>
+                        <li>클립 또는 이쑤시개 2개</li>
+                        <li>길이 약 3~10미터의 면실 또는 낚싯줄</li>
+                        <li>조용한 장소</li>
+                        <li>상대방 1명</li>
+                    </ul>
+                    <h4>절차</h4>
+                    <ol>
+                        <li> 각 컵 바닥 중앙에 작은 구멍을 뚫으세요 (플라스틱 컵의 경우 못이나 다른 뾰족한 도구가 필요할 수 있으므로 이 단계를 수행할 때 주의하세요).</li>
+                        <li> 실의 각 끝을 각 컵 바닥을 통해 꿰세요.</li>
+                        <li> 각 컵 바닥에 클립이나 이쑤시개를 놓고 실의 느슨한 끝을 그 주위에 묶으세요 (클립이나 이쑤시개는 실이 컵 바닥을 통해 빠져나가는 것을 방지하기 위한 것입니다).</li>
+                        <li> 컵 하나를 대화 상대에게 주고 하나는 직접 잡으세요.</li>
+                        <li>컵을 연결하는 실이 곧고 팽팽해질 때까지 천천히 멀어지세요.
+                        </li>
+                        <li>컵을 귀에 대고 상대방이 자신의 컵에 대고 말하거나 소리를 내게 하세요 (서로 가까이 서 있는 경우 비교적 조용하게 하되, 속삭임보다는 큰 소리를 내도록 하세요).</li>
+                    </ol>
+                </div>
+            </div>
+
+
+        </section>
+        <section id="action">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_01_action.jpg" alt="Action" class="img-responsive" style="width:100%;"></h1>
+
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>파동으로서의 소리 </h2>
+                    <p>횡파와 종파의 차이를 기억하나요?</p>
+                    <p>소리는 종파이며, 빠르게 진동하는 물체에 의해 만들어집니다.</p>
+
+                </div>
+
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>탐구해 보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%;">
+                            <p> 다음 영상은 소리굽쇠가 소리를 낼 때 진동하며, 이 진동이 물과 접촉하면 왜곡/감쇠되어 윙윙거리는 소리를 내는 것을 보여줍니다.</p>
+
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2542043"></div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <h3>소리는 주기적 운동의 한 예입니다</h3>
+                    <p>진자만이 주기적 운동의 유일한 예는 아닙니다. 파동이 지나갈 때 위아래로 흔들리는 배, 스프링에 달린 물체가 앞뒤로 움직이는 것, 시계의 초침 등 수많은 예가 있습니다. 이 단원에서는 주요 주기적 운동 유형으로서 소리와 소리를 만드는 방법에 집중할 것입니다.</p>
+                    <p>빠르게 진동하는 물체는 공기 중에 파동을 만들어내며, 이 파동은 모든 방향으로 이동합니다. 소리가 들리는 것은 파동이 사람의 귀에 도달하여 고막을 진동시키고 청각 신경을 자극하기 때문입니다. </p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>복습</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/review.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>인간이 소리를 듣고 측정하는 방법에 대해 알아보려면 다음 자료 <a href="../assets/locker_docs/sph3u_01_how_hearing_works.pdf" target="_blank">청각의 원리<span class="sr-only">(새 창에서 열림)</span></a>를 참조하여 귀의 해부학적 구조를 복습하세요.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>탐구해 보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%;">
+                            <p>다음 영상은 인간의 청각이 어떻게 작동하는지에 대한 추가 정보를 제공합니다. </p>
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2669047"></div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>때때로 소리가 충분히 크지 않아 감지되지 않을 수 있고, 다른 경우에는 소리가 너무 강해서 사람들을 놀라게 하거나 부상을 입힐 수도 있습니다. 소리의 세기는 데시벨(dB)로 측정됩니다.</p>
+                    <p>또한 사람들은 모든 진동수를 들을 수 없습니다. 내이의 유모 세포가 시간이 지남에 따라 퇴화하는 경향이 있으므로, 젊은 사람들은 보통 나이 든 사람들보다 더 넓은 범위의 진동수를 들을 수 있습니다. 젊은 사람은 20 Hz에서 20,000 Hz 범위의 진동수를 들을 수 있습니다. 20,000 Hz보다 높은 진동수를 초음파라 하고, 20 Hz보다 낮은 진동수를 초저주파라 합니다.</p>
+
+                    <p>보청기는 귀 손상을 해결하는 한 가지 방법입니다. 보청기는 개인의 필요에 맞는 특정 진동수를 증폭하도록 프로그래밍할 수 있습니다.</p>
+
+                    <p>때때로 사람의 내이가 넓은 범위의 진동수를 감지하지 못할 수 있습니다. 이러한 종류의 청력 손실에서는 인공 와우가 귀 자체를 우회하여 전자 신호를 청각 신경에 직접 보낼 수 있습니다.</p>
+
+                    <h3>탐구 – 소리의 진동수</h3>
+                    <h4>활동</h4>
+                    <p>이어폰 음악과 같은 지속적인 큰 소리 에너지에 노출되면 청력 손실이 발생할 수 있습니다. 청소년은 20 Hz에서 18 kHz 사이의 진동수를 인지할 수 있어야 합니다. 자신이 인지할 수 있는 진동수를 알아보세요.
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>탐구해 보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+
+                        <div class="callout_content" style="width: 100%;">
+
+                            <p>다음 영상은 다른 높낮이의 소리가 어떻게 들리는지 보여줍니다.</p>
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2668492"></div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>소리의 세기</h3>
+                    <p>이제 소리의 세기 수준과 이러한 수준에 가까운 음원들을 살펴보겠습니다.</p>
+                    <table id="myTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">음원</th>
+                                <th scope="col">세기 수준 (dB)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> 인간 청각의 문턱값</td>
+                                <td> 0 </td>
+                            </tr>
+                            <tr>
+                                <td> 속삭임 </td>
+                                <td> 30</td>
+                            </tr>
+
+                            <tr>
+                                <td> 일반 가정</td>
+                                <td> 50 </td>
+                            </tr>
+                            <tr>
+                                <td> 두 사람의 대화</td>
+                                <td> 60 </td>
+                            </tr>
+                            <tr>
+                                <td> 진공청소기</td>
+                                <td> 80 </td>
+                            </tr>
+                            <tr>
+                                <td> 집에서의 큰 음악</td>
+                                <td> 90 </td>
+                            </tr>
+                            <tr>
+                                <td> 록 콘서트</td>
+                                <td> 110 </td>
+                            </tr>
+                            <tr>
+                                <td> 통증 문턱값</td>
+                                <td> 130 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h4>소음과 소음 공해</h4>
+                    <p>여러분은 소음이 사회와 환경에 미칠 수 있는 영향에 대해 이미 생각해 보았습니다. 이제 소음으로 정의할 수 있는 것이 무엇인지 알아볼 것입니다. 어떤 사람들은 큰 음악을 듣고 단지 소음이라고 말하지만, 다른 사람들은 자신이 좋아하는 노래를 듣고 있을 수 있습니다. 그렇다면 사회는 소음을 어떻게 정의할 수 있을까요? 이것은 전적으로 개인적 의견의 문제입니다.</p>
+
+                    <p>모든 형태의 원치 않는 소리는 소음으로 간주됩니다. 그렇다면 소음 공해란 무엇일까요? </p>
+
+                    <p>소음 공해는 인간의 활동이나 자연의 균형을 방해하는 소리입니다. 인간에게 소음 공해는 심리적 문제뿐만 아니라 귀의 기능에 실질적인 물리적 손상을 일으킬 수 있습니다. 많은 연구에서 소음 공해의 증가로 인해 더 높은 수준의 스트레스, 좌절감, 공격성이 보고되었습니다. 집중력 부족과 전반적인 주의력 결핍은 이러한 연구들에서 잘 기록되어 있습니다. 소음 공해는 동물들의 정상적인 행동도 방해할 수 있으며, 가능한 경우 다른 지역으로 이동하게 만들 수 있습니다.
+                    </p>
+
+
+                    <p>소음 공해의 문제는 조용한 주기적 소리의 간헐적 불쾌감보다는 대부분 소리의 세기 때문입니다. 인간의 귀가 감지할 수 있는 소리 세기의 범위는 매우 넓습니다. 조용한 방에서 핀이 떨어지는 소리부터 수 킬로미터 떨어진 제트 엔진 소리까지 들을 수 있습니다.
+                    </p>
+
+                    <p>이 넓은 범위의 소리 세기를 다루기 위해 데시벨 척도가 발명되었습니다. 이 척도에서 인간의 귀가 감지할 수 있는 가장 낮은 소리의 세기인 청각의 문턱값에는 0 데시벨(dB)의 값이 부여됩니다. 미터법 접두사를 고려하면, 이것이 실제로 다른 단위(벨)의 10분의 1(데시-)에 해당한다는 것을 알 수 있습니다. 나뭇잎이 바스락거리는 소리처럼 10배 더 강한 소리에는 10 dB의 데시벨 수준이 부여됩니다. 청각의 문턱값보다 1000(10<sup>3</sup>)배 강한 속삭임은 30 dB이 부여됩니다. 100만 배(10<sup>6</sup>) 강한 일반 대화는 60 dB이 부여됩니다. 기본적으로 소리가 10배 더 강해지면 데시벨 수준은 10 증가합니다.</p>
+
+                    <p><b>예시</b>: 소리 1이 50 dB이고 소리 2가 80 dB이면, 소리 2는 소리 1보다 30 dB 높으므로 10<sup>3</sup> = 1000배 더 강합니다. </p>
+                    <p>데시벨 척도로 측정되는 이 소리의 특성을 음량이라고 합니다. 인간은 120 dB 이상에 노출되면 실제로 물리적 고통을 느낍니다. 매우 큰 소리에 장시간 노출되거나, 극도로 큰 소리에 짧은 시간 노출되면 일시적 또는 영구적 청력 손실을 초래할 수 있습니다.
+                    </p>
+
+                    <p>소음 공해를 줄이는 한 가지 방법은 소리를 반사하거나 전달하는 대신 흡수하는 재료를 사용하여 건물을 짓는 것입니다. 이렇게 하면 건물 내부의 소리 수준이 감소하고 소음 공해의 영향이 줄어듭니다. 그러나 이 해결책은 외부에 있는 사람들에게는 도움이 되지 않습니다. 외부 소음에 대한 한 가지 해결책은 귀마개를 착용하는 것으로, 단순히 소리가 귀에 들어가는 것을 차단하여 음량을 줄입니다. 물론, 그 사람은 주변의 다른 소리에 대한 인식이 낮아지므로, 이는 단점이거나 안전 문제가 될 수 있습니다.</p>
+
+                    <p>첨단 기술 해결책으로는 소음 제거 헤드폰을 사용하는 것이 있습니다. 이 헤드폰은 귀 위에 놓이며 작은 마이크가 부착되어 있습니다. 마이크가 소리를 감지하면 헤드폰은 정확히 같은 소리를 생성하되 완전히 위상을 반대로 바꿉니다. 이렇게 하면 환경의 소리와 헤드폰의 소리가 상쇄 간섭합니다. 헤드폰을 착용한 사람은 아무 소리도 감지하지 못합니다. 이러한 유형의 기술은 일반적으로 비행기의 일등석 승객이나 매우 큰 소음을 견뎌야 하는 근로자들이 사용합니다.
+                    </p>
+                </div>
+            </div>
+
+
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" style="padding-right: 10px" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 문제를 풀어 이해도를 확인하세요.</p>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div id="ilcCarousel12" class="carousel slide ilo-container-carousel" data-ride="carousel" data-wrap="true" data-interval="false">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <!-- Slide 1 -->
+                    <div class="item active margin-auto ">
+                        <div class="ilo_col ">
+                            <div class="multiple-choice-container" style="margin: auto;" data-config="../ilo/multiple_choice/multiple_choice_u1la2_Q1.json"></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="multiple-choice-container" style="margin: auto;" data-config="../ilo/multiple_choice/multiple_choice_u1la2_Q2.json"></div>
+                    </div>
+
+                    <div class="ilo-carousel-control-container">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators ilo-container-controls">
+                            <li data-target="#ilcCarousel12" data-slide-to="0" class="active"></li>
+                            <li data-target="#ilcCarousel12" data-slide-to="1"></li>
+
+                        </ol><a href="#ilcCarousel12" data-slide="prev">
+                            <div class="ilo-carousel-control ilo-carousel-control-left"></div>
+                        </a><a href="#ilcCarousel12" data-slide="next">
+                            <div class="ilo-carousel-control ilo-carousel-control-right"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>공기 중에서의 소리 전달</h2>
+                    <p>소리는 역학적 파동으로, 이동하기 위해 매질이 필요합니다. 이는 소리가 진공을 통해 이동할 수 없다는 것을 의미합니다. </p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>탐구해 보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%;">
+                            <p>다음 영상은 소리가 전파(이동)하기 위해 매질이 필요하다는 것을 보여줍니다. 장치에서 공기가 천천히 제거되면 소리가 더 이상 들리지 않습니다.</p>
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2542438"></div>
+                </div>
+            </div>
+
+
+            <div class="row margin-top-xl">
+                <div class="col-xs-5 col-xs-offset-1">
+                    <p>소리가 공기를 통해 어떻게 이동하는지 더 명확하게 설명하기 위해, 일반적인 소리굽쇠를 생각해 봅시다.</p>
+                    <p>소리굽쇠에는 두 개의 가지(갈래)가 있어 타격하면 앞뒤로 움직입니다. 가지가 움직이면 공기 중의 입자들을 더 가까이 밀어 밀(압축)이라 불리는 것을 만들고, 또한 공기 중 입자들로부터 뒤로 당겨져 입자들이 더 퍼지게 하여 소(희박)라 불리는 것을 만듭니다.</p>
+                    <p>이 공기 입자들은 평형 위치에서 벗어나 이웃 입자들과 부딪혀 그들도 움직이게 합니다. 이러한 공기 입자 운동 패턴은 모든 방향에서 발생하며, 이것이 다음 그림에 나타난 것처럼 음파가 공기를 통해 이동할 수 있게 하는 것입니다.</p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_01.02.15.jpg" alt="A tuning fork" class="img-responsive" style="width: 70%;">
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- ***************************TO MAKE THIS A FULL SCREEN CAROUSEL, SIMPLY DELETE THE <div> TAG IMMEDIATELY ABOVE THIS COMMENT AS WELL (AS ITS CLOSE </div>) ******************************************* -->
+
+                    <!-- Carousel -->
+                    <div id="ilcCarousel01" class="carousel slide" data-ride="carousel" data-wrap="true" data-interval="false">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#ilcCarousel01" data-slide-to="0" class="active"></li>
+                            <li data-target="#ilcCarousel01" data-slide-to="1"></li>
+                            <li data-target="#ilcCarousel01" data-slide-to="2"></li>
+                            <li data-target="#ilcCarousel01" data-slide-to="3"></li>
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <!-- Slide 1 -->
+                            <div class="item active">
+                                <figure>
+                                    <img src="../assets/img/sph3u_01.02.13a.svg" class="img-responsive center-block" alt="Diagram of tuning fork with the labels tines indicated as the place to strike for sound to be generated.">
+
+                                </figure>
+
+                            </div> <!-- Slide 2 -->
+                            <div class="item">
+                                <figure>
+                                    <img src="../assets/img/sph3u_01.02.13b.svg" class="img-responsive center-block" alt>
+                                    <!-- Caption -->
+                                    <figcaption>
+                                        <p style="text-align: center"><a href="../assets/alt/sph3u_01.02.13b.html" target="_blank">상세 설명을 보려면
+                                                여기를 누르세요.<span class="sr-only">(새 창에서 열림)</span></a></p>
+                                    </figcaption>
+                                </figure>
+
+                            </div> <!-- Slide 3 -->
+                            <div class="item">
+                                <img src="../assets/img/sph3u_01.02.13c.svg" class="img-responsive center-block" alt="Diagram of a tuning fork making rarefraction in the air">
+                                <!-- Caption -->
+
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="item">
+                                <img src="../assets/img/sph3u_01.02.13d.svg" class="img-responsive center-block" alt="Diagram of a tuning fork making compression in the air">
+                                <!-- Caption -->
+
+                            </div>
+                            <br>
+
+                            <!-- Left and right controls -->
+                            <!-- Left -->
+                            <a href="#ilcCarousel01" data-slide="prev">
+                                <i class="fa fa-angle-left fa-2x"></i>
+                            </a>
+                            <!-- Right -->
+                            <a href="#ilcCarousel01" data-slide="next">
+                                <i class="fa fa-angle-right fa-2x pull-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /Carousel -->
+
+                    <!--*************************** CAROUSEL 1 ENDS ******************************************* -->
+
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>소리는 종파입니다</h3>
+                    <p>공기 입자들은 파동의 운동 방향과 평행하게 앞뒤로만 움직이므로, 이것은 종파를 나타냅니다. 밀(압축)에서는 입자들이 빽빽하게 모여 있고 압력이 높습니다. 소(희박)에서는 입자들이 퍼져 있고 압력이 낮습니다.</p>
+                    <figure>
+                        <img src="../assets/img/sph3u_01.02.14.svg" alt="Diagram of two wave lengths with regions with trough labelled as R and regions with crest labelled with R" class="img-responsive">
+
+                    </figure>
+                    <p>음파를 일련의 점(입자를 나타냄)으로 표현하는 대신, 고압 영역과 저압 영역을 나타내는 다른 방법을 사용할 수 있습니다 – 매질을 통한 파동의 운동에 의해 생성된 압력 그래프를 사용할 수 있습니다. 음압파를 횡파로 표현하면, 고압 영역(그림에서 C로 표시된 밀)을 마루로, 저압 영역(그림에서 R로 표시된 소)을 골로 나타낼 수 있습니다. 따라서 이 그림은 음파를 표현하는 더 간단한 방법을 보여줍니다.</p>
+                </div>
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>소리의 인지</h3>
+                </div>
+                <!--       </div>
+      <div class="row"> -->
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+
+                    <p>소리가 파동이므로 학습 활동 1.1의 파동과 관련된 모든 용어와 개념이 소리에도 적용된다는 것을 알았을 것입니다. 더 큰 소리는 공기 입자의 더 큰 진폭의 진동을 의미합니다. 더 높은 음높이의 소리는 더 높은 진동수의 진동을 나타냅니다. 소리는 또한
+                        매질이 변하지 않는 한 일정한 속력으로 이동합니다. </p>
+                    <p>음파의 진동수는 소리의 음높이와 관련이 있습니다. 음높이는 듣는 사람이 인지하는 것입니다. 예를 들어, 고주파 소리는 높은 음높이의 소리로 인지되고, 저주파 진동은 낮은 음높이의 소리를 만듭니다. </p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5"> <img src="../assets/img/sph3u_01.02.12.svg" alt="An individual listening to a sound from a toning fork" class="img-responsive">
+                </div>
+                <!--       </div>
+      <div class="row ilc-row-text"> -->
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>각 소리굽쇠에는 특정 진동수가 있습니다. 256 Hz 소리굽쇠는 가지가 초당 256회 앞뒤로 진동한다는 의미입니다. 512 Hz 소리굽쇠는 가지가 초당 512회 앞뒤로 진동합니다. 512 Hz 소리굽쇠가 256 Hz 소리굽쇠보다 초당 더 많이 앞뒤로 움직이므로 더 높은 음높이를 가집니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>공기 중 음속</h2>
+                    <p>정밀한 실험에 의하면 소리는 정상 압력과 0°C에서 332 m/s로 이동합니다. 공기의 온도가 높으면 음속이 증가합니다. 온도가 1°C 증가할 때마다 음속은 0.59 m/s 증가합니다. </p>
+                    <p>정상 압력에서의 공기 중 음속(<em>v</em>)은 다음 공식을 사용하여 계산할 수 있습니다:
+                    </p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <div class="callout_content">
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mn>332</mn>
+
+                                        <mi mathvariant="normal">&nbsp;m</mi>
+                                        <mn>/</mn>
+                                        <mi mathvariant="normal">s</mi>
+
+                                        <mo>&#xA0;</mo>
+                                        <mo>+</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>0.59</mn>
+                                                <mi mathvariant="normal">&nbsp;m</mi>
+                                                <mn>/</mn>
+                                                <mi mathvariant="normal">s</mi>
+                                                <mo>&#x2022;</mo>
+                                                <mo>&#xb0;</mo>
+                                                <mi mathvariant="normal">C</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mi>T</mi>
+                                    </math></p>
+                                <p>여기서 <i>T</i>는 섭씨 온도입니다.</p>
+                                <p><strong>참고:</strong> 이 공식은 소리가 공기를 통해 이동할 때만 사용할 수 있습니다. 예를 들어 물과 같은 다른 매질에서 이동하는 경우에는 이 공식을 사용할 수 없습니다.&#9;</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예제: 음속 계산</h3>
+                    <p>온도가 18°C일 때 공기 중 음속을 계산하세요.</p>
+
+                    <table id="myTable2" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">단계</th>
+                                <th class="column_2" scope="col">풀이</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td style="width: 10%"> 주어진 값 </td>
+                                <td style="width: 90%">
+                                    <p>온도 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mo>&#xA0;</mo>
+                                            <mo>=</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mn>18</mn>
+                                            <mo>&#xB0;</mo>
+                                        </math></p>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td> 구하는 값 </td>
+                                <td>
+                                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mi>v</mi>
+                                            <mo>&#xA0;</mo>
+                                            <mo>=</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mo>?</mo>
+                                        </math></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 공식 </td>
+                                <td>
+                                    <p>주어진 값과 구하는 값을 기록했으므로, 두 항목을 모두 참조하는 공식을 노트에서 찾을 수 있습니다. 아직 선택지가 많지 않지만, 이 과정을 통해 더 큰 공식 참조표를 만들게 될 것입니다. 음속 공식은 속력과 온도를 모두 포함하므로, 그 공식을 사용해야 합니다.</p>
+                                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mi>v</mi>
+                                            <mo>&#xA0;</mo>
+                                            <mo>=</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mn>332</mn>
+
+                                            <mi mathvariant="normal">&nbsp;m</mi>
+                                            <mn>/</mn>
+                                            <mi mathvariant="normal">s</mi>
+                                            <mo>&#xA0;</mo>
+                                            <mo>+</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mfenced>
+                                                <mrow>
+                                                    <mn>0.59</mn>
+                                                    <mi mathvariant="normal">&nbsp;m</mi>
+                                                    <mn>/</mn>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>&#x2022;</mo>
+                                                    <mo>&#xb0;</mo>
+                                                    <mi mathvariant="normal">C</mi>
+                                                </mrow>
+                                            </mfenced>
+                                            <mi>T</mi>
+                                        </math></p>
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td> 풀이 </td>
+                                <td>
+                                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mi>v</mi>
+                                            <mo>&#xA0;</mo>
+                                            <mo>=</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mn>332</mn>
+                                            <mo>&#xA0;</mo>
+                                            <mi mathvariant="normal">m</mi>
+                                            <mo>/</mo>
+                                            <mi mathvariant="normal">s</mi>
+                                            <mo>&#xA0;</mo>
+                                            <mo>+</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mo>(</mo>
+                                            <mn>0</mn>
+                                            <mo>.</mo>
+                                            <mn>59</mn>
+                                            <mo>&#xA0;</mo>
+                                            <mfrac>
+                                                <mrow>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mo>&#xB0;</mo>
+                                                    <mi mathvariant="normal">C</mi>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo>)</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mo>&#xD7;</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mo>(</mo>
+                                            <mn>18</mn>
+                                            <mo>&#xB0;</mo>
+                                            <mi mathvariant="normal">C</mi>
+                                            <mo>)</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mo>=</mo>
+                                            <mo>&#xA0;</mo>
+                                            <mn>343</mn>
+                                            <mo>&#xA0;</mo>
+                                            <mi mathvariant="normal">m</mi>
+                                            <mo>/</mo>
+                                            <mi mathvariant="normal">s</mi>
+                                        </math></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> 결론 </td>
+                                <td>
+                                    <p>음속은 <b>340 m/s</b>입니다. (유효 숫자 2자리로 반올림.)</p>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <h3>예제: 소리의 파장 구하기</h3>
+                    <p>350 Hz 소리굽쇠가 온도가 –20.0°C인 실외에서 울렸습니다. 소리의 파장은 얼마인가요?</p>
+                    <p>첫 번째 단계는 음속을 구하는 것입니다.</p>
+                    <table id="myTable3" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">단계</th>
+                                <td class="column_2"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 10%"> 주어진 값 </td>
+                                <td style="width: 90%"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi mathvariant="normal">T</mi>
+                                        <mi mathvariant="normal">e</mi>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mi mathvariant="normal">p</mi>
+                                        <mi mathvariant="normal">e</mi>
+                                        <mi mathvariant="normal">r</mi>
+                                        <mi mathvariant="normal">a</mi>
+                                        <mi mathvariant="normal">t</mi>
+                                        <mi mathvariant="normal">u</mi>
+                                        <mi mathvariant="normal">r</mi>
+                                        <mi mathvariant="normal">e</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mo>-</mo>
+                                        <mn>20</mn>
+                                        <mo>.</mo>
+                                        <mn>0</mn>
+                                        <mo>&#xB0;</mo>
+                                        <mi mathvariant="normal">C</mi>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 구하는 값 </td>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mo>?</mo>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 공식 </td>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mn>332</mn>
+
+                                        <mi mathvariant="normal">&nbsp;m</mi>
+                                        <mn>/</mn>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>+</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>0.59</mn>
+                                                <mi mathvariant="normal">&nbsp;m</mi>
+                                                <mn>/</mn>
+                                                <mi mathvariant="normal">s</mi>
+                                                <mo>&#x2022;</mo>
+                                                <mo>&#xb0;</mo>
+                                                <mi mathvariant="normal">C</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mi>T</mi>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 풀이 </td>
+                                <td>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <mtable columnalign="left">
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <mi>v</mi>
+                                                            <mo>=</mo>
+                                                            <mn>332</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mi mathvariant="normal">m</mi>
+                                                            <mo>/</mo>
+                                                            <mi mathvariant="normal">s</mi>
+                                                            <mo>+</mo>
+                                                            <mrow>
+                                                                <mo>(</mo>
+                                                                <mrow>
+                                                                    <mn>0.59</mn>
+                                                                    <mtext>&#x2009;</mtext>
+                                                                    <mfrac>
+                                                                        <mrow>
+                                                                            <mi mathvariant="normal">m</mi>
+                                                                            <mo>/</mo>
+                                                                            <mi mathvariant="normal">s</mi>
+                                                                        </mrow>
+                                                                        <mrow>
+                                                                            <msup>
+                                                                                <mrow></mrow>
+                                                                                <mo>&#x00B0;</mo>
+                                                                            </msup>
+                                                                            <mi mathvariant="normal">C</mi>
+                                                                        </mrow>
+                                                                    </mfrac>
+
+                                                                </mrow>
+                                                                <mo>)</mo>
+                                                            </mrow>
+                                                            <mo>&#x00D7;</mo>
+                                                            <mrow>
+                                                                <mo>(</mo>
+                                                                <mrow>
+                                                                    <mo>&#x2212;</mo>
+                                                                    <msup>
+                                                                        <mrow>
+                                                                            <mn>20</mn>
+                                                                        </mrow>
+                                                                        <mo>&#x00B0;</mo>
+                                                                    </msup>
+                                                                    <mi mathvariant="normal">C</mi>
+                                                                </mrow>
+                                                                <mo>)</mo>
+                                                            </mrow>
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <mi>v</mi>
+                                                            <mo>=</mo>
+                                                            <mn>332</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mi mathvariant="normal">m</mi>
+                                                            <mo>/</mo>
+                                                            <mi mathvariant="normal">s</mi>
+                                                            <mo>+</mo>
+                                                            <mo stretchy="false">(</mo>
+                                                            <mo>&#x2212;</mo>
+                                                            <mn>11.8</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mi mathvariant="normal">m</mi>
+                                                            <mo>/</mo>
+                                                            <mi mathvariant="normal">s</mi>
+                                                            <mo stretchy="false">)</mo>
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <mi>v</mi>
+                                                            <mo>=</mo>
+                                                            <mn>320.2</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mi mathvariant="normal">m</mi>
+                                                            <mo>/</mo>
+                                                            <mi mathvariant="normal">s</mi>
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+
+                                            </mtable>
+                                        </mrow>
+                                    </math>
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td> 결론 </td>
+                                <td>음속은 <b>320.2 m/s</b>입니다. (이것은 문제의 최종 결론이 아니므로 유효 숫자 3자리로 반올림할 필요가 없습니다.)</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <p>두 번째 단계는 파동의 기본 방정식을 재배열하여 파장을 구하는 것입니다.</p>
+                    <table id="myTable4" class="table table-bordered empty-table">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">단계</th>
+                                <td class="column_2"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 10%"> 주어진 값 </td>
+                                <td style="width: 90%"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mn>320</mn>
+                                        <mo>.</mo>
+                                        <mn>2</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mspace linebreak="newline"></mspace>
+                                        <mi>f</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mn>350</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">H</mi>
+                                        <mi mathvariant="normal">z</mi>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 구하는 값 </td>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>&#x3BB;</mi>
+                                        <mo>=</mo>
+                                        <mo>&nbsp;?</mo>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 공식 </td>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>=</mo>
+                                        <mi>f</mi>
+                                        <mi>&#x3BB;</mi>
+                                        <mspace linebreak="newline"></mspace>
+                                        <mi>&#x3BB;</mi>
+                                        <mo>=</mo>
+                                        <mfrac>
+                                            <mi>v</mi>
+                                            <mi>f</mi>
+                                        </mfrac>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 풀이 </td>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>&#x3BB;</mi>
+                                        <mo>=</mo>
+                                        <mfrac>
+                                            <mrow>
+                                                <mn>320.2</mn>
+                                                <mstyle displaystyle="true">
+
+                                                    <mi mathvariant="normal">&nbsp;m</mi>
+                                                    <mn>/</mn>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mstyle>
+                                            </mrow>
+                                            <mrow>
+                                                <mn>350</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">H</mi>
+                                                <mi mathvariant="normal">z</mi>
+                                            </mrow>
+                                        </mfrac>
+                                        <mo>&#xA0;</mo>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mn>0</mn>
+                                        <mo>.</mo>
+                                        <mn>9149</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 결론 </td>
+                                <td>음파의 파장은 <b>0.91 m</b>입니다.</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                    <h3>예제: 기온 구하기</h3>
+                    <p>음속이 360 m/s일 때 온도는 얼마인가요?</p>
+
+                    <table id="myTable6" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">단계</th>
+                                <td class="column_2"></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 10%"> 주어진 값 </td>
+                                <td style="width: 90%"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>=</mo>
+                                        <mn>360</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 구하는 값 </td>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>T</mi>
+                                        <mo>=</mo>
+                                        <mo>&nbsp;?</mo>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 공식 </td>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>=</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mn>332</mn>
+
+                                        <mi mathvariant="normal">&nbsp;m</mi>
+                                        <mn>/</mn>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>+</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>0.59</mn>
+                                                <mi mathvariant="normal">&nbsp;m</mi>
+                                                <mn>/</mn>
+                                                <mi mathvariant="normal">s</mi>
+                                                <mo>&#x2022;</mo>
+                                                <mo>&#xb0;</mo>
+                                                <mi mathvariant="normal">C</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mi>T</mi>
+                                    </math></td>
+                            </tr>
+
+                            <tr>
+                                <td> 풀이 </td>
+                                <td>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mtable columnalign="left">
+                                            <mtr>
+                                                <mtd>
+                                                    <mn>360</mn>
+                                                    <mtext>&#x2009;</mtext>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>=</mo>
+                                                    <mn>332</mn>
+                                                    <mtext>&#x2009;</mtext>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>+</mo>
+                                                    <mrow>
+                                                        <mo>(</mo>
+                                                        <mrow>
+                                                            <mn>0.59</mn>
+                                                            <mfrac>
+                                                                <mrow>
+                                                                    <mi mathvariant="normal">m</mi>
+                                                                    <mo>/</mo>
+                                                                    <mi mathvariant="normal">s</mi>
+                                                                </mrow>
+                                                                <mrow>
+                                                                    <mo>&#x00B0;</mo>
+                                                                    <mi mathvariant="normal">C</mi>
+                                                                </mrow>
+                                                            </mfrac>
+
+                                                        </mrow>
+                                                        <mo>)</mo>
+                                                    </mrow>
+
+                                                    <mi>T</mi>
+                                                </mtd>
+                                            </mtr>
+                                            <mtr>
+                                                <mtd>
+                                                    <mi>T</mi>
+                                                    <mo>=</mo>
+                                                    <mfrac>
+                                                        <mrow>
+                                                            <mn>28</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mi mathvariant="normal">m</mi>
+                                                            <mo>/</mo>
+                                                            <mi mathvariant="normal">s</mi>
+                                                        </mrow>
+                                                        <mrow>
+                                                            <mn>0.59</mn>
+                                                            <mfrac>
+                                                                <mrow>
+                                                                    <mi mathvariant="normal">m</mi>
+                                                                    <mo>/</mo>
+                                                                    <mi mathvariant="normal">s</mi>
+                                                                </mrow>
+                                                                <mrow>
+                                                                    <mo>&#x00B0;</mo>
+                                                                    <mi mathvariant="normal">C</mi>
+                                                                </mrow>
+                                                            </mfrac>
+
+                                                        </mrow>
+                                                    </mfrac>
+
+                                                </mtd>
+                                            </mtr>
+                                            <mtr>
+                                                <mtd>
+                                                    <mi>T</mi>
+                                                    <mo>=</mo>
+                                                    <mn>47.46</mn>
+                                                    <msup>
+                                                        <mtext>&#x2009;</mtext>
+                                                        <mo>&#x00B0;</mo>
+                                                    </msup>
+                                                    <mi mathvariant="normal">C</mi>
+                                                </mtd>
+                                            </mtr>
+                                        </mtable>
+
+                                    </math>
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td> 결론 </td>
+                                <td>기온은 <b>47 °C</b>입니다. (답은 유효 숫자 2자리로 주어집니다.)</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+
+                        <div class="callout_content">
+                            <p> 다음 문제를 풀어 이해도를 확인하세요.</p>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="ilcCarousel12a" class="carousel slide ilo-container-carousel" data-ride="carousel" data-wrap="true" data-interval="false">
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner">
+                    <!-- Slide 1 -->
+                    <div class="item active margin-auto ">
+                        <div class="ilo_col ">
+                            <div class="multiple-choice-container" style="margin: auto;" data-config="../ilo/multiple_choice/multiple_choice_u1la2_Q1a.json"></div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="multiple-choice-container" style="margin: auto;" data-config="../ilo/multiple_choice/multiple_choice_u1la2_Q2a.json"></div>
+                    </div>
+                    <div class="item">
+                        <div class="multiple-choice-container" style="margin: auto;" data-config="../ilo/multiple_choice/multiple_choice_u1la2_Q3a.json"></div>
+                    </div>
+
+                    <div class="ilo-carousel-control-container">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators ilo-container-controls">
+                            <li data-target="#ilcCarousel12a" data-slide-to="0" class="active"></li>
+                            <li data-target="#ilcCarousel12a" data-slide-to="1"></li>
+                            <li data-target="#ilcCarousel12a" data-slide-to="2"></li>
+
+                        </ol><a href="#ilcCarousel12a" data-slide="prev">
+                            <div class="ilo-carousel-control ilo-carousel-control-left"></div>
+                        </a><a href="#ilcCarousel12a" data-slide="next">
+                            <div class="ilo-carousel-control ilo-carousel-control-right"></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>파동은 같은 매질에 머무는 한 일정한 속력으로 이동한다는 것을 기억하세요. </p>
+
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>탐구해 보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%;">
+                            <p>두 가지 다른 파동 펄스가 있는 다음 영상을 살펴보세요. </p>
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2542044"></div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>이전 영상에서 초기 진동의 진폭이나 진동수에 관계없이 파동 펄스가 이동하는 시간은 항상 같다는 것에 주목하세요.</p>
+                    <p>소리의 경우, 매질의 변화는 음속에 급격한 변화를 일으킬 수 있습니다.</p>
+                </div>
+
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>다양한 물질에서의 소리 전달</h2>
+                </div>
+                <div class="col-xs-5 col-xs-offset-1">
+                    <!-- left column -->
+                    <p>소리는 고체와 액체에서도 전달됩니다. 예를 들어, 수중에서 수영할 때도 여전히 소리를 들을 수 있습니다.</p>
+                    <p>번개 폭풍 동안 먼저 멀리서 번개의 섬광을 관찰한 후 소리를 듣게 됩니다. 이는 번개의 빛이 빛의 속력(300,000,000 m/s)으로 이동하는 반면, 음속은 훨씬 느리기 때문입니다. 사람들은 보통 소리가 느리다고 생각하지 않습니다. 사실, 빛의 속력과 비교할 때만 느린 것입니다.</p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_01.02.22.jpeg" alt="Skyeline view of the city with thunderstorm" class="img-responsive">
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <div class="tab-master">
+
+                        <ul class="nav nav-pills">
+                            <li class="active"><a data-toggle="tab" href="#gas">기체</a></li> <!-- tab 1 -->
+                            <li><a data-toggle="tab" href="#liquid">액체</a></li> <!-- tab 2 -->
+                            <li><a data-toggle="tab" href="#solid">고체</a></li> <!-- tab 3 -->
+                        </ul>
+
+
+                        <div class="tab-content">
+
+                            <!-- tab 1 -->
+                            <div id="gas" class="tab-pane fade in active">
+                                <table id="myTable88" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="column_1 blueBorderLeft" scope="col">상태</th>
+                                            <th class="column_2 blueBorderRight" scope="col">물질</th>
+                                            <th class="column_3 blueBorderRight" scope="col">음속 (m/s)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="5">
+                                                기체
+                                            </td>
+                                            <td>이산화탄소</td>
+                                            <td>258</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 산소 </td>
+                                            <td> 317 </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 질소 </td>
+                                            <td> 338 </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 헬륨 </td>
+                                            <td> 970 </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 수소 </td>
+                                            <td> 1270 </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- tab 2 -->
+                            <div id="liquid" class="tab-pane fade">
+                                <table id="myTable11" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="column_1 blueBorderLeft" scope="col">상태</th>
+                                            <th class="column_2 blueBorderRight" scope="col">물질</th>
+                                            <th class="column_3 blueBorderRight" scope="col">음속 (m/s)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="4">
+                                                액체
+                                            </td>
+                                            <td>알코올</td>
+                                            <td>1241</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 바닷물 </td>
+                                            <td> 1470 </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 민물 </td>
+                                            <td> 1493 </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 수은 </td>
+                                            <td> 1452 </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- tab 3 -->
+                            <div id="solid" class="tab-pane fade">
+                                <table id="myTable10" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="column_1 blueBorderLeft" scope="col">상태</th>
+                                            <th class="column_2 blueBorderRight" scope="col">물질</th>
+                                            <th class="column_3 blueBorderRight" scope="col">음속 (m/s)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="5">
+                                                고체
+                                            </td>
+                                            <td>소나무</td>
+                                            <td>3320</td>
+                                        </tr>
+                                        <tr>
+                                            <td> 단풍나무 </td>
+                                            <td> 4110 </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td> 강철 </td>
+                                            <td> 5050 </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td> 유리 </td>
+                                            <td> 5050 </td>
+                                        </tr>
+                                        <tr>
+                                            <td> 알루미늄 </td>
+                                            <td> 5104 </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- end of tabs -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>고체, 액체, 기체에서의 음파</h3>
+                    <p>물질의 입자 이론에 따르면 모든 물질은 작은 입자로 이루어져 있습니다. </p>
+                    <ul>
+                        <li>고체에서 이 입자들은 서로 강하게 끌어당기며 고정된 배열로 가까이 붙어 있습니다. </li>
+                        <li>액체에서는 인력이 그다지 강하지 않고, 약간 더 떨어져 있으며 자유롭게 움직일 수 있습니다. </li>
+                        <li>기체에서는 입자 사이에 거의 인력이 없습니다. 입자들은 멀리 떨어져 있고 자유롭게 떠다닐 수 있습니다. </li>
+                    </ul>
+                    <p>이것이 왜 소리가 고체에서 가장 빠르고, 액체에서 더 느리며, 기체에서 가장 느린지를 어떻게 설명할까요? 더 자세히 알아보려면 다음 내용을 살펴보세요.</p>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** TAB XXX BEGINS ******************************************* -->
+
+                    <div>
+                        <div>
+                            <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+
+                                <!--YOU WILL NEED TO ADJUST THE WIDTH % DEPENDING ON HOW MANY TABS YOU HAVE-->
+                                <li class="active" style="width:33%" role="tab"><a href="#tab2_1" data-toggle="tab">
+                                        고체</a></li>
+                                <li style="width:33%" role="tab"><a href="#tab2_2" data-toggle="tab">
+                                        Liquid</a></li>
+                                <li style="width:33%" role="tab"><a href="#tab2_3" data-toggle="tab">
+                                        Gas</a></li>
+
+
+                            </ul>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+                                <div class="tab-pane fade in active" id="tab2_1">
+
+                                    <p>음파는 종파이며 매질의 입자들은 파동의 운동 방향과 평행하게 앞뒤로만 움직입니다. 입자들이 평형 위치에서 이동하여 옆의 입자들과 부딪히기 시작하면 파동이 전달됩니다. 고체에서 입자 사이에 존재하는 강한 인력은 입자가 교란되면 매우 가까이 있기 때문에 즉시 모든 이웃을 밀거나 당긴다는 것을 의미합니다. 이것이 소리가 고체에서 매우 빠르게 이동할 수 있게 합니다.</p>
+
+
+
+                                </div>
+
+                                <div class="tab-pane fade" id="tab2_2">
+
+
+                                    <p>액체에서는 입자들이 서로 덜 끌어당기고 더 멀리 떨어져 있습니다. 이는 입자가 가장 가까운 이웃을 교란하기 시작하기 전에 상당히 많이 움직여야 한다는 것을 의미합니다. 따라서 소리가 더 느리게 이동합니다. </p>
+
+
+
+                                </div>
+
+                                <div class="tab-pane fade" id="tab2_3">
+
+                                    <p>기체에서는 입자들이 퍼져 있고 서로 거의 끌어당기지 않습니다. 이는 기체 입자들이 소리를 전달하기 위해 실제로 서로 부딪힐 때까지 돌아다녀야 한다는 것을 의미합니다. 소리는 기체를 통해 가장 느리게 이동합니다.</p>
+
+
+                                </div>
+
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB 1 ENDS ******************************************* -->
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>생각해 보기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/think.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>1. 소리가 가장 빠르게 이동하는 물질의 상태는 무엇인가요?</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-1">풀이
+                                보기</button>
+                            <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-1">
+                                <p>고체입니다.</p>
+                            </div>
+
+                            <p class="margin-top-lg">2. 온도가 증가하면 공기 중 음속은 어떻게 되나요? (음속 공식을 생각해 보세요.)</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-2">풀이
+                                보기</button>
+                            <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-2">
+
+
+                                <p>속력이 증가합니다.</p>
+
+                            </div>
+
+                            <p class="margin-top-lg">3. 수은은 매우 밀도가 높은 액체이고, 바닷물은 밀도가 그다지 높지 않습니다. 밀도는 음속과 어떤 관계가 있나요? </p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-3">풀이
+                                보기</button>
+                            <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-3">
+
+
+                                <p>밀도가 증가하면 속력이 증가합니다. 밀도가 감소하면 속력이 감소합니다.</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>도플러 효과</h2>
+                    <p>지나가는 응급 차량의 사이렌 소리를 들어본 적이 있나요? 차량이 다가올 때 사이렌 소리가 더 높은 음으로 들리고, 멀어질 때 더 낮은 음으로 들린다는 것을 알았을 것입니다. 듣는 사람의 관점에서 음원이 다가올 때와 멀어질 때 사이렌의 겉보기 진동수가 변합니다. 음원의 운동으로 인한 이러한 진동수의 변화를 <b>도플러 효과</b>라고 합니다.</p>
+
+                    <p>도플러 효과를 이해하기 위해 다음 그림을 살펴보겠습니다. 첫 번째 그림은 정지해 있는 음원을 보여줍니다. 파동은 음원에서 모든 방향으로 일정한 속력으로 이동합니다. 이 파동들은 다음 그림에 보이는 것처럼 균일한 간격을 가집니다.</p>
+                    <img src="../assets/img/sph3u_01.02.29.svg" alt="Diagrams showing the Doppler effect" class="img-responsive">
+                    <p>두 번째 그림은 점 A에서 멀어지고 점 B를 향해 이동하는 음원을 보여줍니다. 소리는 여전히 모든 방향으로 일정한 속력으로 이동하지만, 음원도 이동하고 있습니다. 점 A에서의 파동은 음속에서 v<sub>source</sub>(음원의 속력)를 뺀 속력으로 음원에서 멀어지고 있습니다. 하나의 파동 봉우리가 방출되고 다음 것이 방출될 때쯤이면 음원은 이미 이동한 상태이므로, 파동은 더 이상 동심원이 아닙니다. A에 있는 관측자의 관점에서 이는 파동이 늘어나 파장이 증가하고 진동수가 감소하게 합니다(속력이 일정하므로). 따라서 음원 앞의 파면은 서로 더 가까워지고, 음원 뒤의 파면은 더 멀어집니다.</p>
+                    <!--<a href="https://www.youtube.com/embed/h4OnBYrbCjY" target="_blank">
+                        <p>Take a look at the following video to understand more about the Doppler effect:</p>
+                    </a>-->
+
+                    <p>B를 향해 가는 파동은 더 높은 진동수를 가집니다. 이는 소리가 음원에서 멀어지는 동안 음원이 소리의 방향으로 향하고 있기 때문입니다. 음원 앞의 파동(위치 B)은 “밀집”되어 파장이 더 작습니다. 이 파동은 이전보다 더 자주 B에 있는 관측자의 고막에 도달하므로 진동수가 더 높아집니다. B에서 관측자는 사이렌을 더 높은 음으로 듣게 됩니다. 그림에 나타난 것처럼 A에서는 반대 효과가 발생합니다. 결과적으로, A에 있는 관측자는 음원이 멀어질 때 더 낮은 진동수를 듣게 되어 더 낮은 음이 됩니다. </p>
+
+                    <p>움직이는 음원의 겉보기 진동수를 계산하는 공식은 다음과 같습니다:</p>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" style="padding-right: 10px;" class="img-responsive">
+                        <div class="callout_content">
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+
+                                <mrow>
+                                    <mtable columnalign="left">
+                                        <mtr columnalign="left">
+                                            <mtd columnalign="left">
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>f</mi>
+                                                        <mrow>
+                                                            <mi>o</mi>
+                                                            <mi>b</mi>
+                                                            <mi>s</mi>
+                                                            <mi>e</mi>
+                                                            <mi>r</mi>
+                                                            <mi>v</mi>
+                                                            <mi>e</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                    <mo>=</mo>
+                                                    <msub>
+                                                        <mi>f</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>r</mi>
+                                                            <mi>c</mi>
+                                                            <mi>e</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                    <mrow>
+                                                        <mo>(</mo>
+                                                        <mrow>
+                                                            <mfrac>
+                                                                <mrow>
+                                                                    <msub>
+                                                                        <mi>v</mi>
+                                                                        <mrow>
+                                                                            <mi>s</mi>
+                                                                            <mi>o</mi>
+                                                                            <mi>u</mi>
+                                                                            <mi>n</mi>
+                                                                            <mi>d</mi>
+                                                                        </mrow>
+                                                                    </msub>
+                                                                </mrow>
+                                                                <mrow>
+                                                                    <msub>
+                                                                        <mi>v</mi>
+                                                                        <mrow>
+                                                                            <mi>s</mi>
+                                                                            <mi>o</mi>
+                                                                            <mi>u</mi>
+                                                                            <mi>n</mi>
+                                                                            <mi>d</mi>
+                                                                        </mrow>
+                                                                    </msub>
+                                                                    <mo>&#x00B1;</mo>
+                                                                    <msub>
+                                                                        <mi>v</mi>
+                                                                        <mrow>
+                                                                            <mi>s</mi>
+                                                                            <mi>o</mi>
+                                                                            <mi>u</mi>
+                                                                            <mi>r</mi>
+                                                                            <mi>c</mi>
+                                                                            <mi>e</mi>
+                                                                        </mrow>
+                                                                    </msub>
+                                                                </mrow>
+                                                            </mfrac>
+                                                        </mrow>
+                                                        <mo>)</mo>
+                                                    </mrow>
+                                                </mrow>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr columnalign="left">
+                                            <mtd columnalign="left">
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>f</mi>
+                                                        <mn>2</mn>
+                                                    </msub>
+                                                    <mo>=</mo>
+                                                    <msub>
+                                                        <mi>f</mi>
+                                                        <mn>1</mn>
+                                                    </msub>
+                                                    <mrow>
+                                                        <mo>(</mo>
+                                                        <mrow>
+                                                            <mfrac>
+                                                                <mrow>
+                                                                    <msub>
+                                                                        <mi>v</mi>
+                                                                        <mrow>
+                                                                            <mi>s</mi>
+                                                                            <mi>o</mi>
+                                                                            <mi>u</mi>
+                                                                            <mi>n</mi>
+                                                                            <mi>d</mi>
+                                                                        </mrow>
+                                                                    </msub>
+                                                                </mrow>
+                                                                <mrow>
+                                                                    <msub>
+                                                                        <mi>v</mi>
+                                                                        <mrow>
+                                                                            <mi>s</mi>
+                                                                            <mi>o</mi>
+                                                                            <mi>u</mi>
+                                                                            <mi>n</mi>
+                                                                            <mi>d</mi>
+                                                                        </mrow>
+                                                                    </msub>
+                                                                    <mo>&#x00B1;</mo>
+                                                                    <msub>
+                                                                        <mi>v</mi>
+                                                                        <mrow>
+                                                                            <mi>s</mi>
+                                                                            <mi>o</mi>
+                                                                            <mi>u</mi>
+                                                                            <mi>r</mi>
+                                                                            <mi>c</mi>
+                                                                            <mi>e</mi>
+                                                                        </mrow>
+                                                                    </msub>
+                                                                </mrow>
+                                                            </mfrac>
+                                                        </mrow>
+                                                        <mo>)</mo>
+                                                    </mrow>
+                                                </mrow>
+                                            </mtd>
+                                        </mtr>
+
+                                    </mtable>
+                                </mrow>
+
+
+                            </math>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>여기서 f<sub>source</sub> 또는 f<sub>1</sub>은 음원의 정지 진동수이고, f<sub>observed</sub> 또는 f<sub>2</sub>는 A 또는 B에 있는 관측자가 감지한 겉보기 진동수이며, v<sub>sound</sub>는 공기 중 음속이고, v<sub>source</sub>는 음원의 속력입니다. 분모 v<sub>sound</sub> + v<sub>source</sub>는 음원이 관측자로부터 멀어질 때 사용됩니다.</p>
+                    <p>이 경우, 분모가 더 크므로 겉보기 진동수가 정지 진동수보다 낮아집니다. 분모 v<sub>sound</sub> – v<sub>source</sub>는 음원이 관측자를 향해 다가올 때 사용됩니다. 이 경우, 분모가 더 작으므로 겉보기 진동수가 정지 진동수보다 높아집니다. 이 공식을 사용하려면 속력의 단위가 동일해야 합니다.</p>
+                    <p>다음 표는 600 Hz의 진동수로 소리를 내는 음원이 다른 방식으로 움직일 때 어떤 일이 일어나는지 요약합니다.</p>
+                    <table id="myTable101" class="table table-bordered">
+
+                        <thead>
+
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">음원의 움직임</th>
+                                <th class="column_2 blueBorderRight" scope="col">음원이 만든 소리의 진동수</th>
+                                <th class="column_3 blueBorderRight" scope="col">관측자가 듣는 진동수</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>관측자를 향해 이동</td>
+                                <td> 600 Hz </td>
+                                <td> 600 Hz보다 높음 </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> 관측자로부터 멀어짐 </td>
+                                <td> 600 Hz </td>
+                                <td> 600 Hz보다 낮음 </td>
+
+                            </tr>
+
+                            <tr>
+                                <td> 정지 </td>
+                                <td> 600 Hz </td>
+                                <td> 600 Hz </td>
+                            </tr>
+
+
+
+
+                        </tbody>
+
+                    </table>
+
+                    <p>음원의 진동수는 절대 변하지 않는다는 것을 인식하는 것이 중요합니다. 그것은 일정합니다. 관측자는 도플러 효과로 인해 다른 진동수, 즉 겉보기 진동수를 듣게 됩니다.
+                    </p>
+                    <h3>예제: 소리의 진동수 계산</h3>
+                    <p>기온이 12°C일 때 자동차가 고속도로를 27 m/s로 달리고 있습니다. 운전자가 도로변에 서 있는 사람을 지나갈 때 420 Hz의 경적을 울립니다. 자동차가 다가올 때와 멀어질 때 그 사람이 들을 수 있는 진동수는 얼마인가요?</p>
+
+                    <table id="myTable77" class="table table-bordered" role="presentation">
+                        <tr>
+                            <td style="width: 10%">단계 1</td>
+                            <td>
+                                <p>먼저 공기 중 음속을 구합니다.</p>
+                                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mtable displaystyle="true" columnalign="right left right left right left right left right left right left" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt">
+                                        <mtr>
+                                            <mtd>
+                                                <mi>v</mi>
+                                                <mo>=</mo>
+                                                <mo>&nbsp;</mo>
+                                            </mtd>
+                                            <mtd>
+
+                                                <mn>332</mn>
+                                                <mrow>
+                                                    <mtext> </mtext>
+                                                    <mi mathvariant="normal">&nbsp;m</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mo>/</mo>
+                                                </mrow>
+                                                <mrow>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mo>+</mo>
+                                                <mrow data-mjx-texclass="INNER">
+                                                    <mo data-mjx-texclass="OPEN">(</mo>
+                                                    <mn>0.59</mn>
+                                                    <mrow>
+                                                        <mtext> </mtext>
+                                                        <mi mathvariant="normal">&nbsp;m</mi>
+                                                    </mrow>
+                                                    <mrow>
+                                                        <mo>/</mo>
+                                                    </mrow>
+                                                    <mrow>
+                                                        <mi mathvariant="normal">s</mi>
+                                                    </mrow>
+                                                    <mo>⋅</mo>
+                                                    <msup>
+                                                        <mrow></mrow>
+                                                        <mrow>
+                                                            <mo>∘</mo>
+                                                        </mrow>
+                                                    </msup>
+                                                    <mrow>
+                                                        <mi mathvariant="normal">C</mi>
+                                                    </mrow>
+                                                    <mo data-mjx-texclass="CLOSE">)</mo>
+                                                </mrow>
+                                                <mi>T</mi>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mi>v</mi>
+                                                <mo>=</mo>
+                                                <mo>&nbsp;</mo>
+                                            </mtd>
+                                            <mtd>
+                                                <mn>332</mn>
+                                                <mrow>
+                                                    <mtext> </mtext>
+                                                    <mi mathvariant="normal">&nbsp;m</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mo>/</mo>
+                                                </mrow>
+                                                <mrow>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mo>+</mo>
+                                                <mrow data-mjx-texclass="INNER">
+                                                    <mo data-mjx-texclass="OPEN">(</mo>
+                                                    <mn>0.59</mn>
+                                                    <mrow>
+                                                        <mtext> </mtext>
+                                                        <mi mathvariant="normal">&nbsp;m</mi>
+                                                    </mrow>
+                                                    <mrow>
+                                                        <mo>/</mo>
+                                                    </mrow>
+                                                    <mrow>
+                                                        <mi mathvariant="normal">s</mi>
+                                                    </mrow>
+                                                    <mo>⋅</mo>
+                                                    <msup>
+                                                        <mrow></mrow>
+                                                        <mrow>
+                                                            <mo>∘</mo>
+                                                        </mrow>
+                                                    </msup>
+                                                    <mrow>
+                                                        <mi mathvariant="normal">C</mi>
+                                                    </mrow>
+                                                    <mo data-mjx-texclass="CLOSE">)</mo>
+                                                </mrow>
+                                                <mo>×</mo>
+                                                <mrow data-mjx-texclass="INNER">
+                                                    <mo data-mjx-texclass="OPEN">(</mo>
+                                                    <msup>
+                                                        <mn>12</mn>
+                                                        <mrow>
+                                                            <mo>∘</mo>
+                                                        </mrow>
+                                                    </msup>
+                                                    <mrow>
+                                                        <mi mathvariant="normal">C</mi>
+                                                    </mrow>
+                                                    <mo data-mjx-texclass="CLOSE">)</mo>
+                                                </mrow>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mi>v</mi>
+                                                <mo>=</mo>
+                                                <mo>&nbsp;</mo>
+                                            </mtd>
+                                            <mtd>
+                                                <mn>339.08</mn>
+                                                <mrow>
+                                                    <mtext> </mtext>
+                                                    <mi mathvariant="normal">&nbsp;m</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mo>/</mo>
+                                                </mrow>
+                                                <mrow>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                            </mtd>
+                                        </mtr>
+                                    </mtable>
+                                </math>
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>단계 2</td>
+                            <td>
+                                <p> <em>f<sub>1</sub></em> = 420 Hz
+                                    (음원의 진동수), <em>f<sub>2</sub></em>는 관측자가 듣는 진동수입니다. 음원이 다가올 때는 공식에서 빼기 부호를, 멀어질 때는 더하기 부호를 사용합니다.</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>단계 3</td>
+
+                            <td>
+                                <p>다가올 때:</p>
+                                <p>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                    <mo>-</mo>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>r</mi>
+                                                            <mi>c</mi>
+                                                            <mi>e</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math>
+                                </p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=&nbsp;</mo>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>420</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">Hz</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <mn>339.08</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>339.08</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>-</mo>
+                                                    <mn>27</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>456.3</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+
+                                <p>멀어질 때:</p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                    <mo>+</mo>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>r</mi>
+                                                            <mi>c</mi>
+                                                            <mi>e</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=&nbsp;</mo>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>420</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">Hz</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <mn>339.08</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>339.08</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>+</mo>
+                                                    <mn>27</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>389.0</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>단계 4</td>
+                            <td>
+                                <p>그 사람은 운전자가 다가올 때 460 Hz의 진동수를, 멀어질 때 390 Hz의 진동수를 듣게 됩니다. (유효 숫자 2자리로 답.)</p>
+                                <p>음원이 관측자에게 다가올 때 진동수가 더 높게 들린다는 것을 알고 있으므로 이것은 타당합니다.</p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 문제를 노트에 풀어 보세요.
+                            </p>
+
+                            <p>1. 다음 그림에서 점 “A”에 있는 사람은 350 Hz보다 높은 진동수를 들을까요, 낮은 진동수를 들을까요? 그 이유는?</p>
+                            <img src="../assets/img/sph3u_01.02.36.svg" alt="An ambulance with frequency of 350 Hz moving towards the left, where a person is standing" class="img-responsive callout-image">
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-4">풀이
+                                보기</button>
+                            <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-4">
+                                <p>구급차가 관측자를 향해 이동하고 있으므로, 그들은 더 높은 진동수의 소리를 듣게 됩니다.</p>
+                            </div>
+
+                            <p>2. 그 사람이 350 Hz와 같은 진동수를 듣기 위해서는 구급차가 어떤 상태여야 하나요?</p>
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-5">풀이
+                                보기</button>
+                            <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-5">
+                                <p>구급차가 정지해 있어야(움직이지 않아야) 합니다. 또는 구급차와 관측자가 정확히 같은 속력으로 같은 방향으로 이동하여 속력 차이가 없어야 합니다.</p>
+                            </div>
+                            <p>3. 자동차 경적의 진동수는 480 Hz이고 자동차는 25 m/s로 이동하고 있습니다. 공기 중 음속은 334 m/s입니다. 자동차가 관측자로부터 멀어질 때 관측자가 감지하는 겉보기 진동수를 구하세요.</p>
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-6">풀이
+                                보기</button>
+                            <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-6">
+                                <p>
+                                    <strong>주어진 값:</strong>
+                                </p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>480</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>=</mo>
+                                        <mn>25</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>n</mi>
+                                                <mi>d</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>334</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+
+                                <p><strong>구하는 값:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mo>&nbsp;?</mo>
+                                    </math></p>
+
+                                <p><strong>공식:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                    <mo>+</mo>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>r</mi>
+                                                            <mi>c</mi>
+                                                            <mi>e</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+
+                                <p><strong>풀이:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mo>(</mo>
+                                        <mn>480</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                        <mo>)</mo>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <mn>334</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>334</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>&#xA0;</mo>
+                                                    <mo>+</mo>
+                                                    <mo>&#xA0;</mo>
+                                                    <mn>25</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>446.6</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+
+                                <p><strong>결론:</strong></p>
+                                <p>관측자는 450 Hz의 진동수를 감지하게 됩니다.</p>
+
+                            </div>
+                            <p>4. 직선 트랙의 레이싱 카가 홍보 행사 중 510 Hz 경적을 울립니다. 자동차는 42 m/s로 이동하고 온도는 28°C입니다. 자동차가 관측자를 향해 이동할 때 정지한 관측자에 대한 경적의 겉보기 진동수를 구하세요.</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-7">풀이
+                                보기</button>
+                            <div class="answer_reveal answer_reveal_tips invisible" id="sph3u_u1la2-suggestedAnswer-7">
+                                <p><strong>주어진 값:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>510</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>=</mo>
+                                        <mn>42</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>T</mi>
+                                        <mo>=</mo>
+                                        <mn>28</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mo>&#xb0;</mo>
+                                        <mi mathvariant="normal">C</mi>
+                                    </math></p>
+
+                                <p><strong>구하는 값:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>sound</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mo>&nbsp;?</mo>
+                                    </math>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mo>&nbsp;?</mo>
+                                    </math>
+                                </p>
+
+                                <p><strong>공식:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mi>v</mi>
+                                        <mo>=</mo>
+                                        <mn>332</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>+</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mo>(</mo>
+                                        <mn>0.59</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mo>&#xb0;</mo>
+                                        <mi mathvariant="normal">C</mi>
+                                        <mo>)</mo>
+                                        <mi>T</mi>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                    <mo>-</mo>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>r</mi>
+                                                            <mi>c</mi>
+                                                            <mi>e</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+                                <p><strong>풀이:</strong></p>
+                                <p>먼저, 음속을 구합니다.</p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>sound</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>332</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mo>&#xA0;</mo>
+                                        <mo>+</mo>
+                                        <mo>&#xA0;</mo>
+                                        <mo>(</mo>
+                                        <mn>0.59</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mo>&#xb0;</mo>
+                                        <mi mathvariant="normal">C</mi>
+                                        <mo>)</mo>
+                                        <mo>(</mo>
+                                        <mn>28</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mo>&#xb0;</mo>
+                                        <mi mathvariant="normal">C</mi>
+                                        <mo>)</mo>
+                                    </math></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>n</mi>
+                                                <mi>d</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>348.52</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+                                <p>그 속력을 사용하여 도플러 효과를 적용합니다.
+                                </p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mo>(</mo>
+                                        <mn>510</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                        <mo>)</mo>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <mn>348.52</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>348.52</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>&#xA0;</mo>
+                                                    <mo>-</mo>
+                                                    <mo>&#xA0;</mo>
+                                                    <mn>42</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>579.9</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+                                <p><strong>결론:</strong></p>
+                                <p>관측자는 580 Hz의 진동수를 감지하게 됩니다.</p>
+                            </div>
+
+                            <p>5. 트럭이 정지한 사람을 향해 이동하면서 450 Hz 경적을 울립니다. 그 사람은 465 Hz의 진동수를 듣습니다. 음속은 340 m/s입니다. 트럭은 얼마나 빠르게 이동하고 있나요?</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la1-suggestedAnswerButton-8">풀이
+                                보기</button>
+                            <div class="answer_reveal answer_reveal_tips invisible" id="sph3u_u1la1-suggestedAnswer-8">
+                                <p><strong>주어진 값:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>450</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>465</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                    </math></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>n</mi>
+                                                <mi>d</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>340</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+
+                                <p><strong>구하는 값:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>r</mi>
+                                                <mi>c</mi>
+                                                <mi>e</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mo>&nbsp;?</mo>
+                                    </math></p>
+
+                                <p><strong>공식:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>2</mn>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <msub>
+                                            <mi>f</mi>
+                                            <mn>1</mn>
+                                        </msub>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>n</mi>
+                                                            <mi>d</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                    <mo>-</mo>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>r</mi>
+                                                            <mi>c</mi>
+                                                            <mi>e</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+
+                                <p><strong>풀이:</strong></p>
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mn>465</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">Hz</mi>
+                                        <mo>=</mo>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>450</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">Hz</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mrow>
+                                                    <mn>340</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>340</mn>
+                                                    <mo>&#xA0;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+                                                    <mi mathvariant="normal">s</mi>
+                                                    <mo>-</mo>
+                                                    <msub>
+                                                        <mi>v</mi>
+                                                        <mrow>
+                                                            <mi>s</mi>
+                                                            <mi>o</mi>
+                                                            <mi>u</mi>
+                                                            <mi>r</mi>
+                                                            <mi>c</mi>
+                                                            <mi>e</mi>
+                                                        </mrow>
+                                                    </msub>
+                                                </mrow>
+                                            </mfrac>
+                                        </mfenced>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mfrac>
+                                            <mrow>
+                                                <mn>465</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">Hz</mi>
+                                            </mrow>
+                                            <mrow>
+                                                <mn>450</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">Hz</mi>
+                                            </mrow>
+                                        </mfrac>
+                                        <mo>(</mo>
+                                        <mn>340</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mo>-</mo>
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>r</mi>
+                                                <mi>c</mi>
+                                                <mi>e</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>)</mo>
+                                        <mo>=</mo>
+                                        <mn>340</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mfenced>
+                                            <mfrac>
+                                                <mn>31</mn>
+                                                <mn>30</mn>
+                                            </mfrac>
+                                        </mfenced>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>340</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">m</mi>
+                                                <mo>/</mo>
+                                                <mi mathvariant="normal">s</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mo>-</mo>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mn>31</mn>
+                                                <mn>30</mn>
+                                            </mfrac>
+                                        </mfenced>
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>r</mi>
+                                                <mi>c</mi>
+                                                <mi>e</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>340</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mfenced>
+                                            <mfrac>
+                                                <mn>1</mn>
+                                                <mn>30</mn>
+                                            </mfrac>
+                                        </mfenced>
+                                        <mfenced>
+                                            <mrow>
+                                                <mn>340</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">m</mi>
+                                                <mo>/</mo>
+                                                <mi mathvariant="normal">s</mi>
+                                            </mrow>
+                                        </mfenced>
+                                        <mo>=</mo>
+                                        <mfenced>
+                                            <mfrac>
+                                                <mn>31</mn>
+                                                <mn>30</mn>
+                                            </mfrac>
+                                        </mfenced>
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>r</mi>
+                                                <mi>c</mi>
+                                                <mi>e</mi>
+                                            </mrow>
+                                        </msub>
+                                    </math>
+                                </p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mfrac>
+                                            <mrow>
+                                                <mn>340</mn>
+                                                <mo>&#xA0;</mo>
+                                                <mi mathvariant="normal">m</mi>
+                                                <mo>/</mo>
+                                                <mi mathvariant="normal">s</mi>
+                                            </mrow>
+                                            <mn>31</mn>
+                                        </mfrac>
+                                        <mo>=</mo>
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>r</mi>
+                                                <mi>c</mi>
+                                                <mi>e</mi>
+                                            </mrow>
+                                        </msub>
+                                    </math></p>
+
+                                <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <msub>
+                                            <mi>v</mi>
+                                            <mrow>
+                                                <mi>s</mi>
+                                                <mi>o</mi>
+                                                <mi>u</mi>
+                                                <mi>r</mi>
+                                                <mi>c</mi>
+                                                <mi>e</mi>
+                                            </mrow>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mn>10.97</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </math></p>
+
+                                <p><strong>결론:</strong></p>
+                                <p>트럭은 11 m/s로 이동하고 있습니다.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>음파의 응용</h2>
+                    <p>음파에는 많은 응용이 있습니다. 여러분이 배울 것들 중 일부는: 초음파, 음향학, 동물의 반향 정위, 메아리, 그리고 소나입니다.</p>
+                    <h3>초음파</h3>
+                    <p>초음파는 20,000 Hz 이상의 진동수를 가진 음파라는 것을 기억하세요. 이 때문에 인간의 귀에는 들리지 않습니다. 이 음파는 물질에 의해 흡수되거나 반사될 수 있는 에너지를 운반합니다. 초음파는 인체 내부 구조의 이미지를 생성하는 데 사용될 수 있습니다. 이 절차는 근본적으로 소나와 유사합니다. 변환기가 초음파를 방출하고 마이크가 반사된 파동을 감지합니다. </p>
+
+                    <p>초음파는 피부와 같이 밀도가 낮은 인체 물질을 더 쉽게 통과하며, 파동의 에너지가 거의 반사되지 않습니다. 뼈와 같이 밀도가 높은 물질은 초음파를 더 쉽게 반사합니다. 컴퓨터를 사용하여 반사파를 이용해 거리를 계산하며, 이 과정으로 영상이 형성됩니다. 초음파는 영상을 형성할 때 부작용이 없기 때문에 X선(고에너지 빛의 한 형태)에 비해 추가적인 장점이 있습니다.</p>
+
+                    <p>초음파는 부상과 질병을 치료하는 데에도 여러 형태로 사용될 수 있습니다. 고에너지 초음파를 사용하면 인체 조직이 가열될 만큼 충분한 에너지가 흡수될 수 있습니다. 근육 조직의 온도 증가는 통증을 완화하고, 부상을 입거나 과도하게 늘어난 근육의 치유를 촉진하며, 흉터 조직을 분해하는 데도 도움이 됩니다. 과열로 인한 손상이 발생하지 않도록 이 형태의 치료에는 주의가 필요합니다.</p>
+                    <img src="../assets/img/sph3u_01.02.37.jpeg" alt="Medical professional using ultrasound wand to show a pregnant woman an image of her developing baby" class="img-responsive img-right-50">
+                    <p>이 고에너지 초음파는 특정 부위에 집중하면 체내의 원치 않는 물질을 파괴할 수 있습니다. 예를 들어, 고통스러운 담석과 신장 결석을 이 치료 방법으로 분쇄할 수 있습니다.</p>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>음향학</h3>
+                    <p>강당이나 홀에서 음악을 연주하면, 발생한 소리의 일부가 벽과 천장에서 반사되어 메아리를 형성합니다. 소리가 벽에서 어떻게 반사되는지가 방의 음질을 부분적으로 결정합니다. 음질에 영향을 미치는 방의 특성을 음향이라 합니다. 방의 모양과 크기, 가구, 사람, 바닥재, 벽의 재료 등 방의 음향에 영향을 미칠 수 있는 것들이 많습니다. 이 모든 것들이 소리가 반사되는 방식에 영향을 미치기 때문에 방의 음향을 결정하는 데 도움이 됩니다. 크고 빈 방에서는 메아리가 매우 두드러집니다. 그러나 몇 개의 깔개와 커튼을 추가하면 메아리가 줄어들고 음향이 개선됩니다.</p>
+                    <p>그러나 음악의 경우, 메아리가 전혀 없으면 소리가 평탄하고 지루하게 느껴질 수 있습니다. 이상적으로는 소리가 무대에서 직접 나오고, 몇 개의 초기 반사가 관객에게 향하기를 원합니다. 이것이 소리에 깊이와 특성을 부여합니다. 음질을 향상시키기 위해 이후의 반사는 최소화해야 합니다.</p>
+                    <img src="../assets/img/sph3u_01.02.38.jpeg" alt="Concert hall from audience perspective looking at the stage." class="img-responsive img-right-50">
+                    <p>홀의 음향은 모든 사람이 명확하게 들을 수 있고 음질을 향상시키는 데 사용됩니다. 잘 설계된 콘서트 홀에서 관객은 메아리로 인해 음악이 연주된 후 1~2초 후에만 들을 수 있습니다. 이를 잔향 시간이라 합니다. 잔향 시간은 콘서트 홀에서 음질을 결정하는 가장 중요한 요소입니다.</p>
+
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>동물의 반향 정위</h3>
+                    <p>돌고래, 범고래, 심지어 박쥐도 먹이를 볼 수 없는 어두운 곳에서 사냥해야 하는 경우가 많습니다. 이를 위해 소리를 내어 먹이에 반사되는 메아리를 이용하여 먹이의 위치를 파악합니다.</p>
+
+                    <img src="../assets/img/sph3u_01.02.39.jpeg" alt="Dolphins jumping at sea" class="img-responsive img-right-50">
+
+                    <p>돌고래는 다음 그림에 나타난 것처럼 비강낭과 멜론이라 불리는 기관을 사용하여 먹잇감의 위치를 파악합니다. 비강낭은 멜론을 통과하는 고주파 소리를 만드는 데 사용됩니다. 멜론은 돌고래 앞쪽에서 음파를 빔으로 집중시킵니다. 이 음파가 돌고래 바로 앞에서 헤엄치는 물고기에 반사되면, 메아리가 그 위치를 알려줍니다. 돌고래는 아래턱을 통해 메아리를 감지합니다. 범고래와 박쥐도 먹잇감을 탐지하는 데 유사한 방법을 사용합니다.</p>
+                    <img src="../assets/img/sph3u_01.02.40.svg" alt="Echolocation in dolphins" class="img-responsive">
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>메아리</h3>
+                    <p>파동이 이동하고 있는 매질로 다시 반사될 수 있다는 것을 배웠습니다. 음파도 마찬가지입니다. 이 효과를 감지하는 쉬운 방법은 절벽이나 큰 평평한 벽과 같은 크고 딱딱한 평평한 표면이 근처에 있는 넓고 개방된 장소로 가는 것입니다. 사람이 소리를 지르면 소리가 모든 방향으로 멀어집니다. 큰 평평한 표면에 부딪힌 소리가 다시 반사되어 그 사람의 외침을 다시 듣게 됩니다. 반사되어 돌아온 소리를 메아리라고 합니다.</p>
+                    <img src="../assets/img/sph3u_01.02.41.jpeg" alt="Man in a cave producing echoes" class="img-responsive img-right-50">
+                    <p>메아리가 0.10초보다 긴 시간 내에 당신의 위치로 반사되면 명확하게 감지할 수 있습니다. 그렇지 않으면 시간 간격이 너무 작아서 원래 만든 소리라고 생각할 것입니다. 이는 당신과 딱딱한 반사면 사이의 거리가 약 17 m보다 커야 한다는 것을 의미합니다. 메아리는 음원에서 반사면까지의 거리를 구하는 데 사용할 수 있습니다. 음속을 알고 원래 소리와 메아리 사이의 시간을 측정하면 소리가 이동한 거리를 계산할 수 있습니다. 소리가 반사면까지 이동한 후 다시 돌아와야 하므로, 이 거리는 음원에서 반사면까지 거리의 두 배를 나타냅니다. 다음 예제는 이러한 문제를 푸는 방법을 보여줍니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예제: 메아리</h3>
+                    <p>한 사람이 소리를 지르고 2.5초 후에 절벽에서 반사된 메아리를 듣습니다. 공기 중 음속은 344 m/s입니다. 그 사람에서 절벽까지의 거리를 구하세요.</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-8">풀이 보기</button>
+                    <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-8">
+
+                        <p><strong>주어진 값:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+
+                                <mi>t</mi>
+                                <mo>=</mo>
+                                <mn>2.5</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math>
+                            ,
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <mn>344</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math>
+                        </p>
+
+                        <p><strong>구하는 값:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>d</mi>
+                            </math></p>
+
+                        <p>먼저 총 거리를 구합니다.</p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+
+                                <mi>d</mi>
+                                <mo>=</mo>
+                                <mi>v</mi>
+                                <mi>t</mi>
+                                <mo>=</mo>
+                                <mo>&#xA0;</mo>
+                                <mo>(</mo>
+                                <mn>344</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                                <mo>)</mo>
+                                <mo>&times;</mo>
+                                <mo>(</mo>
+                                <mn>2.5</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">s</mi>
+                                <mo>)</mo>
+                                <mo>=</mo>
+                                <mn>860</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                            </math></p>
+                        <p>음파가 사람에서 절벽까지, 그리고 다시 귀로 돌아왔으므로, 이 거리는 사람에서 절벽까지 거리의 두 배입니다.</p>
+                        <p>따라서,</p>
+                        <p><strong>결론:</strong></p>
+                        <p>그 사람에서 절벽까지의 거리는 430 m입니다.</p>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>소나</h3>
+                    <p>소나는 음파 탐지기(sound navigation and ranging)의 약자입니다. 일반적으로 이러한 유형의 장치는 대형 선박에 사용됩니다. 선박 하부에 변환기(소리 송신기)가 있어 해저를 향해 아래로 향하는 음파를 생성합니다. </p>
+                    <img src="../assets/img/sph3u_01.02.43.jpeg" alt="A device displaying navigation information" class="img-responsive img-right-50">
+                    <p>이 음파는 수면 아래의 물체(예: 물고기)와 해저에서 반사되어 마이크(소리 수신기)에 의해 감지됩니다. 그런 다음 컴퓨터가 물속의 음속과 메아리가 돌아오는 시간을 사용하여 메아리 예제와 유사한 방법으로 수면 아래 다양한 물체의 깊이를 계산합니다. 이 정보는 영상으로 변환될 수 있습니다. 이러한 종류의 영상은 다음 그림에 나타난 것처럼 물고기 떼, 침몰된 선박, 잠수함, 또는 단순히 수심을 파악하는 데 사용할 수 있습니다.</p>
+                    <img src="../assets/img/sph3u_01.02.44.svg" alt="Diagram showing how ships use a sonar device." class="img-responsive">
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예제: 소나</h3>
+                    <p>어선이 해저를 향해 신호를 보냅니다. 0.30초 후에 하나의 메아리를, 0.80초 후에 또 다른 메아리를 수신합니다. 하나의 메아리는 물고기 떼에서, 다른 하나는 해저에서 온 것입니다. 이 바닷물에서의 음속이 1470 m/s라면, 물고기는 해저 위 얼마나 높은 곳에 있나요?</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u1la2-suggestedAnswerButton-9">풀이
+                        보기</button>
+                    <div class="answer_reveal invisible" id="sph3u_u1la2-suggestedAnswer-9">
+                        <p><strong>주어진 값:</strong></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>t</mi>
+                                    <mrow>
+                                        <mi>f</mi>
+                                        <mi>i</mi>
+                                        <mi>s</mi>
+                                        <mi>h</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>0.30</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>t</mi>
+                                    <mrow>
+                                        <mi>f</mi>
+                                        <mi>l</mi>
+                                        <mi>o</mi>
+                                        <mi>o</mi>
+                                        <mi>r</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>0.80</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>v</mi>
+                                    <mrow>
+                                        <mi>s</mi>
+                                        <mi>o</mi>
+                                        <mi>u</mi>
+                                        <mi>n</mi>
+                                        <mi>d</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>1470</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p><strong>구하는 값:</strong></p>
+
+                        <p>물고기와 해저 사이의 거리는 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>d</mi>
+                                    <mrow>
+                                        <mi>f</mi>
+                                        <mi>l</mi>
+                                        <mi>o</mi>
+                                        <mi>o</mi>
+                                        <mi>r</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>-</mo>
+                                <msub>
+                                    <mi>d</mi>
+                                    <mrow>
+                                        <mi>f</mi>
+                                        <mi>i</mi>
+                                        <mi>s</mi>
+                                        <mi>h</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>=</mo>
+                                <mo>&nbsp;?</mo>
+                            </math></p>
+
+                        <p><strong>공식:</strong></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi>d</mi>
+                                    <mi>t</mi>
+                                </mfrac>
+                            </math>, so <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>d</mi>
+                                <mo>=</mo>
+                                <mi>v</mi>
+                                <mi>t</mi>
+                            </math></p>
+
+                        <p><strong>풀이:</strong></p>
+
+                        <p>각 주어진 시간은 소리가 반사되어 돌아오므로 물체까지의 시간의 두 배입니다.
+                            배에서 물고기까지의 거리:</p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>d</mi>
+                                <mo>=</mo>
+                                <mi>v</mi>
+                                <mi>t</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>d</mi>
+                                <mo>=&nbsp;</mo>
+                                <mfenced>
+                                    <mrow>
+                                        <mn>1470</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </mrow>
+                                </mfenced>
+                                <mfenced>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>0.30</mn>
+                                            <mo>&#xA0;</mo>
+                                            <mi mathvariant="normal">s</mi>
+                                        </mrow>
+                                        <mn>2</mn>
+                                    </mfrac>
+                                </mfenced>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>d</mi>
+                                    <mrow>
+                                        <mi>f</mi>
+                                        <mi>i</mi>
+                                        <mi>s</mi>
+                                        <mi>h</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>220.5</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                            </math></p>
+
+                        <p>배에서 해저까지의 거리:</p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>d</mi>
+                                <mo>=&nbsp;</mo>
+                                <mfenced>
+                                    <mrow>
+                                        <mn>1470</mn>
+                                        <mo>&#xA0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <mi mathvariant="normal">s</mi>
+                                    </mrow>
+                                </mfenced>
+                                <mfenced>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>0.80</mn>
+                                            <mo>&#xA0;</mo>
+                                            <mi mathvariant="normal">s</mi>
+                                        </mrow>
+                                        <mn>2</mn>
+                                    </mfrac>
+                                </mfenced>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>d</mi>
+                                    <mrow>
+                                        <mi>f</mi>
+                                        <mi>i</mi>
+                                        <mi>s</mi>
+                                        <mi>h</mi>
+                                    </mrow>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>588</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                            </math></p>
+
+                        <p>둘의 차이는
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>d</mi>
+                                <mo>=</mo>
+                                <mn>588</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>&#xA0;</mo>
+                                <mo>-</mo>
+                                <mo>&#xA0;</mo>
+                                <mn>220.5</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                            </math>
+                        </p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>d</mi>
+                                <mo>=</mo>
+                                <mn>367.5</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                            </math></p>
+
+                        <p><strong>결론:</strong></p>
+
+                        <p>물고기는 해저 위 370 m에 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <section id="consolidation">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_01_consolidation.jpg" alt="Consolidation" class="img-responsive" style="width:100%;">
+                </h1>
+
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>이해를 연결하기</h2>
+                    <p>첫 번째 활동을 다시 살펴봅시다. 컵과 실 모두가 진동하여 성대에서 시작된 소리를 전달하기 때문에 상대방의 목소리를 들을 수 있었습니다. 이 학습 활동에서 소리의 전달과 인지에 대해 배웠습니다. </p>
+                    <p>이제 청력 손실의 위험을 최소화하는 방법을 배움으로써 소리와 청각에 대해 배운 내용을 연결할 것입니다.</p>
+
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>읽기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/read.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 자료를 살펴보세요: </p>
+                            <p><a href="../assets/locker_docs/sph3u_01.02.46.pdf" target="_blank">캐나다 정부 - 소음성 난청<span class="sr-only">새 창에서 열림</span></a></p>
+                            <p><a href="../assets/locker_docs/sph3u_01.02.47.pdf" target="_blank">캐나다 정부 - 개인 스테레오 시스템과 청력 손실의 위험<span class="sr-only">새 창에서 열림</span></a></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>긍정적인 디지털 발자국을 갖는 것의 일부는 배운 정보를 공유하고 다른 사람들이 알아야 한다고 생각하는 것을 나누는 것입니다. 이렇게 하면 온라인 커뮤니티에 긍정적으로 기여하게 됩니다. 지금까지 소음성 난청 문제를 학습했습니다. </p>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>웹 기반 도구나 워드 프로세서를 사용하여, 소셜 미디어에서 공유할 수 있는 밈(이미지와 문구의 조합)을 만들어 다른 사람들에게 위험이나 자신을 보호할 수 있는 조치에 대해 교육하는 데 도움이 되도록 긍정적인 디지털 발자국을 실천하세요.</p>
+                            <p>여러분의 밈을 웹에서 찾을 수 있는 다음의 것들과 비교해 보세요: </p>
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-xs-5 col-xs-offset-1">
+                            <img src="../assets/img/sph3u_01.02.48.jpeg" alt="advertisement to raise awareness of hearing loss due to loud headphones" class="img-responsive">
+                        </div>
+
+                        <!-- right column -->
+                        <div class="col-xs-5">
+
+                            <img src="../assets/img/sph3u_01.02.49.jpeg" alt="advertisement to raise awareness of hearing loss due to loud performance of music" class="img-responsive">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>지속 과제: 과정 공식 목록</h4>
+                            <p>첫 번째 학습 활동 후 활동에 사용된 물리 공식을 노트에 식별하고 기록하라는 요청을 받았다는 것을 기억하세요.</p>
+
+                            <p>다음 제목 아래에 공식을 추가할 수 있습니다:</p>
+                            <h4>단원 1: 파동과 소리</h4>
+                            <p>이 학습 활동에서 제시된 공식을 기록하세요.</p>
+                            <p>또한 공식 옆에 그 공식을 어떤 상황에서 사용할 것인지 간단한 메모를 기록하세요. </p>
+                            <p>예시:</p>
+                            <div style="border-left: 6px solid green;  height: auto;">
+
+                                <p>파동의 속력을 구하는 데 사용. </p>
+                                <p>속력 = 파장 &times; 진동수</p>
+                                <p>변수: 속력, 진동수, 파장.</p>
+                            </div>
+                            <p>언제, 어떻게 사용할지 생각하는 데 도움이 되도록 노트에 추가할 수도 있습니다.</p>
+                            <p>또한 이 학습 활동 시작 시 작성한 어휘 목록을 업데이트했는지 확인하세요. 음파의 물리학 맥락에서 각 단어의 의미와 용법을 잘 이해하고 있는지 확인하세요. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>자기 점검 퀴즈</h3>
+                    <div class="callout_content_icon"> <img src="../assets/icons/self_check.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>이해도를 확인하세요!</h4>
+                            <p>다음 자기 점검 퀴즈를 완료하여 학습 현황과 집중해야 할 영역을 파악하세요.</p>
+                            <p>이 퀴즈는 피드백용이며, 성적에 포함되지 않습니다. 이 퀴즈에 대한 시도 횟수는 무제한입니다. 시간을 갖고 최선을 다하며, 제공된 피드백을 반영하세요.</p>
+                            <p><strong>퀴즈</strong> 버튼을 눌러 이 도구에 접속하세요.</p> <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=27211480&amp;type=quiz&amp;rcode=eLO-79247199" target="_blank"><img src="../assets/icons/quiz_button.svg" class="action_button callout-image" alt="Quiz"><span class="sr-only">(새 창에서 열림)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+    </main>
+
+    <!-- Compiled GVL, Widgets, ILOs, etc. -->
+    <script src="../dependencies/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../dependencies/vendor.min.js"></script>
+    <script src="../assets/js/bugfixes.js"></script>
+    <script>
+        angular.bootstrap(document.getElementById('u1la2_mc1'), ['multipleChoiceWidget']);
+        angular.bootstrap(document.getElementById('u1la2_mc2'), ['multipleChoiceWidget']);
+
+    </script>
+</body>
+
+</html>
