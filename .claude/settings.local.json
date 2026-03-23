@@ -23,7 +23,9 @@
       "Bash(unzip -o /tmp/gh.zip -d /tmp/gh)",
       "Bash(curl -sL \"https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_macOS_arm64.zip\" -o /tmp/gh.zip -w \"%{http_code}\")",
       "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh --version)",
-      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh auth:*)"
+      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh auth:*)",
+      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh repo:*)",
+      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh api:*)"
     ]
   }
 }
