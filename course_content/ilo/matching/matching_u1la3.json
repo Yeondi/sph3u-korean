@@ -3,7 +3,7 @@
     "pairs": 5,
     "useRandomPairs": false,
     "shuffleColumns": true,
-    "successMessage": "You did it! Way to go!",
+    "successMessage": "해냈습니다! 잘했어요!",
     "basePath": "../assets/img",
     "columnRatio": "1:2",
     "items": [
@@ -13,26 +13,25 @@
       },
       {
         "first": ["", "", "b"],
-        "second": ["", "", "crest"]
+        "second": ["", "", "마루"]
       },
       {
         "first": ["", "", "c"],
-        "second": ["", "", "amplitude"]
+        "second": ["", "", "진폭"]
       },
       {
         "first": ["", "", "d"],
-        "second": ["", "", "trough"]
+        "second": ["", "", "골"]
       },
       {
         "first": ["", "", "e"],
         "second": ["", "", "2 λ"]
-      }     
+      }
     ],
-    "iloStartLink": "Enter interactive activity Matching 1 or press link to skip to end of activity.",
-    "iloStartText": "Beginning of Matching 1 interactive activity.",
-    "iloEndLink": "Press link to return to start of interactive activity Matching 1.",
-    "iloEndText": "End of Matching 1 interactive activity."
+    "iloStartLink": "짝짓기 1 상호작용 활동을 시작하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloStartText": "짝짓기 1 상호작용 활동의 시작입니다.",
+    "iloEndLink": "링크를 눌러 짝짓기 1 상호작용 활동의 시작으로 돌아가세요.",
+    "iloEndText": "짝짓기 1 상호작용 활동의 끝입니다."
 
   }
-  
-  
+

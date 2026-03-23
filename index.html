@@ -2,10 +2,146 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="0;url=Table%20of%20Contents.html">
-<title>SPH3U - 파동과 소리</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPH3U - 온타리오 11학년 물리</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Segoe UI', sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  header {
+    text-align: center;
+    padding: 3rem 1rem 1.5rem;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #f8fafc;
+    letter-spacing: -0.02em;
+  }
+  header p {
+    color: #94a3b8;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    max-width: 960px;
+    width: 100%;
+    padding: 1rem 1.5rem 3rem;
+  }
+  .card {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1px solid #334155;
+    position: relative;
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    border-color: #475569;
+  }
+  .card.active { border-color: #3b82f6; }
+  .card.locked { opacity: 0.45; pointer-events: none; }
+  .unit-num {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+  .card.active .unit-num { color: #60a5fa; }
+  .card h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #f1f5f9;
+  }
+  .card p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.5;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    margin-top: 0.75rem;
+  }
+  .badge.done { background: #166534; color: #bbf7d0; }
+  .badge.soon { background: #854d0e; color: #fef08a; }
+  .badge.locked-badge { background: #334155; color: #64748b; }
+  footer {
+    padding: 1.5rem;
+    text-align: center;
+    color: #475569;
+    font-size: 0.8rem;
+  }
+</style>
 </head>
 <body>
-<p><a href="Table%20of%20Contents.html">SPH3U - 단원 1: 파동과 소리</a></p>
+
+<header>
+  <h1>SPH3U 물리학</h1>
+  <p>온타리오 11학년 물리 — 한국어 번역</p>
+</header>
+
+<div class="grid">
+
+  <div class="card locked">
+    <div class="unit-num">시작하기</div>
+    <h2>SPH3U에 오신 것을 환영합니다!</h2>
+    <p>과정 소개 및 안내</p>
+    <span class="badge locked-badge">준비 중</span>
+  </div>
+
+  <a class="card active" href="Table%20of%20Contents.html">
+    <div class="unit-num">단원 1</div>
+    <h2>파동과 소리</h2>
+    <p>파동의 특성, 전달, 반사, 간섭, 공명</p>
+    <span class="badge done">번역 완료</span>
+  </a>
+
+  <div class="card locked">
+    <div class="unit-num">단원 2</div>
+    <h2>운동과 힘</h2>
+    <p>변위, 속도, 가속도, 뉴턴의 운동 법칙</p>
+    <span class="badge locked-badge">준비 중</span>
+  </div>
+
+  <div class="card locked">
+    <div class="unit-num">단원 3</div>
+    <h2>에너지와 사회</h2>
+    <p>일, 에너지, 열, 효율, 에너지 변환</p>
+    <span class="badge locked-badge">준비 중</span>
+  </div>
+
+  <div class="card locked">
+    <div class="unit-num">단원 4</div>
+    <h2>전기와 자기</h2>
+    <p>전하, 전류, 전압, 저항, 자기장</p>
+    <span class="badge locked-badge">준비 중</span>
+  </div>
+
+</div>
+
+<footer>SPH3U — Ontario Grade 11 Physics (Korean Translation)</footer>
+
 </body>
 </html>

@@ -2,52 +2,52 @@
     "department": "sec",
     "centerAnswers": false,
     "imgBasePath": "../assets/img/",
-    "iloStartText": "Beginning of Multiple Choice 1 interactive activity.",
-    "iloEndText": "End of Multiple Choice 1 interactive activity.",
-    "iloStartLink": "Enter interactive activity Multiple Choice 1 or press link to skip to end of activity.",
-    "iloEndLink": "Press link to return to start of interactive activity Multiple Choice 1.",
+    "iloStartText": "선다형 1 상호작용 활동의 시작입니다.",
+    "iloEndText": "선다형 1 상호작용 활동의 끝입니다.",
+    "iloStartLink": "선다형 1 상호작용 활동을 시작하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 선다형 1 상호작용 활동의 시작으로 돌아가세요.",
     "questions": [
         {
             "randomizeChoices": true,
             "choiceLabels": "alphabetized",
             "prompt": {
                 "question": [
-                    "How much less intense is a concert with an intensity of 110 dB compared to a jet taking off with an intensity of 130 dB?"
+                    "세기가 110 dB인 콘서트는 세기가 130 dB인 이륙하는 제트기보다 얼마나 덜 강한가요?"
                 ],
-                "ariaLabel": "How much less intense is a concert with an intensity of 110 dB compared to a jet taking off with an intensity of 130 dB?"
+                "ariaLabel": "세기가 110 dB인 콘서트는 세기가 130 dB인 이륙하는 제트기보다 얼마나 덜 강한가요?"
             },
             "choices": [
                 {
                     "answer": [
-                        "20 times less intense"
+                        "20배 덜 강한"
                     ],
                     "correct": false,
-                    "feedback": "Incorrect. 130 - 110 = 20 dB. That means the sound is 10² = 100 times less intense.",
-                    "ariaLabel": "20 times less intense"
+                    "feedback": "오답입니다. 130 - 110 = 20 dB입니다. 이는 소리가 10² = 100배 덜 강하다는 것을 의미합니다.",
+                    "ariaLabel": "20배 덜 강한"
                 },
                 {
                     "answer": [
-                        "2 times less intense"
+                        "2배 덜 강한"
                     ],
                     "correct": false,
-                    "feedback": "Incorrect. 130 - 110 = 20 dB. That means the sound is 10² = 100 times less intense.",
-                    "ariaLabel": "2 times less intense"
+                    "feedback": "오답입니다. 130 - 110 = 20 dB입니다. 이는 소리가 10² = 100배 덜 강하다는 것을 의미합니다.",
+                    "ariaLabel": "2배 덜 강한"
                 },
                 {
                     "answer": [
-                        "200 times less intense"
+                        "200배 덜 강한"
                     ],
                     "correct": false,
-                    "feedback": "Incorrect. 130 - 110 = 20 dB. That means the sound is 10² = 100 times less intense.",
-                    "ariaLabel": "200 times less intense"
+                    "feedback": "오답입니다. 130 - 110 = 20 dB입니다. 이는 소리가 10² = 100배 덜 강하다는 것을 의미합니다.",
+                    "ariaLabel": "200배 덜 강한"
                 },
                 {
                     "answer": [
-                        "100 times less intense"
+                        "100배 덜 강한"
                     ],
                     "correct": true,
-                    "feedback": "Correct.",
-                    "ariaLabel": "100 times less intense"
+                    "feedback": "정답입니다.",
+                    "ariaLabel": "100배 덜 강한"
                 }
             ]
         }

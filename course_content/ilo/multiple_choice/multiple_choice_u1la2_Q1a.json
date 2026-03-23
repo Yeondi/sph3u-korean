@@ -2,19 +2,19 @@
     "department": "sec",
     "centerAnswers": false,
     "imgBasePath": "../assets/img/",
-    "iloStartText": "Beginning of Multiple Choice 1 interactive activity.",
-    "iloEndText": "End of Multiple Choice 1 interactive activity.",
-    "iloStartLink": "Enter interactive activity Multiple Choice 1 or press link to skip to end of activity.",
-    "iloEndLink": "Press link to return to start of interactive activity Multiple Choice 1.",
+    "iloStartText": "선다형 1 상호작용 활동의 시작입니다.",
+    "iloEndText": "선다형 1 상호작용 활동의 끝입니다.",
+    "iloStartLink": "선다형 1 상호작용 활동을 시작하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 선다형 1 상호작용 활동의 시작으로 돌아가세요.",
     "questions": [
         {
             "randomizeChoices": true,
             "choiceLabels": "alphabetized",
             "prompt": {
                 "question": [
-                    "A siren with a frequency of 500 Hz is activated at 10.0°C. What is the speed of the sound?"
+                    "진동수가 500 Hz인 사이렌이 10.0°C에서 작동합니다. 소리의 속력은 얼마인가요?"
                 ],
-                "ariaLabel": "A siren with a frequency of 500 Hz is activated at 10.0°C. What is the speed of the sound?"
+                "ariaLabel": "진동수가 500 Hz인 사이렌이 10.0°C에서 작동합니다. 소리의 속력은 얼마인가요?"
             },
             "choices": [
                 {
@@ -22,7 +22,7 @@
                         "50 m/s"
                     ],
                     "correct": false,
-                    "feedback": "Incorrect. The 500 Hz is not needed to find the speed. The formula is v = 332 m/s + (0.59 m/s · °C) × T, where T is 10.0°C.",
+                    "feedback": "오답입니다. 속력을 구하는 데 500 Hz는 필요하지 않습니다. 공식은 v = 332 m/s + (0.59 m/s · °C) × T이며, 여기서 T는 10.0°C입니다.",
                     "ariaLabel": "50 m/s"
                 },
                 {
@@ -30,7 +30,7 @@
                         "510 m/s"
                     ],
                     "correct": false,
-                    "feedback": "Incorrect. The 500 Hz is not needed to find the speed. The formula is v = 332 m/s + (0.59 m/s · °C) × T, where T is 10.0°C.",
+                    "feedback": "오답입니다. 속력을 구하는 데 500 Hz는 필요하지 않습니다. 공식은 v = 332 m/s + (0.59 m/s · °C) × T이며, 여기서 T는 10.0°C입니다.",
                     "ariaLabel": "510 m/s"
                 },
                 {
@@ -38,7 +38,7 @@
                         "338 m/s"
                     ],
                     "correct": true,
-                    "feedback": "Correct.",
+                    "feedback": "정답입니다.",
                     "ariaLabel": "338 m/s"
                 },
                 {
@@ -46,7 +46,7 @@
                         "342 m/s"
                     ],
                     "correct": false,
-                    "feedback": "Incorrect. The 500 Hz is not needed to find the speed. The formula is v = 332 m/s + (0.59 m/s · °C) × T, where T is 10.0°C.",
+                    "feedback": "오답입니다. 속력을 구하는 데 500 Hz는 필요하지 않습니다. 공식은 v = 332 m/s + (0.59 m/s · °C) × T이며, 여기서 T는 10.0°C입니다.",
                     "ariaLabel": "342 m/s"
                 }
             ]
