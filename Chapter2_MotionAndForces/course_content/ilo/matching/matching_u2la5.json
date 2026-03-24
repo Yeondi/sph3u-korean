@@ -1,0 +1,37 @@
+{
+    "department": "sec",
+    "pairs": 5,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "정답입니다! 잘했습니다!",
+    "basePath": "../assets/img",
+    "columnRatio": "1:2",
+    "items": [
+      {
+        "first": ["", "", "12 kg"],
+        "second": ["", "", "118 N"]
+      },
+      {
+        "first": ["", "", "15 g"],
+        "second": ["", "", "0.147 N"]
+      },
+      {
+        "first": ["", "", "30 kg"],
+        "second": ["", "", "294 N"]
+      },
+      {
+        "first": ["", "", "200 g"],
+        "second": ["", "", "1.96 N"]
+      },
+      {
+        "first": ["", "", "250 kg"],
+        "second": ["", "", "2450 N"]
+      }
+
+    ],
+    "iloStartLink": "매칭 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloStartText": "매칭 1 대화형 활동의 시작.",
+    "iloEndLink": "링크를 눌러 매칭 1 대화형 활동의 시작으로 돌아가세요.",
+    "iloEndText": "매칭 1 대화형 활동의 끝."
+
+  }

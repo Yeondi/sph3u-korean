@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <title>힘, 질량, 그리고 가속도</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <link href="css/ilc_main.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet" />
+
+    </head>
+
+    <body>
+        <div id="mainContainer">
+            <!--div id="instructionsMask"></div-->
+            <!-- <div id="instructionsContainer" data-markdown-id="instructions" data-markdown-processed="false"></div> -->
+            <!--div id="instructionsContainer" data-lang-id="instructions" data-lang-processed="false"></div-->
+            <div id="instructions">
+                <h1><span>힘(force), 질량(mass), 그리고 가속도(acceleration)</span></h1>
+
+                <p>이 실험 장치에서는 마찰이 없는 트랙 위의 수레가 매달린 추의 무게에 의해 당겨집니다.</p>
+                <p><span class="colourLetter">M</span> (수레의 질량)</p>
+                <p><span class="colourLetter">m</span> (매달린 추의 질량)</p>
+
+
+                <h2>수행 방법</h2>
+                <p>시작 버튼을 눌러 수레를 놓으면, 중력(gravity)이 매달린 추를 당기면서 수레가 가속됩니다. 시간(time) <span class="colourLetter">t</span>는 수레가
+                    1미터를 이동하는 데 걸리는 시간을 보여줍니다. </p>
+                <p><span class="colourLetter">M</span>과 <span class="colourLetter">m</span>을 슬라이더로
+                    조정하여 질량의 변화가 수레가 1미터를 이동하는 데 걸리는 시간에 어떤 영향을 미치는지 관찰하세요. </p>
+            </div>
+
+
+
+            <!--canvas alt="A horseshoe magnet with the north pole at the top of the screen, and a circuit consisting of a battery and a loop of wire" id="game-canvas" width="540" height="330" tabindex="-1"></canvas-->
+
+
+            <div class="arrange-vertically">
+
+                <div alt="3 springs and newton scales" id="phaser-Container" tabindex="-1"></div>
+            </div>
+
+            <div id="ui" class="">
+
+                <div id="timingBlockUI">
+
+                    <label for="selectTimingBlock"><span>타이밍 블록</span></label>
+
+                    <strong><span id="outputTimingBlock">0</span><span></span></strong>
+
+                    <input id="selectTimingBlock" type="range" min="0" max="1" step="0.01" value="0.5"></input>
+                </div>
+
+
+                <div class="">
+                    <div class="">
+                        <div>
+
+                            <label for="selecthangingMass"><span>매달린 추의 질량</span></label>
+
+
+
+                            <input id="selecthangingMass" type="range" min="1" max="100" value="0"></input>
+                            <div class="val"><span id="outputhangingMass">0</span><span></span></div>
+
+
+                        </div>
+                        <div>
+
+                            <label for="selectwagonMass"><span>수레의 질량</span></label>
+
+
+                            <input id="selectwagonMass" type="range" min="100" max="200" value="0"></input>
+                            <div class="val"><span id="outputwagonMass">0</span><span></span></div>
+
+
+                        </div>
+                        <div id="frictionAll" class="hidden">
+
+                            <label for="selectfirction"><span>마찰 계수</span></label>
+
+                            <strong><span id="outputfirction">0</span><span></span></strong>
+
+                            <input id="selectfirction" type="range" min="0" max="0.4" step="0.01" value="0"></input>
+                        </div>
+                        <div>
+                            <p>
+                                <label for="timeOutput"><span>시간:</span></label>
+
+                            <div class="val nobg"><span id="timeOutput">0.00</span><span>초</span></div>
+                            </p>
+
+                        </div>
+                        <div>
+                            <p>
+                                <button id="startButton" class="btn cta-large"> 시작</button>
+
+                            </p>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- The toggle drawer-->
+                <!--div id="drawerToggle" tabindex="1">
+                    <div id="toggleSquare">
+                        <img id="toggleArrow" src="assets/images/toggleArrow.png" alt="none">
+                        <span id="instructionLabel" data-lang-id="instructionLabel" data-lang-processed="false"></span>
+                    </div>
+                </div-->
+            </div>
+
+
+        </div>
+    </body>
+
+    <script src="libraries/marked.min.js"></script>
+    <script src="https://use.fontawesome.com/dd511ff0f4.js"></script>
+    <script src="libraries/phaser.min.js"></script>
+    <!--script src="js/languageLoader.js"></script-->
+    <script src="js/app.js"></script>
+
+
+</html>

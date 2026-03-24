@@ -1,0 +1,274 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+body {
+	background-color: #C6CDD0;
+	display: flex;
+	justify-content: center;
+}
+
+#mainContainer {
+	display: flex;
+    z-index: 1; 
+    position: relative;	
+}
+
+#ui {
+	position: relative;
+	width: 300px;
+	height: 500px;
+	padding: 20px;
+	/*
+	background-image: url("images/col_lineheight.png");
+	*/
+    z-index: 4;
+    background-color: #F8F9F9; 	
+}
+
+canvas {
+   z-index: 2; 	
+}
+
+h1 {
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+hr {
+	width: 240px;
+}
+
+input {
+	margin-right: 8px;
+}
+
+p {
+	margin-bottom: 8px;
+}
+
+#timeDisplayContainer {
+	position: absolute;
+	bottom: -5px;
+	width: 240px;
+	height: 50px;
+	transition: opacity 0.5s;
+	margin-top: 35px;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#timeDisplay {
+	text-align: center;
+}
+
+#timeMessageDisplay {
+	opacity: 0;
+	color: red;
+	transition: opacity 0.3s;
+}
+
+#timeOutput {
+	opacity: 0;
+	font-size: 32px;
+}
+
+#carControlsContainer {
+	position: absolute;
+	top: 320px;
+}
+
+#activityResultContainer {
+	position: absolute;
+	top: 50px;
+	left: 450px;
+	transition: opacity 0.5s;
+	width: 320px;
+	height: 265px;
+	background-color: #E5E9EA;
+	opacity: 0;
+	box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+	z-index: 3;
+}
+
+#speedChartContainer {
+	position: absolute;
+	top: 30px;
+	left: 615px;
+	transition: opacity 0.5s;
+	width: 250px;
+	height: 260px;
+	background-color: #E5E9EA;
+	opacity: 0;
+	box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+	z-index: 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	visibility: hidden;
+
+}
+
+#positionChartContainer {
+	position: absolute;
+	top: 30px;
+	left: 330px;
+	transition: opacity 0.5s;
+	width: 250px;
+	height: 260px;
+	background-color: #E5E9EA;
+	opacity: 0;
+	box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.3);
+	z-index: 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	visibility: hidden;
+
+}
+
+th {
+	width: 130px;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+#instructionsContainer * {
+	color: white;
+}
+
+.slider {
+	margin-top: -18px;
+}
+
+input[type=range] {
+    width: 205px;
+    cursor: pointer;
+}
+
+#speedChart, #positionChart {
+	width: 240px;
+	height: 200px;
+	padding: 0;
+	margin-left: -20px;
+	margin-bottom: 3px;
+}
+
+#graphingButton {
+	background-color: #DEEDDF;
+}
+
+#drawerToggle {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 20px;
+	height: 500px;
+	background-color: #F5F5F5;
+	cursor: pointer;
+	user-select: none;
+}
+
+#toggleSquare {
+	position: absolute;
+    top:0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+#instructionLabel {
+	display: block;
+	width: 200px;
+	height: 20px;
+	transform: rotate(90deg);
+	transform-origin: 0% 100%;
+	padding-left: 5px;
+	margin-top: -20px; 
+}
+
+#instructionsContainer {
+	position: absolute;
+	left: -300px;
+	top: 0px;
+	width: 600px;
+	height: 500px;
+	padding: 40px 75px 40px 75px;
+	background-color:rgba(0, 0, 0, 0.7);
+	z-index: 4;
+	transition: left 0.5s;
+	/*
+	background-image: url("images/col_lineheight.png");
+	*/
+}
+
+#instructionsMask {
+	width: 600px;
+	height: 500px;
+	position: absolute;
+	right: 900px;
+	top: 0px;
+	background-color: #C6CDD0;
+	z-index: 5;
+}
+
+#toggleArrow {
+	margin-top: -2px;
+    transition: transform 0.5s;
+}
+
+.c3 svg{
+ font: 12px sans-serif;
+}
+
+/* Checkbox */
+
+.onoffswitch {
+    position: relative; width: 60px;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    height: 36px; padding: 0; line-height: 36px;
+    border: 2px solid #E3E3E3; border-radius: 36px;
+    background-color: #FFFFFF;
+    transition: background-color 0.3s ease-in;
+}
+.onoffswitch-label:before {
+    content: "";
+    display: block; width: 36px; margin: 0px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 22px;
+    border: 2px solid #E3E3E3; border-radius: 36px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label {
+    background-color: #49E845;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label, .onoffswitch-checkbox:checked + .onoffswitch-label:before {
+   border-color: #49E845;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label:before {
+    right: 0px; 
+}
+
+

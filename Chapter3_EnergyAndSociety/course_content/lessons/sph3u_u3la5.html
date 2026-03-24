@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>학습 활동 3.5: 핵물리학</title>
+    <style>
+        /*matching widget styles*/
+        .completionItem {
+            /*question (label) and option (select) div*/
+            position: relative;
+            clear: both;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(86, 101, 105, 0.5);
+            margin-bottom: 20px;
+            background-color: #F8F9F9;
+        }
+
+        .completionItem label {
+            /* question is inside <label>*/
+            width: 71%;
+            padding: 2%;
+            font-size: 95%;
+        }
+
+        .completionItem select {
+            /* options are inside <select>*/
+            width: 25%;
+            float: right;
+            margin: 2%;
+            margin-right: 0px;
+            /* .btn-info -- button styles from CVL */
+            color: #F8F9F9;
+            background-color: #0A76A5;
+            border-color: #0A76A5;
+        }
+
+        .completionItem label>span {
+            /*all text is inside <span> - this overrides bold for question text*/
+            font-weight: normal;
+        }
+
+        .completionItem span {
+            /*feedback text*/
+            font-weight: bold;
+        }
+
+        .completionFeedback i {
+            /*this pushes the feedback to a new line*/
+            padding: 20px
+        }
+
+        .completionControls {
+            /*position of submit button - width and position matches options*/
+            float: right;
+            width: 25%;
+        }
+
+        .completionControls button {
+            /*button is full width of 25% in layout*/
+            width: 100%;
+            /* different button */
+            color: #F8F9F9;
+            background-color: gray;
+            border-color: #0A76A5;
+        }
+
+        .completionControls button:hover {
+            background-color: black;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../assets/css/ilc_core_temp.css">
+</head>
+
+<body>
+    <noscript>
+        <div class="alert alert-warning clearfix" role="alert">
+            <p>
+                <strong>경고!</strong> 최상의 학습 경험을 위해 이 학습 활동에는 Javascript가 활성화되어야 하는 요소가 포함되어 있습니다.
+            </p>
+        </div>
+    </noscript>
+
+    <section id="ilcLearningGoals" class="hidden">
+        <h2>학습 목표</h2>
+        <p>우리는 다음을 학습합니다:</p>
+        <ul>
+            <li>핵방사선(nuclear radiation)과 핵반응(nuclear reaction)을 탐구한다</li>
+            <li>핵반응에서 질량이 에너지로 전환될 수 있음을 이해한다</li>
+            <li>핵반응이 대규모 전력 생산에 사용될 수 있음을 이해한다</li>
+        </ul>
+        <h2>성취 기준</h2>
+        <p>나는 다음을 할 수 있습니다:</p>
+        <ul>
+            <li>다양한 유형의 핵반응을 비교한다</li>
+            <li>핵반응식의 균형을 맞춘다</li>
+            <li>질량에서 에너지로의 전환과 관련된 문제를 푼다</li>
+            <li>반감기(half-life)와 그 활용을 설명한다</li>
+            <li>핵분열(nuclear fission)과 핵융합(nuclear fusion)을 설명하고 비교한다</li>
+            <li>원자로(nuclear reactor)가 에너지 변환의 관점에서 어떻게 작동하는지 설명한다</li>
+        </ul>
+    </section>
+
+    <main id="mainContent" class="container">
+        <section id="mindsOn">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_03.05_mindsOn.jpg" alt="Minds On" class="img-responsive" style="width:100%;"></h1>
+            </div>
+
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트에 원자력 발전에 대한 다음 KWL 차트를 완성하세요.</p>
+                            <p>이 과제는 이 학습 활동 이전에 원자력에 대해 이미 <strong>알고 있는 것(KNOW)</strong>을 떠올리는 것입니다. 두 번째 열은 원자력 발전에 대해 <strong>알고 싶은 것(WANT)</strong>의 질문을 기록하는 곳입니다. 마지막 열은 다음 학습 활동을 탐구한 후까지 비워 두세요. 원자력에 대해 <strong>배운 것(LEARNED)</strong>을 이 열에 채워 넣으세요.</p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="text-align: center;">무엇을 알고 있나요(KNOW)?</th>
+                                        <th scope="col" style="text-align: center;">무엇을 알고 싶나요(WANT)?</th>
+                                        <th scope="col" style="text-align: center;">무엇을 배웠나요(LEARNED)?</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding:35px;"></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="margin-top-lg">표를 완성한 후, 다음 동영상 또는 <a href="../assets/locker_docs/sph3u_03.20.04a.pdf" target="_blank">원자력 발전소는 어떻게 작동하는가<span class="sr-only">새 창에서 열림</span></a> 기사를 살펴보세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">탐구해보기!</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%;">
+                            <p>다음 원자력 발전에 관한 동영상을 시청한 후 노트의 KWL 차트 마지막 열에 내용을 추가하세요.</p>
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2542058"></div>
+                </div>
+            </div>
+        </section>
+        <section id="action">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_03_action.jpg" alt="Action" class="img-responsive" style="width:100%;"></h1>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">핵반응 </h2>
+                    <p>온타리오주에서 에너지 수요가 증가하고 온실가스 배출에 대한 우려로 화석 연료 사용을 꺼리는 상황에서, 하나의 가능한 대안 에너지원은 원자로입니다. 원자로는 막대한 양의 에너지를 생산하지만, 몇 가지 단점과 우려도 있습니다. 많은 사람들이 원자력 에너지(nuclear energy)에 대해 강한 의견을 가지고 있습니다. 그들은 그 선택을 하는 데 필요한 모든 정보를 가지고 있을까요? 이 학습 활동에서는 핵반응과 원자력 에너지에 대해 배우고, 자신만의 의견을 형성할 수 있을 만큼 충분한 이해를 발전시킬 것입니다.</p>
+                </div>
+            </div>
+            <!--CAROUSEL STARTS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- Carousel -->
+                    <div id="ilcCarousel01" class="carousel slide" data-ride="carousel" data-wrap="true" data-interval="false">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#ilcCarousel01" data-slide-to="0" class="active"></li>
+                            <li data-target="#ilcCarousel01" data-slide-to="1"></li>
+                            <li data-target="#ilcCarousel01" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <!-- Slide 1 -->
+                            <div class="item active">
+                                <img src="../assets/img/sph3u_03.05.204.jpg" class="img-responsive center-block" alt="Aerial view of Pickering Nuclear Power Plant">
+                                <!-- Caption -->
+                                <div class="carousel-caption">Pickering 원자력 발전소 항공 사진</div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="item">
+                                <img src="../assets/img/sph3u_03.05.201.jpg" class="img-responsive center-block" alt="Panoramic view of Darlington Nuclear Power Plant">
+                                <!-- Caption -->
+                                <div class="carousel-caption">
+                                    Darlington 원자력 발전소 파노라마 사진
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="item">
+                                <img src="../assets/img/sph3u_03.05.202.jpg" class="img-responsive center-block" alt="Aerial view of Bruce Nuclear Power Plant">
+                                <!-- Caption -->
+                                <div class="carousel-caption">
+                                    Bruce 원자력 발전소 항공 사진
+                                </div>
+                            </div>
+                            <!-- Left and right controls -->
+                            <!-- Left -->
+                            <a href="#ilcCarousel01" data-slide="prev">
+                                <i class="fa fa-angle-left fa-2x"></i>
+                            </a>
+                            <!-- Right -->
+                            <a href="#ilcCarousel01" data-slide="next">
+                                <i class="fa fa-angle-right fa-2x pull-right"></i>
+                            </a>
+                        </div>
+                        <!-- /Carousel -->
+                    </div>
+                </div>
+            </div>
+            <!--CAROUSEL ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_03.20.06.jpg" alt="A nuclear radiation sign" class="img-responsive img-right-50">
+                    <h3>간략한 역사</h3>
+                    <p>핵의 시대는 1945년 미국이 최초의 핵무기를 실험하면서 시작되었습니다. 핵반응의 끔찍한 잠재력은 일본의 히로시마와 나가사키에 핵폭탄이 투하되었을 때 증명되었습니다. 이것은 그 이후로 핵 기술에 대한 사람들의 인식을 형성해 왔습니다. 그 참혹한 사건으로부터 10년 이내에 과학자들과 공학자들은 핵폭발에서 방출되는 에너지를 제어하여 대신 전력을 생산하는 방법을 찾아냈습니다. 그 이후로 전 세계에 수백 개의 발전소가 건설되었습니다. 예를 들어, 약 150척의 선박이 원자로를 동력원으로 사용해 왔습니다.</p>
+                    <h3>원자력 에너지</h3>
+                    <p>원자력 에너지는 몇 가지 주목할 만한 예외를 제외하면 비교적 좋은 안전 기록을 가지고 있습니다. 1979년 미국 Three Mile Island 원자력 발전소에서 발생한 원자로 관련 사고는 원자력 에너지의 안전성에 대한 경각심을 불러일으켰습니다. 7년 후, 우크라이나 Chernobyl 원자력 발전소에서의 재난은 그 위험의 완전한 가능성을 보여주었습니다. 원자로 중 하나가 노심 용융(meltdown)을 일으켜 방사선이 아시아와 유럽 전역으로 퍼졌을 때 많은 사람들이 사망했습니다. 이 재난이 인체 건강과 환경에 미친 영향의 범위는 막대했습니다. 가장 최근의 원자력 재난은 2011년 일본 후쿠시마에서 발생했습니다. 이것은 지진에 이은 쓰나미에 의해 발생했습니다. 이러한 재난들을 근거로 핵 기술을 쉽게 배제할 수도 있지만, 특정 기술에 대해 완전히 이해하기 전에 관점을 채택하는 것은 현명하지 않습니다. 핵 기술이 우리 사회에 긍정적인 영향을 미치는 방식의 수는 여러분을 놀라게 할 수 있습니다.</p>
+                    <p>온타리오주의 Pickering 원자력 발전소는 2026년에 생산을 중단할 예정입니다. 이 원자로가 가동을 중단하면, 온타리오주는 전력 수요를 충족시키는 데 필요한 발전 용량을 어디서 확보할 것일까요? 방사능의 원천인 이 발전소는 어떻게 처리될 것일까요? 공학자들과 설계자들은 이제 자신들이 설계한 제품이 제품 수명 주기(product life cycle)의 끝에 도달했을 때 어떻게 해야 하는지에 대해 많은 고민을 합니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>다음 지도는 전 세계 원자력 발전소의 위치를 보여줍니다.</p>
+                    <img src="../assets/img/sph3u_03.20.07.svg" alt="The world map with different powerplant around the world" class="img-responsive">
+                </div>
+            </div>
+            <!--REVIEW STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>복습</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/review.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 대화형 원소 주기율표(periodic table)를 살펴보세요. 이 학습 활동에서 자주 참조해야 합니다.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-ilo">
+                <div class="col-md-10 col-md-offset-1 col-sm-12">
+                    <div class="interactive-img interactive-images-container" data-config="../ilo/periodic-table/periodic-table.json"></div>
+                </div>
+            </div>
+
+
+            <!--REVIEW ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>방사성 원자</h3>
+                    <p>원자(atom)라는 단어는 '나눌 수 없는'이라는 뜻의 그리스어 atomos에서 유래했습니다. 모든 물질을 구성하는 궁극적으로 가장 작은 입자가 있을 것이라고 상상되었고, 원자라는 용어가 적용되었습니다. 더 많은 연구를 통해 원자 내부에 다른 구조가 있다는 것이 밝혀졌습니다.</p>
+                    <p>다음 그림의 첫 번째 다이어그램은 atomos의 개념을 보여주고, 두 번째 다이어그램은 조밀하고 양전하를 띤 원자핵(nucleus)과 원자핵 주위의 공간을 궤도 운동하는 음전하의 전자(electron)로 구성된 현대적 원자 모형을 보여줍니다.</p>
+                    <p>원자핵 내부에 더 많은 구조가 있다는 것이 발견되면서 원자 모형은 더욱 복잡해졌습니다. 원자핵에는 중성자(neutron)와 양성자(proton)라는 두 가지 기본 입자가 포함되어 있으며, 둘 다 전자보다 훨씬 무겁다는 것이 발견되었습니다. 양성자는 양전하를 가지며, 중성자는 중성(전하 없음)입니다. 이 단원의 나머지 부분에서는 원자핵에 초점을 맞출 것입니다.</p>
+                    <img src="../assets/img/sph3u_03.20.09.svg" alt="Atomos and nuclear atom" class="img-responsive">
+                </div>
+            </div>
+            <!--REVIEW STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>복습</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/review.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>원자는 원자핵의 양성자 수로 식별됩니다. 이것을 원자 번호(atomic number)라고 합니다. 다음 대화형 원소 주기율표를 다시 살펴보세요. 수소(H)는 원소 번호 1입니다. 이는 수소의 원자핵에 양성자가 하나만 있다는 것을 의미합니다. 헬륨(He)은 원소 번호 2입니다. 헬륨의 원자핵에는 양성자가 두 개 있습니다. 원소 번호는 원자 번호와 같습니다.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-ilo">
+                <div class="col-md-10 col-md-offset-1 col-sm-12">
+                    <div class="interactive-img interactive-images-container" data-config="../ilo/periodic-table/periodic-table.json"></div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>대화형 원소 주기율표를 사용하여 양성자 수(원자 번호)를 드롭다운 메뉴에서 올바른 원소 기호 및 이름과 일치시키고, 제출 버튼을 눌러 이해도를 확인하세요.</p>
+                        </div>
+                    </div>
+                    <p>원자핵의 양성자 수와 중성자 수의 합을 질량수(mass number)라고 합니다. 대화형 원소 주기율표에서 질량수는 제공되지 않습니다. 그러나 또 다른 중요한 정보인 평균 원자 질량(average atomic mass)이 제공됩니다. 이 값은 해당 원소의 모든 동위원소(isotope) 질량의 가중 평균입니다. 주기율표에서 원소를 누르면 이 값을 확인할 수 있습니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>정의</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/definition.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>복습</h4>
+                            <p><strong>원자 번호</strong>: 원자의 양성자 수입니다. 주기율표에서 각 원소 칸의 상단에 표시되는 경우가 많습니다.</p>
+                            <p><strong>질량수</strong>: 원자의 양성자 + 중성자 수입니다. 이 수는 원소의 동위원소에 따라 다릅니다. 이전 과학 과목에서 동위원소란 같은 수의 양성자를 가지지만 다른 수의 중성자를 가진 원소임을 떠올려 보세요.</p>
+                        </div>
+                    </div>
+
+                    <div class="row ilc-row-ilo">
+
+                        <!-- matching snippit - start -->
+                        <div class="ilo_col col-md-12">
+                            <div class="ilo-brightspace-block matching-container" data-config="../ilo/matching/matching_u3la5.json"></div>
+                        </div>
+                        <!-- matching snippit - end -->
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>핵 동위원소</h3>
+                    <p>원자의 질량이 양성자 수와 중성자 수의 합인 "질량수"에 대해 읽어 본 적이 있나요?</p>
+
+                    <p>특정 원소의 모든 원자가 같은 질량을 가지는 것은 아닙니다.</p>
+
+                    <p>대부분의 수소 원자는 양성자 1개와 중성자 0개(질량수 1)를 가지지만, 일부 수소는 실제로 추가 중성자를 포함합니다. 이런 종류의 수소는 질량수가 2입니다. 이것이 바로 앞서 배운 중수(heavy water)의 성분인 중수소(deuterium)입니다. 지구에서 발견되는 대부분의 우라늄은 질량수가 238이며, 양성자 92개와 중성자 146개를 가지고 있습니다. 이것은 매우 안정적입니다. 그러나 우라늄의 약 0.72%는 중성자가 몇 개 부족합니다. 이런 종류의 우라늄 원자는 중성자 143개(질량수 235)를 가지며, CANDU 원자로의 주요 연료원입니다.
+                    </p>
+
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>정의</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/definition.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>동위원소</h4>
+                            <p>원소의 <strong>동위원소</strong>는 중성자 수가 다른 해당 원소의 모든 변형입니다. 같은 원소의 모든 동위원소는 같은 수의 양성자를 가지지만, 다른 수의 중성자를 가집니다. 문장으로 쓸 때 동위원소는 일반적으로 원소 이름, 대시, 그리고 질량수로 표기합니다. 예를 들어, 우라늄-238과 우라늄-235는 모두 우라늄의 동위원소입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>핵 기호</h3>
+                    <p>원자의 기호가 다음과 같은 방식으로 기록된 것을 자주 볼 수 있습니다:</p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <msubsup>
+                                <mrow></mrow>
+                                <mi mathvariant="normal">Z</mi>
+                                <mi mathvariant="normal">A</mi>
+                            </msubsup>
+                            <mi mathvariant="normal">X</mi>
+                        </mrow>
+                    </math>
+                    <p class="margin-top-lg">X는 원소의 기호를 나타냅니다. A는 질량수(양성자와 중성자의 수)를 나타내고, Z는 원자 번호(양성자 수)를 나타냅니다. 더 높은 수준에서는 원소의 이름으로부터 이미 원자 번호를 알 수 있으므로 Z 값이 생략될 수 있습니다. 같은 원소의 모든 동위원소는 같은 수의 양성자를 가집니다.
+                    </p>
+                    <p>이러한 원소 기호에서 원자 번호가 위인지 아래인지 기억하는 것이 흔한 걱정거리입니다. 유용한 팁은 질량수(양성자 + 중성자)가 어디에 쓰이든 항상 더 큰 수라는 것을 아는 것입니다.</p>
+                    <p>원자 번호는 원자의 종류를 식별하는 데 사용할 수 있지만, 질량수로는 그럴 수 없다는 점에 주목하세요. 이는 원자핵의 중성자 수가 항상 같지 않기 때문입니다. 다음 다이어그램은 수소의 세 가지 다른 동위원소를 보여줍니다. 예를 들어, 수소는 보통 원자핵에 양성자 1개와 중성자 0개를 가집니다. 이것은 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mmultiscripts>
+                                <mi mathvariant="normal">H</mi>
+                                <mprescripts></mprescripts>
+                                <mn>1</mn>
+                                <mn>1</mn>
+                            </mmultiscripts>
+                        </math>로 쓸 수 있으며, 경수소(protium)라고 합니다. 그러나 다음 그림에서 보듯이, 수소의 일부 동위원소는 원자핵에 중성자를 가지고 있습니다. 예를 들어, 수소의 동위원소인 중수소(deuterium)
+                        (<math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mmultiscripts>
+                                <mi mathvariant="normal">H</mi>
+                                <mprescripts></mprescripts>
+                                <mn>1</mn>
+                                <mn>2</mn>
+                            </mmultiscripts>
+                            <mo>&#xA0;</mo>
+                        </math>)는 원자핵에 양성자 1개와 중성자 1개를 가집니다. 삼중수소(tritium)(<math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mmultiscripts>
+                                <mi mathvariant="normal">H</mi>
+                                <mprescripts></mprescripts>
+                                <mn>1</mn>
+                                <mn>3</mn>
+                            </mmultiscripts>
+                            <mo>&#xA0;</mo>
+                        </math>)라고 하는 수소의 세 번째 동위원소는 중성자 2개를 가집니다.</p>
+                    <img src="../assets/img/sph3u_03.20.12.svg" alt="Isotype for Hydrogen with different number of neutrons and protons." class="img-responsive">
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예시: 칼륨</h3>
+                    <p>원소 칼륨(K)을 찾아보세요. 원자 번호(양성자 수)는 19입니다. 평균 원자 질량은 39.098 원자 질량 단위(amu)입니다.</p>
+                    <img src="../assets/img/sph3u_03.20.13.svg" alt="Period table: potassium (atomic number 19), atomic mass 39.098" class="img-responsive img-right-50">
+                    <p>각 원소의 양성자 수를 알아내기 위해 앞의 주기율표를 참조할 것입니다.
+                    </p>
+                    <p>질량수는 주어진 원자의 양성자와 중성자 수를 나타내며 원자 질량 단위(amu)로 표현됩니다. 원자 질량은 특정 원자의 모든 동위원소의 평균 질량을 제공합니다. 같은 원소의 서로 다른 동위원소가 얼마나 풍부한지를 고려하므로, 가중 평균을 제공합니다.</p>
+                    <p>이 칼륨 동위원소는 칼륨-39로 명명하여 구별할 수 있으며, 여기서 39는 질량수를 의미합니다.</p>
+                </div>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트에 질량수에 대한 다음 질문에 답하세요. 다음 각 원소에 대해 중성자 수를 계산하세요.</p>
+
+                        </div>
+                    </div>
+
+                    <ol>
+                        <li>라돈-222 (<sup>222</sup>Rn)</li>
+                    </ol>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-11">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-11">
+                        <p>136</p>
+                        <p>중성자 수 = 질량수 - 원자 번호</p>
+                        <p>136 = 222 - 86</p>
+                        <p>라돈-222에는 136개의 중성자가 있습니다.</p>
+                    </div>
+
+                    <ol start="2">
+                        <li>우라늄-236 (<sup>236</sup>U) </li>
+                    </ol>
+
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-12">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-12">
+                        <p>중성자 수 = 질량수 - 원자 번호</p>
+                        <p>144 = 236 - 92</p>
+                        <p>우라늄-236에는 144개의 중성자가 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>더 알아보기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/discover_more.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <img src="../assets/img/sph3u_03.05.205.jpg" alt="Self-portrait of Marie Curie a physicist" class="img-responsive callout-image img-right-33">
+                            <p>알고 계셨나요: Marie Curie는 방사성 원소인 폴로늄과 라듐을 발견한 공로로 노벨상을 수상했습니다. 그녀는 라듐을 순수 금속으로 성공적으로 생산하고 방사성 원소와 그 화합물의 성질을 기록했습니다. 그녀는 또한 또 다른 노벨상을 수상했으며, 여전히 물리학과 화학이라는 서로 다른 과학 분야에서 두 개의 노벨상을 수상한 유일한 인물입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>핵붕괴</h3>
+                    <p>원자핵 내의 양성자는 모두 양전하를 띠고 있습니다. 왜 그들이 밀접하게 모여 있을까요? 원자핵 내의 양성자들은 비슷한 전하를 가지고 있기 때문에 큰 힘으로 서로 밀어냅니다. 다행히도, 원자핵 내부에는 이 반발력을 극복하고 양성자를 제자리에 유지시킬 수 있는 강한 핵력(strong nuclear force)이라는 또 다른 힘이 있으며, 이는 다음 다이어그램에 나타나 있습니다.</p>
+                    <img src="../assets/img/sph3u_03.20.16.svg" alt="Attraction and repel forces within the atomic nuclei" class="img-responsive">
+
+                    <p>이 강한 힘은 원자핵 내 중성자 수에 크게 영향을 받습니다. 일반적으로 원자핵에 양성자가 더 많은 원자는 서로 밀어내는 양성자가 더 많기 때문에 덜 안정적인 경향이 있습니다. 이 추가 양성자들의 반발 전기력에 대항하기 위해 안정화를 돕는 더 많은 중성자가 필요합니다. 그러나 중성자가 너무 많거나 너무 적으면 원자핵은 불안정한 상태로 남게 됩니다.</p>
+                    <p>원자핵에서 때때로 방출되는 입자와 에너지를 방사선(radiation)이라고 합니다. 원자핵이 방사선을 방출할 때, 붕괴(decay)한다고 합니다.</p>
+                    <p>불안정한 원자는 방사성 붕괴(radioactive decay)를 통해 안정해집니다. 방사성 붕괴에는 세 가지 유형이 있습니다: <strong>알파 붕괴(alpha decay, α), 베타 붕괴(beta decay, β), 감마 붕괴(gamma decay, γ)</strong></p>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** TAB XXX BEGINS ******************************************* -->
+                    <div>
+                        <div>
+                            <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+                                <!--YOU WILL NEED TO ADJUST THE WIDTH % DEPENDING ON HOW MANY TABS YOU HAVE-->
+                                <li class="active" style="width:33%" role="tab"><a href="#tab1_1" data-toggle="tab">
+                                        알파 붕괴</a></li>
+                                <li style="width:33%" role="tab"><a href="#tab1_2" data-toggle="tab">
+                                        베타 붕괴</a></li>
+                                <li style="width:33%" role="tab"><a href="#tab1_3" data-toggle="tab">
+                                        감마 붕괴</a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+                                <div class="tab-pane fade in active" id="tab1_1">
+                                    <p>알파 붕괴(α)는 불안정한 원자핵이 양성자 2개와 중성자 2개를 포함하는 입자를 방출할 때 발생합니다. 알파 입자(alpha particle)의 기호는 α입니다. Word와 Google Docs의 수식 편집기에서 단축키 \alpha를 사용하여 이 기호를 만들 수 있습니다. 이 알파 입자는 헬륨 원자의 원자핵과 동일하므로, 알파 기호 대신 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mrow>
+                                                <msubsup>
+                                                    <mrow></mrow>
+                                                    <mn>2</mn>
+                                                    <mn>4</mn>
+                                                </msubsup>
+                                                <mi mathvariant="normal">H</mi>
+                                                <mi mathvariant="normal">e</mi>
+                                            </mrow>
+                                        </math>로 표기하는 것을 자주 볼 수 있습니다. 이 입자는 보통 더 큰 원자핵에서 방출됩니다. 가장 흔하게 방출되는 입자입니다.</p>
+                                    <p>알파 붕괴의 방정식은 다음과 같이 쓸 수 있습니다:<br>
+                                        원래 원소 &rarr; 알파 입자 + 새로운 원소</p>
+                                    <p>수식 편집기에서는 보통 단축키 "\to"를 사용하여 이런 종류의 화살표를 만들 수 있습니다.</p>
+                                    <p>
+                                        다음 이미지의 예시에서 방정식은 다음과 같습니다<br>
+                                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mrow>
+                                                <msubsup>
+                                                    <mrow></mrow>
+                                                    <mrow>
+                                                        <mn>84</mn>
+                                                    </mrow>
+                                                    <mrow>
+                                                        <mn>218</mn>
+                                                    </mrow>
+                                                </msubsup>
+                                                <mi mathvariant="normal">P</mi>
+                                                <mi mathvariant="normal">o</mi>
+                                                <msubsup>
+                                                    <mo>&#x2192;</mo>
+                                                    <mn>2</mn>
+                                                    <mn>4</mn>
+                                                </msubsup>
+                                                <mi mathvariant="normal">H</mi>
+                                                <mi mathvariant="normal">e</mi>
+                                                <msubsup>
+                                                    <mo>+</mo>
+                                                    <mrow>
+                                                        <mn>82</mn>
+                                                    </mrow>
+                                                    <mrow>
+                                                        <mn>214</mn>
+                                                    </mrow>
+                                                </msubsup>
+                                                <mi mathvariant="normal">P</mi>
+                                                <mi mathvariant="normal">b</mi>
+                                            </mrow>
+                                        </math>
+                                        <br> 알파 입자는 다음과 같이 표기합니다:
+                                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mrow>
+                                                <msubsup>
+                                                    <mrow></mrow>
+                                                    <mn>2</mn>
+                                                    <mn>4</mn>
+                                                </msubsup>
+                                                <mi mathvariant="normal">H</mi>
+                                                <mi mathvariant="normal">e</mi>
+                                            </mrow>
+                                        </math>
+                                    </p>
+                                    <p>
+                                        다음 다이어그램에서 보듯이, 방정식 양쪽의 질량수(위의 수)가 같고, 방정식 양쪽의 원자 번호(아래의 수)가 같다는 것에 주목하세요.<br>
+                                        <img src="../assets/img/sph3u_03.20.17a.svg" alt="Formula showing how Po losing its two neutrons and proton becomes Pb and He" class="img-responsive">
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="tab1_2">
+                                    <p>중성자와 양성자의 수가 안정적이지 않은 일부 불안정한 원자핵에서는, 이 입자들 중 하나가 다른 것으로 변환됩니다. 중성자가 양성자로 변환되거나, 양성자가 중성자로 변환될 수 있습니다. 전하를 보존하기 위해, 두 경우 모두 베타 입자(beta particle)라고 하는 또 다른 입자가 방출되어야 합니다.</p>
+
+                                    <p>중성자가 양성자가 될 때, 이 베타 입자는 음전하를 가진 전자입니다. 음전하 때문에 베타-음 입자라고 불릴 수 있으며, 기호 β<sup>-</sup>로 표현됩니다. 수식 편집기에서는 단축키 "\beta ^-"로 만들 수 있습니다. 베타-음 입자는 핵 기호 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mmultiscripts>
+                                                <mi mathvariant="normal">e</mi>
+                                                <mprescripts></mprescripts>
+                                                <mrow>
+                                                    <mo>-</mo>
+                                                    <mn>1</mn>
+                                                </mrow>
+                                                <mn>0</mn>
+                                            </mmultiscripts>
+                                        </math>로 표현할 수 있으며, 여기서 "e"는 전자를 의미합니다.</p>
+
+
+                                    <p>양성자가 중성자가 될 때, 양전자(positron)라고 불리는 베타-양(β<sup>+</sup>) 입자가 방출됩니다. 양전자는 양전자 방출 단층 촬영(positron emission tomography)이라는 의료 검사에 사용됩니다. 양전자는 핵 기호 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mmultiscripts>
+                                                <mi mathvariant="normal">e</mi>
+                                                <mprescripts></mprescripts>
+                                                <mn>1</mn>
+                                                <mn>0</mn>
+                                            </mmultiscripts>
+                                        </math>로 표현할 수 있습니다. 전자와 이 입자들 사이의 관계를 나타내기 위해 여전히 "e"를 사용합니다.</p>
+                                    <p>다음은 탄소-14의 베타 붕괴 방정식입니다:</p>
+                                    <figure>
+                                        <img src="../assets/img/sph3u_03.20.17b.svg" alt class="img-responsive">
+                                        <figcaption>
+                                            <p><a href="../assets/alt/sph3u_03.20.17b.html" target="_blank">상세 설명을 보려면 여기를 누르세요.<span class="sr-only">(새 창에서 열림)</span></a>
+                                            </p>
+                                        </figcaption>
+                                    </figure>
+                                    <p>
+                                        원래 탄소 원자의 중성자 중 하나가 양성자와 베타-음 입자로 변환되는 것에 주목하세요. 그 결과, 형성된 새로운 원자핵은 중성자가 하나 적고 양성자가 하나 더 많습니다(총 7개). 이제 양성자가 7개이므로, 질소 원자로 표기해야 합니다. 탄소-9의 붕괴는 베타-양 붕괴를 통해 일어납니다.</p>
+
+
+                                    <img src="../assets/img/sph3u_03.20.16b.svg" alt class="img-responsive center-block">
+
+                                    <p>원래 탄소 원자의 양성자 중 하나가 중성자와 양전자로 변환되는 것에 주목하세요. 그 결과, 새로운 원자핵은 양성자가 하나 적고 중성자가 하나 더 많습니다. 이제 양성자가 5개이므로, 붕소 원자로 표기해야 합니다.
+                                    </p>
+                                </div>
+                                <div class="tab-pane fade" id="tab1_3">
+                                    <p>감마 붕괴에서는, 원자 질량과 전하를 가진 입자 대신 원자핵에서 고주파 빛의 폭발이 방출됩니다. 이 에너지 폭발은 매우 강력하며 주파수가 너무 높아 사람의 눈으로는 감지할 수 없습니다. 감마 붕괴가 일어날 때, 모핵(parent nucleus)은 원자 질량수나 원자 번호가 변하지 않습니다. 이 유형의 붕괴는 보통 원자핵이 과잉 에너지를 가진 고도로 들뜬 상태에 있는 다른 핵붕괴 후에, 또는 알파 및 베타 붕괴와 동시에 발생합니다.</p>
+                                    <p>다음 감마 붕괴 예시에서, 들뜬 상태의 라듐 원자핵이 감마 붕괴를 거치지만, 양성자 수가 변하지 않았기 때문에 새로운 유형의 원자로 변하지 않는다는 것에 주목하세요.</p>
+                                    <p>
+                                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                            <mmultiscripts>
+                                                <mi mathvariant="normal">R</mi>
+                                                <mprescripts></mprescripts>
+                                                <mrow>
+                                                    <mn>88</mn>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>226</mn>
+                                                </mrow>
+                                            </mmultiscripts>
+                                            <mi mathvariant="normal">a</mi>
+                                            <mo>&#x2192;</mo>
+                                            <mmultiscripts>
+                                                <mi mathvariant="normal">R</mi>
+                                                <mprescripts></mprescripts>
+                                                <mrow>
+                                                    <mn>88</mn>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>226</mn>
+                                                </mrow>
+                                            </mmultiscripts>
+                                            <mi mathvariant="normal">a</mi>
+                                            <mo>+</mo>
+                                            <mi mathvariant="normal">&#x03B3;</mi>
+                                        </math>
+                                    </p>
+                                </div>
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB 1 ENDS ******************************************* -->
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>방사성 붕괴 유형의 비교</h3>
+                    <p>알파 입자의 질량과 전하는 양성자 2개와 중성자 2개를 포함하고 있음을 나타냅니다. 베타 입자는 빠르게 움직이는 전자(음전하) 또는 양전자(양전하)이기 때문에 질량이 훨씬 작습니다. 감마 방출은 빛(복사 에너지)이므로 질량이나 전하가 없습니다. 일반적으로, 알파 입자가 세 가지 중 가장 느리고, 베타 입자는 감마 입자와 거의 같은 속도로 이동할 수 있습니다.</p>
+                    <p>투과력(penetrating ability)은 거의 모든 방출을 차단하는 데 무엇이 필요한지를 나타냅니다. 다음 표에서 알파 입자는 공기나 종이로도 쉽게 차단된다는 것을 알 수 있습니다. 베타 입자를 차단하려면 얇은 금속이 필요하며, 감마 입자를 차단하려면 납과 같은 더 두꺼운 고밀도 금속이 필요합니다.</p>
+                    <table id="myTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="text-align: center">범주</th>
+                                <th scope="col" style="text-align: center">
+                                    알파</th>
+                                <th scope="col" style="text-align: center">베타
+                                </th>
+                                <th scope="col" style="text-align: center">
+                                    감마</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            <tr style="text-align: center">
+                                <td>질량 (kg)</td>
+                                <td>6.68 &#215; 10<sup>–27</sup> kg</td>
+                                <td>9.31 &#215; 10<sup>–31</sup> kg</td>
+                                <td>0</td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>전하</td>
+                                <td>+2</td>
+                                <td>-1 또는 +1</td>
+                                <td>0</td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>속력</td>
+                                <td>최대 6.67 &#215; 10<sup>7</sup> m/s</td>
+                                <td>6.67 &#215; 10<sup>7</sup> m/s ~ 거의 3.0 &#215; 10<sup>8</sup> m/s</td>
+                                <td>3.0 &#215; 10<sup>8</sup> m/s</td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>투과력</td>
+                                <td>얇은 종이 또는 최대 5 cm의 공기</td>
+                                <td>얇은 금속 (3~6 mm의 알루미늄)</td>
+                                <td>두꺼운 금속 (30 cm의 납) </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>세 가지 유형의 방사성 붕괴에 대해 알게 된 것을 활용하여 노트에 다음 붕괴 문제를 완성하세요. 형성되는 새로운 원소를 식별하기 위해 대화형 원소 주기율표를 사용해야 합니다.</p>
+                            <p>1. 우라늄-238 원자가 알파 붕괴를 겪습니다. 올바른 원자 기호로 핵반응 방정식을 기록하세요.</p>
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-1">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-1">
+                                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <msubsup>
+                                            <mrow></mrow>
+                                            <mrow>
+                                                <mn>92</mn>
+                                            </mrow>
+                                            <mrow>
+                                                <mn>238</mn>
+                                            </mrow>
+                                        </msubsup>
+                                        <mi mathvariant="normal">U</mi>
+                                        <msubsup>
+                                            <mo>&#x2192;</mo>
+                                            <mn>2</mn>
+                                            <mn>4</mn>
+                                        </msubsup>
+                                        <mi mathvariant="normal">H</mi>
+                                        <mi mathvariant="normal">e</mi>
+                                        <msubsup>
+                                            <mo>+</mo>
+                                            <mrow>
+                                                <mn>90</mn>
+                                            </mrow>
+                                            <mrow>
+                                                <mn>234</mn>
+                                            </mrow>
+                                        </msubsup>
+                                        <mi mathvariant="normal">T</mi>
+                                        <mi mathvariant="normal">h</mi>
+                                    </mrow>
+                                </math>
+                            </div>
+                            <p class="margin-top-xl">2. 납-212 원자가 베타-음 붕괴를 겪습니다. 올바른 원자 기호로 핵반응식을 서술하세요.</p>
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-2">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-2">
+                                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <msubsup>
+                                            <mrow></mrow>
+                                            <mrow>
+                                                <mn>82</mn>
+                                            </mrow>
+                                            <mrow>
+                                                <mn>212</mn>
+                                            </mrow>
+                                        </msubsup>
+                                        <mi mathvariant="normal">P</mi>
+                                        <mi mathvariant="normal">b</mi>
+                                        <msubsup>
+                                            <mo>&#x2192;</mo>
+                                            <mrow>
+                                                <mo>&#x2212;</mo>
+                                                <mn>1</mn>
+                                            </mrow>
+                                            <mn>0</mn>
+                                        </msubsup>
+                                        <mi mathvariant="normal">e</mi>
+                                        <msubsup>
+                                            <mo>+</mo>
+                                            <mrow>
+                                                <mn>83</mn>
+                                            </mrow>
+                                            <mrow>
+                                                <mn>212</mn>
+                                            </mrow>
+                                        </msubsup>
+                                        <mi mathvariant="normal">B</mi>
+                                        <mi mathvariant="normal">i</mi>
+                                    </mrow>
+                                </math>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>붕괴 계열</h3>
+                    <p>대부분의 원소는 하나 또는 두 개의 비교적 안정적인 동위원소를 가지고 있습니다. 불안정한 원자핵이 붕괴할 때, 그 생성물도 종종 방사성입니다. 이것은 초기 동위원소가 안정적인 종류로 변환되기 전에 여러 다른 종류의 원소를 거치는 붕괴 사슬을 만들 수 있습니다. 이 일련의 단계를 동위원소의 붕괴 계열(decay series)이라고 합니다. 예를 들어, 다음은 우라늄-238의 붕괴 계열입니다.</p>
+                    <table id="myTable2" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" colspan="6" scope="colgroup" style="text-align: center">우라늄-238 붕괴 계열</th>
+                            </tr>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col" style="text-align: center">
+                                    방사성 동위원소</th>
+                                <th class="column_4 blueBorderRight" scope="col" style="text-align: center">반감기</th>
+                                <th class="column_4 blueBorderRight" scope="col" style="text-align: center">붕괴 유형</th>
+                                <th class="column_4 blueBorderRight" scope="col" style="text-align: center">
+                                    방사성 동위원소</th>
+                                <th class="column_4 blueBorderRight" scope="col" style="text-align: center">반감기</th>
+                                <th class="column_4 blueBorderRight" scope="col" style="text-align: center">
+                                    붕괴 유형</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="text-align: center">
+                                <td>우라늄-238</td>
+                                <td>45억 년</td>
+                                <td>α</td>
+                                <td>납-214</td>
+                                <td>27분</td>
+                                <td>β<sup>-</sup></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>토륨-234</td>
+                                <td>24일</td>
+                                <td>β<sup>-</sup></td>
+                                <td>비스무트-214</td>
+                                <td>20분</td>
+                                <td>β<sup>-</sup></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>프로탁티늄-234</td>
+                                <td>6.7시간</td>
+                                <td>β<sup>-</sup></td>
+                                <td>폴로늄-214</td>
+                                <td>0.00016초</td>
+                                <td>α</td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>우라늄-234</td>
+                                <td>245,000년</td>
+                                <td>α</td>
+                                <td>납-210</td>
+                                <td>22년</td>
+                                <td>β<sup>-</sup></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>토륨-230</td>
+                                <td>75,000년</td>
+                                <td>α</td>
+                                <td>비스무트-210</td>
+                                <td>5일</td>
+                                <td>β<sup>-</sup></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>라듐-226</td>
+                                <td>1600년</td>
+                                <td>α</td>
+                                <td>폴로늄-210</td>
+                                <td>138일</td>
+                                <td>α</td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>라돈-222</td>
+                                <td>3.8일</td>
+                                <td>α</td>
+                                <td>납-206</td>
+                                <td>(안정)</td>
+                                <td></td>
+                            </tr>
+                            <tr style="text-align: center">
+                                <td>폴로늄-218</td>
+                                <td>3.1분</td>
+                                <td>α</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <h3>반감기</h3>
+                    <p>동전을 공중에 던지면, 앞면이 나올지 뒷면이 나올지 확실히 알 수 있는 방법은 없습니다. 어느 쪽이든 나올 확률은 50%입니다. 그러나 동전을 연속으로 1000번 던지면, 약 50%의 확률로 앞면이 나올 것이라고 상당히 확신할 수 있습니다. 이 원리는 방사능을 모델링하는 데 사용됩니다.</p>
+                    <p>특정 불안정한 원자핵이 언제 붕괴할지 결정할 방법은 없습니다. 일부 원자핵은 다른 것들보다 더 안정적입니다. 방사성 물질의 시료가 입자를 방출하는 빈도는 원자핵의 성질에 따라 달라집니다. 그러나 아주 작은 시료도 엄청난 수의 불안정한 원자핵을 포함합니다. 이 규모에서 연구하면, 많은 횟수의 동전 던지기와 마찬가지로 붕괴 속도를 매우 정확하게 예측할 수 있습니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>정의</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/definition.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>동위원소의 <strong>반감기</strong>는 시료에서 원자핵의 절반이 붕괴하는 데 걸리는 시간입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_03.20.21.svg" alt="A person about to toss a coin" class="img-responsive">
+                </div>
+            </div>
+            <!--DISCOVER MORE STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>더 알아보기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/discover_more.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>알고 계셨나요: Chien-Shiung Wu는 실험 물리학자로 Manhattan 프로젝트에 참여하여 우라늄을 동위원소 우라늄-235와 우라늄-238로 분리하는 과정을 개발했습니다. 원하는 검색 엔진을 사용하여 Manhattan 프로젝트에 대해 더 알아보세요.</p>
+                            <img src="../assets/img/sph3u_03.05.200.jpg" alt="Black and white photograph of Chien-Shiung Wu in physics laboratory" class="img-responsive callout-image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--TRY IT STARTS-->
+            <div class="row ilc-row-callout margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 시뮬레이션에서 방사성 붕괴가 두 가지 변수 — 방사성 물질의 반감기와 시료 내 방사성 원자의 수 — 에 의해 어떻게 영향을 받는지 조사할 것입니다.</p>
+                            <p class="margin-top-lg"><a href="../assets/locker_docs/sph3u_03.20.23p.pdf" target="_blank">방사성 붕괴의 접근 가능한 버전은 여기를 누르세요.<span class="sr-only">새 창에서 열림</span></a></p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row ilc-row-ilo">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>시작 버튼을 눌러 방사성 붕괴 시뮬레이션을 여세요.</p>
+                    <img src="../assets/img/sph3u_radioactive_decay_preview.png" alt="Simulation created by TVO ILC" class="img-responsive center-block callout-image" style="width: 100%;"><a href="../ilo/radioactive_decay/index.html" target="_blank" class="btn btn-inverse pull-right">시작 <span class="sr-only">(새 창에서 열림)</span></a>
+                </div>
+            </div>
+            <!--TRY IT ENDS-->
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트를 사용하여 다음 붕괴 문제를 풀어보세요. 이해도를 확인하기 위해 예시 답안과 비교해 보세요.</p>
+                            <p>토륨-234는 우라늄-238의 방사성 붕괴 생성물입니다. 토륨-234 100g이 있다면, 24일 후에는 토륨-234가 50g만 남게 됩니다. 시료의 나머지 절반은 베타 붕괴를 겪었을 것입니다. 24일이 더 지나면, 50g의 절반이 붕괴되어 25g만 남게 됩니다.</p>
+                            <p>다음 질문에 답하기 위해 이전 붕괴 계열 표의 반감기 값을 사용하세요.</p>
+                            <p>1. 비스무트-214 200g의 시료로 시작하면, 100g만 남기까지 얼마나 걸릴까요?</p>
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-13">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-13">
+                                <p>20분이 걸립니다. 반감기가 20분이므로, 원래 양이 20분 만에 절반으로 줄어듭니다.</p>
+                            </div>
+                            <p class="margin-top-xl">2. 비스무트-214 200g의 시료로 시작하면, 80분 후에 얼마나 남을까요?</p>
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-3">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-3">
+                                <p>12.5g이 남습니다. 80분은 4번의 반감기(20분 x 4 = 80분)입니다. 첫 번째 반감기 후 100g이 남고, 두 번째 후 50g, 세 번째 후 25g, 네 번째 반감기 후 12.5g이 남습니다.
+                                </p>
+                            </div>
+                            <p class="margin-top-xl">3. a) 라듐-226의 방사성 붕괴에 대한 다음 표를 채우세요. 이후, 그래프 계산기, GeoGebra, 또는 <a href="../assets/locker_docs/sph3u_03.20.27.pdf" target="_blank">모눈종이<span class="sr-only">새 창에서 열림</span></a>를 사용하여 y축에 질량, x축에 시간을 놓고 라듐-226의 방사성 붕괴 그래프를 작성하세요. 이러한 유형의 그래프를 붕괴 곡선(decay curve)이라고 합니다.</p>
+                            <table class="table table-bordered" id="table001">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="text-align: center">반감기</th>
+                                        <th scope="col" style="text-align: center">시간 (년)</th>
+                                        <th scope="col" style="text-align: center">라듐의 질량 (g)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="text-align: center">
+                                        <td>-</td>
+                                        <td>0</td>
+                                        <td>32</td>
+                                    </tr>
+                                    <tr style="text-align: center">
+                                        <td id="1st_halflife">1번째 반감기:</td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>1,600</em></span></td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>16</em></span></td>
+                                    </tr>
+                                    <tr style="text-align: center">
+                                        <td id="2nd_halflife">2번째 반감기:</td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>3,200</em></span></td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>8</em></span></td>
+                                    </tr>
+                                    <tr style="text-align: center">
+                                        <td id="3rd_halflife">3번째 반감기:</td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>4,800</em></span></td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>4</em></span></td>
+                                    </tr>
+                                    <tr style="text-align: center">
+                                        <td id="4th_halflife">4번째 반감기:</td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>6,400</em></span></td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>2</em></span></td>
+                                    </tr>
+                                    <tr style="text-align: center">
+                                        <td id="5th_halflife">5번째 반감기:</td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>8,000</em></span></td>
+                                        <td><span class="tableSuggestedAnswer invisible"><em>1</em></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button id="table001Button" class="btn btn-table-answer-reveal">예시 답안</button>
+                            <p class="margin-top-lg">b) 그래프를 사용하여 라듐 시료가 12g으로 줄어드는 시간을 추정하세요. 이전 표에서 라듐-226의 반감기가 1600년이라는 것을 알고 있습니다.</p>
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-4">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-4">
+                                <p>다음 그래프에서 보듯이 약 2400년입니다.</p>
+                                <img src="../assets/img/sph3u_03.20.31.png" alt="Mass of radium as it decays overtime graphed" class="img-responsive margin-top-lg callout-image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>응용: 방사성 연대 측정</h3>
+
+                    <p>태양의 방사선으로 인해, 지구 대기의 일부 탄소는 일반적인 탄소-12 외에 탄소-14입니다. 생물이 탄소-14를 들이마시면 체내에 흡수되어 일생 동안 축적됩니다. 죽으면 호흡을 멈춥니다. 탄소-14는 방사성이므로 호흡을 멈추면 탄소-14의 양이 감소합니다. 추정되는 초기 탄소-14 양과 현재 양을 비교하여, 과학자들은 탄소가 분해된 기간을 추정할 수 있습니다. 탄소-14의 붕괴 곡선은 다음 그림에 나타나 있습니다. 곡선의 모양은 라듐의 것과 같지만 시간 척도가 다르다는 것에 주목하세요. 그래프를 사용하여 탄소-14의 반감기를 결정하세요.</p>
+                    <img src="../assets/img/sph3u_03.20.322.svg" alt="Graph showing C-14 decay overtime" class="img-responsive center-block">
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-6">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-6">
+                        <p>약 6000년입니다. (탄소-14의 실제 반감기는 5730년이지만, 그래프에서 정확히 추정하기는 어렵습니다.)</p>
+                        <p><img src="../assets/img/sph3u_03.20.32a.svg" alt class="img-responsive"></p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트를 사용하여 다음 탄소 연대 측정(carbon dating) 문제를 풀어보세요. 이해도를 확인하기 위해 예시 답안과 비교해 보세요.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <!-- <div class="row ilc-row-text margin-top-lg">
+                    <div class="col-xs-10 col-xs-offset-1">
+
+                    </div>
+                </div> -->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>고대 나무의 시료에는 나무가 죽었을 때 2.0 × 10<sup>-6</sup> g의 탄소-14가 포함되어 있었다고 추정됩니다. 시료에는 현재 0.5 × 10<sup>-6</sup> g의 탄소-14가 포함되어 있습니다. 시료의 나이는 얼마일까요?</p>
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-5">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-5">
+                        <p>11,460년입니다.</p>
+                        <p>5730년 후, 원래 탄소-14의 절반이 남게 됩니다 (1.0 &#215;
+                            10<sup>-6</sup> g). </p>
+                        <p>다음 반감기, 즉 11,460년(5730년 &#215; 2) 후에는
+                        </p>
+                        <p>0.5 &#215; 10<sup>-6</sup> g이 남게 됩니다.</p>
+                    </div>
+                    <h4 class="margin-top-xl">연습: 반감기</h4>
+                    <p>반감기와 탄소 연대 측정에 대한 새로운 지식을 활용하여 노트에 다음 문제에 답하세요. <a href="../assets/locker_docs/sph3u_03.20.34.pdf" target="_blank">반감기 답안지<span class="sr-only">새 창에서 열림</span></a>의 풀이로 이해도를 확인할 수 있습니다.</p>
+                    <p>1. 스트론튬-90 시료의 질량이 64g입니다. 반감기는 29.1년입니다.</p>
+                    <p>a) 시료가 16g으로 붕괴하는 데 얼마나 걸릴까요?</p>
+                    <p>b) 116.4년 후에 스트론튬-90이 얼마나 남을까요?</p>
+                    <p>2. 오래된 동물 뼈 시료에는 동물이 죽었을 때 4.0 × 10<sup>-6</sup> g의 탄소-14가 포함되어 있었습니다. 뼈에는 현재 2.5 × 10<sup>-7</sup> g의 탄소-14가 포함되어 있습니다. 탄소-14의 반감기가 5730년이라면, 동물은 얼마나 오래 전에 죽었을까요?</p>
+                    <p>3. 탄소 연대 측정이 대상의 나이를 결정하는 좋은 방법이면 참(TRUE), 아니면 거짓(FALSE)으로 답하세요.</p>
+                    <p>a) 오래된 양피지 조각. </p>
+                    <p>b) 고대 공룡 화석. </p>
+                    <p>c) 오래된 금속 칼. </p>
+                    <h3>응용: 의학</h3>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** ACCORDION 2 BEGINS ******************************************* -->
+                    <div class="accordionILC panel-group" id="accordion2">
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#accordion2-collapse1" class="collapsed">암 치료에서의 방사선</a></h4>
+                            </div>
+                            <div id="accordion2-collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img src="../assets/img/sph3u_03.20.35a.jpg" alt="Harold johns" class="img-responsive img-left-50">
+                                    <p>연구에 따르면 방사선은 건강한 세포보다 빠르게 성장하는 암세포를 죽일 가능성이 더 높습니다. 캐나다의 의학 물리학자 Harold Johns (1915 – 1998)는 코발트-60을 사용하여 암을 치료하는 선구적인 연구를 했습니다.
+                                    </p>
+                                    <p>이 치료법은 감마선을 사용하여 종양에 조사하여 암세포를 죽이는 것입니다. 감마선의 효과를 극대화하기 위해 여러 각도에서 종양을 향해 조사합니다. 이 방법은 건강한 주변 조직에 대한 노출을 최소화하면서 암세포에 대한 노출을 극대화합니다. 암과 싸우기 위해 사용되는 또 다른 시술은 종양 근처에 작은 방사성 펠릿을 이식하는 것입니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#accordion2-collapse2" class="collapsed">의료 영상에 사용되는 방사성 동위원소</a></h4>
+                            </div>
+                            <div id="accordion2-collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img src="../assets/img/sph3u_03.20.35b.jpg" alt="Individual reading an MRI" class="img-responsive img-right-50">
+                                    <p>방사선은 또한 신체 전체의 다양한 질환을 진단하는 데 도움을 줄 수 있습니다. 이것은 반감기가 짧은 다양한 동위원소를 체내에 주입하는 것을 포함합니다. 혈액에 녹는 나트륨-24는 방사선이 신장 문제를 조사하는 데 사용될 수 있는 방법의 한 예입니다. 일반적으로, 이러한 방사성 추적자(radioactive tracer)는 많은 다른 원소와 결합하여 화합물을 형성할 수 있습니다. 이 화합물들은 체내의 다양한 장기 시스템에 모이도록 설계될 수 있습니다. 그런 다음 감마 카메라와 같은 검출기가 장기 시스템의 정확한 사진을 만들어 가능한 문제를 발견하는 데 도움을 줄 수 있습니다. 이 사진들은 의사들이 어떻게 진행할지 결정하는 데 도움을 줄 수 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion2" href="#accordion2-collapse3" class="collapsed">방사선 노출의 위험</a></h4>
+                            </div>
+                            <div id="accordion2-collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img src="../assets/img/sph3u_03.20.35c.jpg" alt="A person about to get their x-ray done" class="img-responsive img-right-50">
+                                    <p>방사성 물질은 원자와 분자를 이온화(전자를 제거)할 수 있습니다. 인체 조직의 분자가 이온화되면 해로운 화학 반응이 발생할 수 있습니다. 방사선이 충분히 강하면 세포 핵의 DNA에 손상을 줄 수 있습니다. 이로 인해 세포가 죽거나 손상될 수 있습니다. 세포가 손상되면 여전히 생식할 수 있지만, 이 경우 여러 형태의 암 중 하나로 발전할 수 있습니다.</p>
+                                    <p>아마 치과에서 엑스레이를 찍을 때 납 앞치마를 착용한 적이 있을 것입니다. 이것은 방사선 노출을 제한하기 위한 것입니다. 일 년에 엑스레이를 매우 적게 찍으므로 방사선 노출량은 세포를 손상시킬 만큼 충분하지 않습니다. 엑스레이를 촬영하는 기술자들은 하루에 많은 엑스레이를 촬영하기 때문에 매우 높은 노출을 받게 됩니다. 그래서 엑스레이가 촬영되는 동안 그들은 방에 머물지 않습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ACCORDION ITEMS -->
+                    </div>
+                    <!-- *************************** ACCORDION 2 ENDS ******************************************* -->
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>방사성 에너지원</h3>
+                    <p>방사능의 원천은 방사능을 방출하는 동안 열도 방출하기 때문에 항상 주변보다 더 뜨겁습니다. 이 열에너지는 Einstein의 방정식에 따라 질량이 에너지로 전환된 것에서 옵니다.</p>
+                </div>
+            </div>
+            <!--FORMULA STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>Einstein의 방정식:</h4>
+                            <p>E = mc<sup>2</sup></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FORMULA ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>일반적으로, 핵반응에서 반응물(방정식의 왼쪽)의 질량은 생성물(방정식의 오른쪽)의 질량보다 약간 더 큽니다. 이 작은 질량 손실은 큰 에너지 증가로 나타납니다. Einstein의 유명한 방정식 E = mc<sup>2</sup>는 질량이 에너지로 전환될 때 형성되는 에너지의 양을 계산하는 데 사용됩니다. 방정식에서 c는 빛의 속도(speed of light)를 나타내며, 상수입니다: c = 3.0 × 10<sup>8</sup> m/s.</p>
+                    <h4>예시 </h4>
+                    <p>우라늄-236의 알파 붕괴에서:</p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <msubsup>
+                                <mrow></mrow>
+                                <mrow>
+                                    <mn>92</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>238</mn>
+                                </mrow>
+                            </msubsup>
+                            <mi mathvariant="normal">U</mi>
+                            <msubsup>
+                                <mo>&#x2192;</mo>
+                                <mrow>
+                                    <mn>90</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>234</mn>
+                                </mrow>
+                            </msubsup>
+                            <mi mathvariant="normal">T</mi>
+                            <mi mathvariant="normal">h</mi>
+                            <msubsup>
+                                <mo>+</mo>
+                                <mn>2</mn>
+                                <mn>4</mn>
+                            </msubsup>
+                            <mi mathvariant="normal">H</mi>
+                            <mi mathvariant="normal">e</mi>
+                        </mrow>
+                    </math>
+                    <p class="margin-top-lg">질량 결손(mass defect) = 반응물의 질량 – 생성물의 질량</p>
+                    <p>질량 결손은 에너지로 전환된 질량의 양입니다.</p>
+                    <p>반응물:</p>
+                    <ul>
+                        <li>우라늄 원자의 질량: 3.919630975 × 10<sup>-25</sup> kg </li>
+                    </ul>
+                    <p>생성물:</p>
+                    <ul>
+                        <li>토륨 원자의 질량: 3.853084652 × 10<sup>-25</sup> kg </li>
+                        <li>알파 입자의 질량: 6.646480725 × 10<sup>-27</sup> kg </li>
+                    </ul>
+                    <p>반응물(우라늄 원자)이 생성물(토륨과 헬륨 원자)보다 더 무겁다는 것을 알 수 있습니다. 원자들의 정확한 질량을 안다면, 얼마나 많은 질량이 사라졌는지 계산할 수 있습니다. 사라진 질량은 다음 다이어그램에 나타난 것처럼 에너지로 변환되었습니다.</p>
+                    <img src="../assets/img/sph3u_03.20.38.svg" alt="U converted to Th and He with energy loss" class="img-responsive">
+                    <p>U-238의 알파 붕괴 반응에서 질량 결손은: </p>
+                    <p>3.919630975 × 10<sup>-25</sup> kg × 3.91954959 × 10<sup>-25</sup> kg = 8.1516 ×
+                        10<sup>-30</sup> kg</p>
+                    <p>질량 결손을 사용하여 U-238의 알파 붕괴에서 방출되는 에너지를 계산하세요.</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la5-suggestedAnswerButton-7">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la5-suggestedAnswer-7">
+                        <p>이 질량은 각 붕괴 사건에서 에너지로 전환됩니다. 에너지의 양은 Einstein의 방정식을 사용하여 구할 수 있습니다:</p>
+
+                        <p>주어진 값:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>m</mi>
+                                <mo>=</mo>
+                                <mn>8.1516</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mn>30</mn>
+                                    </mrow>
+                                </msup>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">kg</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>c</mi>
+                                <mo>=</mo>
+                                <mn>3.0</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mn>8</mn>
+                                </msup>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p>미지수:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>E</mi>
+                                <mo>=</mo>
+                                <mo>?</mo>
+                            </math></p>
+
+                        <p>방정식:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>E</mi>
+                                <mo>=</mo>
+                                <mi>m</mi>
+                                <msup>
+                                    <mi>c</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p>풀이:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>E</mi>
+                                <mo>=</mo>
+                                <mo>(</mo>
+                                <mn>8.1516</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mn>30</mn>
+                                    </mrow>
+                                </msup>
+                                <mo>&#xa0;</mo>
+                                <mi>kg</mi>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mn>3.0</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mn>8</mn>
+                                </msup>
+                                <mo>&#xa0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                                <msup>
+                                    <mo>)</mo>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>E</mi>
+                                <mo>=</mo>
+                                <mn>7.336</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mn>13</mn>
+                                    </mrow>
+                                </msup>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">J</mi>
+                            </math></p>
+
+                        <p>결론:</p>
+                        <p>방출된 에너지는 7.3×10<sup>-13</sup> J입니다. (빛의 속도의 주어진 값이 유효숫자 2자리였으므로 2자리입니다.)</p>
+
+                        <p><strong>참고:</strong> Einstein의 방정식을 사용할 때, 질량은 반드시 kg 단위여야 합니다.</p>
+
+                        <p>이것은 단일 원자핵에서 방출되는 에너지의 양입니다. 이것은 많은 에너지처럼 보이지 않을 수 있지만, 이것은 단 한 번의 붕괴 반응에 대한 에너지라는 점을 고려하세요. 짧은 시간에 많은 반응이 일어나면, 생성되는 에너지는 상당합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>핵반응</h2>
+                    <p>핵반응이 일어나는 두 가지 방법이 있습니다. 핵분열은 큰 원자가 더 작은 원자로 쪼개질 때 발생합니다. 핵융합은 작은 원자나 입자가 결합하여 더 큰 원자를 형성할 때 발생합니다. 두 유형의 반응 모두 많은 양의 에너지를 생성합니다. 원자력 발전소는 에너지를 만들기 위해 핵분열을 사용합니다. 핵융합은 태양 내부에서 발생합니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** TAB 2 BEGINS ******************************************* -->
+                    <div>
+                        <div>
+                            <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+                                <!--YOU WILL NEED TO ADJUST THE WIDTH % DEPENDING ON HOW MANY TABS YOU HAVE-->
+                                <li class="active" style="width:50%" role="tab"><a href="#tab2_1" data-toggle="tab">
+                                        핵분열</a></li>
+                                <li style="width:50%" role="tab"><a href="#tab2_2" data-toggle="tab">
+                                        핵융합</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+                                <div class="tab-pane fade in active" id="tab2_1">
+                                    <p>핵분열은 매우 큰 원자핵이 더 작은 원자핵으로 쪼개지면서 열의 형태로 핵 퍼텐셜 에너지(nuclear potential energy)를 방출할 때 발생합니다. 핵분열은 이미 불안정한 매우 큰 원자핵에서 자연적으로 일어나지만, 추가 중성자를 더 큰 원자핵에 발사하면 이 과정을 가속화할 수 있습니다. 중성자는 큰 원자핵과 결합하여 더욱 불안정하게 만듭니다. 이로 인해 매우 빠르게 분열하면서 새로운 원자핵과 추가 중성자를 방출합니다. 반응이 제어되지 않으면 핵폭발을 일으킵니다.</p>
+                                    <p>원자로는 핵분열 과정을 사용하지만, 폭발을 방지하기 위해 우라늄 원자핵에 충돌하는 중성자의 수가 엄격하게 제어됩니다.</p>
+                                </div>
+                                <div class="tab-pane fade" id="tab2_2">
+
+                                    <p>핵융합에서는 매우 작은 원자핵이 결합하여 더 큰 원자핵을 형성하며, 그 과정에서 과잉 에너지를 생성합니다. 핵융합은 평균적으로 핵분열보다 네 배나 많은 에너지를 생성합니다. 핵융합은 태양이 핵 퍼텐셜 에너지를 복사 에너지(radiant energy)로 전환하는 데 사용하는 과정입니다. 태양에서는 핵융합 반응을 통해 수소가 헬륨으로 전환됩니다.</p>
+
+                                    <img src="../assets/img/sph3u_03.20.40c.svg" alt="hydrogen 2 fuses with hydrogen 1 to form helium 3" class="img-responsive">
+                                    <p>앞의 이미지는 양성자와 중수소 원자가 결합하여 헬륨 원자를 형성하는 방법을 보여줍니다. 핵융합이 일어나려면 매우 높은 온도와 압력이 필요합니다.</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>원자로</h3>
+                    <p>다양한 유형의 원자로가 있습니다. 캐나다에서 사용되는 것은 CANDU(Canadian, Deuterium, Uranium) 원자로라고 합니다. 캐나다 전력의 약 16%가 원자력에서 나옵니다.</p>
+                    <p>다음 다이어그램에서, 이 지도의 분홍색 점은 캐나다의 원자력 발전소 위치를 보여줍니다. 여러분이 그 근처에 살 수도 있습니다. CANDU 원자로는 대량의 냉각수가 필요하기 때문에 원자로가 큰 수역 근처에 있다는 것을 알 수 있습니다.</p>
+                    <p>CANDU 원자로는 Atomic Energy of Canada Limited에 의해 건설되었습니다. </p>
+                    <img src="../assets/img/sph3u_03.20.41.svg" alt="Map of nuclear plants in Canada" class="img-responsive">
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>CANDU 원자로</h3>
+                    <p>다음 다이어그램은 CANDU 원자로의 부품을 보여줍니다.</p>
+                    <img src="../assets/img/sph3u_03.20.42.svg" alt="Diagram of the parts of a CANDU reactor:" class="img-responsive">
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** ACCORDION 4 BEGINS ******************************************* -->
+                    <div class="accordionILC panel-group" id="accordion4">
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion4" href="#accordion4-collapse1" class="collapsed">우라늄 연료 다발</a></h4>
+                            </div>
+                            <div id="accordion4-collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    연료 다발 내부의 우라늄 펠릿이 연료입니다. 핵반응을 시작하려면 중성자에 의해 충돌되어야 합니다. 핵분열이 일어나 우라늄 원자가 분열하면, 두 개의 더 작은 원자와 세 개의 중성자가 형성되며, 이 중성자가 더 많은 우라늄에 충돌하여 더 많은 핵반응을 일으킬 수 있습니다.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion4" href="#accordion4-collapse2" class="collapsed">중수 (감속재)</a>
+                                </h4>
+                            </div>
+                            <div id="accordion4-collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    중수는 두 가지 역할을 합니다. 핵반응이 일어날 수 있도록 우라늄에 발사되는 중성자를 감속시키는 역할을 합니다. 중성자가 너무 빠르게 움직이면 우라늄에서 튕겨져 나가 핵분열을 일으키지 못합니다. 중수의 두 번째 역할은 핵반응 중 생성된 열을 흡수하여 증기 발생기로 전달하는 것입니다.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion4" href="#accordion4-collapse3" class="collapsed">원자로 노심</a></h4>
+                            </div>
+                            <div id="accordion4-collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    원자로 노심의 다른 이름은 칼란드리아(calandria)입니다. 이것은 연료(우라늄)를 포함하는 원자로의 부분입니다.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion4" href="#accordion4-collapse4" class="collapsed">증기 발생기, 터빈 및 발전기</a></h4>
+                            </div>
+                            <div id="accordion4-collapse4" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    핵반응에서 생성된 열은 중수에 의해 증기 발생기로 전달됩니다. 증기 발생기에는 호수에서 펌핑된 일반 물이 들어 있습니다. 중수의 열에너지가 일반 물에 흡수되어 증기를 발생시킵니다. 증기가 압력을 만들어 터빈을 회전시킵니다. 터빈은 발전기에 연결되어 있습니다. 터빈이 회전하면서 생성하는 에너지는 발전기에서 전기 에너지(electrical energy)로 전환됩니다. 다음 학습 활동에서 발전기의 작동 원리에 대해 더 자세히 배울 것입니다.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion4" href="#accordion4-collapse5" class="collapsed">응축기</a></h4>
+                            </div>
+                            <div id="accordion4-collapse5" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    증기가 터빈을 회전시키는 데 사용된 후, 차가운 물이 응축기를 통해 순환하여 증기를 다시 물로 응축시킵니다. 그런 다음 증기 발생기로 다시 펌핑되어 순환을 다시 시작합니다.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ACCORDION ITEMS -->
+                    </div>
+                    <!-- *************************** ACCORDION 4 ENDS ******************************************* -->
+                </div>
+            </div>
+            <div class="row margin-top-lg">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h3>CANDU 원자로의 안전성</h3>
+                    <p>CANDU 원자로에는 다른 설계에서 발생한 것과 같은 대규모 재난을 방지할 수 있는 많은 안전 기능이 있습니다. 1986년 Chernobyl 원자로 노심 용융에서는 사용된 감속재(moderator)가 가연성이었습니다. 원자로가 폭발하자 가연성 감속재가 방사성 연기를 유럽과 아시아 전역으로 퍼뜨렸습니다. CANDU 원자로에서는 감속재로 물을 사용하기 때문에 이런 일이 발생할 수 없습니다. 원자로 자체는 만약의 사태에 대비하여 콘크리트로 둘러싸여 있습니다. 원자로가 과열되지 않도록 하는 많은 안전 장치가 있으며, 누출 시 증기가 빠져나가지 않도록 하는 장치도 있습니다. 마지막으로, 모든 CANDU 원자로 주변에는 비거주 상태로 유지되어야 하는 2 km 구역이 있어야 합니다.</p>
+                </div>
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_03.20.44.svg" alt="Safety sign for Radiation Risk" class="img-responsive">
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>핵폐기물 처리</h3>
+                    <p>원자력 발전소는 두 가지 유형의 폐기물을 생성합니다: 방사성 원자 형태의 핵폐기물(nuclear waste)과 증기 발생기에서 사용되지 않는 과잉 열인 열폐기물(thermal waste)입니다. 이 두 가지 유형의 폐기물에 대해 더 자세히 알아보려면 각 탭을 누르세요.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** TAB 3 BEGINS ******************************************* -->
+                    <div>
+                        <div>
+                            <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+                                <!--YOU WILL NEED TO ADJUST THE WIDTH % DEPENDING ON HOW MANY TABS YOU HAVE-->
+                                <li class="active" style="width:50%" role="tab"><a href="#tab3_1" data-toggle="tab">
+                                        방사성 폐기물</a></li>
+                                <li style="width:50%" role="tab"><a href="#tab3_2" data-toggle="tab">
+                                        열 폐기물</a></li>
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+                                <div class="tab-pane fade in active" id="tab3_1">
+                                    <img src="../assets/img/sph3u_03.20.45a.jpg" alt="Yellow barrels of nuclear waste" class="img-responsive img-left-50" style="margin-bottom: -22px;">
+                                    <p>우라늄이 핵분열을 거치면, 역시 방사성인 두 개의 더 작은 원자로 분열합니다. 더 작은 원자들은 원자로에서 사용할 수 없으며 핵폐기물이 됩니다. 이 폐기물은 매우 위험하며 수천 년 동안 위험한 상태로 남아 있습니다. 핵연료가 다 사용되면, 방사능이 약간 감소할 때까지 대형 수조에 보관됩니다. 결국, 방사선이 지표면에 도달할 수 없는 깊은 지하의 대형 금속 드럼에 저장됩니다. 종종 암석이 매우 안정적인 곳(예: Canadian Shield)의 광산 갱도가 사용됩니다.</p>
+                                </div>
+                                <div class="tab-pane fade" id="tab3_2">
+                                    <img src="../assets/img/sph3u_03.20.45b.jpg" alt="Algae on a lake" class="img-responsive img-left-50" style="margin-bottom: -22px;">
+                                    <p>열오염(thermal pollution)이라 불리는 폐열은 인근 호수로 배출됩니다. 냉각수는 이 호수에서 끌어와 발전소를 냉각시킨 후 다시 호수로 돌려보냅니다. 이 호수들은 매우 크며, 추가 열이 호수의 전체 온도에 거의 영향을 미치지 않는 것으로 여겨집니다. 그러나 바로 인근 지역의 더 따뜻한 물은 물에 녹아 있는 산소의 양을 줄이고 과도한 조류(algae)를 발생시킬 수 있습니다. 온도의 작은 변화도 해당 지역의 생물에 큰 영향을 미칠 수 있습니다.</p>
+                                </div>
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB XXX ENDS ******************************************* -->
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>원자로에 대한 논쟁</h3>
+                    <p>원자로에는 많은 장점과 단점이 있으며, 원자력 에너지에 대한 논쟁은 예측 가능한 미래까지 계속될 것입니다. 원자력 에너지와 관련하여 대부분의 사람들이 할 수 있는 최선의 일은 정보를 계속 파악하고 자신만의 의견을 형성하는 것입니다.</p>
+                    <p>다음은 장점과 단점 중 일부입니다.</p>
+                    <table id="myTable4" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">장점</th>
+                                <th class="column_4 blueBorderRight" scope="col">단점</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>온실가스를 생성하지 않으므로 원자력은 기후 변화에 거의 영향을 미치지 않습니다.</td>
+                                <td>핵폐기물은 수년간 방사성 상태로 남아 있기 때문에 처리하기 어렵습니다.</td>
+                            </tr>
+                            <tr>
+                                <td>소량의 우라늄이 매우 많은 양의 에너지를 생산합니다.</td>
+                                <td>우라늄은 재생 불가능한 자원이므로, 결국 우라늄 공급이 고갈될 것입니다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <section id="consolidation">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_03_consolidation.jpg" alt="Consolidation" class="img-responsive" style="width:100%;">
+                </h1>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트에 있는 KWL 차트를 다시 참조하세요: </p>
+                            <table id="myTable5" class="table table-bordered empty-table">
+                                <thead>
+                                    <tr>
+                                        <th class="column_1 blueBorderLeft" scope="col">무엇을 알고 있나요(KNOW)?</th>
+                                        <th class="column_4 blueBorderRight" scope="col">무엇을 알고 싶나요(WANT)?
+                                        </th>
+                                        <th class="column_4 blueBorderRight" scope="col">무엇을 배웠나요(LEARNED)?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="height:50px;">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="margin-top-lg">이 학습 활동에서 배운 내용을 채워 차트를 완성하세요. </p>
+                            <p>두 번째 열(무엇을 알고 싶나요)을 살펴보고 아직 답이 되지 않은 질문이 있는지 확인하세요. 일부 질문은 이 과목의 범위를 벗어날 수 있지만, 직접 온라인에서 조사해 볼 기회입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>이 단원의 모든 학습 활동을 완료했으므로, 다음 주제를 활용하여 독자적인 조사를 수행하세요. 조사 결과를 노트에 기록하세요. </p>
+                            <ol>
+                                <li>이 단원에서 다룬 주제와 관련 있는 관심 있는 직업을 선택하세요. 이 직업을 추구하는 데 필요한 교육과 훈련을 조사하세요.</li>
+                                <li>이 단원의 내용과 관련된 물리학 분야의 유명한 캐나다 물리학자를 선택하세요. 물리학자의 이름, 물리학 지식에 기여한 시기, 기여 내용, 그리고 사회에 어떤 이익을 주었는지를 포함하는 짧은 전기를 준비하세요.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>자기 점검 퀴즈</h3>
+                    <div class="callout_content_icon"> <img src="../assets/icons/self_check.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>이해도를 확인해 보세요!</h4>
+                            <p>다음 자기 점검 퀴즈를 완료하여 학습 진행 상황과 집중해야 할 영역을 확인하세요.</p>
+                            <p>이 퀴즈는 피드백용이며 성적에 포함되지 않습니다. 이 퀴즈에 대한 시도 횟수는 무제한입니다. 시간을 들여 최선을 다하고 제공되는 피드백을 곰곰이 생각해 보세요.</p>
+                            <p><strong>퀴즈</strong>를 눌러 이 도구에 접근하세요.</p> <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=27211480&amp;type=quiz&amp;rcode=eLO-79301541" target="_blank"><img src="../assets/icons/quiz_button.svg" class="action_button callout-image" alt="Quiz"><span class="sr-only">(새 창에서 열림)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout" style="background-color: #deeddf">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>학습 활동 3.5 과제</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/assessment.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>준비가 되면, 다음 페이지로 이동하여 <a href="../assignments/sph3u_u3la5_assign1.html" target="_blank">3.5 과제<span class="sr-only">새 창에서 열림.</span></a>에 대해 더 알아보세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Compiled GVL, Widgets, ILOs, etc. -->
+    <script src="../dependencies/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../dependencies/vendor.min.js"></script>
+    <script src="../assets/js/bugfixes.js"></script>
+    <script>
+        angular.bootstrap(document.getElementById("u3la5_matching1"), ["matchingComboWidget"]);
+
+    </script>
+</body>
+
+</html>

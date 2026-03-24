@@ -1,0 +1,11 @@
+{
+    "title": "DC 모터의 작동 원리",
+    "subtitle": "상호작용 시뮬레이션",
+    "flowSpeed": "흐름 속도",
+    "flipBattery": "배터리 뒤집기",
+    "reverseMagnet": "자석 반전",
+    "startMotor": "모터 시작",
+    "pause": "일시정지",
+    "resume": "재생",
+    "instructionLabel": "사용 방법"
+}

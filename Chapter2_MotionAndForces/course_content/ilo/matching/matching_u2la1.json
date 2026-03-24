@@ -1,0 +1,45 @@
+{
+    "department": "sec",
+    "pairs": 7,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "정답입니다! 잘했습니다!",
+    "basePath": "../assets/img",
+    "columnRatio": "1:2",
+    "items": [
+      {
+        "first": ["", "", "학교에서 쇼핑몰까지의 거리(distance)"],
+        "second": ["", "", "1500 m"]
+      },
+      {
+        "first": ["", "", "쇼핑몰에서 학교까지의 변위(displacement)"],
+        "second": ["", "", "1500 m [E]"]
+      },
+      {
+        "first": ["", "", "기준점(집)에서 도서관의 위치(position)"],
+        "second": ["", "", "1200 m [E]"]
+      },
+      {
+        "first": ["", "", "도서관에서 쇼핑몰을 거쳐 학교까지의 변위(displacement)"],
+        "second": ["", "", "700 m [W]"]
+      },
+      {
+        "first": ["", "", "학교에서 도서관을 거쳐 쇼핑몰까지의 변위(displacement)"],
+        "second": ["", "", "1500 m [W]"]
+      },
+      {
+        "first": ["", "", "기준점(집)에서 쇼핑몰의 위치(position)"],
+        "second": ["", "", "1000 m [W]"]
+      },
+      {
+        "first": ["", "", "도서관에서 쇼핑몰까지의 거리(distance)"],
+        "second": ["", "", "2200 m"]
+      }
+
+    ],
+    "iloStartLink": "매칭 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloStartText": "매칭 1 대화형 활동의 시작.",
+    "iloEndLink": "링크를 눌러 매칭 1 대화형 활동의 시작으로 돌아가세요.",
+    "iloEndText": "매칭 1 대화형 활동의 끝."
+
+  }

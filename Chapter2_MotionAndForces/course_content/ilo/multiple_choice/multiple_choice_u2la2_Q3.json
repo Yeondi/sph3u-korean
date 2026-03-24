@@ -1,0 +1,39 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "객관식 1 대화형 활동의 시작.",
+    "iloEndText": "객관식 1 대화형 활동의 끝.",
+    "iloStartLink": "객관식 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 객관식 1 대화형 활동의 시작으로 돌아가세요.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "일정한 속력(speed)으로 방향이 바뀐다"
+                ],
+                "ariaLabel": "일정한 속력으로 방향이 바뀐다"
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "등속 운동(uniform motion)"
+                    ],
+                    "correct": true,
+                    "feedback": "정답입니다.",
+                    "ariaLabel": "등속 운동(uniform motion)"
+                },
+                {
+                    "answer": [
+                        "비등속 운동(non-uniform motion)"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "비등속 운동(non-uniform motion)"
+                }
+            ]
+        }
+    ]
+}

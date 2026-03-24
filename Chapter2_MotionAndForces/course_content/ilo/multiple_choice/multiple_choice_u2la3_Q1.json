@@ -1,0 +1,39 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "객관식 1 대화형 활동의 시작.",
+    "iloEndText": "객관식 1 대화형 활동의 끝.",
+    "iloStartLink": "객관식 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 객관식 1 대화형 활동의 시작으로 돌아가세요.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "서브 중 공중에 있는 테니스공은 발사체(projectile)의 예입니다."
+                ],
+                "ariaLabel": "서브 중 공중에 있는 테니스공은 발사체의 예입니다."
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "참"
+                    ],
+                    "correct": true,
+                    "feedback": "정답입니다. 테니스공은 공중에 던져진 후 작용하는 유일한 힘(force)이 중력(gravity)이기 때문에 발사체입니다.",
+                    "ariaLabel": "참"
+                },
+                {
+                    "answer": [
+                        "거짓"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "거짓"
+                }
+            ]
+        }
+    ]
+}

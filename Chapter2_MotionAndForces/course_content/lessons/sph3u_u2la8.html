@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>학습 활동 2.8: 뉴턴의 법칙 적용</title>
+
+    <style>
+        /*matching widget styles*/
+        .completionItem {
+            /*question (label) and option (select) div*/
+            position: relative;
+            clear: both;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(86, 101, 105, 0.5);
+            margin-bottom: 20px;
+            background-color: #F8F9F9;
+        }
+
+        .completionItem label {
+            /* question is inside <label>*/
+            width: 71%;
+            padding: 2%;
+            font-size: 95%;
+        }
+
+        .completionItem select {
+            /* options are inside <select>*/
+            width: 25%;
+            float: right;
+            margin: 2%;
+            margin-right: 0px;
+            /* .btn-info -- button styles from CVL */
+            color: #F8F9F9;
+            background-color: #0A76A5;
+            border-color: #0A76A5;
+        }
+
+        .completionItem label>span {
+            /*all text is inside <span> - this overrides bold for question text*/
+            font-weight: normal;
+        }
+
+        .completionItem span {
+            /*feedback text*/
+            font-weight: bold;
+        }
+
+        .completionFeedback i {
+            /*this pushes the feedback to a new line*/
+            padding: 20px
+        }
+
+        .completionControls {
+            /*position of submit button - width and position matches options*/
+            float: right;
+            width: 25%;
+        }
+
+        .completionControls button {
+            /*button is full width of 25% in layout*/
+            width: 100%;
+            /* different button */
+            color: #F8F9F9;
+            background-color: gray;
+            border-color: #0A76A5;
+        }
+
+        .completionControls button:hover {
+            background-color: black;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../assets/css/ilc_core_temp.css">
+</head>
+
+<body>
+    <noscript>
+        <div class="alert alert-warning clearfix" role="alert">
+            <p>
+                <strong>경고!</strong> 최상의 학습 경험을 위해, 이 학습 활동은
+                Javascript를
+                활성화해야 하는 요소를 포함하고 있습니다.
+            </p>
+        </div>
+    </noscript>
+
+    <section id="ilcLearningGoals" class="hidden">
+        <h2>학습 목표</h2>
+        <p>우리가 배울 내용:</p>
+        <ul>
+            <li>뉴턴의 법칙을 더 복잡한 상황에 적용한다</li>
+            <li>마찰력(friction)의 효과를 이해한다</li>
+        </ul>
+        <h2>성취 기준</h2>
+        <p>나는 다음을 할 수 있다:</p>
+        <ul>
+            <li>하나 이상의 힘이 작용하는 상황에서 뉴턴의 제2법칙을 사용하여 문제를 풀 수 있다</li>
+            <li>마찰 계수(coefficient of friction)를 사용하여 마찰력을 계산할 수 있다</li>
+            <li>마찰력과 관련된 문제를 풀 수 있다</li>
+        </ul>
+    </section>
+
+    <main id="mainContent" class="container">
+        <section id="mindsOn">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_02.08_mindsOn.jpg" alt="Minds On" class="img-responsive" style="width: 100%;"></h1>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>마찰력(friction)과 뉴턴의 운동 법칙</h2>
+                    <p>이제 마찰력이 정지해 있는 물체와 운동 중인 물체에 어떻게 상호작용하는지 살펴볼 차례입니다. 그 전에, 이 학습 활동에서 필요한 용어를 위해 노트를 준비하세요.</p>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+
+                            <p>어휘: 노트나 다른 방법을 사용하여 뉴턴의 운동 법칙 적용의 맥락에서 사용되는 다음 어휘를 기록하세요. 학습 활동을 완료하면서 어휘에 관한 정의와 핵심 용어를 채워 넣으세요. </p>
+                            <ul>
+                                <li>운동 마찰력(kinetic friction)</li>
+                                <li>정지 마찰력(static friction)</li>
+                                <li>수직항력(normal force)</li>
+                                <li>계수(coefficient)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h2>마찰력: 좋은가 나쁜가?</h2>
+                    <p>사람이 눈 위에서 썰매를 타거나 공원의 미끄럼틀을 빠르게 내려올 수 있는 이유를 생각해 보세요.
+                        마찰력이 매우 적으면 빠르게 미끄러지는 것이 쉽습니다.
+                        양말을 신고 나무 바닥이나 타일 바닥을 미끄러지는 것은 가능하지만,
+                        카펫 바닥에서도 미끄러질 수 있을까요?
+                        일부 표면에서는 미끄러질 수 있지만, 마찰력 때문에 모든 표면에서 미끄러질 수 있는 것은 아닙니다.
+                    </p>
+                </div>
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_02.08.200.jpg" alt="Family sliding down snow coved hill on toboggan" class="img-responsive">
+
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>생각해 보기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/think.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>눈이나 얼음 위에서 수행하는 스포츠와 레크리에이션 활동을 생각해 보세요. 마찰력이 유리한 상황을 생각해 보세요. 마찰력이 불리한 상황을 생각해 보세요. 토론에서 그 상황들을 설명하고 급우들과 공유하세요.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>이 학습 활동에서는 마찰력의 원인과 운동에 미치는 영향을 탐구합니다.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="action">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_02_action.jpg" alt="Action" class="img-responsive" style="width: 100%;"></h1>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>마찰력(frictional force)</h2>
+                    <p>마찰력, 즉 F<sub>f</sub>는 모든 표면 사이에 존재하지만, 마찰력의 크기는 부분적으로 표면의 특성에 의해 결정됩니다.
+                        얼음이나 타일과 같은 매끄러운 표면은 카펫이나 아스팔트와 같은 거친 질감의 표면보다 마찰력이 적습니다.
+                        두 표면이 정지 상태에서 서로 접촉하고 있을 때, 표면의 원자들은 서로 끌어당기며 일시적인 결합을 형성합니다. 두 표면이 서로 밀리거나
+                        당겨져 지나갈 때, 이 일시적인 결합은 다음 도표에서 보여주는 것처럼 붙었다 미끄러지는 과정에서 계속 끊어지고 다시 형성됩니다. 표면 사이의
+                        접촉량과 표면 사이의 일시적인 결합의 강도가 마찰력, 즉 표면 사이의 "끈적임" 정도를 결정하는 데 도움을 줍니다.</p>
+                    <img src="../assets/img/sph3u_02.14.03.jpg" alt="Friction between two surfaces" class="img-responsive center-block">
+                    <p class="caption">마찰력은 미시적 수준에서 두 표면 사이의 상호작용에 의해 발생합니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>마찰 계수(coefficient of friction)</h3>
+                    <p>서로 미끄러지는 두 표면 사이의 거칠기 정도를 운동 마찰 계수(coefficient of kinetic friction)라고 합니다. 정지 마찰 계수(coefficient of static friction)도 있습니다. 계수는 표면 쌍마다 다릅니다. </p>
+                    <ul>
+                        <li>
+                            <p><em>μ<sub>k</sub></em>는 운동 마찰 계수의 기호입니다</p>
+                        </li>
+                        <li>
+                            <p><em>μ<sub>s</sub></em>는 정지 마찰 계수의 기호입니다</p>
+                        </li>
+                    </ul>
+                    <p>기호 μ는 그리스 문자 뮤(mu)입니다. 이것은 SI 접두사 "마이크로"와 같은 기호이며, 수식 편집기의 기호 삽입 메뉴에서 찾거나 단축키 "\mu"를 사용하여 입력할 수 있습니다.</p>
+                    <h3>예제</h3>
+                    <p>다음 표에서 윤활된 강철 대 강철과 건조한 강철 대 강철의 정지 마찰 계수를 비교해 보세요. 윤활제는 강철로 만들어진 기계 부품을 움직이는 데 유용합니다.
+                        윤활된 강철 대 강철의 정지 마찰 계수 값이 더 낮다는 것은 마찰이 적다는 것을 나타냅니다. 이러한 부품들이 서로 더 쉽게 움직일 수 있고, 기계가
+                        빨리 마모되지 않습니다.</p>
+                    <table id="myTable" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">표면</th>
+                                <th class="column_2 blueBorderRight" scope="col">정지 마찰 계수
+                                    (<em>μ<sub>s</sub></em>)
+                                </th>
+                                <th class="column_3 blueBorderLeft" scope="col">운동 마찰 계수
+                                    (<em>μ<sub>k</sub></em>)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"> 건조한 강철 대 강철 </th>
+                                <td> 0.74 </td>
+                                <td> 0.57 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 윤활된 강철 대 강철</th>
+                                <td> 0.15 </td>
+                                <td> 0.06 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 강철 대 얼음 </th>
+                                <td> 0.010</td>
+                                <td> 0.010 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 고무 대 마른 콘크리트 </th>
+                                <td> 1.00 </td>
+                                <td> 0.80 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 고무 대 젖은 콘크리트 </th>
+                                <td> 0.70 </td>
+                                <td> 0.50 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 고무 대 얼음 </th>
+                                <td> 0.15</td>
+                                <td> 0.005 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>같은 표면에 대한 μk와 μs 값을 비교해 보세요. <em>μ<sub>k</sub></em>
+                        &lt;
+                        <em>μ<sub>s</sub></em>임을 알 수 있을 것입니다.
+                    </p>
+
+                    <p>이것은 주어진 물체가 주어진 표면과 상호작용할 때 운동 마찰력이 정지 마찰력보다 작다는 것을 의미합니다.</p>
+                    <p>마른 콘크리트 위에서 상자를 미는 것을 생각해 보세요. 상자를 움직이기 시작할 때 처음에 더 많은 노력이 필요하고, 계속 움직이게 하는 것은 덜 힘듭니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>각 질문에 제시된 선택지만 고려하여, 각 질문의 설명에 가장 적합한 재료를 선택하세요.</p>
+                        </div>
+                    </div>
+                    <div class="row ilc-row-ilo">
+
+                        <!-- matching snippit - start -->
+                        <div class="ilo_col col-md-12">
+                            <div class="ilo-brightspace-block matching-container" data-config="../ilo/matching/matching_u2la8.json"></div>
+                        </div>
+                        <!-- matching snippit - end -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>수직항력(normal force)</h2>
+                    <img src="../assets/img/sph3u_02.14.09.jpeg" alt="Woman pushing a sofa" class="img-responsive img-right-50">
+                    <p>바닥을 가로질러 소파를 미는 것을 생각해 보세요. 친구 두 명이 소파에 앉아 있다면 차이가 있을까요? 두 친구가 소파에 앉아 있는 대신 밀어주면 소파를 움직이기가 더 쉬울 것입니다. 소파와 두 친구의 질량(mass)은 소파만의 질량보다 큽니다. 물체의 질량이 증가하면 물체에 작용하는 마찰력도 증가합니다. </p>
+                    <p>소파에 작용하는 힘(force)은 무엇일까요? 소파는 중력(gravity)에 의한 아래 방향의 힘을 받습니다. 이 힘은 바닥을 아래로 누르지만, 소파가 바닥을 뚫고 떨어지지 않으므로 소파에 작용하는 알짜힘(net force, <em>F</em><sub><em>net</em></sub>)이 0이 되도록 위쪽 방향의 힘이 있어야 합니다. 이 위쪽 방향의 힘을 수직항력이라고 합니다. 수직항력(<em>F</em><sub><em>N</em></sub>)은 표면의 지지력입니다. </p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <p>다음 이미지를 살펴보고 수직항력이 항상 물체를 지지하는 표면의 위쪽 방향 힘임을 확인하세요.</p>
+                    <p>이 과목에서 살펴볼 상황에서 <em>F</em><sub><em>g</em></sub>는 <em>F</em><sub><em>N</em></sub>과 같은 크기를 가지지만, 반대 방향으로 작용합니다.
+                    </p>
+                    <p>물론, 공중에 있는 공이나 날고 있는 새처럼 물체에 지지력이 없는 경우도 많습니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- ***************************TO MAKE THIS A FULL SCREEN CAROUSEL, SIMPLY DELETE THE <div> TAG IMMEDIATELY ABOVE THIS COMMENT AS WELL (AS ITS CLOSE </div>) ******************************************* -->
+                    <!-- Carousel -->
+                    <div id="ilcCarousel01" class="carousel slide" data-ride="carousel" data-wrap="true" data-interval="false">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#ilcCarousel01" data-slide-to="0" class="active"></li>
+                            <li data-target="#ilcCarousel01" data-slide-to="1"></li>
+                            <li data-target="#ilcCarousel01" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <!-- Slide 1 -->
+                            <div class="item active">
+                                <img src="../assets/img/sph3u_02.14.10a.svg" class="img-responsive center-block" aria-label="Person standing on the floor" alt="Person standing on the floor">
+                                <!-- Caption -->
+                                <div class="carousel-caption">바닥에 서 있는 사람</div>
+                            </div> <!-- Slide 2 -->
+                            <div class="item">
+                                <img src="../assets/img/sph3u_02.14.10b.svg" class="img-responsive center-block" aria-label="Car on the road" alt="Car on the road">
+                                <!-- Caption -->
+                                <div class="carousel-caption">도로 위의 자동차</div>
+                            </div> <!-- Slide 3 -->
+                            <div class="item">
+                                <img src="../assets/img/sph3u_02.14.10c.svg" class="img-responsive center-block" aria-label="Fridge" alt="Fridge">
+                                <!-- Caption -->
+                                <div class="carousel-caption">냉장고</div>
+                            </div>
+                            <br>
+
+                            <!-- Left and right controls -->
+                            <!-- Left -->
+                            <a href="#ilcCarousel01" data-slide="prev">
+                                <i class="fa fa-angle-left fa-2x"></i>
+                            </a>
+                            <!-- Right -->
+                            <a href="#ilcCarousel01" data-slide="next">
+                                <i class="fa fa-angle-right fa-2x pull-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /Carousel -->
+                    <!--*************************** CAROUSEL 1 ENDS ******************************************* -->
+                </div>
+            </div>
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>마찰력 구하기</h3>
+                    <p>마찰력(<em>F</em><sub><em>f</em></sub>)은 마찰 계수<span style="white-space: nowrap;"> (<em>μ</em><sub><em>k</em></sub>)</span>에 의해 수직항력(<em>F</em><sub><em>N</em></sub>)과 관련됩니다. 서로 미끄러지는 두 물체에 대해 다음 방정식을 사용합니다:</p>
+                    <h4>마찰력</h4>
+                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <msub>
+                                <mi>F</mi>
+                                <mi>f</mi>
+                            </msub>
+                            <mo>=</mo>
+                            <msub>
+                                <mi>&#x3bc;</mi>
+                                <mi>k</mi>
+                            </msub>
+                            <msub>
+                                <mi>F</mi>
+                                <mi>N</mi>
+                            </msub>
+                        </math></p>
+
+                    <p>운동 마찰력의 방향은 항상 운동 방향의 반대입니다.</p>
+
+                    <p>수직항력은 중력과 크기가 같고 방향이 반대이므로, 중력의 크기를 알면 수직항력의 크기도 알 수 있습니다. 질량이 증가하면 중력과 수직항력 모두 증가합니다.</p>
+                    <p><em>μ<sub>k</sub></em> 값을 구하려면 표에서 찾거나 주어진 값을 사용해야 합니다. 이 값은 서로 미끄러지는 두 표면에만 의존합니다. 질량을 변경해도 <em>μ<sub>k</sub></em>는 변하지 <b>않습니다</b>.
+                    </p>
+                    <table id="myTable2" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">표면</th>
+                                <th class="column_2 blueBorderRight" scope="col">정지 마찰 계수
+                                    (<em>μ<sub>s</sub></em>)
+                                </th>
+                                <th class="column_3 blueBorderLeft" scope="col">운동 마찰 계수
+                                    (<em>μ<sub>k</sub></em>)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row"> 건조한 강철 대 강철 </th>
+                                <td> 0.74 </td>
+                                <td> 0.57 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 윤활된 강철 대 강철</th>
+                                <td> 0.15 </td>
+                                <td> 0.06 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 강철 대 얼음 </th>
+                                <td> 0.01</td>
+                                <td> 0.010 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 고무 대 마른 콘크리트 </th>
+                                <td> 1.00 </td>
+                                <td> 0.80 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 고무 대 젖은 콘크리트 </th>
+                                <td> 0.70 </td>
+                                <td> 0.50 </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> 고무 대 얼음 </th>
+                                <td> 0.15</td>
+                                <td> 0.005 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예제: 운동 마찰력(kinetic friction)</h3>
+                    <p>얼음 위에서 450 g 고무 장화에 작용하는 운동 마찰력을 계산하세요.</p>
+                    <p> <img src="../assets/img/sph3u_02.14.14.jpg" alt="A girls flowery wellies standing on ice." style="width: 100%;" class="img-responsive center-block"></p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la8-suggestedAnswerButton-1">예시
+                        답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u2la8-suggestedAnswer-1">
+                        <p><b>주어진 값:</b></p>
+                        <p><math>
+                                <semantics>
+                                    <mtable columnalign="left">
+
+                                        <mtr>
+                                            <mtd>
+                                                <mtext>
+                                                    m&#x00A0;=&#x00A0;450&#x00A0;g&#x00A0;=&#x00A0;0.45&#x00A0;kg
+                                                </mtext>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>&#x03BC;</mi>
+                                                        <mtext>k</mtext>
+                                                    </msub>
+                                                    <mtext>=0.005</mtext>
+                                                    <mtext>&#x2009;</mtext>
+                                                </mrow>
+                                                <mrow>
+                                                    <mtext style="font-family: arial">
+                                                        (마찰&#x00A0;계수&#x00A0;표에서)
+                                                    </mtext>
+                                                </mrow>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mtext style="font-family: arial; font-weight:bold;">
+                                                    미지수:
+                                                </mtext>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>f</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mo>?</mo>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mtext style="font-family: arial; font-weight:bold;">
+                                                    방정식:
+                                                </mtext>
+                                            </mtd>
+                                        </mtr>
+
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>f</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <msub>
+                                                    <mi>&#x03BC;</mi>
+                                                    <mi>k</mi>
+                                                </msub>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>N</mi>
+                                                </msub>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                            </mtd>
+                                        </mtr>
+                                    </mtable>
+                                </semantics>
+                            </math></p>
+
+                        <p><strong>풀이:</strong></p>
+                        <p><math>
+                                <mrow>
+                                    <msub>
+                                        <mi>F</mi>
+                                        <mi>N</mi>
+                                    </msub>
+                                </mrow>
+                            </math>을 구하려면, 이것이 <math>
+                                <mrow>
+                                    <msub>
+                                        <mi>F</mi>
+                                        <mi>g</mi>
+                                    </msub>
+                                </mrow>
+                            </math>와 크기가 같다는 것을 기억하세요.</p>
+
+                        <p><math>
+                                <semantics>
+                                    <mtable columnalign="left">
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>N</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>g</mi>
+                                                </msub>
+                                                <mtext>&#x2009;</mtext>
+                                                <mrow>
+
+                                                    <mrow>
+                                                        <mtext style="font-family: arial">(크기가 같음)</mtext>
+                                                    </mrow>
+
+                                                </mrow>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>N</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mi>m</mi>
+                                                <mi>g</mi>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>N</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mo stretchy="false">(</mo>
+                                                <mn>0.45</mn>
+                                                <mo>&nbsp;</mo>
+                                                <mi mathvariant="normal">k</mi>
+                                                <mi mathvariant="normal">g</mi>
+                                                <mo stretchy="false">)</mo>
+                                                <mrow>
+                                                    <mo>(</mo>
+                                                    <mrow>
+                                                        <mn>9.8</mn>
+                                                        <mo>&nbsp;</mo>
+                                                        <mfrac>
+                                                            <mi mathvariant="normal">m</mi>
+                                                            <mrow>
+                                                                <msup>
+                                                                    <mi mathvariant="normal">s</mi>
+                                                                    <mn>2</mn>
+                                                                </msup>
+                                                            </mrow>
+                                                        </mfrac>
+                                                    </mrow>
+                                                    <mo>)</mo>
+                                                </mrow>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>N</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mn>4.4</mn>
+                                                <mo>&nbsp;</mo>
+                                                <mi mathvariant="normal">N</mi>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mtext style="font-family: arial">이제 마찰력을 구하기 위해
+                                                    다음 방정식을 사용합니다:
+                                                </mtext>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>f</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <msub>
+                                                    <mi mathvariant="normal">&#x03BC;</mi>
+                                                    <mi mathvariant="normal">k</mi>
+                                                </msub>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>N</mi>
+                                                </msub>
+                                            </mtd>
+                                        </mtr>
+
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>f</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mo stretchy="false">
+                                                    (</mo>
+                                                <mn>0.005</mn>
+                                                <mo stretchy="false">
+                                                    )</mo>
+                                                <mo stretchy="false">
+                                                    (</mo>
+                                                <mn>4.4</mn>
+                                                <mo>&nbsp;</mo>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mo stretchy="false">
+                                                    )</mo>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <msub>
+                                                    <mi>F</mi>
+                                                    <mi>f</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mn>0.022</mn>
+                                                <mo>&nbsp;</mo>
+                                                <mi mathvariant="normal">N</mi>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mtext style="font-family: arial; font-weight:bold;">
+                                                    결론:
+                                                </mtext>
+                                            </mtd>
+                                        </mtr>
+                                        <mtr>
+                                            <mtd>
+                                                <mtext style="font-family: arial">
+                                                    장화에&#x00A0;작용하는&#x00A0;운동&#x00A0;마찰력은&#x00A0;0.022&#x00A0;N입니다.
+                                                </mtext>
+                                            </mtd>
+                                        </mtr>
+                                    </mtable>
+
+                                </semantics>
+                            </math>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>이제 노트에서 다음 운동 마찰력 문제를 직접 풀어보세요. 다 풀었으면 <a href="../assets/locker_docs/sph3u_02.08.20.html" target="_blank">예시 답안과<span class="sr-only">(새 창에서 열림)</span></a> 비교하세요.</p>
+                        </div>
+                    </div>
+                    <ol>
+                        <li>어린이가 질량 0.250 kg의 나무 블록을 왼쪽으로, 나무 바닥을 가로질러 밀고 있습니다. 어린이가 가하는 힘은 4.0 N입니다. 운동 마찰 계수는 0.20입니다.
+                            <ol type="a">
+                                <li class="margin-top-lg">블록의 자유 물체 도표(FBD)를 그리세요. 네 가지 힘이 작용해야 합니다.</li>
+                                <li>나무 블록에 작용하는 알짜힘을 계산하세요.</li>
+                                <li>나무 블록의 가속도를 구하세요.</li>
+                            </ol>
+                        </li>
+                        <li>질량 152 g의 고무 퍽이 젖은 아스팔트 위를 남쪽으로 미끄러지고 있습니다. 1.4 N의 마찰력에 의해 감속되고 있습니다. 운동 마찰 계수는 얼마입니까? </li>
+                    </ol>
+                    <p>참고: 퍽이 자체적으로 미끄러지고 있으므로, 가한 힘(<math>
+                            <mover>
+                                <mrow>
+                                    <mn>F</mn>
+                                </mrow>
+                                <mrow>
+                                    <mn>→</mn>
+                                </mrow>
+                            </mover>
+                        </math><sub>A</sub>)은 작용하지 않습니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-callout margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>읽기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/read.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>운동학(kinematics)과 관련된 개념을 적용하는 기술(예: 스포츠에서 속력을 측정하는 장치, 로켓 가속기, 보안 시스템용 운동 감지 센서, 자동차 속도계)을 분석하고 직접 조사하세요. 관심 있는 질문을 만들고 그 질문에 답하세요. </p>
+                        </div>
+                    </div>
+                    <p>예시 질문:</p>
+                    <ol>
+                        <li>자율주행 자동차는 어떻게 작동합니까?</li>
+                        <li>회전 교차로가 신호등보다 나을까요?</li>
+                        <li>스마트 신호등 시스템은 사회에 어떤 이점을 줄까요?</li>
+                        <li>대형 차량(픽업트럭과 SUV)을 금지해야 할까요?</li>
+                        <li>재택 학습과 관련된 이점과 단점은 무엇입니까? </li>
+                    </ol>
+                    <strong>기술이 여러분, 사회, 그리고 환경에 미치는 영향을 평가하세요.</strong>
+                    <p>그 기술에 대해 발견한 내용, 기술 개발과 관련된 문제점, 그리고 성공적인 구현이 사회에 미치는 영향에 대해 짧은 단락을 작성하세요.</p>
+                </div>
+            </div>
+        </section>
+        <section id="consolidation">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_02_consolidation.jpg" alt="Consolidation" class="img-responsive" style="width: 100%;">
+                </h1>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_02.14.16.jpg" alt="Bones that are weak" class="img-responsive img-right-50">
+                    <h2>어떤 치료법을 선택하시겠습니까?</h2>
+                    <p>마찰력에 대해 더 배운 후, 마찰력이 최소한으로 필요한 상황이 많다는 것을 알아두는 것이 중요합니다.</p>
+                    <p>윤활액(synovial fluid)은 인체 관절의 마찰을 최소화합니다. 이 마찰 감소가 어떻게 작용하는지, 그리고 너무 많은 마찰을 겪고 있는 닳은 관절에 어떤 일이 일어나는지 알아보기 위해 조사하세요.
+                    </p>
+                    <p>다음으로, 아래 기사를 검토하고 필요하면 추가 조사를 하세요. </p>
+                    <p>만약 골관절염이 있다면, 어떤 치료법을 선택하시겠습니까? 왜 그런가요? 그 치료법이 무릎의 마찰을 어떻게 줄여줄까요? </p>
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>읽기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/read.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>이 질환의 다양한 치료법에 대한 다음 기사 <a href="../assets/locker_docs/sph3u_02.14.17p.pdf" target="_blank">무릎 골관절염의 세 가지 치료법<span class="sr-only">새 창에서 열림</span></a>을 읽어보세요.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-callout margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>생각해 보기</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/think.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트에 어떤 치료법을 선택할 것인지와 그 이유에 대한 최종 결정을 기록하세요.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h3>온타리오주에서 자동차 소유자에게 겨울 타이어를 의무화해야 할까요?</h3>
+                    <p>마찰력이 어떻게 유리할 수 있는지 배웠습니다. 높은 마찰 계수는 다양한 도로 조건에서 자동차가 멈추는 데 도움을 줄 수 있습니다. 이제 자동차 소유자에게 온타리오주에서 겨울 타이어를 의무화해야 하는지에 대한 의견을 형성하는 데 도움이 되는 포트폴리오 활동을 수행합니다.</p>
+
+
+                </div>
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_02.14.19.jpeg" alt="Car tires on winter road" class="img-responsive">
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>"겨울 타이어"를 조사하고 다양한 조건에서 마찰력이 왜 중요한지 설명하세요. 일부 주에서는 겨울철에 차량에 겨울 타이어를 장착하도록 요구합니다. 이러한 법률은 사회적, 경제적, 환경적 영향을 미칩니다. </p>
+                        </div>
+                    </div>
+                    <p>조사를 완료하면서 다음 "여섯 모자" 활동을 수행하고 각 관점에서의 결론을 노트에 기록하세요. 이 활동에서는 여섯 가지 다른 관점(각기 다른 색의 모자에 대한 다른 관점)에서 문제를 고려합니다. 다양한 관점에서 문제를 이해하는 데 도움이 되도록 각 색상 아래에 메모를 작성하세요.
+                    </p>
+                    <h4>여섯 모자 관점</h4>
+                    <ol>
+                        <li>흰색 모자. 사실적 관점. 이 공간에 사실에 대한 요점 메모를 작성하세요. 사실만 적고, 의견은 적지 마세요. </li>
+                        <li class="margin-top-lg">노란색 모자. 긍정적 관점. 이 공간에 이 문제에 대한 긍정적(낙관적) 관점에서 메모를 작성하세요. </li>
+                        <li class="margin-top-lg">검은색 모자. 부정적 관점. 이 공간에 반대 입장을 취하거나 부정적 관점(반대)에서 메모를 작성하세요. 무엇이 잘못될 수 있을까요? 단점은 무엇일까요? </li>
+                        <li class="margin-top-lg">빨간색 모자. 감정적 관점. 이 공간에 자신의 감정, 직감, 아이디어에 대해 메모를 작성하세요. </li>
+                        <li class="margin-top-lg">초록색 모자. 창의적 관점. 이것은 창의적이 될 공간입니다. 다른 선택지가 있을까요? 창의적인 해결책은? 새로운 아이디어가 있을까요? </li>
+                        <li class="margin-top-lg">파란색 모자. 성찰적 관점. 이것은 과정을 모니터링하는 관점입니다. 다섯 가지 다른 관점을 고려했는지 최선을 다해 확인하세요. 위의 메모를 검토하세요. 여기에서 성찰하세요 - 모든 다른 관점에서 문제를 고려했나요? 과정을 개선할 수 있었나요? </li>
+                    </ol>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>이제 이 단원의 모든 학습 활동을 완료했으므로, 다음 안내에 따라 독립적인 조사를 수행하세요. 조사 결과를 노트에 기록하세요. </p>
+                            <ol>
+                                <li>이 단원에서 다룬 주제와 관련된 관심 있는 직업을 선택하세요. 이 직업을 추구하기 위해 필요한 교육과 훈련을 조사하세요.</li>
+                                <li>이 단원의 내용과 관련된 물리학 분야의 유명한 캐나다 물리학자를 선택하세요. 물리학자의 이름, 물리학 지식에 기여한 시기, 기여한 내용, 그리고 사회에 어떤 도움이 되었는지를 포함하는 짧은 전기를 준비하세요.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>복습</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/review.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>어휘: 어휘를 복습하고 이 학습 활동의 어휘와 관련된 정의와 단어를 사용한 단락을 추가하세요. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout" style="background-color: #deeddf">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>학습 활동 2.8 과제</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/assessment.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>준비가 되면, 다음 페이지로 이동하여 <a href="../assignments/sph3u_u2la8_assign1.html" target="_blank">2.8 과제<span class="sr-only">새 창에서 열림.</span></a>에 대해 더 알아보세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전이 가능 기술 설문</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/study_strategies.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>단원을 완료한 후, 1.1에서 소개된 온타리오주의 전이 가능 기술에 대한 자신의 시연을 검토할 기회를 가지세요. 제2단원 전이 가능 기술 설문을 완료하여 자신의 평가와 그 평가에 대한 구체적인 증거를 공유하세요.</p>
+                            <p><strong>전이 가능 기술 설문</strong> 버튼을 눌러 접속하세요.</p> <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=27211480&amp;type=survey&amp;rCode=eLO-31297862" target="_blank"><img src="../assets/icons/transferable_skills_button.svg" class="action_button callout-image" alt="Transferable skills survey"><span class="sr-only">(새 창에서 열림)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>자기 점검 퀴즈</h3>
+                    <div class="callout_content_icon"> <img src="../assets/icons/self_check.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>이해도를 확인하세요!</h4>
+                            <p>다음 자기 점검 퀴즈를 완료하여 학습 진행 상황과 집중해야 할 영역을 파악하세요.</p>
+                            <p>이 퀴즈는 피드백 목적으로만 사용되며, 성적에 포함되지 않습니다. 이 퀴즈는 무제한으로 시도할 수 있습니다. 충분한 시간을 가지고, 최선을 다하며, 제공된 피드백을 되돌아보세요.</p>
+                            <p><strong>퀴즈</strong>를 눌러 이 도구에 접속하세요.</p> <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=27211480&amp;type=quiz&amp;rcode=eLO-79247217" target="_blank"><img src="../assets/icons/quiz_button.svg" class="action_button callout-image" alt="Quiz"><span class="sr-only">(새 창에서 열림)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Compiled GVL, Widgets, ILOs, etc. -->
+    <script src="../dependencies/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../dependencies/vendor.min.js"></script>
+    <script src="../assets/js/bugfixes.js"></script>
+    <script>
+        angular.bootstrap(document.getElementById("u2la8_matching1"), ["matchingComboWidget"]);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<head>
+<title>발사체 운동(projectile motion)</title>
+<link rel="stylesheet" href="styles/ilc_main.css">
+<link rel="stylesheet" href="styles/rollercoaster.css">
+<script src="./scripts/jQuery.js"></script>
+<style>
+
+    /* QA Fix: Active Slider Labels */
+    .activelabel
+    {
+        float: right;
+        font-weight: normal;
+    }
+    .labelwithactive
+    {
+        width: 100%;
+    }
+
+    /* Arrow Bubble (Pointing Down) */
+    .arrow_box
+    {
+        position: absolute;
+        background: #ffffff;
+        border: 4px solid #ffffff;
+        display: block;
+        border-radius: 10px;
+        width: 65px;
+        padding: 4.5px;
+        z-index: 10;
+        text-align: center;
+    }
+    .arrow_box:after, .arrow_box:before
+    {
+        top: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    .arrow_box:after
+    {
+        border-color: rgba(255, 255, 255, 0);
+        border-top-color: #ffffff;
+        border-width: 7px;
+        margin-left: -7px;
+    }
+    .arrow_box:before
+    {
+        border-color: rgba(255, 255, 255, 0);
+        border-top-color: #ffffff;
+        border-width: 13px;
+        margin-left: -13px;
+    }
+    .arrow_box2
+    {
+        position: relative;
+        background: #ffffff;
+        border: 4px solid #ffffff;
+        display: block;
+        border-radius: 10px;
+        width: 65px;
+        padding: 4.5px;
+        z-index: 10;
+        text-align: center;
+    }
+    .arrow_box2:after, .arrow_box2:before
+    {
+        left: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    .arrow_box2:after
+    {
+        border-color: rgba(255, 255, 255, 0);
+        border-left-color: #ffffff;
+        border-width: 7px;
+        margin-top: -7px;
+    }
+    .arrow_box2:before
+    {
+        border-color: rgba(255, 255, 255, 0);
+        border-left-color: #ffffff;
+        border-width: 13px;
+        margin-top: -13px;
+    }
+
+</style>
+</head>
+<body>
+    <div id="appContainer">
+        <h1>발사체 운동(projectile motion)</h1>
+        <div id="infoContainer">
+            <p><span class="infoHeading">각도: </span><span id="angleOutput">146도</span>
+            <br><span class="infoHeading">속도(velocity): </span><span id="velocityOutput">7 m/s</span>
+            <br><span class="infoHeading">거리(distance): </span><span id="distanceOutput">0 m</span></p>
+        </div>
+        <div id="bubble" class="arrow_box" style="display: none;" aria-hidden="true"><b><span id="distanceOutput2">0</span> m</b></div>
+        <div style="display: block; width: 900px; height: 300px; position: absolute; top: 40px; z-index: 1;"></div>
+
+        <div id="metersContainer" class="infoHeading">미터</div>
+
+        <div id="interface">
+            <div id="uiContainer" class="interfaceElement">
+                <label for="angleInput" class="labelwithactive">각도 <span class="activelabel"><span id="angleOutput2"></span>&#176;</span></label>
+                <input id="angleInput" type="range" min="" max="" value=""></input>
+                <label for="velocityInput" class="labelwithactive">속도(velocity) <span class="activelabel"><span id="velocityOutput2">7</span> m/s</span></label>
+                <input id="velocityInput" type="range" min="1" max="20" value="7"></input>
+                <center>
+                    <button id="launchButton" class="btn btn-default uiButton" aria-label="button one" style="margin-top: 7.5px;">발사</button>
+                </center>
+            </div>
+            <div id="partOne" class="interfaceElement">
+                <!-- <h2>1. Simple track</h2> -->
+                <!-- <p>Select the <em>Start</em> button to start the simulation. Select the add<em>Add friction</em> to apply friction. and use the Complex track </p> -->
+                <h2>1. 발사 각도와 초기 속도</h2>
+                <p>발사체(projectile)의 경로는 발사 각도와 초기 속도의 조합에 의해 결정됩니다.
+                    슬라이더를 사용하여 대포의 각도와 속도를 조정한 다음 발사 버튼을 눌러 화살을 발사하세요.
+                    목표물을 맞히는 조합을 찾을 때까지 계속 시도하세요. 그런 다음, 같은 효과를 내는 조합을 두 개 이상 더 찾아보세요.
+                    </p>
+                <h2>2. 최대 거리를 위한 발사 각도</h2>
+                <p>먼저, 속도 슬라이더를 최대값(20 m/s)으로 설정하세요. 다음으로, 대포의 각도를 조정하고 화살을 발사하세요.
+                    각도를 바꾸고 다시 발사하세요. 가장 먼 거리를 만들어내는 각도를 찾을 때까지 이 과정을 반복하세요.
+                </p>
+
+            </div>
+            <!-- <div id="partTwo" class="interfaceElement">
+                <h2>2. Complex track</h2>
+                <p>This is a test</p>
+            </div>
+            <div id="partThree" class="interfaceElement">
+                <h2>3. Friction</h2>
+                <p>This is a test</p>
+            </div> -->
+        </div>
+    </div>
+
+<!-- Files needed to run Hexi -->
+<!--
+<script src="../src/modules/pixi.js/bin/pixi.js"></script>
+<script src="../bin/modules.js"></script>
+<script src="../bin/core.js"></script>
+-->
+
+<!--
+Preferably, just load the single hexi.js or hexi.min.hs file
+which includes Pixi, the modules, and Hexi's core:
+-->
+<script src="scripts/hexi.min.js"></script>
+
+<!-- Main application file -->
+<script src="scripts/main.js"></script>
+
+<!-- QA Fix -->
+<script type="text/javascript">
+
+    // Disable canvas.touch-action:none whenever possible.
+    setInterval(function () {
+        if ($("canvas").length)
+            $("canvas").css("touch-action", "auto");
+    }, 1);
+
+</script>
+</body>
+</html>

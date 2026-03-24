@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>학습 활동 2.5: 힘</title>
+
+    <style>
+        /*matching widget styles*/
+        .completionItem {
+            /*question (label) and option (select) div*/
+            position: relative;
+            clear: both;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(86, 101, 105, 0.5);
+            margin-bottom: 20px;
+            background-color: #F8F9F9;
+        }
+
+        .completionItem label {
+            /* question is inside <label>*/
+            width: 71%;
+            padding: 2%;
+            font-size: 95%;
+        }
+
+        .completionItem select {
+            /* options are inside <select>*/
+            width: 25%;
+            float: right;
+            margin: 2%;
+            margin-right: 0px;
+            /* .btn-info -- button styles from CVL */
+            color: #F8F9F9;
+            background-color: #0A76A5;
+            border-color: #0A76A5;
+        }
+
+        .completionItem label>span {
+            /*all text is inside <span> - this overrides bold for question text*/
+            font-weight: normal;
+        }
+
+        .completionItem span {
+            /*feedback text*/
+            font-weight: bold;
+        }
+
+        .completionFeedback i {
+            /*this pushes the feedback to a new line*/
+            padding: 20px
+        }
+
+        .completionControls {
+            /*position of submit button - width and position matches options*/
+            float: right;
+            width: 25%;
+        }
+
+        .completionControls button {
+            /*button is full width of 25% in layout*/
+            width: 100%;
+            /* different button */
+            color: #F8F9F9;
+            background-color: gray;
+            border-color: #0A76A5;
+        }
+
+        .completionControls button:hover {
+            background-color: black;
+        }
+
+    </style>
+    <link rel="stylesheet" href="../assets/css/ilc_core_temp.css">
+</head>
+
+<body>
+    <noscript>
+        <div class="alert alert-warning clearfix" role="alert">
+            <p>
+                <strong>경고!</strong> 최상의 학습 경험을 위해, 이 학습 활동은
+                Javascript를 활성화해야 하는 요소를 포함하고 있습니다.
+            </p>
+        </div>
+    </noscript>
+
+    <section id="ilcLearningGoals" class="hidden">
+        <h2>학습 목표</h2>
+        <p>우리가 배울 내용:</p>
+        <ul>
+            <li>힘(force)이 무엇이고 어떤 역할을 하는지 이해한다</li>
+            <li>자유 물체 도표(free-body diagram)를 사용하여 힘 문제를 해결한다</li>
+            <li>뉴턴의 제1법칙(Newton's first law)을 사용하여 일상의 상황을 설명한다</li>
+            <li>마찰력(friction)과 수직 항력(normal force) 같은 힘의 효과를 탐구한다</li>
+            <li>힘이 일상생활에 어떤 영향을 미치는지 이해한다</li>
+        </ul>
+        <h2>성취 기준</h2>
+        <p>나는 다음을 할 수 있다:</p>
+        <ul>
+            <li>자유 물체 도표를 그려 힘 문제를 해결할 수 있다</li>
+            <li>뉴턴의 제1법칙이 일상생활에 어떤 영향을 미치는지 설명할 수 있다</li>
+            <li>마찰력과 수직 항력 같은 힘의 종류를 식별할 수 있다</li>
+            <li>힘이 일상생활에서 이로울 수도 있고 해로울 수도 있는 이유를 설명할 수 있다</li>
+        </ul>
+    </section>
+
+    <main id="mainContent" class="container">
+        <section id="mindsOn">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_02.05_mindsOn.jpg" alt="Minds On" class="img-responsive" style="width: 100%;"></h1>
+            </div>
+
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>어휘: 힘의 연구를 설명하는 데 사용되는 다음 어휘를 기록하세요.
+                                학습 활동을 완료하면서 어휘와 관련된 정의와 핵심 용어를 작성하세요.</p>
+                            <ul>
+                                <li>질량(mass)</li>
+                                <li>무게(weight)</li>
+                                <li>힘(force)</li>
+                                <li>크기(magnitude)</li>
+                                <li>방향(direction)</li>
+                                <li>벡터(vector)</li>
+                                <li>뉴턴(newton)</li>
+                                <li>자유 물체 도표(free body diagram)</li>
+                                <li>관성(inertia)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>질량 대 무게</h2>
+                    <p>일상 대화에서 사람들은 질량과 무게를 같은 의미로 사용하는 경우가 많습니다. 이 학습 활동에서 이 두 개념을 탐구할 것입니다. 이전 과정에서 이 용어들을 배운 적이 있을 수도 있습니다.</p>
+                </div>
+            </div>
+            <!--DISCUSSION STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>기존 지식을 활용하여 다음 질문에 대한 답을 노트에 기록하세요.
+                            </p>
+                            <ol>
+                                <li>질량이란 무엇입니까?</li>
+                                <li>무게란 무엇입니까?</li>
+                                <li>각각의 측정 단위는 무엇입니까?</li>
+                                <li>체중계가 측정하는 것은 질량입니까, 무게입니까?</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--DISCUSSION ENDS-->
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>이 학습 활동이 끝나면, 아직 모르더라도 질량과 무게라는 두 용어를 구별할 수 있게 될 것입니다.</p>
+                </div>
+            </div>
+
+        </section>
+        <section id="action">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_02_action.jpg" alt="Action" class="img-responsive" style="width: 100%;"></h1>
+
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">힘이란 무엇인가?</h2>
+                </div>
+            </div>
+            <!--CALLOUT STARTS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1 color-safe-bg_light-brand-1">
+                    <p><strong>힘(force)</strong>은 물체에 대한 밀기 또는 당기기입니다.</p>
+                </div>
+            </div>
+            <!--CALLOUT ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>이 밀기 또는 당기기는 다른 물체와의 상호작용의 결과입니다. 때로는 물체를 밀거나 당기는 것이 무엇인지 매우 명확할 수 있지만, 다른 때는 그렇지 않을 수 있습니다.
+                    </p>
+                    <p>예를 들어, 문을 밀면 문에 가해지는 힘은 여러분에 의해 적용됩니다. </p>
+                    <img src="../assets/img/sph3u_02.11.05.svg" alt="Person pushing sliding doors away to open them" class="img-responsive">
+                </div>
+            </div>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <p>공이 아래로 떨어지는 경우, 공은 땅 쪽으로 당겨지고 있습니다. 공에 작용하는 힘은 지구의 중력(gravitational pull)에 의한 것입니다. 여러분과 문 사이처럼 공과 지구 사이에 물리적 접촉은 없습니다. </p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_02.11.06.svg" alt="Ball falling downards." class="img-responsive">
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>이 두 가지 예시는 두 가지 유형의 힘을 보여줍니다: 접촉력(contact force)과 원격력(action-at-a-distance force)입니다.
+                    </p>
+                    <h3>힘의 종류</h3>
+                    <p>다음의 접촉력과 원격력을 살펴보세요. 다른 힘들도 생각할 수 있으며, 어떤 범주에 속하는지 생각해 보세요.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** ACCORDION 1 BEGINS ******************************************* -->
+
+                    <div class="accordionILC panel-group" id="accordion1">
+
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#accordion1-collapse1" class="collapsed">접촉력</a></h4>
+                            </div>
+                            <div id="accordion1-collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>마찰력(friction)</li>
+
+                                        <li>장력(tension)</li>
+
+                                        <li>적용된 힘(applied)</li>
+
+                                        <li>수직 항력(normal)</li>
+
+                                        <li>탄성력(spring)</li>
+                                    </ul>
+                                    <p>이 힘들은 모두 상호작용하는 물체 사이에 물리적 접촉이 필요하다는 점에 주목하세요.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#accordion1-collapse2" class="collapsed">원격력</a></h4>
+                            </div>
+                            <div id="accordion1-collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul>
+                                        <li>중력(gravitational)</li>
+
+                                        <li>전기력(electrical)</li>
+
+                                        <li>자기력(magnetic)</li>
+
+                                    </ul>
+                                    <p>이 힘들은 상호작용하는 물체 사이에 물리적 분리가 있어도 존재한다는 점에 주목하세요.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- END OF ACCORDION ITEMS -->
+                    </div>
+
+                    <!-- *************************** ACCORDION 1 ENDS ******************************************* -->
+
+
+                </div>
+            </div>
+
+
+
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="col-xs-4">
+                        <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+                            <li role="tab" class="active" style="width: 100%;"><a href="#lefttab1_1" data-toggle="tab">적용된 힘</a></li>
+                            <li role="tab" style="width: 100%;"><a href="#lefttab1_2" data-toggle="tab">중력</a></li>
+                            <li role="tab" style="width: 100%;"><a href="#lefttab1_3" data-toggle="tab">수직 항력</a></li>
+                            <li role="tab" style="width: 100%;"><a href="#lefttab1_4" data-toggle="tab">마찰력</a></li>
+                            <li role="tab" style="width: 100%;"><a href="#lefttab1_5" data-toggle="tab">장력</a></li>
+                            <li role="tab" style="width: 100%;"><a href="#lefttab1_6" data-toggle="tab">탄성력</a></li>
+                        </ul>
+                    </div>
+                    <!--right column-->
+                    <div class="col-xs-8">
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+                                <div class="tab-pane fade in active" id="lefttab1_1">
+                                    <p>다른 물체에 의해 물체에 가해지는 힘입니다.</p>
+                                    <p>예시: 사람이 책상 위에서 책을 밀고 있습니다. 적용된 힘(applied force)은 사람이 책에 가하는 힘입니다.
+                                    </p>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_2">
+
+                                    <p>질량을 가진 두 물체 사이의 인력입니다. 이것은 <strong>무게(weight)</strong>라고도 합니다.
+                                    </p>
+                                    <p>예시: 지구는 여러분과 같은 다른 물체에 중력을 가합니다.
+                                    </p>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_3">
+                                    <p>물체와 접촉하고 있는 표면이 물체에 가하는 지지력입니다. 이 힘은 항상 접촉 표면에 수직으로 작용합니다.</p>
+                                    <p>예시: 책이 책상 위에 놓여 있으면, 접촉하고 있는 표면은 책을 지지하기 위해 위쪽으로 힘을 가합니다. 수평면에서 수직 항력은 물체의 무게와 크기가 같고 방향이 반대입니다.</p>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_4">
+                                    <p>서로 상대적으로 움직이는 두 표면에 의해 가해지는 힘입니다. 물체가 움직이려고 시도할 때도 발생할 수 있습니다. 대부분의 경우, 마찰력은 물체의 운동을 방해합니다.</p>
+                                    <p>예시: 책상 위에서 책을 밀면, 책의 표면과 책상의 표면이 서로 이동하면서 마찰력이 발생합니다.</p>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_5">
+                                    <p>줄, 밧줄, 케이블에 의해 전달되는 힘입니다.</p>
+                                    <p>예시: 엘리베이터는 장력이 작용하는 두꺼운 케이블에 의해 지지됩니다.</p>
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_6">
+                                    <p>압축되거나 늘어난 용수철이 그에 연결된 물체에 가하는 힘입니다.</p>
+                                    <p>예시: 용수철에 매달린 질량.</p>
+
+                                </div>
+
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB XXX ENDS ******************************************* -->
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>힘의 정량화</h3>
+
+                    <span>물리학자들이 힘을 나타내는 데 사용하는 기호는</span> <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <semantics>
+                            <mrow>
+                                <mover accent="true">
+                                    <mi>F</mi>
+                                    <mo>&#x2192;</mo>
+                                </mover>
+                                <mtext>.</mtext>
+                            </mrow>
+                            <annotation encoding="MathType-MTEF">
+                                MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaabaaaaaaaaapeGabmOrayaalaGaaeOlaaaa@3074@
+                            </annotation>
+                        </semantics>
+                    </math>
+                    <span>으로 씁니다. 기호 위의 벡터 화살표에 주목하세요. 힘은 벡터(vector)량이므로, 크기(값)와 방향으로 설명됩니다. 분석 중인 힘의 종류를 나타내기 위해 아래 첨자가 종종 사용됩니다. 다음은 기호 목록입니다.</span>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <semantics>
+                            <mrow>
+                                <mtable columnalign="left">
+                                    <mtr columnalign="left">
+                                        <mtd columnalign="left">
+                                            <mrow>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi>F</mi>
+                                                        <mo>&#x2192;</mo>
+                                                    </mover>
+
+                                                    <mi>g</mi>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mtext>&#x00A0;중력&#x00A0;</mtext>
+                                            </mrow>
+                                        </mtd>
+                                    </mtr>
+                                    <mtr columnalign="left">
+                                        <mtd columnalign="left">
+                                            <mtable columnalign="left">
+                                                <mtr>
+                                                    <mtd>
+                                                        <msub>
+                                                            <mover accent="true">
+                                                                <mi>F</mi>
+                                                                <mo>&#x2192;</mo>
+                                                            </mover>
+
+                                                            <mi>N</mi>
+                                                        </msub>
+                                                        <mo>=</mo>
+                                                        <mtext>&#x00A0;수직&#x00A0;항력</mtext>
+                                                    </mtd>
+                                                </mtr>
+                                                <mtr>
+                                                    <mtd>
+                                                        <mtable columnalign="left">
+                                                            <mtr columnalign="left">
+                                                                <mtd columnalign="left">
+                                                                    <mrow>
+                                                                        <msub>
+                                                                            <mover accent="true">
+                                                                                <mi>F</mi>
+                                                                                <mo>&#x2192;</mo>
+                                                                            </mover>
+
+                                                                            <mrow>
+                                                                                <mi>a</mi>
+                                                                                <mi>p</mi>
+                                                                                <mi>p</mi>
+                                                                            </mrow>
+                                                                        </msub>
+                                                                        <mo>=</mo>
+                                                                        <mtext>
+                                                                            &#x00A0;적용된&#x00A0;힘&#x00A0;
+                                                                        </mtext>
+                                                                    </mrow>
+                                                                </mtd>
+                                                            </mtr>
+                                                            <mtr columnalign="left">
+                                                                <mtd columnalign="left">
+                                                                    <mrow>
+                                                                        <msub>
+                                                                            <mover accent="true">
+                                                                                <mi>F</mi>
+                                                                                <mo>&#x2192;</mo>
+                                                                            </mover>
+
+                                                                            <mi>f</mi>
+                                                                        </msub>
+                                                                        <mo>=</mo>
+                                                                        <mtext>
+                                                                            &#x00A0;마찰력&#x00A0;
+                                                                        </mtext>
+                                                                    </mrow>
+                                                                </mtd>
+                                                            </mtr>
+
+                                                            <mtr columnalign="left">
+                                                                <mtd columnalign="left">
+                                                                    <mrow>
+                                                                        <msub>
+                                                                            <mover accent="true">
+                                                                                <mi>F</mi>
+                                                                                <mo>&#x2192;</mo>
+                                                                            </mover>
+
+                                                                            <mi>T</mi>
+                                                                        </msub>
+                                                                        <mo>=</mo>
+                                                                        <mtext>
+                                                                            &#x00A0;장력&#x00A0;
+                                                                        </mtext>
+                                                                    </mrow>
+                                                                </mtd>
+                                                            </mtr>
+
+                                                        </mtable>
+                                                        <mtext>&#x00A0;</mtext>
+                                                    </mtd>
+                                                </mtr>
+                                            </mtable>
+
+                                        </mtd>
+                                    </mtr>
+
+                                </mtable>
+                            </mrow>
+                            <annotation encoding="MathType-MTEF">
+                                MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaauaadaqaceaaaeaaqaaaaaaaaaWdbiqadAeagaWca8aadaWgaaWcbaWdbiaadEgaa8aabeaak8qacqGH9aqpcaqGGaGaaeOzaiaab+gacaqGYbGaae4yaiaabwgacaqGGaGaae4BaiaabAgacaqGGaGaae4zaiaabkhacaqGHbGaaeODaiaabMgacaqG0bGaaeyEaiaabccaa8aaeaqabeaapeGabmOrayaalaWdamaaBaaaleaapeGaamOtaaWdaeqaaOWdbiabg2da9iaabccacaqGUbGaae4BaiaabkhacaqGTbGaaeyyaiaabYgacaqGGaGaaeOzaiaab+gacaqGYbGaae4yaiaabwgaaeaapaqbamaabiqaaaqaa8qaceWGgbGbaSaapaWaaSbaaSqaa8qacaWGHbGaamiCaiaadchaa8aabeaak8qacqGH9aqpcaqGGaGaaeyyaiaabchacaqGWbGaaeiBaiaabMgacaqGLbGaaeizaiaabccacaqGMbGaae4BaiaabkhacaqGJbGaaeyzaiaabccaa8aabaWdbiqadAeagaWca8aadaWgaaWcbaWdbiaadAgaa8aabeaak8qacqGH9aqpcaqGGaGaaeOzaiaab+gacaqGYbGaae4yaiaabwgacaqGGaGaae4BaiaabAgacaqGGaGaaeOzaiaabkhacaqGPbGaae4yaiaabshacaqGPbGaae4Baiaab6gacaqGGaGabmOrayaalaWdamaaBaaaleaapeGaamivaaWdaeqaaOWdbiabg2da9iaabccacaqG0bGaaeyzaiaab6gacaqGZbGaaeyAaiaab+gacaqGUbGaaeiiaiaabAgacaqGVbGaaeOCaiaabogacaqGLbGaaeiiaaaacaqGGaaaaaaaaa@87C0@
+                            </annotation>
+                        </semantics>
+                    </math>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1 color-safe-bg_light-brand-1">
+                    <h4>힘의 단위</h4>
+                    <p>힘의 단위는 뉴턴(N)이라 하며, 킬로그램, 미터, 초의 조합입니다. 기호 N으로 표시되는 뉴턴은 1.0 kg의 물체를 1.0 m/s<sup>2</sup>로 가속시키는 데 필요한 힘의 양입니다.</p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <semantics>
+                            <mrow>
+                                <mn>1</mn>
+                                <mi mathvariant="normal">N</mi>
+                                <mo>=</mo>
+                                <mn>1</mn>
+                                <mtext>&#x2009;</mtext>
+                                <mi mathvariant="normal">k</mi>
+                                <mi mathvariant="normal">g</mi>
+                                <mo>&#x22C5;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <msup>
+                                    <mi mathvariant="normal">s</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </mrow>
+                            <annotation encoding="MathType-MTEF">
+                                MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaabaaaaaaaaapeGaaGymaiaad6eacqGH9aqpcaaIXaGaaGjbVlaadUgacaWGNbGaeyyXICTaamyBaiaac+cacaWGZbWdamaaCaaaleqabaWdbiaaikdaaaaaaa@3B8D@
+                            </annotation>
+                        </semantics>
+                    </math>
+
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>질량 대 무게</h2>
+                    <p>물리학에서 흔히 잘못 사용되는 두 가지 용어는 질량과 무게입니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1 color-safe-bg_light-brand-1">
+                    <h3 class="h4">질량</h3>
+                    <p>질량은 킬로그램(kg)과 그램(g)으로 측정됩니다. 이것은 물체에 있는 "물질"(또는 물질(matter))의 양을 나타냅니다. 저울(예: 삼중 빔 저울)로 측정합니다.
+                    </p>
+                    <p>질량을 생각하는 또 다른 방법은 물체의 관성(운동 변화에 대한 저항)의 척도입니다. 질량이 클수록 현재의 운동 경로에서 가속되거나 이동하는 것에 더 많이 저항합니다.</p>
+
+
+                    <div class="brightcove-video-container" data-video-id="2542055"></div>
+
+                    <p style="padding-top: 3%;">참고: 1 kg = 1,000 g 또는 1 g = 0.001 kg</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1 color-safe-bg_light-brand-1">
+                    <h4>무게</h4>
+                    <p>무게는 물체를 아래로 당기는 중력을 말합니다. 힘이므로 뉴턴(N)으로 측정됩니다. 저울(예: 용수철 저울 또는 체중계)로 측정합니다.</p>
+                    <img src="../assets/img/sph3u_02.11.11.svg" alt="A scaled with different weights placed on each side." class="img-responsive">
+                </div>
+            </div>
+            <!--TRYIT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 활동에서 용수철 저울을 나타내는 시뮬레이션을 사용하여 다른 행성의 중력이 무게 측정에 미치는 영향을 탐구할 것입니다. 용수철 저울은 아래쪽 끝에 고리가 달린 작은 용수철이 있는 장비입니다. 용수철을 늘리려면 힘이 필요합니다. 힘의 양은 용수철에 장착된 눈금으로 측정할 수 있습니다. 물체가 고리에 매달리면 중력이 아래쪽으로 힘을 가하고 용수철이 늘어납니다.</p>
+                            <p>물체의 무게는 그것에 작용하는 중력에 따라 달라집니다.</p>
+                        </div>
+                    </div>
+                    <p><b>지시사항:</b></p>
+                    <p>각 용수철 저울에 같은 질량을 추가한 다음, 중력이 다른 표면(지구, 달, 목성)을 선택하여 주어진 질량의 무게가 어떻게 변하는지 살펴보세요.</p>
+                    <p><a href="../assets/locker_docs/sph3u_02.11.13p.pdf" target="_blank">"무게 활동"의 접근 가능한 버전을 보려면 여기를 누르세요.<span class="sr-only"> (새 창에서 열림)</span></a>
+                    </p>
+                </div>
+            </div>
+            <div class="row ilc-row-ilo">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/weightactivity.png" alt="Simulation created by TVO ILC" class="img-responsive center-block" style="width: 100%;">
+                    <a href="../ilo/weight_activity/index.html" target="_blank" class="btn btn-inverse pull-right">시작
+                        <span class="sr-only">(새 창에서 열림)</span></a>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>지구에서 1.0 kg 질량을 용수철에 매달면 아래쪽으로 9.8 N의 힘이 측정됩니다. 두 개의 1.0 kg 질량을 매달면 다음 그림과 같이 용수철은 19.6 N의 힘을 기록합니다.</p>
+                    <img src="../assets/img/sph3u_02.11.14.svg" alt="Simulation with different weights attached to a scale" class="img-responsive">
+                    <p>각 경우의 힘은 질량을 아래로 당기는 중력(<em>F</em><sub><em>g</em></sub>)입니다. 지구 표면에서 중력은 각 kg의 질량에 9.8 N의 아래쪽 힘을 가합니다. <em>g</em>는 중력 가속도(acceleration due to gravity)임에 유의하세요.</p>
+
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <semantics>
+                            <mrow>
+                                <mover accent="true">
+                                    <mi>g</mi>
+                                    <mo>&#x2192;</mo>
+                                </mover>
+                                <mo>=</mo>
+                                <mn>9.8</mn>
+                                <mfrac>
+                                    <mi mathvariant="normal">N</mi>
+                                    <mrow>
+                                        <mi mathvariant="normal">k</mi>
+                                        <mi mathvariant="normal">g</mi>
+                                    </mrow>
+                                </mfrac>
+                                <mo stretchy="false">[</mo>
+                                <mi mathvariant="normal">d</mi>
+                                <mi mathvariant="normal">o</mi>
+                                <mi mathvariant="normal">w</mi>
+                                <mi mathvariant="normal">n</mi>
+                                <mo stretchy="false">]</mo>
+                            </mrow>
+                            <annotation encoding="MathType-MTEF">
+                                MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaabaaaaaaaaapeGabm4zayaalaGaeyypa0JaaGyoaiaac6cacaaI4aWaaSaaa8aabaWdbiaad6eaa8aabaWdbiaadUgacaWGNbaaaiaacUfacaWGKbGaam4BaiaadEhacaWGUbGaaiyxaaaa@3BAA@
+                            </annotation>
+                        </semantics>
+                    </math>
+
+                    <p>따라서, 지구 표면에서 중력(무게)은 다음 공식을 사용하여 측정할 수 있습니다:</p>
+                </div>
+            </div>
+            <!--FORMULA CALLOUT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p><strong>중력</strong></p>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <semantics>
+                                        <mrow>
+                                            <msub>
+                                                <mover accent="true">
+                                                    <mi>F</mi>
+                                                    <mo>&#x2192;</mo>
+                                                </mover>
+                                                <mi>g</mi>
+                                            </msub>
+                                            <mo>=</mo>
+                                            <mi>m</mi>
+                                            <mover accent="true">
+                                                <mi>g</mi>
+                                                <mo>&#x2192;</mo>
+                                            </mover>
+                                        </mrow>
+                                        <annotation encoding="MathType-MTEF">
+                                            MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaabaaaaaaaaapeGabmOrayaalaWdamaaBaaaleaapeGaam4zaaWdaeqaaOWdbiabg2da9iaad2gaceWGNbGbaSaaaaa@3419@
+                                        </annotation>
+                                    </semantics>
+                                </math></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FORMULA CALLOUT ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예제: 중력(무게)</h3>
+                    <p>지구 표면에서 질량이 50.0 kg인 사람에게 작용하는 중력(무게)은 얼마입니까?</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-7">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-7">
+                        <math class="math-small">
+                            <semantics>
+                                <mrow>
+                                    <mtext>&#x00A0;무게&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi>F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mi>g</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mi>m</mi>
+                                    <mover accent="true">
+                                        <mi>g</mi>
+                                        <mo>&#x2192;</mo>
+                                    </mover>
+                                    <mo>=</mo>
+                                    <mo stretchy="false">(</mo>
+                                    <mn>50</mn>
+                                    <mtext>kg</mtext>
+                                    <mo stretchy="false">)</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <mn>9.8</mn>
+                                            <mfrac>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mrow>
+                                                    <mtext>kg</mtext>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo stretchy="false">[</mo>
+                                            <mi mathvariant="normal">&#x0020;</mi>
+                                            <mi mathvariant="normal">d</mi>
+                                            <mi mathvariant="normal">o</mi>
+                                            <mi mathvariant="normal">w</mi>
+                                            <mi mathvariant="normal">n</mi>
+                                            <mi mathvariant="normal">&#x0020;</mi>
+                                            <mo stretchy="false">]</mo>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mo>=</mo>
+                                    <mn>490</mn>
+                                    <mtext>N&#x00A0;</mtext>
+                                    <mo stretchy="false">[</mo>
+                                    <mi mathvariant="normal">&#x0020;</mi>
+                                    <mi mathvariant="normal">d</mi>
+                                    <mi mathvariant="normal">o</mi>
+                                    <mi mathvariant="normal">w</mi>
+                                    <mi mathvariant="normal">n</mi>
+                                    <mi mathvariant="normal">&#x0020;</mi>
+                                    <mo stretchy="false">]</mo>
+                                </mrow>
+                                <annotation encoding="MathType-MTEF">
+                                    MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaabaaaaaaaaapeGaaeiiaiaabEfacaqGLbGaaeyAaiaabEgacaqGObGaaeiDaiaabccacqGH9aqpceWGgbGbaSaapaWaaSbaaSqaa8qacaWGNbaapaqabaGcpeGaeyypa0JaamyBaiqadEgagaWcaiabg2da9iaacIcacaaI1aGaaGimaiaabUgacaqGNbGaaiykamaabmaapaqaa8qacaaI5aGaaiOlaiaaiIdadaWcaaWdaeaapeGaamOtaaWdaeaapeGaae4AaiaabEgaaaGaai4waiGacccacaWGKbGaam4BaiaadEhacaWGUbGaaiiiaiaac2faaiaawIcacaGLPaaacqGH9aqpcaaI0aGaaGyoaiaaicdacaqGobGaaeiiaiaacUfaciGGGaGaamizaiaad+gacaWG3bGaamOBaiaacccacaGGDbaaaa@5AC8@
+                                </annotation>
+                            </semantics>
+                        </math>
+                        <br>
+                        <br>
+                        <p>지구 표면에서 1 g 질량에 작용하는 중력은 얼마입니까?</p>
+
+                        <math class="math-small">
+                            <semantics>
+                                <mrow>
+                                    <mtext>&#x00A0;무게&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi>F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mi>g</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mi>m</mi>
+                                    <mover accent="true">
+                                        <mi>g</mi>
+                                        <mo>&#x2192;</mo>
+                                    </mover>
+                                    <mo>=</mo>
+                                    <mo stretchy="false">(</mo>
+                                    <mn>0.001</mn>
+                                    <mi mathvariant="normal">k</mi>
+                                    <mi mathvariant="normal">g</mi>
+                                    <mo stretchy="false">)</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <mn>9.8</mn>
+                                            <mfrac>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mrow>
+                                                    <mi mathvariant="normal">k</mi>
+                                                    <mi mathvariant="normal">g</mi>
+                                                </mrow>
+                                            </mfrac>
+                                            <mo stretchy="false">[</mo>
+                                            <mi mathvariant="normal">d</mi>
+                                            <mi mathvariant="normal">o</mi>
+                                            <mi mathvariant="normal">w</mi>
+                                            <mi mathvariant="normal">n</mi>
+                                            <mo stretchy="false">]</mo>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                            </semantics>
+                        </math>
+                        <math class="math-small">
+                            <semantics>
+                                <mrow>
+                                    <mo>=</mo>
+                                    <mn>9.8</mn>
+                                    <mo>&#x00D7;</mo>
+                                    <msup>
+                                        <mrow>
+                                            <mn>10</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mo>&#x2212;</mo>
+                                            <mn>3</mn>
+                                        </mrow>
+                                    </msup>
+                                    <mi mathvariant="normal">N</mi>
+                                    <mtext>&#x2009;</mtext>
+                                    <mo stretchy="false">[</mo>
+                                    <mi mathvariant="normal">d</mi>
+                                    <mi mathvariant="normal">o</mi>
+                                    <mi mathvariant="normal">w</mi>
+                                    <mi mathvariant="normal">n</mi>
+                                    <mo stretchy="false">]</mo>
+                                </mrow>
+                                <annotation encoding="MathType-MTEF">
+                                    MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaaabaaaaaaaaapeGaaeiiaiaabEfacaqGLbGaaeyAaiaabEgacaqGObGaaeiDaiaabccacqGH9aqpceWGgbGbaSaapaWaaSbaaSqaa8qacaWGNbaapaqabaGcpeGaeyypa0JaamyBaiqadEgagaWcaiabg2da9iaacIcacaaIWaGaaiOlaiaaicdacaaIWaGaaGymaiaadUgacaWGNbGaaiykamaabmaapaqaa8qacaaI5aGaaiOlaiaaiIdadaWcaaWdaeaapeGaamOtaaWdaeaapeGaam4AaiaadEgaaaGaai4waiaadsgacaWGVbGaam4Daiaad6gacaGGDbaacaGLOaGaayzkaaGaeyypa0JaaGyoaiaac6cacaaI4aGaey41aqRaaGymaiaaicdapaWaaWbaaSqabeaapeGaeyOeI0IaaG4maaaakiaad6eacaaMe8Uaai4waiaadsgacaWGVbGaam4Daiaad6gacaGGDbaaaa@60D2@
+                                </annotation>
+                            </semantics>
+                        </math>
+                        <p style="padding-top: 2%">
+                            용수철 저울과 1 kg 질량을 달의 표면으로 가져가면, 질량은 변하지 않지만(여전히 같은 양의 물질이 들어 있으므로) 중력(무게)은 달라질 것입니다. 달 표면에서는 1 kg 질량을 매달았을 때 저울이 1.6 N만 표시합니다.</p>
+                        <p>달에서 예제에서처럼 490 N의 무게를 가진 50 kg의 사람은 80 N밖에 나가지 않을 것입니다. 50 kg × 1.6 N/kg [아래] = 80 N [아래]. </p>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!--TRYIT STARTS-->
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p style="padding-bottom: 5%">중력 공식을 사용하여 왼쪽 열의 질량을 오른쪽 열의 지구에서의 무게와 짝지으세요.</p>
+                        </div>
+                    </div>
+                    <div class="row ilc-row-ilo">
+
+                        <!-- matching snippit - start -->
+                        <div class="ilo_col col-md-12">
+                            <div class="ilo-brightspace-block matching-container" data-config="../ilo/matching/matching_u2la5.json"></div>
+                        </div>
+                        <!-- matching snippit - end -->
+                    </div>
+                </div>
+            </div>
+            <!--TRYIT ENDS-->
+            <div class="row margin-top-xl">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h3>자유 물체 도표</h3>
+                    <p>이것들은 모두 외력의 예입니다 - 물체의 외부에 작용하는 힘입니다. 이러한 시나리오는 자유 물체 도표에서 벡터를 사용하여 나타낼 수 있습니다. 물체는 크기나 모양에 관계없이 기하학적 도형으로 표현됩니다: 상자, 원, 또는 점(물체의 질량 중심 또는 균형점을 상징)으로 나타냅니다.
+                    </p>
+                    <p>옆의 이미지에서 새집이 밧줄로 나무에 매달려 있습니다.</p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_02.11.18.svg" alt="Image of red bird house hanging from a string" class="img-responsive center-block">
+                    <figure><img src="../assets/img/sph3u_02.11.21.svg" alt class="img-responsive">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_02.11.21.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트에 새집의 자유 물체 도표를 만드는 단계를 따르세요.</p>
+                            <p>1. 다음 그림과 같이 분석할 물체를 나타내는 점 또는 상자를 만드세요. 이 경우 새집에 작용하는 힘을 분석할 것입니다.</p>
+                            <img src="../assets/img/sph3u_02.11.20.svg" alt="Image of red bird house hanging from a string represented with a dot or a rectangle" class="img-responsive callout-image">
+
+
+                            <p>2. 물체에 작용하는 힘을 식별하세요. 힘의 방향으로 화살표를 만드세요. 다음 그림은 이 경우를 나타내며, 아래쪽으로 당기는 힘(중력)과 위쪽으로 당기는 힘(장력(또는 줄의 힘))이 있습니다. 그린 화살표는 힘의 크기에 비례해야 합니다. 새집은 중력과 같은 크기의 장력(<em>F</em><sub><em>string</em></sub>)을 받고 있으므로, 두 화살표는 거의 같은 크기여야 합니다.</p>
+                            <figure><img src="../assets/img/sph3u_02.11.24.svg" alt class="img-responsive callout-image">
+                                <figcaption>
+                                    <p><a href="../assets/alt/sph3u_02.11.24.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                                </figcaption>
+                            </figure>
+
+
+
+                            <p>3. 힘의 값이 주어지거나 알려진 경우, 도표에 추가할 수 있습니다.</p>
+
+                            <p>힘을 만드는 것은 표시하지 않고 - 힘의 방향, 크기, 그리고 힘이 작용하는 물체만 표시한다는 점에 유의하세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예제: 자유 물체 도표</h3>
+                    <p>때로는 다른 시점에서 물체의 자유 물체 도표(FBD)를 만드는 것이 유용합니다. 예를 들어, 물체가 바닥을 가로질러 끌려가고 있다면, 두 가지 관점이 표시될 수 있습니다: 측면과 위(조감도)에서 본 것입니다.</p>
+                    <p>상자가 왼쪽으로 8 N, 오른쪽으로 8 N으로 당겨지는 경우, 위에서 본 FBD는 다음과 같습니다:</p>
+                    <img src="../assets/img/sph3u_02.11.26.svg" alt="Image of a object represented with a dot, that has force to the right (8 newtons) and force to the left (8 Newtons)" class="img-responsive">
+
+
+                </div>
+            </div>
+            <!--TRYIT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>상자가 거친 표면 위에서 동쪽으로 밀리고 있습니다. 다음 이미지를 사용하여 올바른 FBD를 선택하여 이해도를 확인하세요.</p>
+
+                        </div>
+                    </div>
+
+                    <figure><img src="../assets/img/sph3u_02.11.14b.svg" alt="Four diagram with objects with different forces acting on it." class="img-responsive callout-image">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_02.11.14b.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+
+                    <div class="row ilc-row-widget">
+                        <div class="col-xs-12">
+                            <!-- *************************** MULTIPLE CHOICE 1 BEGINS ******************************************* -->
+                            <div id="u2la5_mc1" class="multiple-choice-widget" data-ng-controller="multipleChoiceController" data-ng-init="getQuestionData('../widgets/sph3u_u2la5_mc1.json')">
+                                <div data-multiple-choice-directive></div>
+                            </div>
+                            <!--*************************** MULTIPLE CHOICE 1 ENDS ******************************************* -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--TRYIT ENDS-->
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>알짜힘</h3>
+                    <p>물체에 작용하는 알짜힘(net force, 합력)은 모든 힘의 벡터 합(총합)입니다.
+                    </p>
+                    <p>물체에는 종종 하나 이상의 힘이 작용합니다. 운동장에서 두 명의 친구가 각각 여러분의 양팔을 반대 방향으로 당기는 놀이를 해본 적이 있습니까? 때로는 어디로도 움직이지 않았습니다. 다른 때에는 한 친구 쪽으로 움직였습니다.</p>
+                    <p>여러분의 몸에 작용하는 수평 방향의 힘을 생각해 보세요. 다음 그림에서 점은 양팔이 당겨지는 사람을 나타내고, 왼쪽과 오른쪽 화살표(F<sub>left</sub>와 F<sub>right</sub>)는 친구들을 나타냅니다.</p>
+                    <p>다음 그림은 두 친구가 같은 크기의 힘으로 당기는 시나리오를 나타냅니다.</p>
+                    <figure><img src="../assets/img/sph3u_02.11.29.svg" alt class="img-responsive">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_02.11.29.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <semantics>
+                                <mrow>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi mathvariant="normal">F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mrow>
+                                            <mi mathvariant="normal">n</mi>
+                                            <mi mathvariant="normal">e</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                        </mrow>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi mathvariant="normal">F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mrow>
+                                            <mi mathvariant="normal">l</mi>
+                                            <mi mathvariant="normal">e</mi>
+                                            <mi mathvariant="normal">f</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                        </mrow>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi mathvariant="normal">F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mrow>
+                                            <mi mathvariant="normal">r</mi>
+                                            <mi mathvariant="normal">i</mi>
+                                            <mi mathvariant="normal">g</mi>
+                                            <mi mathvariant="normal">h</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                        </mrow>
+                                    </msub>
+                                </mrow>
+                            </semantics>
+                        </math>
+                    </p>
+                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <semantics>
+                                <mrow>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi mathvariant="normal">F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mrow>
+                                            <mi mathvariant="normal">n</mi>
+                                            <mi mathvariant="normal">e</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                        </mrow>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mn>8</mn>
+                                    <mi mathvariant="normal">N</mi>
+                                    <mtext>&#x2009;</mtext>
+                                    <mo stretchy="false">[</mo>
+                                    <mi mathvariant="normal">l</mi>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">f</mi>
+                                    <mi mathvariant="normal">t</mi>
+                                    <mo stretchy="false">]</mo>
+                                    <mo>+</mo>
+                                    <mn>8</mn>
+                                    <mi mathvariant="normal">N</mi>
+                                    <mtext>&#x2009;</mtext>
+                                    <mo stretchy="false">[</mo>
+                                    <mtext>right</mtext>
+                                    <mo stretchy="false">]</mo>
+                                </mrow>
+                            </semantics>
+                        </math>
+                    </p>
+                    <p>[오른쪽]을 양의 방향으로 합시다.</p>
+                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <semantics>
+                                <mrow>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi mathvariant="normal">F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mrow>
+                                            <mi mathvariant="normal">n</mi>
+                                            <mi mathvariant="normal">e</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                        </mrow>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mo>&#x2212;</mo>
+                                    <mn>8</mn>
+                                    <mi mathvariant="normal">N</mi>
+                                    <mtext>&#x2009;</mtext>
+                                    <mo stretchy="false">[</mo>
+                                    <mi mathvariant="normal">r</mi>
+                                    <mi mathvariant="normal">i</mi>
+                                    <mi mathvariant="normal">g</mi>
+                                    <mi mathvariant="normal">h</mi>
+                                    <mi mathvariant="normal">t</mi>
+                                    <mo stretchy="false">]</mo>
+                                    <mo>+</mo>
+                                    <mn>8</mn>
+                                    <mi mathvariant="normal">N</mi>
+                                    <mtext>&#x2009;</mtext>
+                                    <mo stretchy="false">[</mo>
+                                    <mtext>right</mtext>
+                                    <mo stretchy="false">]</mo>
+                                </mrow>
+                            </semantics>
+                        </math>
+                    </p>
+                    <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <semantics>
+                                <mrow>
+                                    <msub>
+                                        <mover accent="true">
+                                            <mi mathvariant="normal">F</mi>
+                                            <mo>&#x2192;</mo>
+                                        </mover>
+
+                                        <mrow>
+                                            <mi mathvariant="normal">n</mi>
+                                            <mi mathvariant="normal">e</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                        </mrow>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mn>0</mn>
+                                    <mi mathvariant="normal">N</mi>
+                                </mrow>
+                            </semantics>
+                        </math></p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>다음 그림은 친구들로부터 불균형한 힘이 작용하는 시나리오를 나타냅니다:
+                    </p>
+                    <figure><img src="../assets/img/sph3u_02.11.30.svg" alt class="img-responsive">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_02.11.30.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <semantics>
+                            <mrow>
+                                <mtable columnalign="left">
+                                    <mtr columnalign="left">
+                                        <mtd columnalign="left">
+                                            <mrow>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi mathvariant="normal">F</mi>
+                                                        <mo>&#x2192;</mo>
+                                                    </mover>
+
+                                                    <mrow>
+                                                        <mi mathvariant="normal">n</mi>
+                                                        <mi mathvariant="normal">e</mi>
+                                                        <mi mathvariant="normal">t</mi>
+                                                    </mrow>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi mathvariant="normal">F</mi>
+                                                        <mo>&#x2192;</mo>
+                                                    </mover>
+
+                                                    <mrow>
+                                                        <mi mathvariant="normal">l</mi>
+                                                        <mi mathvariant="normal">e</mi>
+                                                        <mi mathvariant="normal">f</mi>
+                                                        <mi mathvariant="normal">t</mi>
+                                                    </mrow>
+                                                </msub>
+                                                <mo>+</mo>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi mathvariant="normal">F</mi>
+                                                        <mo>&#x2192;</mo>
+                                                    </mover>
+
+                                                    <mrow>
+                                                        <mi mathvariant="normal">r</mi>
+                                                        <mi mathvariant="normal">i</mi>
+                                                        <mi mathvariant="normal">g</mi>
+                                                        <mi mathvariant="normal">h</mi>
+                                                        <mi mathvariant="normal">t</mi>
+                                                    </mrow>
+                                                </msub>
+                                            </mrow>
+                                        </mtd>
+                                    </mtr>
+                                    <mtr columnalign="left">
+                                        <mtd columnalign="left">
+                                            <mrow>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi mathvariant="normal">F</mi>
+                                                        <mo>&#x2192;</mo>
+                                                    </mover>
+
+                                                    <mrow>
+                                                        <mi mathvariant="normal">n</mi>
+                                                        <mi mathvariant="normal">e</mi>
+                                                        <mi mathvariant="normal">t</mi>
+                                                    </mrow>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mn>8</mn>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mtext>&#x2009;</mtext>
+                                                <mo stretchy="false">[</mo>
+                                                <mi mathvariant="normal">l</mi>
+                                                <mi mathvariant="normal">e</mi>
+                                                <mi mathvariant="normal">f</mi>
+                                                <mi mathvariant="normal">t</mi>
+                                                <mo stretchy="false">]</mo>
+                                                <mo>+</mo>
+                                                <mn>12</mn>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mtext>&#x2009;</mtext>
+                                                <mo stretchy="false">[</mo>
+                                                <mtext>right</mtext>
+                                                <mo stretchy="false">]</mo>
+                                            </mrow>
+                                        </mtd>
+                                    </mtr>
+                                    <mtr columnalign="left">
+                                        <mtd columnalign="left">
+                                            <mrow>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi mathvariant="normal">F</mi>
+                                                        <mo>&#x2192;</mo>
+                                                    </mover>
+
+                                                    <mrow>
+                                                        <mi mathvariant="normal">n</mi>
+                                                        <mi mathvariant="normal">e</mi>
+                                                        <mi mathvariant="normal">t</mi>
+                                                    </mrow>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mo>&#x2212;</mo>
+                                                <mn>8</mn>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mtext>&#x2009;</mtext>
+                                                <mo stretchy="false">[</mo>
+                                                <mi mathvariant="normal">r</mi>
+                                                <mi mathvariant="normal">i</mi>
+                                                <mi mathvariant="normal">g</mi>
+                                                <mi mathvariant="normal">h</mi>
+                                                <mi mathvariant="normal">t</mi>
+                                                <mo stretchy="false">]</mo>
+                                                <mo>+</mo>
+                                                <mn>12</mn>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mtext>&#x2009;</mtext>
+                                                <mo stretchy="false">[</mo>
+                                                <mtext>right</mtext>
+                                                <mo stretchy="false">]</mo>
+                                            </mrow>
+                                        </mtd>
+                                    </mtr>
+                                    <mtr columnalign="left">
+                                        <mtd columnalign="left">
+                                            <mrow>
+                                                <msub>
+                                                    <mover accent="true">
+                                                        <mi mathvariant="normal">F</mi>
+                                                        <mo>&#x2192;</mo>
+                                                    </mover>
+
+                                                    <mrow>
+                                                        <mi mathvariant="normal">n</mi>
+                                                        <mi mathvariant="normal">e</mi>
+                                                        <mi mathvariant="normal">t</mi>
+                                                    </mrow>
+                                                </msub>
+                                                <mo>=</mo>
+                                                <mn>4</mn>
+                                                <mi mathvariant="normal">N</mi>
+                                                <mtext>&#x2009;</mtext>
+                                                <mo stretchy="false">[</mo>
+                                                <mi mathvariant="normal">r</mi>
+                                                <mi mathvariant="normal">i</mi>
+                                                <mi mathvariant="normal">g</mi>
+                                                <mi mathvariant="normal">h</mi>
+                                                <mi mathvariant="normal">t</mi>
+                                                <mo stretchy="false">]</mo>
+                                            </mrow>
+                                        </mtd>
+                                    </mtr>
+
+                                </mtable>
+                            </mrow>
+                            <annotation encoding="MathType-MTEF">
+                                MathType@MTEF@5@5@+=faaagCart1ev2aaaKnaaaaWenf2ys9wBH5garuWqH1MyYLwyaeXatLxBI9gBaerbd9wDYLwzYbqee0evGueE0jxyaibaieYlf9irVeeu0dXdh9vqqj=hHeeu0xXdbba9frFj0=OqFfea0dXdd9vqaq=JfrVkFHe9pgea0dXdar=Jb9hs0dXdbPYxe9vr0=vr0=vqpi0dc9GqpWqaaeaabiGaciaacaqabeaadaqaaqaaaOqaauaadaqaeeaaaaqaaabaaaaaaaaapeGabmOrayaalaWdamaaBaaaleaapeGaamOBaiaadwgacaWG0baapaqabaGcpeGaeyypa0JabmOrayaalaWdamaaBaaaleaapeGaamiBaiaadwgacaWGMbGaamiDaaWdaeqaaOWdbiabgUcaRiqadAeagaWca8aadaWgaaWcbaWdbiaadkhacaWGPbGaam4zaiaadIgacaWG0baapaqabaaakeaapeGabmOrayaalaWdamaaBaaaleaapeGaamOBaiaadwgacaWG0baapaqabaGcpeGaeyypa0JaaGioaiaad6eacaaMe8Uaai4waiaadYgacaWGLbGaamOzaiaadshacaGGDbGaey4kaSIaaGymaiaaikdacaWGobGaaGjbVlaacUfacaqGYbGaaeyAaiaabEgacaqGObGaaeiDaiaac2faa8aabaWdbiqadAeagaWca8aadaWgaaWcbaWdbiaad6gacaWGLbGaamiDaaWdaeqaaOWdbiabg2da9iabgkHiTiaaiIdacaWGobGaaGjbVlaacUfacaWGYbGaamyAaiaadEgacaWGObGaamiDaiaac2facqGHRaWkcaaIXaGaaGOmaiaad6eacaaMe8Uaai4waiaabkhacaqGPbGaae4zaiaabIgacaqG0bGaaiyxaaWdaeaapeGabmOrayaalaWdamaaBaaaleaapeGaamOBaiaadwgacaWG0baapaqabaGcpeGaeyypa0JaaGinaiaad6eacaaMe8Uaai4waiaadkhacaWGPbGaam4zaiaadIgacaWG0bGaaiyxaaaaaaa@82EC@
+                            </annotation>
+                        </semantics>
+                    </math>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>첫 번째 시나리오(그림 A)에서는 알짜힘이 0이므로 전혀 움직이지 않았을 것입니다. 두 번째 시나리오(그림 B)에서는 알짜힘이 오른쪽으로 4 N이므로 오른쪽으로 움직였을 것입니다. </p>
+                    <p>다음 학습 활동에서 운동과 힘에 대해 더 자세히 배울 것입니다. 이것은 뉴턴의 운동 법칙에서 더 자세히 설명됩니다. </p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>운동과 힘에 대한 초기 개념</h2>
+                    <p>Aristotle을 포함한 여러 초기 철학자들은 밀거나 당기지 않는 물체(정지 상태의 물체)의 운동을 설명하려고 했습니다. Aristotle의 이론은 한 번도 검증하지 않았음에도 불구하고 2000년 이상 널리 받아들여졌습니다.</p>
+                </div>
+            </div>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h3>Galileo</h3>
+                    <p>외부 힘이 작용하지 않는 한 물체가 운동 상태(정지 상태 또는 등속 상태)를 유지한다는 생각은 물리학자 Galileo Galilei에 의해 확인되었습니다. Galileo가 과학에 기여한 수많은 공헌 중 하나는 이론이 참인지 거짓인지 결정하기 위해 검증되어야 한다는 생각이었습니다. 이러한 이유로 Galileo는 종종 근대 과학의 창시자 중 한 명으로 여겨집니다.</p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_02.11.28.jpeg" alt="Drawing of Galileo" class="img-responsive">
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>Galileo의 운동에 대한 생각</h3>
+                    <p>외부 힘이 작용하지 않는 한 물체가 운동 상태를 유지하려는 Galileo의 혁명적인 생각은 중요한 것입니다.</p>
+                    <p>이 생각은 직관적으로 보일 수 있습니다. 예를 들어, 물체가 정지해 있으면 무한정 정지 상태를 유지할 것이라고 가정할 것입니다.</p>
+                    <p>그러나 움직이는 물체의 경우, 물체가 계속 움직이려면 힘이 작용해야 한다는 널리 퍼진 오해가 있습니다. 이것이 항상 맞는 것은 아닙니다. </p>
+                    <p>예를 들어, 마찰이 없는 표면을 굴러 내려와 마찰이 없는 수평면 위를 구르는 공을 생각해 보세요. 공은 지구가 당기는 중력 때문에 경사면을 굴러 내려갑니다. 중력은 수직 방향의 힘임을 기억하세요. 공이 수평면에 도달하면 알짜힘이 더 이상 작용하지 않지만 계속 굴러갑니다. 공을 느리게 할 것이 아무것도 없습니다!</p>
+                    <p>다음은 평평한 표면 위를 굴러가는 공의 자유 물체 도표입니다:</p>
+                    <img src="../assets/img/sph3u_02.11.22.svg" alt="Image of a object represented with a circle with force of gravity and normal force acting on it" class="img-responsive">
+                    <p>참고: 수평 방향의 힘은 없습니다(마찰이 없는 표면임을 기억하세요). 작용하는 유일한 힘은 수직 항력과 중력입니다. 이 공은 수평 방향으로 알짜힘이 없으므로 같은 방식으로 계속 움직일 것입니다. 즉, 공은 관성으로 인해 운동 상태(즉, 등속도로 이동)를 유지합니다. </p>
+                </div>
+            </div>
+            <!--CALLOUT STARTS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1 class color-safe-bg_light-brand-1">
+                    <p><strong>관성(inertia)</strong>은 물체가 운동 변화에 저항하는 경향입니다.</p>
+                </div>
+            </div>
+            <!--CALLOUT ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>공에 마찰력이 작용하면(대부분의 경우에 그러하듯이) 시나리오가 달라집니다.</p>
+                    <p>자유 물체 도표는 다음과 같이 기록됩니다:</p>
+                    <figure><img src="../assets/img/sph3u_02.11.23.svg" alt class="img-responsive">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_02.11.23.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+                    <p>수평 방향에 불균형한 힘이 있음에 주목하세요. 실제로 이 힘은 공을 느리게 합니다. 따라서 외부 힘(마찰력)이 작용하고 있으므로 운동 상태에 변화가 있습니다. 이것이 이러한 사고방식을 받아들이기 어렵게 만든 측면 중 하나입니다. 현실에서 거의 모든 운동은 마찰을 경험하므로, 사람들은 운동의 자연적인 경향이 멈추는 것이라고 생각했을 수 있습니다.</p>
+
+                    <h3>운동 상태</h3>
+                    <p>버스 운전사가 예상치 못하게 브레이크를 밟았을 때 몸이 휘청인 적이 있습니까? 코너를 돌거나 갑자기 멈출 때 차 안에서 식료품이 굴러다닌 적이 있습니까? 스키 점프를 할 때 스키 점퍼가 바로 땅으로 떨어지지 않고 공중으로 날아오르는 것처럼 보이는 이유는 무엇입니까? 놀이공원 놀이기구를 탈 때 무중력을 느낀 적이 있습니까?</p>
+                    <img src="../assets/img/sph4u_01.05.33.svg" alt="An amusement park sky drop ride where riders are being dropped straight down toward the ground." class="img-responsive center-block">
+
+                    <p>이 학습 활동에서 이와 같은 상황을 살펴보고 뉴턴의 제1법칙을 사용하여 설명하는 방법을 배울 것입니다.</p>
+
+                    <p>다음 그림은 관성의 두 가지 예를 보여줍니다. 경사면 위의 수레에 있는 공들은 경사면 끝에서도 계속 운동 상태를 유지합니다. 두 번째 예에서는 물이 담긴 유리잔 위에 놓인 종이 위에 동전이 올려져 있습니다. 종이를 제거하면 동전은 정지 상태를 유지하므로 유리잔 안으로 떨어지게 됩니다. </p>
+                    <figure><img src="../assets/img/sph3u_02.05.200.svg" alt class="img-responsive">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_02.05.200.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+                    <p>자동차와 같은 무거운 물체는 공과 같은 작은 물체보다 관성이 더 큽니다. 따라서 공을 밀어 정지 상태에서 운동 상태로 바꾸는 것은 쉽지만, 자동차를 밀어 움직이게 하는 것은 훨씬 어렵습니다. 마찬가지로 움직이는 자동차를 멈추는 것은 상당히 어렵지만, 움직이는 공을 멈추는 것은 매우 쉽습니다. 질량이 클수록 관성도 커집니다.</p>
+                </div>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트를 사용하여 다음 각 질문을 완료할 수 있습니다. 자신의 풀이를 예시 답안과 비교하여 이해도를 확인하세요. </p>
+                        </div>
+                    </div>
+                    <p>1. 하키 선수가 거친 얼음 표면 위에서 팀원에게 퍽을 패스합니다.</p>
+                    <p>a) 스틱이 힘을 가하는 동안 얼음 위 퍽의 자유 물체 도표를 그리세요.</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-8">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-8">
+                        <p>다음 자유 물체 도표에는 퍽에 작용하는 네 가지 힘이 있습니다: 적용된 힘, 마찰력, 수직 항력, 중력.</p>
+                        <figure><img src="../assets/img/sph3u_02.11.21a.svg" alt class="img-responsive callout-image">
+                            <figcaption>
+                                <p><a href="../assets/alt/sph3u_02.11.21a.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <!--MC INSERT 1 ENDS-->
+                    <p>b) 얼음 표면 위를 미끄러지는 퍽의 자유 물체 도표를 그리세요.
+                    </p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-9">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-9">
+                        <p>다음 자유 물체 도표에는 퍽에 작용하는 세 가지 힘이 있습니다: 마찰력, 수직 항력, 중력.</p>
+                        <figure><img src="../assets/img/sph3u_02.11.21b.svg" alt class="img-responsive callout-image">
+                            <figcaption>
+                                <p><a href="../assets/alt/sph3u_02.11.21b.html" target="_blank">자세한 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h4>활동 </h4>
+                    <p>검지 손가락 위에 카드를 올려놓으세요. 카드 중앙에 동전을 올려놓아 손가락 끝에서 균형을 잡으세요. 다른 손으로 카드를 튕겨 날려 보세요. 동전에 무슨 일이 일어납니까? 동전이 손가락 위에 남도록 할 수 있습니까?
+                    </p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>탐구해 보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%;">
+                            <p>또는 같은 시연을 하는 다음 영상을 살펴보세요.</p>
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2543114"></div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p> 이것이 왜 작동하는지 생각해 보세요.</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-1">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-1">
+
+
+                        <p>동전은 관성으로 인해 정지 상태를 유지합니다. 카드를 빠르게 제거하면 동전은 손가락 위에 남아 있게 됩니다.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <p>이것은 마술사가 테이블 위의 접시 밑에서 식탁보를 빠르게 잡아당기는 것과 매우 비슷합니다. 이것은 접시가 무겁고 식탁보를 매우 빠르게 당길 때 가장 잘 작동합니다. 접시의 관성이 식탁보가 당겨지는 동안 접시를 제자리에 유지합니다.</p>
+
+                </div>
+            </div>
+            <!--VIDEO PLAYER STARTS-->
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>탐구해 보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/watch.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%;">
+                            <p>다음 영상은 접시가 올려진 식탁보를 당기는 시연입니다.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2665522"></div>
+                    <div class="callout_content margin-top-lg" style="width: 100%;">
+                        <p>다음 영상 클립을 살펴보고 관성을 사용하여 달걀에 무슨 일이 일어나는지 설명해 보세요.
+                        </p>
+                    </div>
+                    <div class="brightcove-video-container" data-video-id="2543115"></div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p> 이것이 왜 작동하는지 생각해 보세요.</p>
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-2">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-2">
+
+
+                        <p>달걀은 정지 상태에 있으며 관성 때문에 정지 상태를 유지하려고 합니다. 달걀 아래의 통이 빠지면 달걀은 공중에서 정지 상태를 유지할 수 없으므로 아래로 곧장 떨어집니다.</p>
+
+                    </div>
+                    <h3 class="margin-top-lg">예제: 곡선 도로</h3>
+                    <p>다음 그림은 자동차가 우회전하는 것을 위에서 본 것입니다. 자동차의 방향이 변합니다(검은 실선 화살표로 표시). 대시보드 위에 상자(빨간 직사각형으로 표시)가 있습니다. 회전하는 동안 상자의 관성은 원래 방향으로 계속 이동하게 하여 대시보드의 왼쪽으로 미끄러집니다. 자동차 안의 승객에게도 같은 일이 일어납니다. 안전벨트가 승객을 자동차와 그 운동의 일부로 만들어주기 때문에 승객은 그만큼 미끄러지지 않습니다.</p>
+                    <img src="../assets/img/sph3u_02.11.40.svg" alt="Diagram of how inertia works for an object inside another object, remains in the same position" class="img-responsive">
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1 color-safe-bg_light-brand-1">
+                    <h3>요약: 관성</h3>
+                    <p>이것은 무엇을 의미합니까?</p>
+                    <ul>
+                        <li>정지한 물체는 정지 상태를 유지하려는 경향이 있습니다.</li>
+                        <li>운동 중인 물체는 운동 상태를 유지하려는 경향이 있습니다.</li>
+                        <li>물체의 속도가 일정하면 알짜 외력은 0이어야 합니다.</li>
+                        <li>물체가 가속하고 있다면, 0이 아닌 알짜 외력에 의한 것이어야 합니다.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row margin-top-lg">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h2>Sir Isaac Newton</h2>
+                    <p>Sir Isaac Newton은 Galileo의 관성에 대한 생각을 수정하고 확장했으며, 더 근본적인 법칙도 개발하게 됩니다.</p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_02.11.41.jpg" alt="Self portrait of Isaac Newton" class="img-responsive">
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>이전의 모든 예시는 뉴턴의 제1운동법칙의 적용입니다.</p>
+
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** TAB XXX BEGINS ******************************************* -->
+
+                    <div>
+                        <div>
+                            <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+
+
+                                <!--YOU WILL NEED TO ADJUST THE WIDTH % DEPENDING ON HOW MANY TABS YOU HAVE-->
+                                <li class="active" style="width:16%" role="tab"><a href="#tab1_1" data-toggle="tab">
+                                        1643</a></li>
+                                <li style="width:16%" role="tab"><a href="#tab1_2" data-toggle="tab">
+                                        1665</a></li>
+                                <li style="width:16%" role="tab"><a href="#tab1_3" data-toggle="tab">
+                                        1670</a></li>
+                                <li style="width:16%" role="tab"><a href="#tab1_4" data-toggle="tab">
+                                        1672</a></li>
+                                <li style="width:16%" role="tab"><a href="#tab1_5" data-toggle="tab">
+                                        1687</a></li>
+                                <li style="width:16%" role="tab"><a href="#tab1_6" data-toggle="tab">
+                                        1727</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+
+                                <div class="tab-pane fade in active" id="tab1_1">
+                                    <h3>1643</h3>
+                                    <img src="../assets/img/sph3u_02.11.42a.jpg" width="300" alt="Stamp with Isaac Newton on it" style="float: left; margin-right: 4%;">
+
+                                    <div>
+                                        Isaac Newton은 Galileo가 사망한 직후인 1643년에 태어났습니다. 그는 자신의 생각에 이의를 제기당하는 것을 싫어했고, 결과적으로 자신의 연구를 발표하는 것을 꺼렸습니다. 어린 시절 그는 학교에 거의 관심이 없었지만, 삼촌이 대학 진학을 준비하도록 주장했습니다.
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="tab1_2">
+                                    <h3>1665</h3>
+                                    <img src="../assets/img/sph3u_02.11.42b.jpg" width="300" alt="Image of a old building" style="float: left; margin-right: 4%;">
+
+                                    <p>Cambridge 대학에서 학부생으로 법학을 공부했지만 과학에도 노출되었습니다. 1665년, 유럽과 영국을 휩쓸고 있던 역병으로 인해 대학이 일시적으로 폐쇄되었습니다. Newton은 집에서 계속 공부했으며, 이 기간 동안 수학(미적분학의 기초를 놓음), 광학(백색광이 여러 색의 빛으로 구성되어 있음을 깨달음), 그리고 물리학과 천문학에서도 놀라운 발전을 이루었습니다.</p>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="tab1_3">
+                                    <h3>1670</h3>
+                                    <img src="../assets/img/sph3u_02.11.42c.jpg" width="200" alt="Stamp celebrating 150 years of Newton's discovery" style="float: left; margin-right: 4%;">
+
+                                    <p>1670년, 27세의 나이에 Cambridge의 교수가 되었고, 처음에는 광학 분야에 노력을 집중했습니다. 렌즈 대신 오목 거울을 사용하여 먼 물체에서 오는 빛을 모으는 망원경을 만들어 망원경의 설계를 개선할 수 있었습니다. 이것은 대구경 유리 렌즈를 사용할 때 발생하는 색수차(빛이 색으로 분산되는 현상) 문제를 해결하는 것처럼 보였습니다.
+                                    </p>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="tab1_4">
+                                    <h3>1672</h3>
+                                    <img src="../assets/img/sph3u_02.11.42d.jpg" width="300" alt="Image of white light entering a prism and coming out as a rainbow" style="float: left; margin-right: 4%;">
+
+                                    <p>1672년, Newton은 반사 망원경을 기증한 후 런던 왕립학회의 회원이 되었습니다. 같은 해 빛과 색에 관한 첫 논문을 발표하여 큰 호응을 받았지만, 당시 저명한 과학자들인 Robert Hooke와 Christiaan Huygens는 그의 빛의 입자설을 지지하지 않았습니다. Newton은 이 비판에 대해 Hooke에게 부정적으로 반응했으며, 실제로 1704년 Hooke가 사망할 때까지 광학 분야에서 추가 결과의 발표를 미루었습니다.</p>
+                                </div>
+
+                                <div class="tab-pane fade" id="tab1_5">
+                                    <h3>1687</h3>
+                                    <img src="../assets/img/sph3u_02.11.42e.jpg" width="300" alt="Image of principia mathematic, the book by Isaac Newton" style="float: left; margin-right: 4%;">
+
+                                    <p>Newton의 가장 유명한 저작인 Principia Mathematica는 1687년에 출판되었지만, 약 20년 동안 작업해 온 아이디어를 담고 있었습니다 - 그의 발견을 발표하기를 꺼리는 또 다른 예입니다. 이 책에서 그는 세 가지 운동 법칙과 만유인력의 법칙을 설명했습니다. 그는 이러한 아이디어를 궤도 운동하는 물체, 발사체, 진자, 자유 낙하하는 물체에 적용했습니다. 그의 연구는 이전에 관련이 없어 보이던 다양한 천체 운동도 연결했습니다. 이것은 여전히 출판된 가장 중요한 과학 서적 중 하나로 여겨집니다.
+                                    </p>
+                                </div>
+
+                                <div class="tab-pane fade" id="tab1_6">
+                                    <h3>1727</h3>
+                                    <img src="../assets/img/sph3u_02.11.42f.jpg" width="300" alt="Image of coins" style="float: left; margin-right: 4%;">
+
+                                    <p>Principia Mathematica가 출판된 직후, Newton은 왕립 조폐국의 수장이 되었습니다. 그는 조폐국의 화폐 개주 사업을 이끌었고 위조 방지를 위해 노력했습니다. 이 시기에 그는 적극적인 연구를 그만두었지만 여전히 왕립학회에 관여했습니다. Principia의 성공에도 불구하고, 그는 여전히 다른 과학자들, 특히 독일 수학자 Gottfried Leibniz에게 미적분학의 창시에 대해 이의를 제기했습니다. 그는 1727년에 사망하여 Westminster Abbey에 안장되었습니다.
+                                    </p>
+                                </div>
+
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB XXX ENDS ******************************************* -->
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>뉴턴의 제1운동법칙</h3>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1 color-safe-bg_light-brand-1">
+                    <h4>뉴턴의 제1법칙</h4>
+                    <p>물체에 작용하는 알짜힘이 0이면(알짜힘 없음), 물체는 정지 상태 또는 직선으로 등속도 운동 상태를 유지합니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_02.11.43.jpg" alt="Image of a person on a skateboard" class="img-responsive img-right-33">
+                    <p>스케이트보드가 콘크리트 장벽에 의해 갑자기 멈춘 후 공중으로 날아가는 스케이트보더의 이 사진은 뉴턴의 제1법칙을 명확히 보여줍니다:</p>
+
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>스케이트보더가 스케이트보드 위에서 타고 있을 때, 스케이트보더는 스케이트보드와 같은 속도로 움직이고 있었습니다. 장벽은 스케이트보드의 운동을 멈추는 힘으로 작용했지만, 스케이트보더에게는 외부 힘이 작용하지 않았습니다. 스케이트보더는 스케이트보드에 단단히 부착되어 있지 않았으므로, 원래 속도로 앞으로 계속 움직였습니다.</p>
+                    <p>물체에 알짜힘이 작용하지 않으면, 물체는 정지 상태 또는 직선으로 등속도 운동 상태를 유지합니다.</p>
+                    <p>뉴턴의 제1법칙은 이전 학습 활동에서 배운 관성의 개념을 설명하므로 <strong>관성의 법칙(Law of Inertia)</strong>이라고도 합니다.</p>
+                    <p>내부 힘은 물체의 외부 운동에 변화를 일으키지 않습니다. 예를 들어, 버스에 탄 사람이 앞 좌석을 밀어도 버스의 운동에는 영향을 미치지 않습니다.
+                    </p>
+                </div>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트를 사용하여 다음 각 질문을 완료할 수 있습니다. 자신의 풀이를 예시 답안과 비교하여 이해도를 확인하세요. </p>
+                            <p>뉴턴의 제1법칙이 다음 각 상황에 어떻게 적용되는지 설명하세요:</p>
+
+                            <p>1. 토보건 위의 두 청소년이 토보건을 세게 잡아당기면 뒤로 넘어집니다. 설명하세요.</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-3">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-3">
+
+
+                                <p>청소년들의 관성은 토보건을 앞으로 당기는 힘이 가해져도 정지 상태를 유지하게 합니다. 토보건을 당기는 힘은 아이에게 작용하지 않으므로, 토보건이 당겨질 때 아이는 정지 상태를 유지하고 토보건 위에서 뒤로 미끄러집니다.
+                                </p>
+
+                            </div>
+
+                            <p class="margin-top-lg">2. 한 사람이 썰매를 타고 언덕을 내려갑니다. 눈더미를 치고 썰매는 거기에 박히지만, 사람은 방수 바지를 입고 언덕을 계속 내려갑니다. 설명하세요.</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-4">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-4">
+
+                                <p>사람은 썰매와 같은 속도로 움직이고 있습니다. 썰매가 멈추면 사람은 같은 속도로 계속 움직입니다. 썰매를 멈추는 힘은 사람에게 작용하지 않으므로, 관성으로 인해 계속 움직입니다.</p>
+
+                            </div>
+
+                            <p class="margin-top-lg">3. 트럭 적재함에 놓인 상자가 운전자가 신호등에서 출발할 때 트럭 뒤쪽으로 미끄러집니다. 설명하세요.</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-5">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-5">
+
+
+                                <p>상자는 정지 상태에 있습니다. 트럭이 앞으로 가속하면, 마찰력이 충분하지 않으면 상자는 정지 상태를 유지하므로 뒤로 움직이는 것처럼 보입니다. 트럭에 작용하는 힘은 상자가 트럭에 부착되어 있지 않으므로 상자에 작용하지 않습니다.</p>
+
+                            </div>
+
+                            <p class="margin-top-lg">4. Amena는 눈삽을 세게 뒤로 잡아당겨 눈을 털어냅니다. 설명하세요.</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u2la5-suggestedAnswerButton-6">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u2la5-suggestedAnswer-6">
+
+
+                                <p>Amena가 눈을 버리기 위해 삽을 앞으로 움직이면, 눈은 삽과 같은 속도로 이동합니다. 그러나 Amena가 삽을 세게 뒤로 당기면 눈은 앞으로 계속 갑니다. Amena는 눈에 힘을 가하지 않고 삽에만 힘을 가합니다.</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+        </section>
+        <section id="consolidation">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_02_consolidation.jpg" alt="Consolidation" class="img-responsive" style="width: 100%;">
+                </h1>
+
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>이제 학습 활동 시작 부분에서 제시된 질문에 대한 답을 배웠을 것입니다. </p>
+                    <p>질량과 무게의 개념이 얼마나 다른지 놀랐습니까? 하지만 두 용어가 같은 의미로 사용되는 것을 자주 볼 수 있습니다. 물리학에서 이 둘은 매우 다른 것을 의미합니다.</p>
+                </div>
+            </div>
+            <!--TRY IT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">직접 해보기!</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p style="padding-bottom: 3%">이해도를 확인하기 위해 다음 질문을 풀어보세요.
+                            </p>
+
+
+
+                        </div>
+                    </div>
+                    <div id="u2la5_mc2" class="multiple-choice-widget" data-ng-controller="multipleChoiceController" data-ng-init="getQuestionData('../widgets/sph3u_u2la5_mc2.json')">
+
+                        <div data-multiple-choice-directive></div>
+                    </div>
+
+                </div>
+            </div>
+            <!--TRY IT ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>안전을 위한 지식 연결</h3>
+                    <p>물리학에서 매우 중요한 개념인 관성에 대해서도 배웠습니다.</p>
+                    <p>이 학습 활동을 마무리하기 위해, 배운 것을 일상생활에 적용해 봅시다. </p>
+                </div>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트에 다음 적용 사례가 일상생활에서 왜 중요한지, 그리고 관성이 어떻게 관련되는지 설명하세요.</p>
+
+                            <p>관성의 개념을 사용하여:</p>
+                            <ul>
+                                <li>자동차에서 안전벨트의 필요성을 설명하세요.</li>
+                                <li>자동차에서 머리 받침대의 필요성을 설명하세요.</li>
+                                <li>무거운 짐을 실은 대형 자동차가 코너를 천천히 돌아야 하는 이유를 설명하세요.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <!--REVIEW STARTS-->
+            <div class="row ilc-row-callout margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>복습</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/review.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>어휘 복습: 이 학습 활동과 관련된 단어의 정의를 확인하세요. 힘과 뉴턴의 운동 법칙에 대해 배운 내용의 맥락에서 그 단어들을 사용하는 문단을 추가하세요. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>자기 점검 퀴즈</h3>
+                    <div class="callout_content_icon"> <img src="../assets/icons/self_check.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>이해도를 확인하세요!</h4>
+                            <p>다음 자기 점검 퀴즈를 완료하여 학습 진행 상황과 집중해야 할 영역을 파악하세요.</p>
+                            <p>이 퀴즈는 피드백 목적으로만 사용되며, 성적에 포함되지 않습니다. 이 퀴즈는 무제한으로 시도할 수 있습니다. 충분한 시간을 가지고, 최선을 다하며, 제공된 피드백을 되돌아보세요.</p>
+                            <p><strong>퀴즈</strong>를 눌러 이 도구에 접속하세요.</p> <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=27211480&amp;type=quiz&amp;rcode=eLO-79247213" target="_blank"><img src="../assets/icons/quiz_button.svg" class="action_button callout-image" alt="Quiz"><span class="sr-only">(새 창에서 열림)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--REVIEW ENDS-->
+        </section>
+
+    </main>
+
+    <!-- Compiled GVL, Widgets, ILOs, etc. -->
+
+    <script src="../dependencies/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../dependencies/vendor.min.js"></script>
+    <script src="../assets/js/bugfixes.js"></script>
+
+    <script>
+        angular.bootstrap(document.getElementById("u2la5_matching1"), ["matchingComboWidget"]);
+
+    </script>
+
+    <script>
+        angular.bootstrap(document.getElementById('u2la5_mc1'), ['multipleChoiceWidget']);
+        angular.bootstrap(document.getElementById('u2la5_mc2'), ['multipleChoiceWidget']);
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="a" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="220" height="100" viewBox="0 0 220 100">
+  <line x1="10" y1="50.014" x2="62.275" y2="50.014" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+  <line x1="160.353" y1="50.014" x2="210" y2="50.014" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+  <g>
+    <g>
+      <line x1="118.32" y1="7.556" x2="118.32" y2="91.556" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="132.331" y1="26.494" x2="132.331" y2="73.534" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+    <g>
+      <line x1="146.342" y1="7.556" x2="146.342" y2="91.556" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="160.353" y1="26.494" x2="160.353" y2="73.534" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+    <path d="m184.005,20.831v2.393h-13.645v-2.393h13.645Z" stroke-width="0"/>
+    <g>
+      <line x1="62.275" y1="7.556" x2="62.275" y2="91.556" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="76.286" y1="26.494" x2="76.286" y2="73.534" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+    <path d="m45.153,20.831h5.551v2.393h-5.551v6.289h-2.543v-6.289h-5.551v-2.393h5.551v-5.811h2.543v5.811Z" stroke-width="0"/>
+    <g>
+      <line x1="90.297" y1="7.556" x2="90.297" y2="91.556" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+      <line x1="104.309" y1="26.494" x2="104.309" y2="73.534" fill="#fff" stroke="#000" stroke-linejoin="round" stroke-width="2"/>
+    </g>
+  </g>
+</svg>

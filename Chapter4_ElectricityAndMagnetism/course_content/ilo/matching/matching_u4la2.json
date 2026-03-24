@@ -1,0 +1,34 @@
+{
+    "department": "sec",
+    "pairs": 4,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "해냈습니다! 잘했어요!",
+    "basePath": "../assets/img",
+    "columnRatio": "2:1",
+    "items": [
+      {
+        "first": ["", "", "12 V의 전위차(electric potential)가 걸린 60 W 전구의 저항(resistance)은 얼마인가?"],
+        "second": ["", "", "P = V²R"]
+      },
+      {
+        "first": ["", "", "헤어드라이어의 저항이 80 Ω이다. 헤어드라이어에 흐르는 전류(current)가 12 A일 때, 헤어드라이어가 사용하는 전력(power)은 얼마인가?"],
+        "second": ["", "", "P=I²R"]
+      },
+      {
+        "first": ["", "", "전자레인지가 800 W의 전력을 사용한다. 전자레인지에 흐르는 전류가 6.4 A일 때, 전자레인지의 전압(voltage)은 얼마인가?"],
+        "second": ["", "", "P=VI"]
+      },
+      {
+        "first": ["", "", "크레인이 250 s 동안 1400 J의 전기 위치 에너지(electric potential energy)를 변환한다. 크레인이 사용하는 전력은 얼마인가?"],
+        "second": ["", "", "P =Wt=△Et"]
+      }
+
+    ],
+    "iloStartLink": "짝짓기 1 상호작용 활동을 시작하거나 링크를 눌러 활동 끝으로 건너뜁니다.",
+    "iloStartText": "짝짓기 1 상호작용 활동의 시작입니다.",
+    "iloEndLink": "링크를 눌러 짝짓기 1 상호작용 활동의 처음으로 돌아갑니다.",
+    "iloEndText": "짝짓기 1 상호작용 활동의 끝입니다."
+
+  }
+

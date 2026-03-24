@@ -1,0 +1,47 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "객관식 1 대화형 활동의 시작.",
+    "iloEndText": "객관식 1 대화형 활동의 끝.",
+    "iloStartLink": "객관식 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 객관식 1 대화형 활동의 시작으로 돌아가세요.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "어떤 물체가 먼저 땅에 떨어졌습니까?"
+                ],
+                "ariaLabel": "어떤 물체가 먼저 땅에 떨어졌습니까?"
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "무거운 물체"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "무거운 물체"
+                },
+                {
+                    "answer": [
+                        "가벼운 물체"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "가벼운 물체"
+                },
+                {
+                    "answer": [
+                        "두 물체가 동시에 땅에 떨어졌다"
+                    ],
+                    "correct": true,
+                    "feedback": "정답입니다!",
+                    "ariaLabel": "두 물체가 동시에 땅에 떨어졌다"
+                }
+            ]
+        }
+    ]
+}

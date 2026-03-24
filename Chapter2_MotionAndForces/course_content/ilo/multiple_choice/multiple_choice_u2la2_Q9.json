@@ -1,0 +1,63 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "객관식 1 대화형 활동의 시작.",
+    "iloEndText": "객관식 1 대화형 활동의 끝.",
+    "iloStartLink": "객관식 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 객관식 1 대화형 활동의 시작으로 돌아가세요.",
+    "questions": [
+        {
+            "randomizeChoices": false,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "<math xmlns=\"http:\/\/www.w3.org\/1998\/Math\/MathML\"><mrow><msubsup><mi>v</mi><mn>2</mn><mn>2</mn></msubsup><mo>=</mo><msubsup><mi>v</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><mn>2</mn><mi>a</mi><mi>d</mi></mrow><\/math>"
+                ],
+                "ariaLabel": ""
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "선택지 1"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 1"
+                },
+                {
+                    "answer": [
+                        "선택지 2"
+                    ],
+                    "correct": true,
+                    "feedback": "정답입니다.",
+                    "ariaLabel": "선택지 2"
+                },
+                {
+                    "answer": [
+                        "선택지 3"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 3"
+                },
+                {
+                    "answer": [
+                        "선택지 4"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 4"
+                },
+                {
+                    "answer": [
+                        "선택지 5"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 5"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<head>
+<title>운동 그래프 그리기</title>
+<link rel="stylesheet" href="styles/ilc_main.css">
+<link rel="stylesheet" href="styles/style.css">
+<link rel="stylesheet" href="styles/c3.min.css">
+</head>
+<body>
+    <div id="appContainer">
+        <h1>운동 그래프 그리기</h1>
+        <div id="infoContainer">
+            <!-- <p><span class="infoHeading">Angle: </span><span id="angleOutput">146 degrees</span>
+            <br><span class="infoHeading">Velocity: </span><span id="velocityOutput">7 m/s</span>
+            <br><span class="infoHeading">Distance: </span><span id="distanceOutput">0 m</span></p> -->
+        </div>
+
+          <div id="graph"></div>
+
+        <div id="interface">
+            <div id="columnOne" class="interfaceElement">
+                    <p>이 차트는 세 가지 서로 다른 일정한 속도(velocity)로 이동하는 물체의 1차원 운동을 나타냅니다. 선택
+                        상자를 사용하여 세 벡터(vector) 각각에 대한 올바른 속도를 선택하세요. 그런 다음 <strong>결과 확인</strong>을
+                        선택하여 선택이 맞는지 확인하세요. <strong>새 차트 생성</strong> 버튼을 선택하면
+                        세 개의 새로운 벡터가 생성되고 이전 선택이 지워집니다.
+
+            </div>
+            <div id="columnTwo" class="interfaceElement">
+                <!-- <h2>1. Simple track</h2> -->
+                <!-- <p>Select the <em>Start</em> button to start the simulation. Select the add<em>Add friction</em> to apply friction. and use the Complex track </p> -->
+                <!-- <h2>1. Launch angle and initial velocity</h2> -->
+
+                   <!-- <p><strong>Velocity 1:</strong> <input id="velocityOneInput"><span class="glyphicon correctIcon"></span><span class="resultOutput"></span><br>
+                   <strong>Velocity 2:</strong> <input id="velocityTwoInput"><span class="glyphicon correctIcon"></span><span class="resultOutput"></span><br>
+                   <strong>Velocity 3:</strong> <input id="velocityThreeInput"><span class="glyphicon correctIcon"></span><span class="resultOutput"></span><br>  -->
+                   <!-- <p><strong>Velocity 1:</strong> <input id="velocityOneInput"><span class="glyphicon correctIcon"></span><span class="resultOutput"></span><br>
+                   <strong>Velocity 2:</strong> <input id="velocityTwoInput"><span class="glyphicon correctIcon"></span><span class="resultOutput"></span><br>
+                   <strong>Velocity 3:</strong> <input id="velocityThreeInput"><span class="glyphicon correctIcon"></span><span class="resultOutput"></span><br>  -->
+                   <form id="myForm">
+                    <p>
+                    <label for="velocityOneInput">속도 1:</label>
+                    <select id="velocityOneInput">
+                      <option>선택...</option>
+                    </select>
+                    <span class="glyphicon correctIcon"></span><span class="resultOutput"></span>
+                    <br>
+                    <label for="velocityTwoInput">속도 2:</label>
+                    <select id="velocityTwoInput">
+                      <option>선택...</option>
+                    </select>
+                    <span class="glyphicon correctIcon"></span><span class="resultOutput"></span>
+                    <br>
+                    <label for="velocityThreeInput">속도 3:</label>
+                    <select id="velocityThreeInput">
+                      <option>선택...</option>
+                    </select>
+                    <span class="glyphicon correctIcon"></span><span class="resultOutput"></span>
+                    <br>
+                    </p>
+                  </form>
+                <p>
+                <button id="checkResultsButton" class="btn btn-default uiButton" aria-label="button one">결과 확인</button>
+                <button id="generateChartButton" class="btn btn-default uiButton" aria-label="button one">새 차트 생성</button>
+                    </p>
+
+            </div>
+            <!-- <div id="partTwo" class="interfaceElement">
+                <h2>2. Complex track</h2>
+                <p>This is a test</p>
+            </div>
+            <div id="partThree" class="interfaceElement">
+                <h2>3. Friction</h2>
+                <p>This is a test</p>
+            </div> -->
+        </div>
+    </div>
+
+<!-- Files needed to run Hexi -->
+<!--
+<script src="../src/modules/pixi.js/bin/pixi.js"></script>
+<script src="../bin/modules.js"></script>
+<script src="../bin/core.js"></script>
+-->
+
+<!--
+d3 and c3 libraries, which are used for creating the graphs
+-->
+<script src="scripts/d3.min.js"></script>
+<script src="scripts/c3.min.js"></script>
+
+<!-- Main application file -->
+<script src="scripts/main.js"></script>
+</body>
+</html>

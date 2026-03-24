@@ -1,0 +1,1791 @@
+{
+  "id": 4,
+  "department": "sec",
+  "imageSrc": "../assets/img/02.05.13.png",
+  "imageAlt": "주기율표",
+  "periodicTable": true,
+  "title": "주기율표(Periodic table)",
+  "instructions": "각 원소를 눌러 자세한 정보를 확인하세요.",
+  "highlightColor": "#64113f",
+  "areas": [
+    {
+      "name": "수소(Hydrogen)",
+      "areaAlt": "수소, 1",
+      "areaDetails": {
+        "atomicNumber": 1,
+        "averageAtomicMass": "1.008",
+        "electronegativity": "2.20",
+        "commonOxidationStates": "+1",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -259,
+        "boilingPoint": -253
+      },
+      "coords": "70,72,127,128",
+      "shape": "rect"
+    },
+    {
+      "name": "헬륨(Helium)",
+      "areaAlt": "헬륨, 2",
+      "areaDetails": {
+        "atomicNumber": 2,
+        "averageAtomicMass": "4.003",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -272,
+        "boilingPoint": -269
+      },
+      "shape": "rect",
+      "coords": "1138,72,1198,128"
+    },
+    {
+      "name": "리튬(Lithium)",
+      "areaAlt": "리튬, 3",
+      "areaDetails": {
+        "atomicNumber": 3,
+        "averageAtomicMass": "6.94",
+        "electronegativity": "0.98",
+        "commonOxidationStates": "+1",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 181,
+        "boilingPoint": 1342
+      },
+      "shape": "rect",
+      "coords": "68,134,127,191"
+    },
+    {
+      "name": "베릴륨(Beryllium)",
+      "areaAlt": "베릴륨, 4",
+      "areaDetails": {
+        "atomicNumber": 4,
+        "averageAtomicMass": "9.012",
+        "electronegativity": "1.57",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1287,
+        "boilingPoint": 2469
+      },
+      "shape": "rect",
+      "coords": "132,132,189,189"
+    },
+    {
+      "name": "붕소(Boron)",
+      "areaAlt": "붕소, 5",
+      "areaDetails": {
+        "atomicNumber": 5,
+        "averageAtomicMass": "10.81",
+        "electronegativity": "2.04",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2076,
+        "boilingPoint": 4000
+      },
+      "shape": "rect",
+      "coords": "824,133,883,192"
+    },
+    {
+      "name": "탄소(Carbon)",
+      "areaAlt": "탄소, 6",
+      "areaDetails": {
+        "atomicNumber": 6,
+        "averageAtomicMass": "12.011",
+        "electronegativity": "2.55",
+        "commonOxidationStates": "-4, -3, -2, -1, 0, +1, +2, +3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 3550,
+        "boilingPoint": 4827
+      },
+      "coords": "886,134,945,191",
+      "shape": "rect"
+    },
+    {
+      "name": "질소(Nitrogen)",
+      "areaAlt": "질소, 7",
+      "areaDetails": {
+        "atomicNumber": 7,
+        "averageAtomicMass": "14.007",
+        "electronegativity": "3.04",
+        "commonOxidationStates": "-3, +2, +3, +4, +5",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -210,
+        "boilingPoint": -196
+      },
+      "shape": "rect",
+      "coords": "951,134,1008,191"
+    },
+    {
+      "name": "산소(Oxygen)",
+      "areaAlt": "산소, 8",
+      "areaDetails": {
+        "atomicNumber": 8,
+        "averageAtomicMass": "15.999",
+        "electronegativity": "3.44",
+        "commonOxidationStates": "-2, -1",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -219,
+        "boilingPoint": -183
+      },
+      "shape": "rect",
+      "coords": "1013,133,1070,190"
+    },
+    {
+      "name": "플루오린(Fluorine)",
+      "areaAlt": "플루오린, 9",
+      "areaDetails": {
+        "atomicNumber": 9,
+        "averageAtomicMass": "18.998",
+        "electronegativity": "3.98",
+        "commonOxidationStates": "-1",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -220,
+        "boilingPoint": -188
+
+      },
+      "shape": "rect",
+      "coords": "1075,133,1134,190"
+    },
+    {
+      "name": "네온(Neon)",
+      "areaAlt": "네온, 10",
+      "areaDetails": {
+        "atomicNumber": 10,
+        "averageAtomicMass": "20.180",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -249
+        ,
+        "boilingPoint": -246
+
+      },
+      "shape": "rect",
+      "coords": "1141,132,1197,191"
+    },
+    {
+      "name": "나트륨(Sodium)",
+      "areaAlt": "나트륨, 11",
+      "areaDetails": {
+        "atomicNumber": 11,
+        "averageAtomicMass": "22.990",
+        "electronegativity": "0.93",
+        "commonOxidationStates": "+1",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 98,
+        "boilingPoint": 883
+
+      },
+      "coords": "70,196,127,253",
+      "shape": "rect"
+    },
+    {
+      "name": "마그네슘(Magnesium)",
+      "areaAlt": "마그네슘, 12",
+      "areaDetails": {
+        "atomicNumber": 12,
+        "electronegativity": "24.305",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 650,
+        "boilingPoint": 1091
+      },
+      "shape": "rect",
+      "coords": "132,196,189,253"
+    },
+    {
+      "name": "알루미늄(Aluminum)",
+      "areaAlt": "알루미늄, 13",
+      "areaDetails": {
+        "atomicNumber": 13,
+        "electronegativity": "26.982",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 660,
+        "boilingPoint": 2470
+      },
+      "shape": "rect",
+      "coords": "822,197,883,254"
+    },
+    {
+      "name": "규소(Silicon)",
+      "areaAlt": "규소, 14",
+      "areaDetails": {
+        "atomicNumber": 14,
+        "electronegativity": "28.085",
+        "commonOxidationStates": "-4, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1410,
+        "boilingPoint": 3355
+      },
+      "shape": "rect",
+      "coords": "888,197,945,254"
+    },
+    {
+      "name": "인(Phosphorus)",
+      "areaAlt": "인, 15",
+      "areaDetails": {
+        "atomicNumber": 15,
+        "electronegativity": "30.974",
+        "commonOxidationStates": "-3, +3, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 44,
+        "boilingPoint": 281
+      },
+      "shape": "rect",
+      "coords": "951,196,1008,255"
+    },
+    {
+      "name": "황(Sulfur)",
+      "areaAlt": "황, 16",
+      "areaDetails": {
+        "atomicNumber": 16,
+        "electronegativity": "32.065",
+        "commonOxidationStates": "-2, +2, +4, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 114,
+        "boilingPoint": 445
+      },
+      "coords": "1013,196,1070,254",
+      "shape": "rect"
+    },
+    {
+      "name": "염소(Chlorine)",
+      "areaAlt": "염소, 17",
+      "areaDetails": {
+        "atomicNumber": 17,
+        "electronegativity": "35.453",
+        "commonOxidationStates": "-1, +1, +3, +5, +7",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -102,
+        "boilingPoint": -34
+      },
+      "shape": "rect",
+      "coords": "1075,195,1134,254"
+    },
+    {
+      "name": "아르곤(Argon)",
+      "areaAlt": "아르곤, 18",
+      "areaDetails": {
+        "atomicNumber": 18,
+        "averageAtomicMass": "39.098",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -189,
+        "boilingPoint": -186
+      },
+      "shape": "rect",
+      "coords": "1140,194,1198,254"
+    },
+    {
+      "name": "칼륨(Potassium)",
+      "areaAlt": "칼륨, 19",
+      "areaDetails": {
+        "atomicNumber": 19,
+        "electronegativity": "0.82",
+        "commonOxidationStates": "+1",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 64,
+        "boilingPoint": 759
+      },
+      "shape": "rect",
+      "coords": "68,258,127,316"
+    },
+    {
+      "name": "칼슘(Calcium)",
+      "areaAlt": "칼슘, 20",
+      "areaDetails": {
+        "atomicNumber": 20,
+        "averageAtomicMass": "40.078",
+        "electronegativity": "1.00",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 842,
+        "boilingPoint": 1484
+      },
+      "shape": "rect",
+      "coords": "132,258,189,316"
+    },
+    {
+      "name": "스칸듐(Scandium)",
+      "areaAlt": "스칸듐, 21",
+      "areaDetails": {
+        "atomicNumber": 21,
+        "averageAtomicMass": "44.956",
+        "electronegativity": "1.36",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1541,
+        "boilingPoint": 2830
+      },
+      "coords": "195,259,252,316",
+      "shape": "rect"
+    },
+    {
+      "name": "타이타늄(Titanium)",
+      "areaAlt": "타이타늄, 22",
+      "areaDetails": {
+        "atomicNumber": 22,
+        "averageAtomicMass": "47.867",
+        "electronegativity": "1.54",
+        "commonOxidationStates": "+3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1668,
+        "boilingPoint": 3287
+      },
+      "shape": "rect",
+      "coords": "259,259,316,316"
+    },
+    {
+      "name": "바나듐(Vanadium)",
+      "areaAlt": "바나듐, 23",
+      "areaDetails": {
+        "atomicNumber": 23,
+        "averageAtomicMass": "50.942",
+        "electronegativity": "1.63",
+        "commonOxidationStates": "0, +2, +3, +4, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1910,
+        "boilingPoint": 3407
+      },
+      "shape": "rect",
+      "coords": "321,259,378,316"
+    },
+    {
+      "name": "크로뮴(Chromium)",
+      "areaAlt": "크로뮴, 24",
+      "areaDetails": {
+        "atomicNumber": 24,
+        "averageAtomicMass": "51.996",
+        "electronegativity": "1.66",
+        "commonOxidationStates": "0, +2, +3, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2672,
+        "boilingPoint": 1907
+      },
+      "shape": "rect",
+      "coords": "384,259,442,316"
+    },
+    {
+      "name": "망가니즈(Manganese)",
+      "areaAlt": "망가니즈, 25",
+      "areaDetails": {
+        "atomicNumber": 25,
+        "averageAtomicMass": "54.938",
+        "electronegativity": "1.55",
+        "commonOxidationStates": "-1, 0, +2, +3, +4, +6, +7",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1246,
+        "boilingPoint": 2061
+      },
+      "shape": "rect",
+      "coords": "448,259,505,316"
+    },
+    {
+      "name": "철(Iron)",
+      "areaAlt": "철, 26",
+      "areaDetails": {
+        "atomicNumber": 26,
+        "averageAtomicMass": "55.845",
+        "electronegativity": "1.83",
+        "commonOxidationStates": "-2, 0, +2, +3, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1538,
+        "boilingPoint": 2861
+      },
+      "coords": "508,259,567,316",
+      "shape": "rect"
+    },
+    {
+      "name": "코발트(Cobalt)",
+      "areaAlt": "코발트, 27",
+      "areaDetails": {
+        "atomicNumber": 27,
+        "averageAtomicMass": "58.933",
+        "electronegativity": "1.88",
+        "commonOxidationStates": "-1, 0, +2, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1495,
+        "boilingPoint": 2927
+      },
+      "shape": "rect",
+      "coords": "573,259,631,316"
+    },
+    {
+      "name": "니켈(Nickel)",
+      "areaAlt": "니켈, 28",
+      "areaDetails": {
+        "atomicNumber": 28,
+        "averageAtomicMass": "58.693",
+        "electronegativity": "1.91",
+        "commonOxidationStates": "0, +2, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1455,
+        "boilingPoint": 2730
+      },
+      "shape": "rect",
+      "coords": "635,261,694,316"
+    },
+    {
+      "name": "구리(Copper)",
+      "areaAlt": "구리, 29",
+      "areaDetails": {
+        "atomicNumber": 29,
+        "averageAtomicMass": "63.546",
+        "electronegativity": "1.90",
+        "commonOxidationStates": "+1, +2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1085,
+        "boilingPoint": 2562
+      },
+      "shape": "rect",
+      "coords": "699,259,758,316"
+    },
+    {
+      "name": "아연(Zinc)",
+      "areaAlt": "아연, 30",
+      "areaDetails": {
+        "atomicNumber": 30,
+        "averageAtomicMass": "65.38",
+        "electronegativity": "1.65",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 419,
+        "boilingPoint": 907
+      },
+      "shape": "rect",
+      "coords": "762,259,820,316"
+    },
+    {
+      "name": "갈륨(Gallium)",
+      "areaAlt": "갈륨, 31",
+      "areaDetails": {
+        "atomicNumber": 31,
+        "averageAtomicMass": "69.723",
+        "electronegativity": "1.81",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 30,
+        "boilingPoint": 2400
+      },
+      "coords": "824,259,883,316",
+      "shape": "rect"
+    },
+    {
+      "name": "저마늄(Germanium)",
+      "areaAlt": "저마늄, 32",
+      "areaDetails": {
+        "atomicNumber": 32,
+        "averageAtomicMass": "72.64",
+        "electronegativity": "2.01",
+        "commonOxidationStates": "-+4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 938,
+        "boilingPoint": 2833
+      },
+      "shape": "rect",
+      "coords": "888,259,943,316"
+    },
+    {
+      "name": "비소(Arsenic)",
+      "areaAlt": "비소, 33",
+      "areaDetails": {
+        "atomicNumber": 33,
+        "averageAtomicMass": "74.922",
+        "electronegativity": "2.18",
+        "commonOxidationStates": "-3, +3, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 817,
+        "boilingPoint": 613
+      },
+      "shape": "rect",
+      "coords": "951,260,1009,316"
+    },
+    {
+      "name": "셀레늄(Selenium)",
+      "areaAlt": "셀레늄, 34",
+      "areaDetails": {
+        "atomicNumber": 34,
+        "averageAtomicMass": "78.96",
+        "electronegativity": "2.55",
+        "commonOxidationStates": "-2, +4, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 221,
+        "boilingPoint": 685
+      },
+      "shape": "rect",
+      "coords": "1013,260,1070,316"
+    },
+    {
+      "name": "브로민(Bromine)",
+      "areaAlt": "브로민, 35",
+      "areaDetails": {
+        "atomicNumber": 35,
+        "averageAtomicMass": "79.904",
+        "electronegativity": "2.96",
+        "commonOxidationStates": "-1, +1, +3, +5, +7",
+        "phaseAtStandardTemperatureAndPressure": "액체",
+        "meltingPoint": -7,
+        "boilingPoint": 59
+      },
+      "coords": "1075,259,1134,316",
+      "shape": "rect"
+    },
+    {
+      "name": "크립톤(Krypton)",
+      "areaAlt": "크립톤, 36",
+      "areaDetails": {
+        "atomicNumber": 36,
+        "averageAtomicMass": "83.798",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -157,
+        "boilingPoint": -153
+      },
+      "shape": "rect",
+      "coords": "1140,257,1197,316"
+    },
+    {
+      "name": "루비듐(Rubidium)",
+      "areaAlt": "루비듐, 37",
+      "areaDetails": {
+        "atomicNumber": 37,
+        "averageAtomicMass": "85.468",
+        "electronegativity": "0.82",
+        "commonOxidationStates": "+1",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 39,
+        "boilingPoint": 688
+      },
+      "shape": "rect",
+      "coords": "70,321,127,377"
+    },
+    {
+      "name": "스트론튬(Strontium)",
+      "areaAlt": "스트론튬, 38",
+      "areaDetails": {
+        "atomicNumber": 38,
+        "averageAtomicMass": "87.62",
+        "electronegativity": "0.95",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 777,
+        "boilingPoint": 1382
+      },
+      "shape": "rect",
+      "coords": "130,320,189,377"
+    },
+    {
+      "name": "이트륨(Yttrium)",
+      "areaAlt": "이트륨, 39",
+      "areaDetails": {
+        "atomicNumber": 39,
+        "averageAtomicMass": "88.906",
+        "electronegativity": "1.22",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1526,
+        "boilingPoint": 3338
+      },
+      "shape": "rect",
+      "coords": "195,320,252,377"
+    },
+    {
+      "name": "지르코늄(Zirconium)",
+      "areaAlt": "지르코늄, 40",
+      "areaDetails": {
+        "atomicNumber": 40,
+        "averageAtomicMass": "91.224",
+        "electronegativity": "1.33",
+        "commonOxidationStates": "+4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1855,
+        "boilingPoint": 4409
+      },
+      "shape": "rect",
+      "coords": "257,321,316,377"
+    },
+    {
+      "name": "나이오븀(Niobium)",
+      "areaAlt": "나이오븀, 41",
+      "areaDetails": {
+        "atomicNumber": 41,
+        "averageAtomicMass": "92.906",
+        "electronegativity": "1.60",
+        "commonOxidationStates": "+3, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2477,
+        "boilingPoint": 4927
+      },
+      "shape": "rect",
+      "coords": "321,320,378,377"
+    },
+    {
+      "name": "몰리브데넘(Molybdenum)",
+      "areaAlt": "몰리브데넘, 42",
+      "areaDetails": {
+        "atomicNumber": 42,
+        "averageAtomicMass": "95.95",
+        "electronegativity": "2.16",
+        "commonOxidationStates": "0, +2, +3, +4, +5, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2623,
+        "boilingPoint": 4639
+      },
+      "shape": "rect",
+      "coords": "384,321,441,378"
+    },
+    {
+      "name": "테크네튬(Technetium)",
+      "areaAlt": "테크네튬, 43",
+      "areaDetails": {
+        "atomicNumber": 43,
+        "averageAtomicMass": "[98] 안정 동위 원소 없음",
+        "electronegativity": "2.10",
+        "commonOxidationStates": "+7",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2204,
+        "boilingPoint": 4265
+      },
+      "shape": "rect",
+      "coords": "446,322,505,377"
+    },
+    {
+      "name": "루테늄(Ruthenium)",
+      "areaAlt": "루테늄, 44",
+      "areaDetails": {
+        "atomicNumber": 44,
+        "averageAtomicMass": "101.07",
+        "electronegativity": "2.20",
+        "commonOxidationStates": "-2, 0, +2, +3, +4, +6, +8",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2334,
+        "boilingPoint": 4150
+      },
+      "shape": "rect",
+      "coords": "510,322,567,377"
+    },
+    {
+      "name": "로듐(Rhodium)",
+      "areaAlt": "로듐, 45",
+      "areaDetails": {
+        "atomicNumber": 45,
+        "averageAtomicMass": "102.906",
+        "electronegativity": "2.28",
+        "commonOxidationStates": "0, +1, +2, +3, +4, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1963,
+        "boilingPoint": 3697
+      },
+      "shape": "rect",
+      "coords": "573,322,630,377"
+    },
+    {
+      "name": "팔라듐(Palladium)",
+      "areaAlt": "팔라듐, 46",
+      "areaDetails": {
+        "atomicNumber": 46,
+        "averageAtomicMass": "106.42",
+        "electronegativity": "2.20",
+        "commonOxidationStates": "0, +2, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1555,
+        "boilingPoint": 2963
+      },
+      "shape": "rect",
+      "coords": "635,323,694,378"
+    },
+    {
+      "name": "은(Silver)",
+      "areaAlt": "은, 47",
+      "areaDetails": {
+        "atomicNumber": 47,
+        "averageAtomicMass": "107.868",
+        "electronegativity": "1.93",
+        "commonOxidationStates": "+1, +2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 962,
+        "boilingPoint": 2162
+      },
+      "shape": "rect",
+      "coords": "697,320,756,377"
+    },
+    {
+      "name": "카드뮴(Cadmium)",
+      "areaAlt": "카드뮴, 48",
+      "areaDetails": {
+        "atomicNumber": 48,
+        "averageAtomicMass": "112.414",
+        "electronegativity": "1.69",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 321,
+        "boilingPoint": 767
+      },
+      "shape": "rect",
+      "coords": "762,321,819,378"
+    },
+    {
+      "name": "인듐(Indium)",
+      "areaAlt": "인듐, 49",
+      "areaDetails": {
+        "atomicNumber": 49,
+        "averageAtomicMass": "114.818",
+        "electronegativity": "1.78",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 157,
+        "boilingPoint": 2072
+      },
+      "shape": "rect",
+      "coords": "824,322,881,377"
+    },
+    {
+      "name": "주석(Tin)",
+      "areaAlt": "주석, 50",
+      "areaDetails": {
+        "atomicNumber": 50,
+        "averageAtomicMass": "118.710",
+        "electronegativity": "1.96",
+        "commonOxidationStates": "+2, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 232,
+        "boilingPoint": 2602
+      },
+      "shape": "rect",
+      "coords": "888,321,947,378"
+    },
+    {
+      "name": "안티모니(Antimony)",
+      "areaAlt": "안티모니, 51",
+      "areaDetails": {
+        "atomicNumber": 51,
+        "averageAtomicMass": "121.760",
+        "electronegativity": "2.05",
+        "commonOxidationStates": "-3, +3, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 631,
+        "boilingPoint": 1587
+      },
+      "shape": "rect",
+      "coords": "951,321,1009,377"
+    },
+    {
+      "name": "텔루륨(Tellurium)",
+      "areaAlt": "텔루륨, 52",
+      "areaDetails": {
+        "atomicNumber": 52,
+        "averageAtomicMass": "127.60",
+        "electronegativity": "2.10",
+        "commonOxidationStates": "-2, +4, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 450,
+        "boilingPoint": 988
+      },
+      "shape": "rect",
+      "coords": "1015,321,1072,378"
+    },
+    {
+      "name": "아이오딘(Iodine)",
+      "areaAlt": "아이오딘, 53",
+      "areaDetails": {
+        "atomicNumber": 53,
+        "averageAtomicMass": "126.904",
+        "electronegativity": "2.66",
+        "commonOxidationStates": "-1, +1, +3, +5, +7",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 114,
+        "boilingPoint": 184
+      },
+      "shape": "rect",
+      "coords": "1075,321,1134,379"
+    },
+    {
+      "name": "제논(Xenon)",
+      "areaAlt": "제논, 54",
+      "areaDetails": {
+        "atomicNumber": 54,
+        "averageAtomicMass": "131.293",
+        "electronegativity": "2.60",
+        "commonOxidationStates": "+2, +4, +6",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -112,
+        "boilingPoint": -108
+      },
+      "shape": "rect",
+      "coords": "1140,319,1198,378"
+    },
+    {
+      "name": "세슘(Cesium)",
+      "areaAlt": "세슘, 55",
+      "areaDetails": {
+        "atomicNumber": 55,
+        "averageAtomicMass": "132.905",
+        "electronegativity": "0.79",
+        "commonOxidationStates": "+1",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 28,
+        "boilingPoint": 671
+      },
+      "shape": "rect",
+      "coords": "70,383,127,442"
+    },
+    {
+      "name": "바륨(Barium)",
+      "areaAlt": "바륨, 56",
+      "areaDetails": {
+        "atomicNumber": 56,
+        "averageAtomicMass": "137.327",
+        "electronegativity": "0.89",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 727,
+        "boilingPoint": 1897
+      },
+      "shape": "rect",
+      "coords": "132,383,189,440"
+    },
+    {
+      "name": "란타넘족(Lanthanides)",
+      "areaAlt": "란타넘족",
+      "areaDetails": "란타넘족. 란타넘족 원소(57-71)에 대한 안내입니다.",
+      "shape": "poly",
+      "coords": "195,442,248,442,261,548,253,436,253,383,195,383"
+    },
+    {
+      "name": "란타넘(Lanthanum)",
+      "areaAlt": "란타넘, 57",
+      "areaDetails": {
+        "atomicNumber": 57,
+        "averageAtomicMass": "138.905",
+        "electronegativity": "1.10",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 920,
+        "boilingPoint": 3464
+      },
+      "shape": "rect",
+      "coords": "261,551,318,608"
+    },
+    {
+      "name": "세륨(Cerium)",
+      "areaAlt": "세륨, 58",
+      "areaDetails": {
+        "atomicNumber": 58,
+        "averageAtomicMass": "140.116",
+        "electronegativity": "1.12",
+        "commonOxidationStates": "+3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 795,
+        "boilingPoint": 3257
+      },
+      "shape": "rect",
+      "coords": "321,551,380,609"
+    },
+    {
+      "name": "프라세오디뮴(Praseodymium)",
+      "areaAlt": "프라세오디뮴, 59",
+      "areaDetails": {
+        "atomicNumber": 59,
+        "averageAtomicMass": "140.908",
+        "electronegativity": "1.13",
+        "commonOxidationStates": "+3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 931,
+        "boilingPoint": 3520
+      },
+      "shape": "rect",
+      "coords": "385,551,442,608"
+    },
+    {
+      "name": "네오디뮴(Neodymium)",
+      "areaAlt": "네오디뮴, 60",
+      "areaDetails": {
+        "atomicNumber": 60,
+        "averageAtomicMass": "144.242",
+        "electronegativity": "1.14",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1021,
+        "boilingPoint": 3074
+      },
+      "shape": "rect",
+      "coords": "448,551,507,608"
+    },
+    {
+      "name": "프로메튬(Promethium)",
+      "areaAlt": "프로메튬, 61",
+      "areaDetails": {
+        "atomicNumber": 61,
+        "averageAtomicMass": "[145] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1042,
+        "boilingPoint": 3000
+      },
+      "shape": "rect",
+      "coords": "512,551,569,609"
+    },
+    {
+      "name": "사마륨(Samarium)",
+      "areaAlt": "사마륨, 62",
+      "areaDetails": {
+        "atomicNumber": 62,
+        "averageAtomicMass": "150.36",
+        "electronegativity": "1.17",
+        "commonOxidationStates": "+2, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1072,
+        "boilingPoint": 1794
+      },
+      "shape": "rect",
+      "coords": "574,549,631,609"
+    },
+    {
+      "name": "유로퓸(Europium)",
+      "areaAlt": "유로퓸, 63",
+      "areaDetails": {
+        "atomicNumber": 63,
+        "averageAtomicMass": "151.964",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+2, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 826,
+        "boilingPoint": 1529
+      },
+      "shape": "rect",
+      "coords": "637,551,694,607"
+    },
+    {
+      "name": "가돌리늄(Gadolinium)",
+      "areaAlt": "가돌리늄, 64",
+      "areaDetails": {
+        "atomicNumber": 64,
+        "averageAtomicMass": "157.25",
+        "electronegativity": "1.20",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1312,
+        "boilingPoint": 3273
+      },
+      "shape": "rect",
+      "coords": "701,550,758,609"
+    },
+    {
+      "name": "터븀(Terbium)",
+      "areaAlt": "터븀, 65",
+      "areaDetails": {
+        "atomicNumber": 65,
+        "averageAtomicMass": "158.925",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1356,
+        "boilingPoint": 3230
+      },
+      "shape": "rect",
+      "coords": "763,551,820,608"
+    },
+    {
+      "name": "디스프로슘(Dysprosium)",
+      "areaAlt": "디스프로슘, 66",
+      "areaDetails": {
+        "atomicNumber": 66,
+        "averageAtomicMass": "162.500",
+        "electronegativity": "1.22",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1412,
+        "boilingPoint": 2567
+      },
+      "shape": "rect",
+      "coords": "824,551,883,607"
+    },
+    {
+      "name": "홀뮴(Holmium)",
+      "areaAlt": "홀뮴, 67",
+      "areaDetails": {
+        "atomicNumber": 67,
+        "averageAtomicMass": "164.930",
+        "electronegativity": "1.23",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1474,
+        "boilingPoint": 2695
+      },
+      "shape": "rect",
+      "coords": "886,550,947,607"
+    },
+    {
+      "name": "어븀(Erbium)",
+      "areaAlt": "어븀, 68",
+      "areaDetails": {
+        "atomicNumber": 68,
+        "averageAtomicMass": "167.259",
+        "electronegativity": "1.24",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1529,
+        "boilingPoint": 2868
+      },
+      "shape": "rect",
+      "coords": "951,550,1009,607"
+    },
+    {
+      "name": "툴륨(Thulium)",
+      "areaAlt": "툴륨, 69",
+      "areaDetails": {
+        "atomicNumber": 69,
+        "averageAtomicMass": "168.934",
+        "electronegativity": "1.25",
+        "commonOxidationStates": "+2, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1545,
+        "boilingPoint": 1950
+      },
+      "shape": "rect",
+      "coords": "1015,550,1072,607"
+    },
+    {
+      "name": "이터븀(Ytterbium)",
+      "areaAlt": "이터븀, 70",
+      "areaDetails": {
+        "atomicNumber": 70,
+        "averageAtomicMass": "173.045",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+2, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 819,
+        "boilingPoint": 1196
+      },
+      "shape": "rect",
+      "coords": "1077,551,1134,607"
+    },
+    {
+      "name": "루테튬(Lutetium)",
+      "areaAlt": "루테튬, 71",
+      "areaDetails": {
+        "atomicNumber": 71,
+        "averageAtomicMass": "174.967",
+        "electronegativity": "1.00",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1663,
+        "boilingPoint": 3402
+      },
+      "shape": "rect",
+      "coords": "1140,550,1197,607"
+    },
+    {
+      "name": "하프늄(Hafnium)",
+      "areaAlt": "하프늄, 72",
+      "areaDetails": {
+        "atomicNumber": 72,
+        "averageAtomicMass": "178.49",
+        "electronegativity": "1.30",
+        "commonOxidationStates": "+4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2227,
+        "boilingPoint": 4602
+      },
+      "shape": "rect",
+      "coords": "257,383,316,442"
+    },
+    {
+      "name": "탄탈럼(Tantalum)",
+      "areaAlt": "탄탈럼, 73",
+      "areaDetails": {
+        "atomicNumber": 73,
+        "averageAtomicMass": "180.948",
+        "electronegativity": "1.50",
+        "commonOxidationStates": "+5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 3020,
+        "boilingPoint": 5457
+      },
+      "shape": "rect",
+      "coords": "321,384,378,441"
+    },
+    {
+      "name": "텅스텐(Tungsten)",
+      "areaAlt": "텅스텐, 74",
+      "areaDetails": {
+        "atomicNumber": 74,
+        "averageAtomicMass": "183.84",
+        "electronegativity": "1.70",
+        "commonOxidationStates": "0, +2, +3, +4, +5, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 3422,
+        "boilingPoint": 5555
+      },
+      "shape": "rect",
+      "coords": "384,383,442,440"
+    },
+    {
+      "name": "레늄(Rhenium)",
+      "areaAlt": "레늄, 75",
+      "areaDetails": {
+        "atomicNumber": 75,
+        "averageAtomicMass": "186.207",
+        "electronegativity": "1.90",
+        "commonOxidationStates": "-1, +2, +4, +6, +7",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 3185,
+        "boilingPoint": 5597
+      },
+      "shape": "rect",
+      "coords": "448,384,505,441"
+    },
+    {
+      "name": "오스뮴(Osmium)",
+      "areaAlt": "오스뮴, 76",
+      "areaDetails": {
+        "atomicNumber": 76,
+        "averageAtomicMass": "190.23",
+        "electronegativity": "2.20",
+        "commonOxidationStates": "-2, 0, +2, +3, +4, +6, +8",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 3033,
+        "boilingPoint": 5027
+      },
+      "shape": "rect",
+      "coords": "510,383,567,440"
+    },
+    {
+      "name": "이리듐(Iridium)",
+      "areaAlt": "이리듐, 77",
+      "areaDetails": {
+        "atomicNumber": 77,
+        "averageAtomicMass": "192.217",
+        "electronegativity": "2.20",
+        "commonOxidationStates": "-1, 0, +1, +2, +3, +4, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2466,
+        "boilingPoint": 4428
+      },
+      "shape": "rect",
+      "coords": "573,385,630,440"
+    },
+    {
+      "name": "백금(Platinum)",
+      "areaAlt": "백금, 78",
+      "areaDetails": {
+        "atomicNumber": 78,
+        "averageAtomicMass": "195.084",
+        "electronegativity": "2.20",
+        "commonOxidationStates": "+2, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1768,
+        "boilingPoint": 3825
+      },
+      "shape": "rect",
+      "coords": "637,383,694,440"
+    },
+    {
+      "name": "금(Gold)",
+      "areaAlt": "금, 79",
+      "areaDetails": {
+        "atomicNumber": 79,
+        "averageAtomicMass": "196.967",
+        "electronegativity": "2.40",
+        "commonOxidationStates": "-1, +1, +2, +3, +4, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1064,
+        "boilingPoint": 2700
+      },
+      "shape": "rect",
+      "coords": "697,383,756,442"
+    },
+    {
+      "name": "수은(Mercury)",
+      "areaAlt": "수은, 80",
+      "areaDetails": {
+        "atomicNumber": 80,
+        "averageAtomicMass": "200.592",
+        "electronegativity": "1.90",
+        "commonOxidationStates": "+1, +2",
+        "phaseAtStandardTemperatureAndPressure": "액체",
+        "meltingPoint": -39,
+        "boilingPoint": 357
+      },
+      "shape": "rect",
+      "coords": "762,384,820,441"
+    },
+    {
+      "name": "탈륨(Thallium)",
+      "areaAlt": "탈륨, 81",
+      "areaDetails": {
+        "atomicNumber": 81,
+        "averageAtomicMass": "204.38",
+        "electronegativity": "1.80",
+        "commonOxidationStates": "+1, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 34,
+        "boilingPoint": 1473
+      },
+      "shape": "rect",
+      "coords": "824,384,883,441"
+    },
+    {
+      "name": "납(Lead)",
+      "areaAlt": "납, 82",
+      "areaDetails": {
+        "atomicNumber": 82,
+        "averageAtomicMass": "207.2",
+        "electronegativity": "1.80",
+        "commonOxidationStates": "+2, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 328,
+        "boilingPoint": 1749
+      },
+      "shape": "rect",
+      "coords": "888,383,945,440"
+    },
+    {
+      "name": "비스무트(Bismuth)",
+      "areaAlt": "비스무트, 83",
+      "areaDetails": {
+        "atomicNumber": 83,
+        "averageAtomicMass": "208.980",
+        "electronegativity": "1.90",
+        "commonOxidationStates": "+3, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 272,
+        "boilingPoint": 1564
+      },
+      "shape": "rect",
+      "coords": "951,382,1009,438"
+    },
+    {
+      "name": "폴로늄(Polonium)",
+      "areaAlt": "폴로늄, 84",
+      "areaDetails": {
+        "atomicNumber": 84,
+        "averageAtomicMass": "[209] 안정 동위 원소 없음",
+        "electronegativity": "2.00",
+        "commonOxidationStates": "+2, +4, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 254,
+        "boilingPoint": 962
+      },
+      "shape": "rect",
+      "coords": "1013,383,1072,440"
+    },
+    {
+      "name": "아스타틴(Astatine)",
+      "areaAlt": "아스타틴, 85",
+      "areaDetails": {
+        "atomicNumber": 85,
+        "averageAtomicMass": "[210] 안정 동위 원소 없음",
+        "electronegativity": "2.20",
+        "commonOxidationStates": "-1, +1, +3, +5, +7",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 302,
+        "boilingPoint": 337
+      },
+      "shape": "rect",
+      "coords": "1075,382,1134,440"
+    },
+    {
+      "name": "라돈(Radon)",
+      "areaAlt": "라돈, 86",
+      "areaDetails": {
+        "atomicNumber": 86,
+        "averageAtomicMass": "[222] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "기체",
+        "meltingPoint": -71,
+        "boilingPoint": -62
+      },
+      "shape": "rect",
+      "coords": "1140,383,1197,440"
+    },
+    {
+      "name": "프랑슘(Francium)",
+      "areaAlt": "프랑슘, 87",
+      "areaDetails": {
+        "atomicNumber": 87,
+        "averageAtomicMass": "[223] 안정 동위 원소 없음",
+        "electronegativity": "0.70",
+        "commonOxidationStates": "+1",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 27,
+        "boilingPoint": 677
+      },
+      "shape": "rect",
+      "coords": "68,445,127,504"
+    },
+    {
+      "name": "라듐(Radium)",
+      "areaAlt": "라듐, 88",
+      "areaDetails": {
+        "atomicNumber": 88,
+        "averageAtomicMass": "[226] 안정 동위 원소 없음",
+        "electronegativity": "0.90",
+        "commonOxidationStates": "+2",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 700,
+        "boilingPoint": 1737
+      },
+      "shape": "rect",
+      "coords": "134,446,189,503"
+    },
+    {
+      "name": "악티늄족(Actinides)",
+      "areaAlt": "악티늄족",
+      "areaDetails": "악티늄족. 악티늄족 원소(89-103)에 대한 안내입니다.",
+      "shape": "poly",
+      "coords": "253,446,195,446,195,506,259,646,204,506,253,506"
+    },
+    {
+      "name": "악티늄(Actinium)",
+      "areaAlt": "악티늄, 89",
+      "areaDetails": {
+        "atomicNumber": 89,
+        "averageAtomicMass": "[227] 안정 동위 원소 없음",
+        "electronegativity": "1.10",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1050,
+        "boilingPoint": 3197
+      },
+      "shape": "rect",
+      "coords": "259,614,318,672"
+    },
+    {
+      "name": "토륨(Thorium)",
+      "areaAlt": "토륨, 90",
+      "areaDetails": {
+        "atomicNumber": 90,
+        "averageAtomicMass": "232.038",
+        "electronegativity": "1.30",
+        "commonOxidationStates": "+4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1755,
+        "boilingPoint": 4787
+      },
+      "shape": "rect",
+      "coords": "321,612,380,671"
+    },
+    {
+      "name": "프로탁티늄(Protactinium)",
+      "areaAlt": "프로탁티늄, 91",
+      "areaDetails": {
+        "atomicNumber": 91,
+        "averageAtomicMass": "231.036",
+        "electronegativity": "1.50",
+        "commonOxidationStates": "+4, +5",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1568,
+        "boilingPoint": 4000
+      },
+      "shape": "rect",
+      "coords": "385,613,442,672"
+    },
+    {
+      "name": "우라늄(Uranium)",
+      "areaAlt": "우라늄, 92",
+      "areaDetails": {
+        "atomicNumber": 92,
+        "averageAtomicMass": "238.029",
+        "electronegativity": "1.70",
+        "commonOxidationStates": "+3, +4, +5, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1132,
+        "boilingPoint": 4131
+      },
+      "shape": "rect",
+      "coords": "448,614,505,671"
+    },
+    {
+      "name": "넵투늄(Neptunium)",
+      "areaAlt": "넵투늄, 93",
+      "areaDetails": {
+        "atomicNumber": 93,
+        "averageAtomicMass": "[237] 안정 동위 원소 없음",
+        "electronegativity": "1.30",
+        "commonOxidationStates": "+3, +4, +5, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 644,
+        "boilingPoint": 3902
+      },
+      "shape": "rect",
+      "coords": "512,614,569,671"
+    },
+    {
+      "name": "플루토늄(Plutonium)",
+      "areaAlt": "플루토늄, 94",
+      "areaDetails": {
+        "atomicNumber": 94,
+        "averageAtomicMass": "[244] 안정 동위 원소 없음",
+        "electronegativity": "1.30",
+        "commonOxidationStates": "+3, +4, +5, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 639,
+        "boilingPoint": 3232
+      },
+      "shape": "rect",
+      "coords": "573,612,631,672"
+    },
+    {
+      "name": "아메리슘(Americium)",
+      "areaAlt": "아메리슘, 95",
+      "areaDetails": {
+        "atomicNumber": 95,
+        "averageAtomicMass": "[243] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3, +4, +5, +6",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1176,
+        "boilingPoint": 2607
+      },
+      "shape": "rect",
+      "coords": "637,612,694,672"
+    },
+    {
+      "name": "퀴륨(Curium)",
+      "areaAlt": "퀴륨, 96",
+      "areaDetails": {
+        "atomicNumber": 96,
+        "averageAtomicMass": "[247] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1347,
+        "boilingPoint": 3110
+      },
+      "shape": "rect",
+      "coords": "699,612,756,672"
+    },
+    {
+      "name": "버클륨(Berkelium)",
+      "areaAlt": "버클륨, 97",
+      "areaDetails": {
+        "atomicNumber": 97,
+        "averageAtomicMass": "[247] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 985,
+        "boilingPoint": 2627
+      },
+      "shape": "rect",
+      "coords": "762,613,819,672"
+    },
+    {
+      "name": "캘리포늄(Californium)",
+      "areaAlt": "캘리포늄, 98",
+      "areaDetails": {
+        "atomicNumber": 98,
+        "averageAtomicMass": "[251] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3, +4",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 899,
+        "boilingPoint": 1472
+      },
+      "shape": "rect",
+      "coords": "824,612,883,671"
+    },
+    {
+      "name": "아인슈타이늄(Einsteinium)",
+      "areaAlt": "아인슈타이늄, 99",
+      "areaDetails": {
+        "atomicNumber": 99,
+        "averageAtomicMass": "[252] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 860,
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "888,612,945,671"
+    },
+    {
+      "name": "페르뮴(Fermium)",
+      "areaAlt": "페르뮴, 100",
+      "areaDetails": {
+        "atomicNumber": 100,
+        "averageAtomicMass": "[257] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1527,
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "951,614,1009,671"
+    },
+    {
+      "name": "멘델레븀(Mendelevium)",
+      "areaAlt": "멘델레븀, 101",
+      "areaDetails": {
+        "atomicNumber": 101,
+        "averageAtomicMass": "[258] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 827,
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "1013,614,1072,671"
+    },
+    {
+      "name": "노벨륨(Nobelium)",
+      "areaAlt": "노벨륨, 102",
+      "areaDetails": {
+        "atomicNumber": 102,
+        "averageAtomicMass": "[259] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+2, +3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 827,
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "1075,613,1134,672"
+    },
+    {
+      "name": "로렌슘(Lawrencium)",
+      "areaAlt": "로렌슘, 103",
+      "areaDetails": {
+        "atomicNumber": 103,
+        "averageAtomicMass": "[262] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "+3",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 1627,
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "1141,612,1197,672"
+    },
+    {
+      "name": "러더포듐(Rutherfordium)",
+      "areaAlt": "러더포듐, 104",
+      "areaDetails": {
+        "atomicNumber": 104,
+        "averageAtomicMass": "[267] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": 2100,
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "259,447,316,503"
+    },
+    {
+      "name": "더브늄(Dubnium)",
+      "areaAlt": "더브늄, 105",
+      "areaDetails": {
+        "atomicNumber": 105,
+        "averageAtomicMass": "[268] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "321,447,378,502"
+    },
+    {
+      "name": "시보귬(Seaborgium)",
+      "areaAlt": "시보귬, 106",
+      "areaDetails": {
+        "atomicNumber": 106,
+        "averageAtomicMass": "[269] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "384,445,441,502"
+    },
+    {
+      "name": "보륨(Bohrium)",
+      "areaAlt": "보륨, 107",
+      "areaDetails": {
+        "atomicNumber": 107,
+        "averageAtomicMass": "[270] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "448,446,503,503"
+    },
+    {
+      "name": "하슘(Hassium)",
+      "areaAlt": "하슘, 108",
+      "areaDetails": {
+        "atomicNumber": 108,
+        "averageAtomicMass": "[269] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "510,447,567,502"
+    },
+    {
+      "name": "마이트너륨(Meitnerium)",
+      "areaAlt": "마이트너륨, 109",
+      "areaDetails": {
+        "atomicNumber": 109,
+        "averageAtomicMass": "[278] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "573,446,631,503"
+    },
+    {
+      "name": "다름슈타튬(Darmstadtium)",
+      "areaAlt": "다름슈타튬, 110",
+      "areaDetails": {
+        "atomicNumber": 110,
+        "averageAtomicMass": "[281] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "635,446,694,503"
+    },
+    {
+      "name": "뢴트게늄(Roentgenium)",
+      "areaAlt": "뢴트게늄, 111",
+      "areaDetails": {
+        "atomicNumber": 111,
+        "averageAtomicMass": "[280] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "699,446,756,503"
+    },
+    {
+      "name": "코페르니슘(Copernicium)",
+      "areaAlt": "코페르니슘, 112",
+      "areaDetails": {
+        "atomicNumber": 112,
+        "averageAtomicMass": "[285] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "762,446,819,505"
+    },
+    {
+      "name": "니호늄(Nihonium)",
+      "areaAlt": "니호늄, 113",
+      "areaDetails": {
+        "atomicNumber": 113,
+        "averageAtomicMass": "[286] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "824,448,881,505"
+    },
+    {
+      "name": "플레로븀(Flerovium)",
+      "areaAlt": "플레로븀, 114",
+      "areaDetails": {
+        "atomicNumber": 114,
+        "averageAtomicMass": "[289] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "886,447,945,507"
+    },
+    {
+      "name": "모스코븀(Moscovium)",
+      "areaAlt": "모스코븀, 115",
+      "areaDetails": {
+        "atomicNumber": 115,
+        "averageAtomicMass": "[289] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "952,447,1009,503"
+    },
+    {
+      "name": "리버모륨(Livermorium)",
+      "areaAlt": "리버모륨, 116",
+      "areaDetails": {
+        "atomicNumber": 116,
+        "averageAtomicMass": "[293] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "1015,446,1072,507"
+    },
+    {
+      "name": "테네신(Tennessine)",
+      "areaAlt": "테네신, 117",
+      "areaDetails": {
+        "atomicNumber": 117,
+        "averageAtomicMass": "[294] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": 610
+      },
+      "shape": "rect",
+      "coords": "1072,446,1134,507"
+    },
+    {
+      "name": "오가네손(Oganesson)",
+      "areaAlt": "오가네손, 118",
+      "areaDetails": {
+        "atomicNumber": 118,
+        "averageAtomicMass": "[294] 안정 동위 원소 없음",
+        "electronegativity": "알 수 없음",
+        "commonOxidationStates": "알 수 없음",
+        "phaseAtStandardTemperatureAndPressure": "고체",
+        "meltingPoint": "알 수 없음",
+        "boilingPoint": "알 수 없음"
+      },
+      "shape": "rect",
+      "coords": "1140,445,1197,504"
+    }
+  ]
+}

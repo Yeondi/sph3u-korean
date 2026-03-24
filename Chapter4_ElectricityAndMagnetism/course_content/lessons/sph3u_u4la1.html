@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>학습 활동 4.1: 정전기와 전류</title>
+
+
+    <link rel="stylesheet" href="../assets/css/ilc_core_temp.css">
+</head>
+
+<body>
+    <noscript>
+        <div class="alert alert-warning clearfix" role="alert">
+            <p>
+                <strong>경고!</strong> 최상의 학습 경험을 위해 이 학습 활동에는 자바스크립트(Javascript)가 활성화되어 있어야 하는 요소가 포함되어 있습니다.
+            </p>
+        </div>
+    </noscript>
+
+    <section id="ilcLearningGoals" class="hidden">
+        <h2>학습 목표</h2>
+        <p>우리가 배울 내용:</p>
+        <ul>
+            <li>전기(electricity)가 전기 회로(electric circuits)를 통해 어떻게 이동하는지 설명한다</li>
+            <li>전하(charge), 전류(current), 전위차(potential difference), 전기 에너지(electrical energy), 저항(resistance)과 관련된 문제를 풀다</li>
+            <li>대체 전기 에너지 형태를 평가한다</li>
+        </ul>
+        <h2>성취 기준</h2>
+        <p>나는 다음을 할 수 있다:</p>
+        <ul>
+            <li>물체의 전하와 관련된 문제를 풀 수 있다</li>
+            <li>전하, 전류, 전위차, 전기 에너지, 저항과 관련된 문제를 풀 수 있다</li>
+            <li>옴의 법칙(Ohm's law)을 사용하여 전류, 전위차, 저항과 관련된 문제를 풀 수 있다
+                대체 전기 에너지 형태를 평가할 수 있다</li>
+        </ul>
+    </section>
+
+    <main id="mainContent" class="container">
+        <section id="mindsOn">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_04.01_mindsOn.jpg" alt="준비 활동" class="img-responsive" style="width: 100%;"></h1>
+
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>어휘: 다음 어휘를 노트에 기록하세요. 학습 활동을 완료하면서 각 어휘의 정의와 핵심 용어를 채워 넣으세요.</p>
+                            <ul>
+                                <li>전기(electricity)</li>
+                                <li>자기(magnetism)</li>
+                                <li>회로(circuit)</li>
+                                <li>저항기(resistor)</li>
+                                <li>도체(conductor)</li>
+                                <li>절연체(insulator)</li>
+                                <li>옴(ohm)</li>
+                                <li>쿨롱(coulomb)</li>
+                                <li>전류(current)</li>
+                                <li>전하(electric charge)</li>
+                                <li>암페어(ampere)</li>
+                                <li>볼트(volt)</li>
+                                <li>전위차(electric potential difference)</li>
+                                <li>감전(electric shock)</li>
+                                <li>전기 위험(electric hazard)</li>
+                                <li>저항(resistance)</li>
+                                <li>부하(load)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>회로 만들기</h3>
+                    <p>이전 수업에서 전기 회로에 대해 배운 적이 있을 것입니다. 다음 장비로 간단한 회로를 어떻게 만들 수 있는지 생각해 봅시다.</p>
+                    <ul>
+                        <li>전선</li>
+                        <li>배터리</li>
+                        <li>전구</li>
+                        <li>스위치</li>
+                    </ul>
+                </div>
+            </div>
+            <!--TRY IT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 시뮬레이션을 사용하여 전구를 켜 보세요. <strong>Start</strong> 버튼을 눌러 새 탭에서 시뮬레이션을 여세요.</p>
+                        </div>
+                    </div>
+                    <p><a href="../assets/locker_docs/sph3u_04.01.100.pdf" target="_blank">"회로 제작 키트: DC - 가상 실험실"의 접근성 버전을 보려면 여기를 누르세요 <span class="sr-only">(새 창에서 열림)</span></a> </p>
+                </div>
+            </div>
+            <div class="row ilc-row-ilo">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_ILO_light_bulb_simulation.jpg" alt="전구 시뮬레이션" class="img-responsive center-block callout-image"><a href="../ilo/phet_circuit_construction_kit/index.html" target="_blank" class="btn btn-inverse pull-right">Start <span class="sr-only">(새 창에서 열림)</span></a>
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p class="margin-top-lg">1. 전구를 켤 수 있었나요?</p>
+                    <p>2. 전선 대신 다양한 물질(화면 왼쪽 메뉴 상자)을 사용하여 회로를 만들고 전구를 켜 보세요.</p>
+                    <p>3. 어떤 물체가 전선을 대체하면서도 전구를 켤 수 있는지 서술하세요.</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-1">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-1">
+
+                        <p>스위치, 클립, 동전.</p>
+
+                    </div>
+                </div>
+            </div>
+            <!--TRY IT ENDS-->
+        </section>
+        <section id="action">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_04_action.jpg" alt="탐구 활동" class="img-responsive" style="width: 100%;"></h1>
+
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_04.22.04.svg" alt="Television and remote control." class="img-responsive img-right-50">
+                    <h2>소개</h2>
+                    <p>전기는 우리 생활에서 중요한 역할을 하지만, 종종 당연하게 여겨집니다. 텔레비전, 컴퓨터, 전자레인지, 그리고 전기를 사용하는 다른 모든 가전제품 없이 생활한다면 어떨까요? 전기에 대한 우리의 의존은 상당한 비용을 수반합니다. 전력을 공급하는 발전소는 천연가스를 태우고, 방사성 물질을 사용하고, 강을 막고, 환경을 파괴합니다. 명백한 해결책은 전기 사용량을 줄이고 필요한 만큼의 깨끗한 에너지원을 찾는 것입니다. 이를 개인적으로든 사회적으로든 달성하려면, 전기가 어떻게 작동하는지 이해해야 합니다. 이 학습 활동에서는 전기 회로, 전위차, 전류를 살펴봅니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전하</h3>
+                    <img src="../assets/img/sph3u_04.22.05.jpeg" alt="Portrait of Benjamin Franklin" class="img-responsive img-left-50">
+
+                    <p>전기는 실제로 원자에 결합되지 않은 전자(electron)로 구성됩니다. 이 전자들은 가정용 에어컨부터 스마트폰까지 모든 것에 전기 에너지와 전력을 전달하는 데 사용됩니다. 정전기(static electricity)(건조한 겨울날 받는 충격)와 달리, 이 모든 장치를 작동시키는 전기는 회로를 통해 이동하며 간단한 규칙을 따릅니다.
+                    </p>
+                    <p>과학자들이 전기를 연구하기 시작했을 때, 양전하와 음전하를 가진 물체가 확인되었습니다. Benjamin Franklin은 1752년에 번개와 전기 사이의 관계를 발견했습니다. 그는 양전하가 물체에서 물체로, 전선을 따라 흐른다고 생각했습니다. 이후에, 실제로는 음전하를 가진 전자가 구리선과 같은 도체를 통해 흐른다는 것이 발견되었습니다. 양전하가 흐르는 전기 회로를 설명하기 위해 만들어진 모든 규칙은 오늘날에도 여전히 유용합니다. 이는 전기 전하가 회로를 통해 이동하는 것에 대해 두 가지 방식으로 이야기할 수 있음을 의미합니다: 하나는 전자 흐름(electron flow)이라 하고, 다른 하나는 관례적 전류(conventional current)라 합니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <figure class="img-right-50"><img src="../assets/img/sph3u_04.22.06.svg" alt class="img-responsive ">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_04.22.06.html" target="_blank">상세 설명을 보려면 여기를 누르세요<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+
+                    <h3>전하의 흐름</h3>
+
+                    <p><strong>관례적 전류</strong>: 전류가 배터리의 양극 단자에서 음극 단자로 흐릅니다(양전하가 이동하는 방향). 다이어그램을 참조하세요.
+                    </p>
+                    <p><strong>전자 흐름</strong>: 전류가 배터리의 음극 단자에서 양극 단자로 흐릅니다(전자가 이동하는 방향). 다이어그램을 참조하세요.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>산업(예: 전기 공학)에서와 마찬가지로, 이 과정에서는 회로를 그리고 생각할 때 관례적 전류 흐름을 사용합니다.</p>
+                    <h3>전하(<i>Q</i>) 계산하기</h3>
+                    <p>전자는 음전하를 가지고 양성자(proton)는 양전하를 가집니다. 양성자가 전자보다 훨씬 큰 질량을 가지고 있지만, 전하의 크기는 둘 다 같습니다. </p>
+                    <p>전하의 기호는 <i>Q</i>입니다. 전자 하나의 전하는 -1.6 &#215;
+                        10<sup>-19</sup> C입니다. 전하의 단위는 C(쿨롱(coulomb))입니다. 양성자 하나의 전하는 +1.6
+                        &#215; 10<sup>-19</sup> C입니다. 이것은 가장 작은 전하량이며 기호 <i>e</i>로 표시합니다.
+                    </p>
+                </div>
+            </div>
+            <!--GREEN CALLOUT STARTS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1  color-safe-bg_light-brand-1 padding-top-lg">
+                    <h4>기본 전하(elementary charge) (<i>e</i>)</h4>
+                    <p><i>e</i> = 전자 또는 양성자 하나의 전하 = 1.6 &#215; 10<sup>-19</sup> C</p>
+                </div>
+            </div>
+            <!--GREEN CALLOUT ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>전자를 얻은 물체는 양성자보다 전자가 더 많으므로 음전하를 갖게 됩니다. 전자를 잃은 물체는 양성자보다 전자가 적으므로 양전하를 갖게 됩니다. </p>
+
+                    <p>전자가 한 물체에서 다른 물체로 이동한 수를 알면, 각 물체의 전하량(<i>Q</i>)을 구할 수 있습니다.</p>
+                </div>
+            </div>
+            <!--FORMULA STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4 class="h5">전하량</h4>
+                            <p><i>Q</i> = <i>Ne</i> </p>
+                            <p>여기서: </p>
+                            <ul>
+                                <li><i>Q</i> = 전하량, 쿨롱(C) 단위로 측정.</li>
+                                <li><i>N</i> = 잃거나 얻은 전자의 수 (전자를 잃으면 <i>Q</i>는 양수, 전자를 얻으면 <i>Q</i>는 음수).</li>
+                                <li><i>e</i> = 1.6 &#215; 10<sup>-19</sup> C</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FORMULA ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p><strong>예시</strong>: 정전기와 전하에 대한 다음 문제를 검토하세요.</p>
+
+                    <img src="../assets/img/sph3u_04.22.09.svg" alt="Clothes inside of a dryer." class="img-responsive img-right-33">
+                    <p>Ganga는 양모 스웨터와 실크 블라우스를 건조기에 함께 넣었습니다. Ganga가 꺼냈을 때 스웨터와 블라우스가 서로 붙어 있었습니다. 일부 전자가 양모에서 실크로 이동하여 정전기적 인력(electrostatic force of attraction)이 생성되었습니다. </p>
+
+                    <p style="clear: both">1. 어떤 물체가 양전하를 띠게 되었나요?</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-2">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-2">
+
+
+                        <p>양모는 전자를 잃었으므로 양전하를 띠게 되었습니다. 실크는 전자를 얻었으므로 음전하를 띠게 됩니다.</p>
+
+                    </div>
+
+                    <p class="margin-top-xl">2. 9.75 × 10<sup>23</sup>개의 전자가 양모에서 실크로 이동했다면, 양모와 실크의 전하는 얼마인가요?</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-3">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-3">
+                        <p>주어진 값:</p>
+                        <p style="margin-top: -10px;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>N</mi>
+                                <mo>=</mo>
+                                <mn>9.75</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mn>23</mn>
+                                </msup>
+                                <mspace linebreak="newline"></mspace>
+                                <mi>e</mi>
+                                <mo>=</mo>
+                                <msup>
+                                    <mn>1.60</mn>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mn>19</mn>
+                                    </mrow>
+                                </msup>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">C</mi>
+                            </math></p>
+
+                        <p style="margin-top: 15px;">미지수:</p>
+                        <p style="margin-top: -10px;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>Q</mi>
+                                <mo mathvariant="italic">=</mo>
+                                <mo>?</mo>
+                            </math></p>
+
+                        <p style="margin-top: 15px;">방정식:</p>
+                        <p style="margin-top: -10px;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>Q</mi>
+                                <mo mathvariant="italic">=</mo>
+                                <mi>N</mi>
+                                <mi>e</mi>
+                            </math></p>
+
+                        <p style="margin-top: 15px;">풀이:</p>
+                        <p style="margin-top: -10px;"><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>Q</mi>
+                                <mo mathvariant="italic">=</mo>
+                                <mo>(</mo>
+                                <mn>9.75</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mn>23</mn>
+                                </msup>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mn>1.60</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mn>19</mn>
+                                    </mrow>
+                                </msup>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">C</mi>
+                                <mo>)</mo>
+                                <mspace linebreak="newline"></mspace>
+                                <mi>Q</mi>
+                                <mo>=</mo>
+                                <mn>156,000</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">C</mi>
+                            </math></p>
+
+                        <p style="margin-top: 15px;">결론:</p>
+                        <p style="margin-top: -10px;">실크는 전자를 얻었으므로 -156,000 C의 전하를 가집니다. 양모는 전자를 잃었으므로 156,000 C의 전하를 가집니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전류 측정하기</h3>
+                    <p>도시 도로의 교통 흐름을 측정하는 임무를 맡았다고 가정해 봅시다. 도로변에서 스톱워치를 들고 10분 동안 50대의 차를 세었습니다.</p>
+                    <p>50대/10분 = 5대/분. 흐름 속도는 분당 5대입니다.</p>
+
+                    <p>이와 마찬가지로, 도체를 통해 한 곳에서 다른 곳으로 전하가 흐르는 것을 <strong>전류</strong>라 합니다.
+                    </p>
+                    <p><strong>전류 (<math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>I</mi>
+                            </math>)</strong>: 1초(s) 동안 한 지점을 통과하는 전자의 수.</p>
+                </div>
+            </div>
+            <!--FORMULA STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>전류</h4>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <mi>I</mi>
+                                        <mo>=</mo>
+                                        <mfrac>
+                                            <mi>Q</mi>
+                                            <mi>t</mi>
+                                        </mfrac>
+                                    </mrow>
+                                </math></p>
+                            <p>전류의 단위는 암페어(A)입니다. 1 암페어는 초당 1 쿨롱과 같으므로, 전류를 구하려면 시간을 초 단위로 측정해야 합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FORMULA ENDS-->
+            <div class="row ilc-row-text margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h4>전류의 예시</h4>
+                    <p>예시 1: 3 A = 3 쿨롱/초 = 3 C/s</p>
+                    <p>예시 2: 0.001 A = 1 밀리암페어 = 0.001 C/s</p>
+                    <h4>전류계(ammeter)</h4>
+                    <p>다음과 같은 전류계라는 기기로 회로의 전류를 측정합니다. </p>
+
+                    <img src="../assets/img/sph3u_04.22.14.svg" alt="Image of an ammeter" class="img-responsive">
+
+                    <h4>예시 1: 전류</h4>
+                    <p>전류계가 5 암페어(5 A)의 전류를 기록했습니다. 1분 동안 전류계를 통과하는 전하량은 몇 쿨롱인가요?</p>
+
+                    <!--SHOW ANSWER STARTS-->
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-11">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-11">
+
+                        <p>참고: 시간은 초 단위여야 합니다. 1분 = 60초.</p>
+                        <p><strong>주어진 값:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>I</mi>
+                                <mo>=</mo>
+                                <mn>5</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">A</mi>
+                            </math></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>t</mi>
+                                <mo>=</mo>
+                                <mn>60</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+                        <p><strong>미지수:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>Q</mi>
+                                <mo>=</mo>
+                                <mo>?</mo>
+                            </math></p>
+                        <p><strong>방정식:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>I</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mi>Q</mi>
+                                        <mi>t</mi>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Q</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi>I</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi>t</mi>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p><strong>풀이:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Q</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo stretchy="false">(</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mn>5</mn>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">A</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo stretchy="false">)</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo stretchy="false">(</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mn>60</mn>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">s</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo stretchy="false">)</mo>
+                                </mrow>
+                            </math></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>Q</mi>
+                                <mo>=</mo>
+                                <mn>300</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">C</mi>
+                            </math></p>
+                        <p><strong>결론:</strong></p>
+                        <p>1분 동안 전류계를 통과하는 전하량은 300 C입니다.</p>
+                    </div>
+                    <!--SHOW ANSWER ENDS-->
+                </div>
+            </div>
+
+
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h4>예시 2: 전류 </h4>
+                    <p>충전기가 충전식 배터리를 완충하는 데 12시간이 걸립니다. 8.1 × 10<sup>21</sup>개의 전자가 배터리를 통과한다면, 배터리를 통과하는 전류는 얼마인가요?</p>
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-12">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-12">
+                        <p>참고: 시간은 초 단위여야 합니다.</p>
+                        <p>12시간 = 12 &#215; 60 &#215; 60 = 43,200초</p>
+                        <p><strong>주어진 값:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>N</mi>
+                                    <mo>=</mo>
+                                    <mn>8.1</mn>
+                                    <mo>&#x00D7;</mo>
+                                    <msup>
+                                        <mrow>
+                                            <mn>10</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>21</mn>
+                                        </mrow>
+                                    </msup>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">l</mi>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">c</mi>
+                                    <mi mathvariant="normal">t</mi>
+                                    <mi mathvariant="normal">r</mi>
+                                    <mi mathvariant="normal">o</mi>
+                                    <mi mathvariant="normal">n</mi>
+                                    <mi mathvariant="normal">s</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                </mrow>
+                            </math></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>t</mi>
+                                <mo>=</mo>
+                                <mn>43,200</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+                        <p><strong>미지수:</strong></p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>I</mi>
+                                    <mo>=</mo>
+                                    <mi mathvariant="normal">?</mi>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p><strong>방정식:</strong></p>
+                        <p>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>Q</mi>
+                                <mo>=</mo>
+                                <mi>N</mi>
+                                <mi>e</mi>
+                            </math>
+                        </p>
+                        <p><strong>풀이:</strong></p>
+                        <p>먼저, 전자의 수를 사용하여 배터리를 통과하는 전하량을 구합니다.</p>
+
+                        <p>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Q</mi>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <mn>8.1</mn>
+                                            <mo>&#x00D7;</mo>
+                                            <msup>
+                                                <mrow>
+                                                    <mn>10</mn>
+                                                </mrow>
+                                                <mrow>
+                                                    <mn>21</mn>
+                                                </mrow>
+                                            </msup>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <mn>1.6</mn>
+                                            <mo>&#x00D7;</mo>
+                                            <msup>
+                                                <mrow>
+                                                    <mn>10</mn>
+                                                </mrow>
+                                                <mrow>
+                                                    <mo>&#x2212;</mo>
+                                                    <mn>19</mn>
+                                                </mrow>
+                                            </msup>
+                                            <mi mathvariant="normal">C</mi>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>Q</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mn>1296</mn>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">C</mi>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p>그 다음 전류 공식을 사용합니다.</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>I</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mi>Q</mi>
+                                        <mi>t</mi>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>I</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>1296</mn>
+                                            <mi mathvariant="normal">C</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>43,200</mn>
+                                            <mi mathvariant="normal">s</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>I</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mn>0.03</mn>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">A</mi>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p><strong>결론:</strong></p>
+                        <p>배터리를 통과하는 전류는 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mn>3.0</mn>
+                                    <mo>&#x00D7;</mo>
+                                    <msup>
+                                        <mrow>
+                                            <mn>10</mn>
+                                        </mrow>
+                                        <mrow>
+                                            <mo>&#x2212;</mo>
+                                            <mn>2</mn>
+                                        </mrow>
+                                    </msup>
+                                    <mi mathvariant="normal">A</mi>
+                                </mrow>
+                            </math>입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전위와 전위 에너지</h3>
+                    <p>전자는 도체를 통해 이동하여 전류를 형성합니다. 그러나 전하는 스스로 흐르지 않습니다. 무엇이 전자를 도체를 통해 이동하게 할까요?</p>
+                    <!--SHOW ANSWER STARTS-->
+                    <button class="btn btn-default btn-answer-reveal" id="ilc1u_u1la1-suggestedAnswerButton-1">예시 답안</button>
+                    <div class="answer_reveal invisible" id="ilc1u_u1la1-suggestedAnswer-1">
+                        <p>전자는 배터리를 통과하면서 에너지를 얻습니다. 전자가 회로의 한 지점에서 다른 지점으로 이동할 때 에너지를 잃습니다. 예를 들어, 전하가 전구가 포함된 회로를 통해 흐를 때, 전하의 에너지는 전구를 통과하면서 감소하고 전기 에너지는 빛과 열로 변환됩니다. </p>
+                    </div>
+                    <!--SHOW ANSWER ENDS-->
+                    <p class="margin-top-xl">1 쿨롱의 전하가 가지는 에너지의 양에는 특별한 이름이 있습니다: <strong>전위(electric potential)</strong>. 두 지점 사이의 전위 차이를 전위차라고 합니다. 이것을 전압(voltage)이라고도 합니다.</p>
+                    <p><strong>전위 (<i>V</i>)</strong>: 1 쿨롱의 전하가 운반하는 에너지(<i>E</i>)의 양.</p>
+                </div>
+            </div>
+            <!--FORMULA CALLOUT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>전위 </h4>
+                            <p>
+                                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <mi>V</mi>
+                                        <mo>=</mo>
+                                        <mfrac>
+                                            <mi>E</mi>
+                                            <mi>Q</mi>
+                                        </mfrac>
+                                    </mrow>
+                                </math>
+                            </p>
+
+                            <p><strong>참고:</strong> 전위의 단위는 볼트(V)이며, 에너지는 줄(J) 단위로, 전하는 쿨롱(C) 단위로 측정합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FORMULA CALLOUT ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전위차 (전압)</h3>
+                    <p>배터리는 전위 값에 따라 판매됩니다. 1.5 V 또는 9 V 배터리를 사러 간 적이 있을 것입니다. 1.5 V 배터리의 경우, 각 쿨롱의 전하가 배터리를 통과할 때 1.5 J의 에너지를 받습니다. 9 V 배터리의 경우, 각 쿨롱의 전하가 9 J의 에너지를 받습니다.</p>
+                    <p>전하가 회로에서 전구와 같은 소자를 통과할 때, 높은 전위로 소자에 들어가고 낮은 위치 에너지로 나옵니다. 전위의 차이를 전위차라고 합니다.</p>
+                    <p>두 지점 사이의 전위차는 전압계(voltmeter)라는 기기로 직접 측정할 수 있습니다. 전위차를 측정하려면 전위차를 측정할 회로의 두 지점 사이에 전압계의 단자를 놓기만 하면 됩니다. 다음 그림에서는 전구 양단의 전위차를 측정하고 있습니다.
+                    </p>
+                    <img src="../assets/img/sph3u_04.22.20.svg" alt="6 J of energy removed for every coulomb from a lightbulb" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto">
+                    <p>전하는 10 J의 에너지를 가지고 있습니다. 전구를 통과한 후에는 4 J의 에너지만 남습니다. 이는 전하가 전구를 통과하면서 6 J의 에너지가 손실되었음을 의미합니다(에너지가 빛과 열로 변환됨). 각 쿨롱의 전하에서 6 J의 에너지가 손실되면, 전위차는 6 V입니다.</p>
+                    <h4>전압계</h4>
+                    <p>다음 다이어그램은 토스터 양단의 전위차를 측정하는 전압계를 보여줍니다. 전압계는 120 V를 나타냅니다. 이는 토스터가 각 쿨롱에서 120 J의 에너지를 가져와 열로 변환한다는 것을 의미합니다.</p>
+                    <img src="../assets/img/sph3u_04.22.21.svg" alt="Voltmeter attached before and after a toaster" class="img-responsive" style="display: block; margin-left: auto; margin-right: auto">
+                    <h3>전위 에너지</h3>
+                    <p>전위와 전류에 대한 공식을 결합할 수 있습니다. </p>
+                    <p>
+                        <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>I</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi>Q</mi>
+                                    <mi>t</mi>
+                                </mfrac>
+                            </mrow>
+                        </math>을 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mi>Q</mi>
+                            <mo>=</mo>
+                            <mi>I</mi>
+                            <mi>t</mi>
+                        </math>로 재배열할 수 있으므로, 전위 공식에서 <i>Q</i>를 대체하면 새로운 공식 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>V</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi>E</mi>
+                                    <mi>Q</mi>
+                                </mfrac>
+                            </mrow>
+                        </math> &nbsp;또는 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <mi>Q</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mi>E</mi>
+                                    <mi>V</mi>
+                                </mfrac>
+                            </mrow>
+                        </math>을 얻을 수 있습니다.</p>
+                </div>
+            </div>
+            <!--FORMULA STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>전위</h4>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <mfrac>
+                                            <mi>E</mi>
+                                            <mi>V</mi>
+                                        </mfrac>
+                                        <mo>=</mo>
+                                        <mi>I</mi>
+                                        <mi>t</mi>
+                                    </mrow>
+                                </math></p>
+                            <p>또는</p>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <mi>E</mi>
+                                        <mo>=</mo>
+                                        <mi>V</mi>
+                                        <mi>I</mi>
+                                        <mi>t</mi>
+                                    </mrow>
+                                </math></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FORMULA ENDS-->
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout margin-top-xl">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트를 사용하여 다음 각 문제를 풀 수 있습니다. 예시 답안과 비교하여 자신의 이해도를 확인하세요. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>전류와 전위 공식을 사용하여 이 문제를 풀어보세요:</p>
+                    <p>1. 50.0 mA의 연속 전류를 3.1 &#215; 10<sup>3</sup>초 동안 공급할 수 있는 9.0 V 배터리에 저장된 에너지를 계산하세요.</p>
+
+                    <p>다음 표에 주어진 값을 (적절한 기본 단위로) 입력하세요:</p>
+
+                    <table class="table table-bordered" id="table001">
+                        <tbody>
+                            <tr>
+                                <th id="time" style="width: 50%" scope="row">시간 (t)</th>
+                                <td style="width: 50%"><span class="tableSuggestedAnswer invisible"><em>3.1 &#215;
+                                            10<sup>3</sup></em> s</span></td>
+
+                            </tr>
+                            <tr>
+                                <th id="current" style="width: 50%" scope="row">전류 (A)</th>
+                                <td style="width: 50%"><span class="tableSuggestedAnswer invisible"><i>50.0</i> mA = <i>0.050</i>
+                                        A</span></td>
+
+                            </tr>
+                            <tr>
+                                <th id="electricPotential" style="width: 50%" scope="row">전위 (V)</th>
+                                <td style="width: 50%"><span class="tableSuggestedAnswer invisible"><em>9.0
+                                            V</em></span></td>
+
+                            </tr>
+                            <tr>
+                                <th id="unknown" style="width: 50%" scope="row">미지수</th>
+                                <td style="width: 50%"><span class="tableSuggestedAnswer invisible"><em>E</em></span>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <button id="table001Button" class="btn btn-table-answer-reveal">예시 답안</button>
+                    <p class="margin-top-xl">2. 전류와 전위 방정식을 결합하여 배터리에 저장된 에너지를 구하세요.</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-13">예시 답안</button>
+                    <div class="answer_reveal  invisible" id="sph3u_u4la1-suggestedAnswer-13">
+                        <p>V와 I의 공식을 결합하면 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>V</mi>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mi>E</mi>
+                                        <mrow>
+                                            <mi>I</mi>
+                                            <mi>t</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </mrow>
+                            </math>이 됩니다.</p>
+                        <p>
+                            이것을 재배열하면 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>E</mi>
+                                    <mo>=</mo>
+                                    <mi>V</mi>
+                                    <mi>I</mi>
+                                    <mi>t</mi>
+                                </mrow>
+                            </math>가 됩니다.
+                            <br>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>E</mi>
+                                    <mo>=</mo>
+                                    <mo stretchy="false">(</mo>
+                                    <mn>9.0</mn>
+                                    <mi>V</mi>
+                                    <mo stretchy="false">)</mo>
+                                    <mo stretchy="false">(</mo>
+                                    <mn>0.050</mn>
+                                    <mi mathvariant="normal">A</mi>
+                                    <mo stretchy="false">)</mo>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mrow>
+                                            <mn>3.1</mn>
+                                            <mo>&#x00D7;</mo>
+                                            <msup>
+                                                <mrow>
+                                                    <mn>10</mn>
+                                                </mrow>
+                                                <mn>3</mn>
+                                            </msup>
+                                            <mi mathvariant="normal">s</mi>
+                                        </mrow>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi>E</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mn>1395</mn>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">J</mi>
+                                </mrow>
+                            </math>
+                            배터리에는 1395 J의 에너지가 저장되어 있습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>옴의 법칙</h3>
+                    <img src="../assets/img/sph3u_04.22.26.svg" alt=" A person rubbing their hands together." class="img-responsive img-right-50">
+                    <p>양 손바닥을 맞대고 문질러 보세요(또는 양말을 신은 발이나 맨발로 카펫을 문질러 보세요). 손이 뜨거워지는 것을 느낄 수 있습니다. 마찰이 열을 만듭니다. 양 손바닥을 더 세게 누르세요. 이제 문지르기가 더 어렵고 더 많은 열이 발생합니다. 손 사이의 마찰이 저항을 만듭니다.</p>
+                    <p>전하가 물질을 통과할 때, 반대 작용 또는 저항(<i>R</i>)을 받습니다. 전구나 발열체와 같은 회로의 소자에는 저항이 있습니다. 때때로, 전위차의 강하가 필요할 때 회로에 저항기를 배치합니다. 저항기의 목적은 회로의 전위차를 떨어뜨리는 것입니다. </p>
+
+                    <img src="../assets/img/sph3u_04.22.27.jpg" alt=" Five resistors in a row with different coloured bands around them." class="img-responsive img-right-50">
+                    <p>일반적으로 회로에 사용되는 저항기는 다음 이미지와 같이 다양한 색상의 띠가 있는 작은 원통 모양입니다. 띠의 색상과 수는 저항기의 저항 크기를 나타냅니다. 예를 들어, 다음 이미지에서 가장 왼쪽의 저항기에는 빨간색, 빨간색, 갈색, 금색의 네 개의 띠가 있으며, 총 저항이 220 &ohm;임을 나타냅니다. </p>
+
+                    <p>저항은 저항을 연구한 독일 물리학자 Georg Ohm(1789-1854)의 이름을 따서 옴 단위로 측정합니다. 옴의 기호는 &ohm;(그리스 알파벳 문자 중 하나)입니다.
+                    </p>
+                    <p>이것은 그리스 문자 오메가(Omega)이므로, Word 또는 Google Docs 수식 편집기에서 \Omega 단축키로 이 기호를 만들 수 있습니다. 소문자 오메가는 다르므로 반드시 대문자 O를 사용하세요.</p>
+                    <div class="color-safe-bg_light-brand-1">
+                        <p><strong>참고:</strong> 1 &ohm; = 1 V/A.</p>
+                    </div>
+                    <p class="margin-top-lg"><strong>옴의 법칙</strong>은 전위, 전류, 저항 사이의 관계를 설명합니다.</p>
+                </div>
+            </div>
+            <!--FORMULA STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>옴의 법칙 </h4>
+                            <p><i>V</i> = <i>IR</i></p>
+                            <p>여기서:</p>
+                            <p><i>V</i> = 전위 (볼트, V 단위로 측정)</p>
+                            <p><i>I</i> = 전류 (암페어, A 단위로 측정)</p>
+                            <p><i>R</i> = 저항 (옴, &ohm; 단위로 측정)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--FORMULA ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>다음 다이어그램의 회로는 전위차(전압)를 조절할 수 있는 가변 전원 공급 장치(배터리와 유사)를 사용합니다. 전류계와 전압계를 사용하여 저항기 양단의 전위차와 이를 통과하는 전류를 측정했습니다. </p>
+                    <img src="../assets/img/sph3u_04.22.29.svg" alt="Circuit with power supply, resistor, ammeter and voltmeter" class="img-responsive">
+                    <p>위의 전기 회로 다이어그램을 살펴보고 다음 질문에 답하세요.</p>
+                </div>
+            </div>
+            <!--NOTEBOOK STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>1. 옴의 법칙을 사용하여 각 전류와 전위차 측정값 쌍에 대한 저항을 구하세요. </p>
+                            <p>다음 표를 노트에 복사하고 답을 기록하세요. 예시 답안과 비교하여 자신의 이해도를 확인하세요.</p>
+
+                            <table class="table table-bordered" id="table002" style="text-align: center">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" id="PotentilaDifference" style="text-align: center">전위차 (V)</th>
+                                        <th scope="col" id="Current" style="text-align: center">전류 (A)</th>
+                                        <th scope="col" id="Resistence" aria-hidden="true" style="text-align: center">
+                                            저항(&Omega;)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td id="1.5V">1.5</td>
+                                        <td>0.68</td>
+                                        <td><span class="tableSuggestedAnswer invisible">2.2</span></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td id="3V">3.0</td>
+                                        <td>1.35</td>
+                                        <td><span class="tableSuggestedAnswer invisible">2.2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="5V">5.0</td>
+                                        <td>2.3</td>
+                                        <td><span class="tableSuggestedAnswer invisible">2.2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="6V">6.0</td>
+                                        <td>2.7</td>
+                                        <td><span class="tableSuggestedAnswer invisible">2.2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="9V">9.0</td>
+                                        <td>4.1</td>
+                                        <td><span class="tableSuggestedAnswer invisible">2.2</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="10V">10</td>
+                                        <td>4.5</td>
+                                        <td><span class="tableSuggestedAnswer invisible">2.2</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button id="table002Button" class="btn btn-table-answer-reveal">예시 답안</button>
+                            <p class="margin-top-xl">2. 전위차가 증가하면 전류는 어떻게 되나요?</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-4">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-4">
+
+
+                                <p>전류도 증가합니다.</p>
+
+                            </div>
+                            <p class="margin-top-xl">3. 저항 값에 대해 무엇을 알 수 있나요?</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-5">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-5">
+
+
+                                <p>전위차와 전류가 변해도 저항 값은 일정합니다.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--NOTEBOOK ENDS-->
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전압&ndash;전류 그래프 사용하기</h3>
+                    <p>방금 옴의 법칙을 사용하여 저항을 구했습니다. 전위차와 전류 데이터로부터 저항을 구하는 또 다른 방법이 있습니다. V&ndash;I 그래프를 그리면 그래프의 기울기가 저항입니다.</p>
+                    <p>다음은 이전 데이터 표에서 그린 그래프입니다.</p>
+                    <img src="../assets/img/sph3u_04.22.33.jpeg" alt="Graph of potential difference versus current is a straight line" class="img-responsive">
+                    <p>직선 위의 아무 두 점을 선택하고 기울기를 구하세요. 기울기의 방정식은:</p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <mi mathvariant="normal">s</mi>
+                            <mi mathvariant="normal">l</mi>
+                            <mi mathvariant="normal">o</mi>
+                            <mi mathvariant="normal">p</mi>
+                            <mi mathvariant="normal">e</mi>
+                            <mo>=</mo>
+                            <mfrac>
+                                <mrow>
+                                    <msub>
+                                        <mi>y</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>&#x2212;</mo>
+                                    <msub>
+                                        <mi>y</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                </mrow>
+                                <mrow>
+                                    <msub>
+                                        <mi>x</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                    <mo>&#x2212;</mo>
+                                    <msub>
+                                        <mi>x</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                </mrow>
+                            </mfrac>
+                        </mrow>
+                    </math>
+                </div>
+            </div>
+            <!--TRY IT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content" style="width: 100%">
+                            <p>기울기를 구하고 예시 답안과 비교하세요.</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u4la1-suggestedAnswerButton-6" style="width: 100%">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u4la1-suggestedAnswer-6">
+                                <p>다른 점을 선택했을 수 있지만, 기울기는 거의 같아야 합니다.</p>
+                                <p>점 (1, 2.2)와 (4.5, 10) 사용</p>
+                                <p>기울기가 데이터 표에서 옴의 법칙을 사용하여 계산한 저항과 같다는 것을 알 수 있습니다. 기울기는 저항기가 제공하는 저항과 같습니다.</p>
+                                <p>기울기 = (10 &minus; 2.2) / (4.5 &minus; 1)</p>
+                                <p>기울기 = 2.2 &ohm;</p>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--TRY IT ENDS-->
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>실험 활동</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/lab_activity.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 대화형 활동에서는 저항기의 전압과 전류 사이의 관계를 찾는 실험을 완료합니다. <strong>Start</strong> 버튼을 눌러 새 탭에서 시뮬레이션을 여세요.</p>
+
+                        </div>
+                    </div>
+                    <p class="margin-top-lg"><a href="../assets/locker_docs/sph3u_04.22.37p.pdf" target="_blank">"옴의 법칙"의 접근성 버전을 보려면 여기를 누르세요<span class="sr-only"> (새 창에서 열림)</span></a></p>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-ilo">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_ILO_Ohms_law_simulation.jpg" alt="옴의 법칙 시뮬레이션" class="img-responsive center-block callout-image"><a href="../ilo/ohms_law/index.html" target="_blank" class="btn btn-inverse pull-right">Start <span class="sr-only">(새 창에서 열림)</span></a>
+                </div>
+            </div>
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p class="margin-top-lg"><strong>목적</strong>: 다양한 저항기에 대한 전압과 전류 사이의 관계를 찾는다.</p>
+                    <p><strong>재료</strong>: 전선, 저항기, 배터리, 전류계, 전압계.</p>
+                    <p><strong>절차 및 관찰</strong>:</p>
+                    <p>1. 저항기의 저항을 약 1000옴으로 설정하세요.</p>
+                    <p>2. 다음 표를 노트에 복사하세요.</p>
+
+                    <table id="myTable" class="table table-bordered empty-table">
+
+                        <thead>
+
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">전압 (V)</th>
+                                <th class="column_4 blueBorderRight" scope="col">전류 (A)</th>
+                                <th class="column_4 blueBorderRight" scope="col">저항 (Ω)</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>0.5</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td>2</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                    <p class="margin-top-lg">3. 표에 표시된 대로 전압을 변경하세요.</p>
+                    <p>4. 옴의 법칙 대화형 시뮬레이션을 사용하여 해당하는 전류를 암페어 단위로 표에 기록하세요.</p>
+                    <p>5. 약 400옴의 저항기로 1~6단계를 반복하세요.</p>
+                    <p>6. 약 40옴의 저항기로 1~6단계를 반복하세요.</p>
+                    <p><strong>분석:</strong></p>
+                    <ul>
+                        <li>제공된 <a href="../assets/locker_docs/sph3u_04.22.36.pdf" target="_blank">그래프 용지<span class="sr-only"> (새 창에서 열림)</span></a>에 데이터를 그래프로 나타내거나 그래프 계산기를 사용하세요. 각 데이터 세트는 같은 용지 또는 그래프 계산기에 그려야 합니다.</li>
+                        <li>가로축에 전압(V)을, 세로축에 전류(I)를 표시하세요.</li>
+                        <li>축에 적절한 제목과 레이블을 붙이세요.</li>
+                        <li>원점(0,0)을 통과하는 최적 적합선을 그리세요.</li>
+                        <li>각 그래프의 최적 적합선의 기울기를 계산하세요.</li>
+                    </ul>
+
+                    <p><strong>토론:</strong></p>
+                    <ul>
+                        <li>데이터에서 어떤 종류의 관계를 얻었나요?</li>
+                        <li>그래프 기울기의 물리적 의미는 무엇인가요?</li>
+                    </ul>
+
+
+
+                </div>
+            </div>
+
+
+
+            <!--PORTFOLIO ENDS-->
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전기 위험 예방</h3>
+                    <p>전기는 매우 위험할 수 있지만, 몇 가지 간단한 규칙으로 대부분의 전기 위험을 예방할 수 있습니다.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <!-- *************************** TAB 2 BEGINS ******************************************* -->
+
+                    <!--left column-->
+                    <div class="col-xs-4">
+                        <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+
+                            <li class="active" style="width:100%" role="tab"><a href="#lefttab1_1" data-toggle="tab">
+                                    정전기로 인한 감전</a></li>
+                            <li style="width:100%" role="tab"><a href="#lefttab1_2" data-toggle="tab">
+                                    번개</a></li>
+                            <li style="width:100%" role="tab"><a href="#lefttab1_3" data-toggle="tab">
+                                    전류로 인한 감전</a></li>
+                            <li style="width:100%" role="tab"><a href="#lefttab1_4" data-toggle="tab">
+                                    전류 감전의 영향</a></li>
+
+
+                        </ul>
+                    </div>
+                    <!--right column-->
+                    <div class="col-xs-8">
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+
+                                <div class="tab-pane fade in active" id="lefttab1_1">
+                                    <img src="../assets/img/sph3u_04.22.39a.svg" alt="Image of two hands touching with a little bit of electrical charge" class="img-responsive img-left-50">
+                                    <p>감전은 흔히 정전기에서 발생합니다. 정전기는 보통 도체를 통해 이동하지 않으므로, 한 물체에서 다른 물체로 점프하는 작은 불꽃으로 이동하는 경우가 많습니다. 그 물체 중 하나가 당신이라면, 감전이 몸에 들어오는 부위에서 날카로운 통증을 느낄 수 있습니다. 특히 매우 건조한 겨울에 감전을 경험한 적이 있을 것입니다. 건조기에서 옷을 꺼낼 때 충격이나 딱딱하는 소리를 느꼈거나, 차에서 내려 금속 문 손잡이를 만질 때 충격을 느꼈을 수 있습니다. 때때로 다른 사람을 만질 때도 감전을 받을 수 있습니다.</p>
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_2">
+                                    <img src="../assets/img/sph3u_04.22.39b.jpg" alt="Image of landscape with lighting" class="img-responsive img-left-50">
+                                    <p>정전기는 거의 위험하지 않습니다. 그러나 치명적일 수 있는 정전기의 한 형태가 있는데, 바로 번개입니다. 세계 일부 지역에서는 낙뢰가 매우 흔하며 치명적일 수 있습니다. 그래서 사람들은 폭풍 시 개활지와 언덕 꼭대기에서 멀리 떨어져 있으라고 경고받습니다. 많은 양의 전기가 인체를 통과하면 화상이나 심장마비를 일으킬 수 있습니다.</p>
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_3">
+                                    <img src="../assets/img/sph3u_04.22.39c.jpg" alt="Illustration of a person touching a electricity outlet and getting electric shock" class="img-responsive img-left-50">
+                                    <p>전류가 중단되어 전선이 아닌 당신을 통해 이동하면 전류에 의한 감전을 받을 수도 있습니다.</p>
+                                    <p>겉보기에 적은 양의 전류로도 심각한 부상을 입을 수 있습니다. 감전과 관련된 부상의 심각성은 몸을 통과하는 전류의 양과 전류가 통과하는 신체 부위에 따라 달라집니다. 매우 많은 양의 전류가 피부를 따라 짧은 거리만 이동하면 매우 고통스러울 수 있지만, 심각한 화상만으로 운좋게 빠져나올 수 있을 것입니다. 반면에, 훨씬 적은 양의 전류가 흉강을 통과하면 심장을 멈추게 하여 사망을 초래할 수 있습니다. 중요한 것은 전기가 치명적일 수 있다는 것입니다.</p>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="lefttab1_4">
+                                    <p>다음은 다양한 반응과 각각의 전류 수준을 나타낸 표입니다. </p>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">전류</th>
+                                                <th scope="col">반응</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                <td>0.001 A</td>
+                                                <td>감지 수준</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.005 A</td>
+                                                <td>약한 충격 감지; 고통스럽지는 않지만 불쾌함</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.006 - 0.03 A</td>
+                                                <td>고통스러운 충격; "놓을 수 있는" 범위</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0.05 - 0.15 A</td>
+                                                <td>극심한 통증, 호흡 정지, 심한 근육 수축</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1.0 - 4.3 A</td>
+                                                <td>심실세동(ventricular fibrillation)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>10 A 이상</td>
+                                                <td>심정지, 심한 화상, 사망 가능성 높음</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB 2 ENDS ******************************************* -->
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전기 안전</h3>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** TAB XXX BEGINS ******************************************* -->
+
+                    <div>
+                        <div>
+                            <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+
+                                <!--YOU WILL NEED TO ADJUST THE WIDTH % DEPENDING ON HOW MANY TABS YOU HAVE-->
+                                <li class="active" style="width:50%" role="tab"><a href="#tab1_1" data-toggle="tab">
+                                        가정에서의 전기 안전</a></li>
+                                <li style="width:50%" role="tab"><a href="#tab1_2" data-toggle="tab">
+                                        실험실에서의 전기 안전</a></li>
+
+
+                            </ul>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+
+
+                                <div class="tab-pane fade in active" id="tab1_1">
+                                    <p>차단 스위치 및/또는 회로 차단기 패널의 위치를 알고 작동 방법을 배우세요. 화재나 감전 사고 시 이 장치를 사용하여 장비를 차단하세요. 통전될 수 있는 전선을 절대 만지지 마세요. 가정의 전기 장비를 작업하기 전에 회로 테스터를 사용하세요.</p>
+                                    <img src="../assets/img/sph3u_04.22.40a.jpg" alt="Most homes have a circuit breaker panel that looks like this in the basement." height="180" style="float: left; margin-right: 2%;">
+                                    <img src="../assets/img/sph3u_04.22.40b.jpg" alt="Keep your hairdryer away from water!" height="180" style="float: left; margin-right: 2%;">
+                                    <img src="../assets/img/sph3u_04.22.40c.jpg" alt="Children playing with a power cord" height="180" style="float: left; margin-right: 2%;">
+                                    <img src="../assets/img/sph3u_04.22.40d.jpg" alt="Person turning off power bar" height="180" style="float: left;">
+                                </div>
+
+                                <div class="tab-pane fade" id="tab1_2">
+                                    <p>사용 전에 모든 전선을 점검하세요. 닳거나 손상된 코드를 사용하지 말고, 단락(short circuit)을 방지하기 위해 코드가 완전히 절연되어 있는지 확인하세요.</p>
+                                    <img src="../assets/img/sph3u_04.22.40e.jpg" alt="A long cord." height="200" style="float: left; margin-right: 2%;">
+                                    <img src="../assets/img/sph3u_04.22.40f.jpg" alt="Person drying hands on a towel" height="200" style="float: left; margin-right: 2%;">
+                                    <img src="../assets/img/sph3u_04.22.40g.jpg" alt="Three prong outlet on wall" height="200" style="float: left; margin-right: 2%;">
+                                    <img src="../assets/img/sph3u_04.22.40h.jpg" alt="GFI outlet" height="200" style="float: left;">
+                                </div>
+
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB 1 ENDS ******************************************* -->
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>전기 화재</h3>
+                    <p>전기와 관련된 또 다른 안전 위험은 화재입니다. 전기가 화재를 일으키고 심각한 위험에 노출시킬 수 있는 몇 가지 방법이 있습니다.</p>
+                    <p>다음 각 탭을 선택하여 자세히 알아보세요.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** TAB 3 BEGINS ******************************************* -->
+
+                    <div>
+                        <div>
+                            <ul class="nav nav-pills-sm" role="tablist" style="width:100%">
+
+                                <!--YOU WILL NEED TO ADJUST THE WIDTH % DEPENDING ON HOW MANY TABS YOU HAVE-->
+                                <li class="active" style="width:33%" role="tab"><a href="#tab3_1" data-toggle="tab">
+                                        불꽃</a></li>
+                                <li style="width:33%" role="tab"><a href="#tab3_2" data-toggle="tab">
+                                        단락</a></li>
+                                <li style="width:33%" role="tab"><a href="#tab3_3" data-toggle="tab">
+                                        전선 용융</a></li>
+
+                            </ul>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- START TAB ITEMS -->
+
+
+                                <div class="tab-pane fade in active" id="tab3_1">
+                                    <img src="../assets/img/sph3u_04.22.41a.svg" alt="Cigarette lighter" class="img-responsive img-left-33">
+                                    <p>전기는 쉽게 불꽃을 만들고, 그 불꽃은 가스와 액체 같은 인화성 물질에 점화할 수 있습니다. 이것이 바베큐 라이터에서 일어나는 일입니다. 불꽃이 만들어지고 라이터에 저장된 연료에 점화합니다. 이것이 통제되지 않는 환경에서 발생하면 대형 화재를 일으킬 수 있습니다. 내연 기관은 실린더 내부의 연료/공기 혼합물에 점화하기 위해 점화 플러그를 사용합니다(통제된 환경).</p>
+                                </div>
+
+                                <div class="tab-pane fade" id="tab3_2">
+                                    <img src="../assets/img/sph3u_04.22.41b.svg" alt="Burned electrical outlet" class="img-responsive img-left-33">
+
+                                    <p>전선과 커넥터가 적절히 절연되지 않으면 단락이 발생할 수 있습니다. 이는 배터리의 한쪽 끝을 짧은 전선으로 의도적으로 다른 쪽 끝에 연결하는 것과 같습니다. 단락은 전하가 에너지를 모두 사용하지 않고 배터리로 돌아올 때 발생합니다.</p>
+                                </div>
+
+                                <div class="tab-pane fade" id="tab3_3">
+                                    <img src="../assets/img/sph3u_04.22.41c.svg" alt="Image of electric outlet that is damaged" class="img-responsive img-left-33">
+                                    <p>앞서 배웠듯이, 물질의 저항이 낮을수록 통과할 수 있는 전류가 높아집니다. 전류는 열 에너지를 방출하며, 이것이 위험할 수 있습니다. 충분한 전류가 충분히 가는 전선을 통과하면 매우 뜨거워집니다. 사실, 이것이 토스터가 작동하는 원리입니다. 높은 온도를 견디도록 설계되지 않은 경우, 단락된 전선은 매우 뜨거워져 플라스틱이나 덮개를 녹이고 물질에 불을 붙일 수 있습니다. 컴퓨터나 휴대전화를 오래 사용하면 매우 뜨거워지는 것을 느꼈을 것입니다. 이는 전하가 장치의 전선을 통과하면서 발생하는 열 때문입니다.</p>
+                                </div>
+
+
+                                <!-- END OF TAB ITEMS -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- *************************** TAB 3 ENDS ******************************************* -->
+                </div>
+            </div>
+
+
+        </section>
+        <section id="consolidation">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_04_consolidation.jpg" alt="정리 활동" class="img-responsive" style="width: 100%;"></h1>
+
+            </div>
+            <!--TRY IT STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">직접 해보기!</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>학습 활동 시작 부분에서 사용했던 다음 시뮬레이션을 사용하여 저항기가 포함된 간단한 회로로 옴의 법칙 실험을 수행하세요. </p>
+                            <p>실험을 수행하는 데 필요한 것에 대해 생각해 보세요. </p>
+                            <ul>
+                                <li>전선&#9;&#9;</li>
+                                <li>배터리 &#9;</li>
+                                <li>저항기 (색상 띠가 있는)</li>
+                                <li>전류계 (회로 내에 직렬로 연결)</li>
+                                <li>전압계 (저항기 양단에 연결)</li>
+                            </ul>
+                            <p>모든 것이 올바르게 설정되면 전압과 전류 측정값을 얻을 수 있습니다. <strong>Start</strong> 버튼을 눌러 새 탭에서 시뮬레이션을 여세요.</p>
+                        </div>
+                    </div>
+                    <p><a href="../assets/locker_docs/sph3u_04.01.100.pdf" target="_blank">"회로 제작 키트: DC - 가상 실험실"의 접근성 버전을 보려면 여기를 누르세요 <span class="sr-only">(새 창에서 열림)</span></a> </p>
+                </div>
+            </div>
+            <div class="row ilc-row-ilo">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_ILO_circuit_construction.jpg" alt="회로 제작 키트 시뮬레이션" class="img-responsive center-block callout-image"><a href="../ilo/phet_circuit_construction_kit/index.html" target="_blank" class="btn btn-inverse pull-right">Start <span class="sr-only">(새 창에서 열림)</span></a>
+                </div>
+                <!--END-->
+            </div>
+            <!--TRY IT ENDS-->
+            <!--REVIEW STARTS-->
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>복습</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/review.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>이 학습 활동 시작 부분에 나열된 어휘를 복습하세요. 노트에 각 어휘를 사용하여 이 학습 활동의 핵심 개념을 설명하는 문단을 작성하세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--REVIEW ENDS-->
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>자기 점검 퀴즈</h3>
+                    <div class="callout_content_icon"> <img src="../assets/icons/self_check.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>이해도를 확인하세요!</h4>
+                            <p>다음 자기 점검 퀴즈를 완료하여 학습의 현재 위치와 집중해야 할 영역을 파악하세요.</p>
+                            <p>이 퀴즈는 피드백 목적이며, 성적에 포함되지 않습니다. 이 퀴즈에 대한 시도 횟수는 무제한입니다. 충분한 시간을 갖고 최선을 다하며, 제공된 피드백을 반성하세요.</p>
+                            <p><strong>퀴즈</strong>를 눌러 이 도구에 접근하세요.</p> <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=27211480&amp;type=quiz&amp;rcode=eLO-79301558" target="_blank"><img src="../assets/icons/quiz_button.svg" class="action_button callout-image" alt="퀴즈"><span class="sr-only">(새 창에서 열림)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Compiled GVL, Widgets, ILOs, etc. -->
+    <script src="../dependencies/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../dependencies/vendor.min.js"></script>
+    <script src="../assets/js/bugfixes.js"></script>
+</body>
+
+</html>

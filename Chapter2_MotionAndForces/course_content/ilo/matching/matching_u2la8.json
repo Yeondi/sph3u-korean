@@ -1,0 +1,29 @@
+{
+    "department": "sec",
+    "pairs": 3,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "정답입니다! 잘했습니다!",
+    "basePath": "../assets/img",
+    "columnRatio": "2:1",
+    "items": [
+      {
+        "first": ["", "", "이 두 표면은 서로 미끄러질 때 가장 작은 마찰력(friction)을 갖습니다."],
+        "second": ["", "", "얼음 위의 고무"]
+      },
+      {
+        "first": ["", "", "어떤 두 표면이 가장 작은 정지 마찰력(static friction)을 갖습니까?"],
+        "second": ["", "", "윤활된 강철 대 강철"]
+      },
+      {
+        "first": ["", "", "어떤 두 표면이 서로 움직이기 시작하는 데 가장 큰 힘(force)이 필요합니까?"],
+        "second": ["", "", "마른 콘크리트 위의 고무"]
+      }
+
+    ],
+    "iloStartLink": "매칭 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloStartText": "매칭 1 대화형 활동의 시작.",
+    "iloEndLink": "링크를 눌러 매칭 1 대화형 활동의 시작으로 돌아가세요.",
+    "iloEndText": "매칭 1 대화형 활동의 끝."
+
+  }

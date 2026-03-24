@@ -1,0 +1,29 @@
+{
+    "department": "sec",
+    "pairs": 3,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "정답입니다! 잘했습니다!",
+    "basePath": "../assets/img",
+    "columnRatio": "2:1",
+    "items": [
+      {
+        "first": ["", "", "관성(inertia)의 법칙이라고도 합니다. 정지해 있는 물체는 계속 정지해 있으려 하고, 운동 중인 물체는 불균형한 힘(force)이 작용하지 않는 한 계속 운동하려 한다는 법칙입니다."],
+        "second": ["", "", "뉴턴의 제1법칙"]
+      },
+      {
+        "first": ["", "", "힘(force), 질량(mass), 가속도(acceleration)의 관계를 F = ma 공식으로 나타냅니다."],
+        "second": ["", "", "뉴턴의 제2법칙"]
+      },
+      {
+        "first": ["", "", "모든 작용력에는 크기가 같고 방향이 반대인 반작용력이 있다는 법칙입니다."],
+        "second": ["", "", "뉴턴의 제3법칙"]
+      }
+
+    ],
+    "iloStartLink": "매칭 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloStartText": "매칭 1 대화형 활동의 시작.",
+    "iloEndLink": "링크를 눌러 매칭 1 대화형 활동의 시작으로 돌아가세요.",
+    "iloEndText": "매칭 1 대화형 활동의 끝."
+
+  }

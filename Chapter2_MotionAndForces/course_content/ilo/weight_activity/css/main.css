@@ -1,0 +1,135 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+body {
+	background-color: #C6CDD0;
+	display: flex;
+	justify-content: center;
+}
+
+#mainContainer {
+	display: flex;
+    z-index: 1; 
+    position: relative;	
+}
+#ui-top {
+	font-size:13px;
+    top: 0px;
+    left: 230px;
+	width: 670px;
+	height: 70px;
+	padding: 10px;
+    z-index: 4;
+    background-color: #F8F9F9; 	
+}
+#ui {
+	position: absolute;
+    top: 440px;
+    left: 230px;
+	width: 670px;
+	height: 60px;
+	padding: 6px;
+    z-index: 4;
+    background-color: #F8F9F9; 	
+}
+#instructions {
+    width: 230px; 
+    height: 500px;
+    padding: 20px;
+    background-color: #F8F9F9; 	
+    font-size: 14px;
+}
+
+canvas {
+    -ms-touch-action: none;
+   z-index: 2; 	
+}
+
+h1 {
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+hr {
+	width: 240px;
+}
+
+input {
+	margin-right: 8px;
+}
+
+p {
+	margin-bottom: 8px;
+}
+
+
+
+th {
+	width: 130px;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+input[type=range] {
+    width: 130px;
+    cursor: pointer;
+}
+
+
+#toggleSquare {
+	position: absolute;
+    top:0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+
+
+#toggleArrow {
+	margin-top: -2px;
+    transition: transform 0.5s;
+    transform: rotate(-180deg);
+}
+
+
+
+.arrange-horizontally > * {
+    display: inline-block;
+    text-align: center;
+    
+}
+
+.arrange-vertically > * {
+    display: block;
+}
+
+.commonWidth {
+    width:212px;
+}
+
+.commonWidthBottom {
+    width:200px;
+}
+
+select {
+    margin-bottom: 5px;
+}
+
+dt {
+    margin-top:20px;
+}

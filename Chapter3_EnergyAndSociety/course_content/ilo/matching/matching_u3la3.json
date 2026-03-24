@@ -1,0 +1,53 @@
+{
+    "department": "sec",
+    "pairs": 9,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "정답입니다! 잘했습니다!",
+    "basePath": "../assets/img",
+    "columnRatio": "1:1",
+    "items": [
+      {
+        "first": ["", "", "복사(radiant)"],
+        "second": ["", "", "전파와 마이크로파를 포함"]
+      },
+      {
+        "first": ["", "", "전기(electrical)"],
+        "second": ["", "", "전선 속을 흐르는 전자"]
+      },
+      {
+        "first": ["", "", "전기적 퍼텐셜(electric potential)"],
+        "second": ["", "", "정전기 달라붙음을 일으키는 에너지"]
+      },
+      {
+        "first": ["", "", "중력 퍼텐셜(gravitational potential)"],
+        "second": ["", "", "높이 올려진 물체에 저장"]
+      },
+      {
+        "first": ["", "", "화학적 퍼텐셜(chemical potential)"],
+        "second": ["", "", "설탕 분자에 저장"]
+      },
+      {
+        "first": ["", "", "핵 퍼텐셜(nuclear potential)"],
+        "second": ["", "", "원자로에서 방출"]
+      },
+      {
+        "first": ["", "", "소리(sound)"],
+        "second": ["", "", "종파"]
+      },
+      {
+        "first": ["", "", "탄성 퍼텐셜(elastic potential)"],
+        "second": ["", "", "활에서 화살을 발사"]
+      },
+      {
+        "first": ["", "", "열(thermal)"],
+        "second": ["", "", "마찰에 의해 쉽게 생성"]
+      }
+
+    ],
+    "iloStartLink": "짝짓기 1 상호작용 활동에 들어가거나 링크를 눌러 활동 끝으로 건너뜁니다.",
+    "iloStartText": "짝짓기 1 상호작용 활동을 시작합니다.",
+    "iloEndLink": "링크를 눌러 짝짓기 1 상호작용 활동의 처음으로 돌아갑니다.",
+    "iloEndText": "짝짓기 1 상호작용 활동이 끝났습니다."
+
+  }

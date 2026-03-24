@@ -1,0 +1,41 @@
+{
+    "department": "sec",
+    "pairs": 6,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "정답입니다! 잘했습니다!",
+    "basePath": "../assets/img",
+    "columnRatio": "1:1",
+    "items": [
+      {
+        "first": ["", "", "손전등 건전지"],
+        "second": ["", "", "화학적 퍼텐셜 에너지(chemical potential energy)"]
+      },
+      {
+        "first": ["", "", "비명 소리"],
+        "second": ["", "", "소리 에너지(sound energy)"]
+      },
+      {
+        "first": ["", "", "물결파"],
+        "second": ["", "", "운동 에너지(kinetic energy)"]
+      },
+      {
+        "first": ["", "", "높은 선반 위의 상자"],
+        "second": ["", "", "중력 퍼텐셜 에너지(gravitational potential energy)"]
+      },
+      {
+        "first": ["", "", "꼬인 고무줄"],
+        "second": ["", "", "탄성 퍼텐셜 에너지(elastic potential energy)"]
+      },
+      {
+        "first": ["", "", "우라늄 원자핵"],
+        "second": ["", "", "핵 퍼텐셜 에너지(nuclear potential energy)"]
+      }
+
+    ],
+    "iloStartLink": "짝짓기 1 상호작용 활동에 들어가거나 링크를 눌러 활동 끝으로 건너뜁니다.",
+    "iloStartText": "짝짓기 1 상호작용 활동을 시작합니다.",
+    "iloEndLink": "링크를 눌러 짝짓기 1 상호작용 활동의 처음으로 돌아갑니다.",
+    "iloEndText": "짝짓기 1 상호작용 활동이 끝났습니다."
+
+  }

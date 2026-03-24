@@ -1,0 +1,166 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+body {
+	background-color: #C6CDD0;
+	display: flex;
+    justify-content: center;
+    font-size: 14px;
+}
+
+#mainContainer {
+	display: flex;
+    z-index: 1; 
+    position: relative;	
+}
+#ui-top {
+	
+    top: 0px;
+    left: 230px;
+	width: 650px;
+	height: 70px;
+	padding: 10px;
+    z-index: 4;
+    background-color: #F8F9F9; 	
+}
+.colourLetter
+{ 
+    color: blue;
+}
+#ui {
+	position: absolute;
+    top: 100px;
+    left: 330px;
+	width: 500px;
+	height: 400px;
+	padding: 20px;
+    z-index: 4;
+    background-color: #F8F9F9; 	
+}
+#instructions {
+    
+    width: 330px; 
+    height: 500px;
+    padding: 10px;
+    background-color: #F8F9F9; 	
+}
+
+#ui label {
+    width: 120px;
+    margin:20px 20px 5px 0px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: normal;
+    display: block;
+}
+#ui .val {
+    min-width: 60px;
+    margin-right: 20px;
+    display: inline-block;
+    background: #212628;
+    color: white;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius:5px;
+
+}
+#ui .val.nobg {
+    background: none;
+    color: #212628;
+    padding: 0;
+}
+#ui input[type=range] {
+    width:240px;
+    display:inline;
+}
+
+canvas {
+    -ms-touch-action: none;
+   z-index: 2; 	
+}
+
+h1 {
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+hr {
+	width: 240px;
+}
+
+input {
+	margin-right: 8px;
+}
+
+p {
+	margin-bottom: 8px;
+}
+
+
+
+th {
+	width: 130px;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+input[type=range] {
+    width: 130px;
+    cursor: pointer;
+}
+
+
+#toggleSquare {
+	position: absolute;
+    top:0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: #212628;
+}
+
+
+
+#toggleArrow {
+	margin-top: -2px;
+    transition: transform 0.5s;
+    transform: rotate(-180deg);
+}
+
+
+
+.arrange-horizontally > * {
+    display: inline-block;
+    text-align: center;
+    
+}
+
+.arrange-vertically > * {
+    display: block;
+}
+
+.commonWidth {
+    width:180px;
+}
+.hidden{
+    display: none;
+}
+
+#startButton {
+    position:absolute;
+    bottom:20px;
+}

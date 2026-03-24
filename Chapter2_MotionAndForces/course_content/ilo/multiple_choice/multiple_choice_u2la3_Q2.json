@@ -1,0 +1,39 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "객관식 1 대화형 활동의 시작.",
+    "iloEndText": "객관식 1 대화형 활동의 끝.",
+    "iloStartLink": "객관식 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 객관식 1 대화형 활동의 시작으로 돌아가세요.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "하늘을 날고 있는 비행기는 발사체(projectile)의 예입니다."
+                ],
+                "ariaLabel": "하늘을 날고 있는 비행기는 발사체의 예입니다."
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "참"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "참"
+                },
+                {
+                    "answer": [
+                        "거짓"
+                    ],
+                    "correct": true,
+                    "feedback": "정답입니다. 비행기는 중력(gravity) 외에도 엔진의 힘(force)이 작용하기 때문에 발사체가 아닙니다.",
+                    "ariaLabel": "거짓"
+                }
+            ]
+        }
+    ]
+}

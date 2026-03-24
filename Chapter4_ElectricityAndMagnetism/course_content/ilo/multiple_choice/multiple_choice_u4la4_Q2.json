@@ -1,0 +1,39 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "객관식 1 상호작용 활동의 시작입니다.",
+    "iloEndText": "객관식 1 상호작용 활동의 끝입니다.",
+    "iloStartLink": "객관식 1 상호작용 활동을 시작하거나 링크를 눌러 활동 끝으로 건너뜁니다.",
+    "iloEndLink": "링크를 눌러 객관식 1 상호작용 활동의 처음으로 돌아갑니다.",
+    "questions": [
+        {
+            "randomizeChoices": true,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "S극 옆에 N극이 있다."
+                ],
+                "ariaLabel": "S극 옆에 N극이 있다."
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "서로 밀어낸다(반발한다)."
+                    ],
+                    "correct": false,
+                    "feedback": "정답입니다.",
+                    "ariaLabel": "서로 밀어낸다(반발한다)."
+                },
+                {
+                    "answer": [
+                        "서로 끌어당긴다."
+                    ],
+                    "correct": true,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "서로 끌어당긴다."
+                }
+            ]
+        }
+    ]
+}

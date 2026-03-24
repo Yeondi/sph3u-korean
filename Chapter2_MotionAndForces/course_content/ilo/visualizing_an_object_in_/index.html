@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<meta charset="utf-8">
+<title>운동 중인 물체 시각화</title>
+<link rel="stylesheet" href="styles/ilc_main.css">
+<link rel="stylesheet" href="styles/c3.min.css">
+<link rel="stylesheet" href="styles/styles.css">
+<body>
+<div id="mainContainer">
+    <div id="instructionsMask"></div>
+    <!-- <div id="instructionsContainer" data-markdown-id="instructions" data-markdown-processed="false"></div> -->
+    <div id="instructionsContainer" data-lang-id="instructions" data-lang-processed="false"></div>
+
+    <!-- Activity results container -->
+  	<div id="activityResultContainer" class="activityResult color-safe-bg_light-brand-1">
+  	  <table id="timeStampTable">
+  	    <tr>
+  	      <th><span data-lang-id="tableHeadingTime" data-lang-processed="false"></th>
+  	      <th><span data-lang-id="tableHeadingPosition" data-lang-processed="false"></th>
+  	      <th><span data-lang-id="tableHeadingSpeed" data-lang-processed="false"></th>
+  	    </tr>
+  	  </table>
+    </div>
+
+    <!-- The graph charts -->
+    <div id="speedChartContainer">
+      <h5><span data-lang-id="speedVsTimeHeading" data-lang-processed="false"></span></h3>
+      <div id="speedChart"></div>
+    </div>
+
+    <div id="positionChartContainer">
+      <h5><span data-lang-id="positionVsTimeHeading" data-lang-processed="false"></span></h3>
+      <div id="positionChart"></div>
+    </div>
+
+    <!-- UI container -->
+	<div id="ui"><div>
+
+	    <!-- The main heading-->
+		<h1><span data-lang-id="mainHeading" data-lang-processed="false"></span></h1>
+
+        <h2><span data-lang-id="initialSettings" data-lang-processed="false"></h2>
+
+		<!-- The car's position -->
+		<p><span data-lang-id="carPositionLabel" data-lang-processed="false"></span>
+		<strong><span id="carPositionOutput">0</span><span data-lang-id="positionAppendMeters" data-lang-processed="false"></span></strong>
+		<input aria-label = "carPositionInput" id="carPositionInput" type="range" min="0" max="50" value="0"></input>
+
+		<!-- The flag's position -->
+		<p><span data-lang-id="flagPositionLabel" data-lang-processed="false"></span>
+		<strong><span id="flagPositionOutput">50</span><span data-lang-id="positionAppendMeters" data-lang-processed="false"></span></strong>
+		<input aria-label = "flagPositionInput" id="flagPositionInput" type="range" min="0" max="50" value="50"></input>
+
+		<!-- The car's power -->
+		<p><span data-lang-id="carPowerLabel" data-lang-processed="false"></span>
+		<strong><span id="carPowerOutput">1</span></strong>
+		<input aria-label = "carPowerInput" id="carPowerInput" type="range" min="1" max="6" value="1"></input>
+
+        <h2><span data-lang-id="moveCar" data-lang-processed="false"></h2>
+
+		<!-- the start buttons -->
+		<p><button id="uniformGoButton" class="btn btn-default" data-lang-id="uniformGoButtonTextOff" data-lang-processed="false"></button>
+		<p><button id="nonUniformGoButton" class="btn btn-default" data-lang-id="nonUniformGoButtonTextOff" data-lang-processed="false"></button>
+
+		<!-- The reset button -->
+ 	    <p><button id="resetButton" class="btn btn-default" data-lang-id="resetButtonText" data-lang-processed="false"></button>
+
+ 	    <!-- Time Display -->
+ 	    <div id="timeDisplayContainer">
+ 	      <div id="timeDisplay" >
+ 	      <p id="timeOutput"></p>
+ 	      <!--
+ 	      <p><strong><span id="timeMessageDisplay" data-lang-id="timeMessage" data-lang-processed="false"></span></strong></p>
+ 	      -->
+ 	      </div>
+ 	    </div>
+
+	    <!--
+		<div id="carControlsContainer">
+		<button id="goButton" class="btn btn-primary" data-lang-id="goButtonText" data-lang-processed="false"></button>
+		<p>
+		  <br>
+		  <span data-lang-id="speedLabel" data-lang-processed="false"></span> <strong><span id="carSpeedOutput"></span></strong>
+		  <br>
+		  <span data-lang-id="powerLabel" data-lang-processed="false"></span> <strong><span id="carPowerOutput"></span></strong>
+		</p>
+		<p>
+     		<button id="slowerButton" class="btn btn-default" data-lang-id="slowerButtonText" data-lang-processed="false"></button>
+     		<button id="fasterButton" class="btn btn-default" data-lang-id="fasterButtonText" data-lang-processed="false"></button>
+     		<button id="resetButton" class="btn btn-default" data-lang-id="resetButtonText" data-lang-processed="false"></button>
+		</p>
+		</div>
+		-->
+	   <!--
+		<p><span data-lang-id="label1" data-lang-processed="false"></span> <strong><span id="ballSpeedOutput"></span></strong><p>
+		<p><span data-lang-id="label2" data-lang-processed="false"></span> <strong><span id="ballAngleOutput"></span></strong><p>
+		<p><span data-lang-id="label3" data-lang-processed="false"></span> <strong><span id="platformFrictionOutput"></span></strong><p>
+		<input class="slider" type="range" min="0" max="1" value="0" id="platformFrictionSlider" step="0.1">
+		<button id="graphingButton" class="btn btn-default graphingButton" data-lang-id="startGraphingButtonText" data-lang-processed="false"></button>
+		-->
+
+		<!-- The toggle drawer-->
+		<div id="drawerToggle" tabindex="1">
+			<div id="toggleSquare">
+				<img id="toggleArrow" src="images/toggleArrow.png" alt="none">
+				<span id="instructionLabel" data-lang-id="instructionLabel" data-lang-processed="false"></span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Files needed to run Hexi -->
+<!--
+<script src="../src/modules/pixi.js/bin/pixi.js"></script>
+<script src="../bin/modules.js"></script>
+<script src="../bin/core.js"></script>
+-->
+
+<!--
+Preferably, just load the single hexi.js or hexi.min.hs file
+which includes Pixi, the modules, and Hexi's core:
+-->
+<script src="libraries/hexi.min.js"></script>
+<script src="libraries/decomp.min.js"></script>
+<script src="libraries/matter.min.js"></script>
+<script src="libraries/d3.min.js"></script>
+<script src="libraries/c3.min.js"></script>
+<script src="libraries/marked.min.js"></script>
+
+<!-- Main application file -->
+<!-- <script src="scripts/markdownLoader.js"></script> -->
+<!-- <script src="scripts/languageLoader.js"></script> -->
+<script src="scripts/languageLoader.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/toggleDrawer.js"></script>
+</body>
+</html>

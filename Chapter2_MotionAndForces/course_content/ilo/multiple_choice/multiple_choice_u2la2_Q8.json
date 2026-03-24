@@ -1,0 +1,63 @@
+{
+    "department": "sec",
+    "centerAnswers": false,
+    "imgBasePath": "../assets/img/",
+    "iloStartText": "객관식 1 대화형 활동의 시작.",
+    "iloEndText": "객관식 1 대화형 활동의 끝.",
+    "iloStartLink": "객관식 1 대화형 활동에 참여하거나 링크를 눌러 활동의 끝으로 건너뛰세요.",
+    "iloEndLink": "링크를 눌러 객관식 1 대화형 활동의 시작으로 돌아가세요.",
+    "questions": [
+        {
+            "randomizeChoices": false,
+            "choiceLabels": "alphabetized",
+            "prompt": {
+                "question": [
+                    "<math xmlns=\"http:\/\/www.w3.org\/1998\/Math\/MathML\"><mover accent='true'><mi>d</mi><mo>&#x2192;</mo></mover><mo>=</mo><mover accent='true'><mrow><msub><mi>v</mi><mn>1</mn></msub></mrow><mo stretchy='true'>&#x2192;</mo></mover><mi>t</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mover accent='true'><mi>a</mi><mo>&#x2192;</mo></mover><msup><mrow><mo stretchy='false'>(</mo><mi>t</mi><mo stretchy='false'>)</mo></mrow><mn>2</mn></msup><\/math>"
+                ],
+                "ariaLabel": ""
+            },
+            "choices": [
+                {
+                    "answer": [
+                        "선택지 1"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 1"
+                },
+                {
+                    "answer": [
+                        "선택지 2"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 2"
+                },
+                {
+                    "answer": [
+                        "선택지 3"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 3"
+                },
+                {
+                    "answer": [
+                        "선택지 4"
+                    ],
+                    "correct": false,
+                    "feedback": "오답입니다.",
+                    "ariaLabel": "선택지 4"
+                },
+                {
+                    "answer": [
+                        "선택지 5"
+                    ],
+                    "correct": true,
+                    "feedback": "정답입니다.",
+                    "ariaLabel": "선택지 5"
+                }
+            ]
+        }
+    ]
+}

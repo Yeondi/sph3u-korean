@@ -1,0 +1,2397 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <title>학습 활동 3.2: 에너지 보존</title>
+
+    <link rel="stylesheet" href="../assets/css/ilc_core_temp.css">
+</head>
+
+<body>
+    <noscript>
+        <div class="alert alert-warning clearfix" role="alert">
+            <p>
+                <strong>경고!</strong> 최상의 학습 경험을 위해 이 학습 활동에는 Javascript가 활성화되어야 하는 요소가 포함되어 있습니다.
+            </p>
+        </div>
+    </noscript>
+
+    <section id="ilcLearningGoals" class="hidden">
+        <h2>학습 목표</h2>
+        <p>우리는 다음을 학습합니다:</p>
+        <ul>
+            <li>에너지 보존 법칙(law of conservation of energy)을 이해한다</li>
+            <li>일상적인 상황에서 에너지 변환을 설명한다</li>
+            <li>다양한 에너지 발생 방법을 탐구한다</li>
+        </ul>
+        <h2>성취 기준</h2>
+        <p>나는 다음을 할 수 있습니다:</p>
+        <ul>
+            <li>에너지 보존 법칙을 사용하여 문제를 푼다</li>
+            <li>일상적인 상황에서 에너지 변환을 식별한다</li>
+            <li>에너지 발생 방법을 설명하고 효율을 비교한다</li>
+        </ul>
+    </section>
+
+    <main id="mainContent" class="container">
+        <section id="mindsOn">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_03.02_mindsOn.jpg" alt="Minds On" class="img-responsive" style="width:100%;"></h1>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>에너지 변환(energy transformation)</h2>
+                    <p>마지막으로 경사면을 올라가거나 내려갔던 때를 생각해 보세요. 예를 들어 언덕을 올라갈 때, 여러분은 아마 모르는 사이에 가지고 있는 에너지(energy)의 유형이 변화하고 있었습니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>여러분은 이전에 에너지 변환과 에너지 변환 방정식에 대해 배웠습니다.
+                                배운 내용을 활용하여, 마찰과 공기 저항을 무시하고 다음 상황에 대한 에너지 변환 방정식을 기록하세요:</p>
+                            <p>1. 위로 던진 공이 높이 올라갈수록 느려집니다.</p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-1">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-1">
+                                <p>운동 에너지(kinetic energy) → 중력 퍼텐셜 에너지(gravitational potential energy)</p>
+                            </div>
+                            <p class="margin-top-lg">2. 눈 덮인 언덕 꼭대기에서 썰매를 탄 학생이 언덕을 내려갑니다.
+                            </p>
+
+                            <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-2">예시 답안</button>
+                            <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-2">
+                                <p>중력 퍼텐셜 에너지 → 운동 에너지</p>
+                            </div>
+                            <p class="margin-top-lg">이 학습 활동에서 여러분은 에너지 변환을 식별해야 합니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_03.02.200.jpg" alt="A drawing of inventor Granville Woods" class="img-responsive img-right-33">
+                    <p>우리 중 많은 사람이 영화나 놀이공원에서 롤러코스터를 본 적이 있습니다. 철도 시스템을 만드는 데 사용된 것과 동일한 기술이 최초의 안전한 롤러코스터에 사용되었다는 것을 알고 계셨나요? Granville Woods는 Coney Island에서 최초의 8자 모양 롤러코스터를 시험했습니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>직접 해보기!</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/try_it.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>원하는 검색 엔진을 사용하여 "the mechanical universe"와 "design
+                                a roller coaster"를 검색한 후, 시뮬레이션 웹사이트인 <em>Amusement Park Physics — Design a Roller Coaster</em> 페이지를 방문하여 여러분만의 롤러코스터를 설계해 보세요.</p>
+                            <p>여러분의 창의력(그리고 물리학 지식)을 활용하여 자신만의 놀이공원 놀이기구를 설계하게 됩니다. 롤러코스터를 좋아하든 아니든, 누구나 이 활동을 시도할 수 있습니다.</p>
+
+                            <p>완료하면, 시뮬레이션이 여러분의 롤러코스터를 두 가지 측면에서 평가합니다:</p>
+                            <ul>
+                                <li>안전성</li>
+                                <li>재미 (오락성)</li>
+                            </ul>
+                            <p>이 학습 활동의 뒷부분에서 성공적인 롤러코스터 설계의 구성 요소에 대해 더 배우게 됩니다.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="action">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_03_action.jpg" alt="Action" class="img-responsive" style="width:100%;"></h1>
+
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>도입</h2>
+                    <p>Thomas Edison은 미래를 내다보는 능력, 발명 정신, 그리고 효율에 대한 열정으로 유명했습니다. 1931년 세상을 떠나기 직전, 그는 다음과 같은 말을 남겼으며, 이 말은 이후 New York Times에 실렸습니다.</p>
+                    <blockquote>
+
+
+                        <p>나는 태양과 태양 에너지에 돈을 걸겠다. 정말 대단한 에너지원이다! 석유와 석탄이 고갈될 때까지 기다리지 않고 이를 해결하기 시작하길 바란다. </p>
+
+                        <cite>Thomas Edison (1847–1931)</cite>
+
+                    </blockquote>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <p>에너지 효율적이라는 것은 무엇을 의미할까요? 에너지를 보존한다는 것은 무엇을 의미할까요? 에너지는 어디서 오며 에너지의 종류가 하나 이상일까요? 이 수업에서 여러분은 화학 에너지(chemical energy)와 역학적 에너지(mechanical energy)가 가정과 직장에서 매일 사용하는 전기 에너지(electrical energy)로 어떻게 변환되는지 배우게 됩니다.</p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_03.17.07.jpg" alt="Outer space image of the sun" class="img-responsive">
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h3>태양: 궁극적인 에너지원</h3>
+                    <p>우리의 주요 에너지원은 태양이지만, 우리가 사용하는 대부분의 에너지는 사용하기 전에 여러 번 변환됩니다. 에너지는 다양한 형태로 존재하며 한 유형에서 다른 유형으로 쉽게 변환됩니다. 에너지는 생성되거나 파괴될 수 없지만, 저장되어 나중에 사용될 수 있습니다. 에너지가 형태를 바꿀 때, 일부는 항상 열에너지(thermal energy)로 변환되어 주변 환경으로 분산됩니다.</p>
+                    <p>하루 동안 여러분이 하는 모든 것은 에너지를 한 형태에서 다른 형태로 변환하는 것과 관련됩니다. 컴퓨터에서 뉴스를 확인하든, 퇴근 후 집에 돌아오든, 집안일을 하든, 여러분은 에너지를 사용하고 다른 형태로 변환하고 있습니다.</p>
+                    <p>우리 몸은 음식에 저장된 화학 에너지를 지속적으로 열에너지와 운동 에너지로 변환합니다. 이 과정을 세포 호흡(cellular respiration)이라 하며, 이것이 우리를 살아 있게 합니다. 식단과 신체 건강이 우리 몸이 이 변환을 얼마나 효율적으로 수행할 수 있는지를 결정합니다. 균형 잡힌 식단과 규칙적인 활동이 중요합니다.</p>
+                </div>
+
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <img src="../assets/img/sph3u_03.17.08.jpg" alt="Energy from the sun and wind transformed into light" class="img-responsive">
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>중력 퍼텐셜 에너지 계산</h3>
+                    <p>건설 현장 견학에서, 여러분은 크레인이 1000 kg의 하중을 옆의 그림과 같이 10 m 높이로 들어 올리는 것을 관찰합니다.
+                        이것은 얼마나 많은 에너지가 필요했을까요?</p>
+
+                    <img src="../assets/img/sph3u_03.17.11.svg" alt="Image with a object of 1000 kg hanging from a string about 10 m from a person" class="img-responsive center-block">
+
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>필요한 에너지는 수행된 일(work)과 같으며, 물체가 수직으로 들어 올려지므로 힘(force)은 중력(gravity)과 같습니다.</p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <mi>W</mi>
+                            <mo>=</mo>
+                            <mi>F</mi>
+
+                            <mi>d</mi>
+                        </mrow>
+                    </math>
+                    <br>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                        <mrow>
+                            <mi>W</mi>
+                            <mo>=</mo>
+                            <mi>m</mi>
+                            <mi>g</mi>
+                            <mo>&#x00D7;</mo>
+                            <mi>d</mi>
+                            <mo>=</mo>
+                            <mo stretchy="false">(</mo>
+                            <mn>1000</mn>
+                            <mo>&nbsp;</mo>
+                            <mi mathvariant="normal">k</mi>
+                            <mi mathvariant="normal">g</mi>
+                            <mo stretchy="false">)</mo>
+                            <mrow>
+                                <mo>(</mo>
+                                <mrow>
+                                    <mn>9.8</mn>
+                                    <mo>&nbsp;</mo>
+                                    <mi mathvariant="normal">m</mi>
+                                    <mo>/</mo>
+                                    <msup>
+                                        <mi mathvariant="normal">s</mi>
+                                        <mn>2</mn>
+                                    </msup>
+                                </mrow>
+                                <mo>)</mo>
+                            </mrow>
+                            <mo stretchy="false">(</mo>
+                            <mn>10</mn>
+                            <mo>&nbsp;</mo>
+                            <mi mathvariant="normal">m</mi>
+                            <mo stretchy="false">)</mo>
+                            <mo>=</mo>
+                            <mn>9.8</mn>
+                            <mo>&#x00D7;</mo>
+                            <msup>
+                                <mrow>
+                                    <mn>10</mn>
+                                </mrow>
+                                <mn>4</mn>
+                            </msup>
+                            <mo>&nbsp;</mo>
+                            <mi mathvariant="normal">J</mi>
+                        </mrow>
+                    </math>
+
+                    <p class="margin-top-lg">그 철강 하중 바로 아래에 서 있으시겠습니까? 아마 아닐 것입니다!
+                        중력과 여러분 위에 있는 하중의 위치 때문에, 그 철강 하중에는 많은 에너지(9.8 ×
+                        10<sup>4</sup> J)가
+                        저장되어 있습니다. 케이블이 끊어지면 그 모든 에너지가 여러분에게 전달될 가능성이 항상 있습니다.</p>
+                    <p>하중을 들어 올리는 데 수행된 일은 현재 중력 퍼텐셜 에너지로 하중에 저장되어 있습니다. 이것은 기호 ΔE<sub>g</sub>로 표시합니다. </p>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>중력 퍼텐셜 에너지 = ΔE<sub>g</sub></p>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mo>&#x25b3;</mo>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>g</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mi>m</mi>
+                                    <mi>g</mi>
+                                    <mo>&#x25b3;</mo>
+                                    <mi>h</mi>
+                                </math></p>
+
+                            <p>여기서:</p>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mo>&#x25b3;</mo>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>g</mi>
+                                    </msub>
+                                </math> 는 두 지점 사이의 중력 퍼텐셜 에너지의 차이입니다.</p>
+
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mi>m</mi>
+                                </math> 은 물체의 질량(mass)입니다.</p>
+
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mi>g</mi>
+                                </math> 는 중력 가속도(acceleration due to gravity)입니다.</p>
+
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mo>&#x25b3;</mo>
+                                    <mi>h</mi>
+                                </math> 는 두 지점 사이의 높이 차이입니다.</p>
+
+                            <p>이 방정식은 때때로 다음과 같이 쓸 수도 있습니다:</p>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>g</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mi>m</mi>
+                                    <mi>g</mi>
+                                    <mi>h</mi>
+                                </math></p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="color-safe-bg_light-brand-1 margin-bottom-lg">
+                        <p><strong>참고:</strong> 에너지에는 항상 줄(J) 단위를, 질량에는 킬로그램(kg)을, 높이에는 미터(m)를 사용하세요.</p>
+                    </div>
+                    <h3>예시: 중력 퍼텐셜 에너지의 변화</h3>
+                    <p>롤러코스터에서 24 m 높이의 언덕을 올라가는 420 kg 자동차의 중력 퍼텐셜 에너지 변화를 계산하세요.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** ACCORDION 1 BEGINS ******************************************* -->
+
+                    <div class="accordionILC panel-group" id="accordion1">
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#accordion1-collapse1" class="collapsed">주어진 값</a></h4>
+                            </div>
+                            <div id="accordion1-collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mtable columnalign="left">
+                                            <mtr>
+                                                <mtd>
+                                                    <mtext>주어진 값:</mtext>
+                                                </mtd>
+                                            </mtr>
+                                            <mtr>
+                                                <mtd>
+                                                    <mi>m</mi>
+                                                    <mo>=</mo>
+                                                    <mn>420</mn>
+                                                    <mtext>&#x00A0;kg&#x00A0;&#x00A0;&#x00A0;</mtext>
+                                                    <mi>g</mi>
+                                                    <mo>=</mo>
+                                                    <mn>9.8</mn>
+                                                    <msup>
+                                                        <mtext>&#x00A0;m/s</mtext>
+                                                        <mn>2</mn>
+                                                    </msup>
+                                                    <mtext>&#x00A0;&#x00A0;</mtext>
+                                                    <mi mathvariant="normal">&#x0394;</mi>
+                                                    <mi>h</mi>
+                                                    <mo>=</mo>
+                                                    <mn>24</mn>
+                                                    <mtext>&#x00A0;m</mtext>
+                                                </mtd>
+                                            </mtr>
+                                            <mtr>
+                                                <mtd>
+                                                    <mtext>미지수:</mtext>
+                                                </mtd>
+                                            </mtr>
+                                            <mtr>
+                                                <mtd>
+                                                    <mi mathvariant="normal">&#x0394;</mi>
+                                                    <msub>
+                                                        <mi>E</mi>
+                                                        <mi>g</mi>
+                                                    </msub>
+                                                    <mo>=</mo>
+                                                    <mtext>&#x00A0;?</mtext>
+                                                </mtd>
+                                            </mtr>
+
+                                        </mtable>
+
+                                    </math>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion1" href="#accordion1-collapse2" class="collapsed">풀이</a></h4>
+                            </div>
+                            <div id="accordion1-collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <p>방정식:</p>
+                                    <p><math>
+                                            <mrow>
+                                                <mtable columnalign="left" equalrows="true" equalcolumns="true">
+                                                    <mtr columnalign="left">
+                                                        <mtd columnalign="left">
+                                                            <mrow>
+                                                                <mi>E</mi>
+                                                                <mo>=</mo>
+                                                                <mi>m</mi>
+                                                                <mi>g</mi>
+                                                                <mi>h</mi>
+                                                            </mrow>
+                                                        </mtd>
+                                                    </mtr>
+                                                </mtable>
+                                            </mrow>
+                                        </math>
+                                    </p>
+
+
+                                    <p>풀이:</p>
+
+                                    <p><math>
+                                            <mrow>
+                                                <mtable columnalign="left" equalrows="true" equalcolumns="true">
+                                                    <mtr columnalign="left">
+                                                        <mtd columnalign="left">
+                                                            <mrow>
+                                                                <mi>E</mi>
+                                                                <mo>=</mo>
+                                                                <mtext>&#160;</mtext>
+                                                                <mfenced>
+                                                                    <mrow>
+                                                                        <mn>420</mn>
+                                                                        <mtext>&#x00A0;kg</mtext>
+                                                                    </mrow>
+                                                                </mfenced>
+                                                                <mfenced>
+                                                                    <mrow>
+                                                                        <mn>9.8</mn>
+                                                                        <msup>
+                                                                            <mrow>
+                                                                                <mtext>&#x00A0;m/s</mtext>
+                                                                            </mrow>
+                                                                            <mn>2</mn>
+                                                                        </msup>
+                                                                    </mrow>
+                                                                </mfenced>
+                                                                <mfenced>
+                                                                    <mrow>
+                                                                        <mn>24</mn>
+                                                                        <mtext>&#x00A0;m</mtext>
+                                                                    </mrow>
+                                                                </mfenced>
+                                                            </mrow>
+                                                        </mtd>
+                                                    </mtr>
+                                                    <mtr columnalign="left">
+                                                        <mtd columnalign="left">
+                                                            <mrow>
+                                                                <mi>E</mi>
+                                                                <mo>=</mo>
+                                                                <mn>9.9</mn>
+                                                                <mo>&#x00D7;</mo>
+                                                                <msup>
+                                                                    <mrow>
+                                                                        <mn>10</mn>
+                                                                    </mrow>
+                                                                    <mn>4</mn>
+                                                                </msup>
+                                                                <mtext>J</mtext>
+                                                            </mrow>
+                                                        </mtd>
+                                                    </mtr>
+                                                </mtable>
+                                            </mrow>
+                                        </math>
+                                    </p>
+                                    <p>결론:</p>
+                                    <p>롤러코스터 자동차는 24 m 높이로 올라간 후 99 kJ의 중력 퍼텐셜 에너지를 얻습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END OF ACCORDION ITEMS -->
+                    </div>
+                    <!-- *************************** ACCORDION 1 ENDS ******************************************* -->
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>중력 퍼텐셜 에너지의 변화</h3>
+                    <p>물체가 더 낮은 위치로 이동하면 중력 퍼텐셜 에너지는 어떻게 될까요?
+                    </p>
+                    <button class="btn btn-default btn-answer-reveal" id="ilc1u_u1la1-suggestedAnswerButton-100">답안 보기</button>
+                    <div class="answer_reveal invisible" id="ilc1u_u1la1-suggestedAnswer-100">
+                        <p>물체가 낮아지면 중력 퍼텐셜 에너지를 잃습니다. </p>
+                    </div>
+                    <p class="margin-top-lg">물체가 떨어지면 중력 퍼텐셜 에너지를 잃으므로, 중력 퍼텐셜 에너지의 변화는 음수입니다.</p>
+                    <h4>예시</h4>
+                    <p>45 g의 골프공이 그린의 컵에 떨어집니다. 이 공은 -5.3 ×
+                        10<sup>-3</sup> J의 중력 퍼텐셜 에너지 변화를 경험합니다. 얼마나 떨어졌을까요?</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-6">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-6">
+                        <p>주어진 값:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>m</mi>
+                                <mo>=</mo>
+                                <mn>0.045</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">kg</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>g</mi>
+                                <mo>=</mo>
+                                <mn>9.8</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <msup>
+                                    <mi mathvariant="normal">s</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mo>&#x25b3;</mo>
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mo>-</mo>
+                                <mn>5.3</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mn>3</mn>
+                                    </mrow>
+                                </msup>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">J</mi>
+                            </math></p>
+
+                        <p>미지수:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mo>&#x25b3;</mo>
+                                <mi>h</mi>
+                                <mo>=</mo>
+                                <mo>?</mo>
+                            </math></p>
+
+                        <p>방정식:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mo>&#x25b3;</mo>
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mi>m</mi>
+                                <mi>g</mi>
+                                <mo>&#x25b3;</mo>
+                                <mi>h</mi>
+                            </math></p>
+
+                        <p>풀이:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mo>&#x25b3;</mo>
+                                <mi>h</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mo>&#x25b3;</mo>
+                                        <msub>
+                                            <mi>E</mi>
+                                            <mi>g</mi>
+                                        </msub>
+                                    </mrow>
+                                    <mrow>
+                                        <mi>m</mi>
+                                        <mi>g</mi>
+                                    </mrow>
+                                </mfrac>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mo>&#x25b3;</mo>
+                                <mi>h</mi>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mrow>
+                                        <mo>-</mo>
+                                        <mn>5.3</mn>
+                                        <mo>&#xd7;</mo>
+                                        <msup>
+                                            <mn>10</mn>
+                                            <mrow>
+                                                <mo>-</mo>
+                                                <mn>3</mn>
+                                            </mrow>
+                                        </msup>
+                                        <mo>&#xa0;</mo>
+                                        <mi mathvariant="normal">J</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mo>(</mo>
+                                        <mn>0.045</mn>
+                                        <mo>&#xa0;</mo>
+                                        <mi>kg</mi>
+                                        <mo>)</mo>
+                                        <mo>(</mo>
+                                        <mn>9.8</mn>
+                                        <mo>&#xa0;</mo>
+                                        <mi mathvariant="normal">m</mi>
+                                        <mo>/</mo>
+                                        <msup>
+                                            <mi mathvariant="normal">s</mi>
+                                            <mn>2</mn>
+                                        </msup>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mfrac>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mo>&#x25b3;</mo>
+                                <mi>h</mi>
+                                <mo>=</mo>
+                                <mo>-</mo>
+                                <mn>0.01202</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                            </math></p>
+
+                        <p>결론:</p>
+                        <p>공은 0.012 m, 즉 1.2 cm 떨어졌습니다. </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+
+                    <h2>운동 에너지</h2>
+                    <img src="../assets/img/sph3u_03.17.17a.jpg" alt="Image with a hockystick with a puck" class="img-responsive img-right-50">
+                    <p>하키 퍽이 스틱을 떠날 때 얼마나 많은 에너지를 가지고 있을까요? 하키 스틱은
+                        퍽에 일정 거리에 걸쳐 힘을 가했으므로, 퍽에 일이 수행되었습니다. 퍽의 에너지는
+                        운동 에너지 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <msub>
+                                <mi>E</mi>
+                                <mi>k</mi>
+                            </msub>
+                        </math>, 즉 운동의 에너지 형태로 증가했습니다. 하키 퍽은
+                        처음에 정지해 있었으므로, 동작이 시작될 때 운동 에너지를 가지고 있지 않았습니다. </p>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>하키 스틱이 수행한 모든 일은 운동 에너지가 되었습니다. 하키 스틱을 떠날 때 퍽의 운동 에너지는 운동 에너지의 일반 공식을 사용하여 구할 수 있습니다:</p>
+                </div>
+            </div>
+
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p> <strong>운동 에너지:</strong> </p>
+                            <p>
+
+                                <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <msub>
+                                            <mi>E</mi>
+                                            <mi>k</mi>
+                                        </msub>
+                                        <mo>=</mo>
+                                        <mfrac>
+                                            <mn>1</mn>
+                                            <mn>2</mn>
+                                        </mfrac>
+                                        <mi>m</mi>
+                                        <msup>
+                                            <mi>v</mi>
+                                            <mn>2</mn>
+                                        </msup>
+                                    </mrow>
+                                </math>
+                            </p>
+                            <p>여기서 <em>m</em>은 질량(kg 단위)이고 <em>v</em>는 속력(speed)(m/s 단위)입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예시: 운동 에너지</h3>
+                    <img src="../assets/img/sph3u_03.02.201.jpeg" alt="A teenager pushing shot put ball" class="img-responsive img-right-33">
+                    <p>예시 1: 속도 36.0 km/h [전방]로 움직이는 7.0 kg 포환(shot put)의 운동 에너지를 계산하세요.
+                        선수가 포환에 그 속도를 주기 위해 얼마나 많은 일을 했을까요? (일은 에너지의 변화와 같으므로, 운동 에너지의 변화를 구하면 수행된 일을 구하는 것임을 기억하세요.)</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-7">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-7">
+                        <p>주어진 값:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>m</mi>
+                                <mo>=</mo>
+                                <mn>7.0</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">kg</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <mn>36.0</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">km</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">h</mi>
+                                <mo>=</mo>
+                                <mn>10</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math> (방정식에서는 속도가 아닌 속력을 사용하므로, 방향은 필요하지 않습니다.)
+                        </p>
+
+                        <p>미지수:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mo>?</mo>
+                            </math></p>
+
+                        <p>방정식:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>1</mn>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mi>m</mi>
+                                <msup>
+                                    <mi>v</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p>풀이:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>1</mn>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mo>(</mo>
+                                <mn>7.0</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">kg</mi>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mn>10.0</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                                <msup>
+                                    <mo>)</mo>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>350</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">J</mi>
+                            </math></p>
+
+                        <p>결론:</p>
+                        <p>포환의 운동 에너지는 350 J입니다.</p>
+
+                        <p>일은 에너지의 변화와 같으므로, 선수는 포환에 350 J의 일을 수행한 것입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <img src="../assets/img/sph3u_03.02.202.jpg" alt="Car driving on road next to water" class="img-responsive img-right-33">
+                    <p>예시 2: 450 kg 자동차가 9.2 × <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <msup>
+                                <mn>10</mn>
+                                <mn>4</mn>
+                            </msup>
+                        </math> J의 운동 에너지를 가지고 있을 때, 얼마나 빠르게 달리고 있을까요?
+                    </p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-9">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-9">
+
+                        <p>주어진 값:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>m</mi>
+                                <mo>=</mo>
+                                <mn>450</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">kg</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>9.2</mn>
+                                <mo>&#xd7;</mo>
+                                <msup>
+                                    <mn>10</mn>
+                                    <mn>4</mn>
+                                </msup>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">J</mi>
+                            </math></p>
+
+                        <p>미지수:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <mo>?</mo>
+                            </math></p>
+
+                        <p>방정식:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>1</mn>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mi>m</mi>
+                                <msup>
+                                    <mi>v</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p>풀이:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mfrac>
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <msub>
+                                            <mi>E</mi>
+                                            <mi>k</mi>
+                                        </msub>
+                                    </mrow>
+                                    <mi>m</mi>
+                                </mfrac>
+                                <mo>=</mo>
+                                <msup>
+                                    <mi>v</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <msqrt>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                        </mrow>
+                                        <mi>m</mi>
+                                    </mfrac>
+                                </msqrt>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <msqrt>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mo>(</mo>
+                                            <mn>9.2</mn>
+                                            <mo>&#xd7;</mo>
+                                            <msup>
+                                                <mn>10</mn>
+                                                <mn>4</mn>
+                                            </msup>
+                                            <mo>&#xA0;</mo>
+                                            <mi mathvariant="normal">J</mi>
+                                            <mo>)</mo>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>450</mn>
+                                            <mo>&#xA0;</mo>
+                                            <mi mathvariant="normal">kg</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </msqrt>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <mn>20.22</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p>결론:</p>
+                        <p>자동차는 2.0×10<sup>1</sup> m/s로 달리고 있습니다.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>에너지 보존 법칙 </h3>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>정의</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/definition.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>에너지 보존 법칙</h4>
+                            <p>에너지는 파괴되거나 소멸될 수 없으며, 단지 한 형태에서 다른 형태로 변환될 뿐입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>물리학자들은 종종 보존(conserve)이라는 용어를 시스템 내 총 에너지가 일정하다는 의미로 사용합니다. 롤러코스터가 트랙을 통과할 때 중력 퍼텐셜 에너지와 운동 에너지의 양은 변하지만, 총 에너지는 일정하게 유지됩니다. </p>
+                    <p>여러분은 다양한 형태의 에너지에 대해 배웠습니다. 이제 역학적 에너지의 개념을 배울 것입니다. 역학적 에너지는 물체의 운동 에너지와 중력 퍼텐셜 에너지의 합입니다.</p>
+                    <p>다시 말해, 물체의 역학적 에너지는 물체의 운동 에너지와 퍼텐셜 에너지의 합과 같습니다:</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p><strong>역학적 에너지</strong> </p>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <msub>
+                                            <mi>E</mi>
+                                            <mi>T</mi>
+                                        </msub>
+                                    </mrow>
+                                    <mo>=</mo>
+                                    <mrow>
+                                        <msub>
+                                            <mi>E</mi>
+                                            <mi>k</mi>
+                                        </msub>
+                                    </mrow>
+                                    <mo>+</mo>
+                                    <mrow>
+                                        <msub>
+                                            <mi>E</mi>
+                                            <mi>g</mi>
+                                        </msub>
+                                    </mrow>
+                                </math></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>따라서, 중력 외에 다른 외력이 작용하지 않는다면, 과정 전체에 걸쳐 일정하게 유지되는 것은 총 역학적 에너지입니다.</p>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>노트</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다음 스케이트보드 경사로 그림을 연구하고, 노트에 다음 질문에 답하세요. 여러분의 풀이를 예시 답안과 비교하여 이해도를 확인하세요.</p>
+                        </div>
+                    </div>
+                    <p>1. 스케이트보더가 정지 상태에서 C 지점에서 출발하면, 경사로를 내려갈 때 속력이 증가하고 높이가 감소합니다. 운동 에너지가 가장 큰 곳은 어디일까요?</p>
+                    <figure>
+                        <img src="../assets/img/sph3u_03.02.203.svg" alt class="img-responsive center-block">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_03.02.203.html" target="_blank">상세 설명을 보려면 여기를 누르세요.<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-3">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-3">
+                        <p>A 지점에서입니다. 가장 낮은 지점에 있을 때 E<sub>g</sub>가 가장 낮고 E<sub>K</sub>가 가장 높기 때문입니다.</p>
+                    </div>
+                    <p class="margin-top-lg">2. 스케이트보더의 질량이 55 kg이라고 가정하고, 다음 표를 채우세요. 높이는 알지만 속력은 모르기 때문에 약간 까다롭습니다. 표를 채우는 데 필요한 만큼 힌트를 사용하세요.</p>
+                    <p>힌트:</p>
+
+                    <!-- *************************** ACCORDION 5 BEGINS ******************************************* -->
+
+                    <div class="accordionILC panel-group" id="accordion5">
+
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion5" href="#accordion5-collapse1" class="collapsed">힌트 1</a></h4>
+                            </div>
+                            <div id="accordion5-collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    C 지점에서
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                            <mtext>&#x2009;</mtext>
+                                            <mo>=</mo>
+                                            <mtext>&#x00A0;</mtext>
+                                            <mn>0</mn>
+                                            <mtext>&#x00A0;</mtext>
+                                            <mi mathvariant="normal">J</mi>
+                                        </mrow>
+                                    </math>
+                                    입니다. 스케이트보더가 정지해 있기 때문입니다. 공식
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>T</mi>
+                                                        <mi>A</mi>
+                                                    </msub>
+                                                </mrow>
+                                            </msub>
+                                            <mtext>&#x2009;</mtext>
+                                            <mo>=</mo>
+                                            <mtext>&#x00A0;</mtext>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                            <mo>+</mo>
+                                            <mtext>&#x00A0;</mtext>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>g</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math>을 사용하여 여기서 먼저 역학적 에너지를 구하세요.
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>g</mi>
+                                            </msub>
+                                            <mtext>&#x2009;</mtext>
+                                            <mo>=</mo>
+                                            <mtext>&#x2009;</mtext>
+                                            <mi>m</mi>
+                                            <mi>g</mi>
+                                            <mi>h</mi>
+                                        </mrow>
+                                    </math>를 기억하세요.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion5" href="#accordion5-collapse2" class="collapsed">힌트 2</a></h4>
+                            </div>
+                            <div id="accordion5-collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    C 지점에서의 역학적 에너지를 알게 되면, 에너지 보존 법칙을 사용하세요. 역학적 에너지는 A, B, C 지점에서 모두 같아야 합니다.<br>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>T</mi>
+                                                        <mi>A</mi>
+                                                    </msub>
+                                                </mrow>
+                                            </msub>
+                                            <mo>=</mo>
+                                            <mtext>&#x00A0;</mtext>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>T</mi>
+                                                        <mi>B</mi>
+                                                    </msub>
+                                                </mrow>
+                                            </msub>
+                                            <mo>=</mo>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>T</mi>
+                                                        <mi>C</mi>
+                                                    </msub>
+                                                </mrow>
+                                            </msub>
+                                        </mrow>
+                                    </math>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion5" href="#accordion5-collapse3" class="collapsed">힌트 3</a></h4>
+                            </div>
+                            <div id="accordion5-collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    높이를 사용하여 A와 B에서의
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>g</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math>를 계산할 수 있습니다. 그런 다음 역학적 에너지 공식을 재배열하여
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math>를 구하세요.
+                                    <br>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                            <mo>=</mo>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mrow>
+                                                    <msub>
+                                                        <mi>T</mi>
+                                                        <mi>A</mi>
+                                                    </msub>
+                                                </mrow>
+                                            </msub>
+                                            <mo>&#x2212;</mo>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>g</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion5" href="#accordion5-collapse4" class="collapsed">힌트 4</a></h4>
+                            </div>
+                            <div id="accordion5-collapse4" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    A와 B 지점에서의 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math>를 알게 되면, 운동 에너지 공식을 사용하여 각 지점에서의 속력을 구하세요.<br>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                            <mo>=</mo>
+                                            <mfrac>
+                                                <mn>1</mn>
+                                                <mn>2</mn>
+                                            </mfrac>
+                                            <mi>m</mi>
+                                            <msup>
+                                                <mi>v</mi>
+                                                <mn>2</mn>
+                                            </msup>
+                                        </mrow>
+                                    </math><br>
+                                    <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <mi>v</mi>
+                                            <mo>=</mo>
+                                            <msqrt>
+                                                <mrow>
+                                                    <mfrac>
+                                                        <mrow>
+                                                            <mn>2</mn>
+                                                            <msub>
+                                                                <mi>E</mi>
+                                                                <mi>k</mi>
+                                                            </msub>
+                                                        </mrow>
+                                                        <mi>m</mi>
+                                                    </mfrac>
+                                                </mrow>
+                                            </msqrt>
+                                        </mrow>
+                                    </math>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- END OF ACCORDION ITEMS -->
+                    </div>
+
+                    <!-- *************************** ACCORDION 5 ENDS ******************************************* -->
+
+
+
+                    <table class="table table-bordered" id="table0010">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <th scope="col">A 지점</th>
+                                <th scope="col">B 지점</th>
+                                <th scope="col">C 지점</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math></td>
+                                <td><span class="tableSuggestedAnswer invisible">2156 J</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">1078 J</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">0 J</span></td>
+                            </tr>
+                            <tr>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <mi>V</mi>
+                                        </mrow>
+                                    </math></td>
+                                <td><span class="tableSuggestedAnswer invisible">8.85 m/s</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">6.26 m/s</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">0 m/s</span></td>
+                            </tr>
+                            <tr>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>g</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math></td>
+                                <td><span class="tableSuggestedAnswer invisible">539 J</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">1617 J</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">2695 J</span></td>
+                            </tr>
+                            <tr>
+                                <td><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                        <mrow>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>T</mi>
+                                            </msub>
+                                        </mrow>
+                                    </math></td>
+                                <td><span class="tableSuggestedAnswer invisible">2695 J</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">2695 J</span></td>
+                                <td><span class="tableSuggestedAnswer invisible">2695 J</span></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <button id="table0010Button" class="btn btn-table-answer-reveal">예시 답안</button>
+                    <p class="margin-top-lg">3. <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                            </mrow>
+                        </math>와 <math xmlns="http://www.w3.org/1998/Math/MathML">
+                            <mrow>
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                            </mrow>
+                        </math> 사이의 관계는 무엇인가요?</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-4">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-4">
+
+                        <p>중력 퍼텐셜 에너지가 감소하면(물체가 낮아지면), 운동 에너지가 증가합니다(물체의 속력이 증가합니다).</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row margin-top-lg">
+                <!-- left column -->
+                <div class="col-xs-5 col-xs-offset-1">
+                    <h3>예시: 떨어뜨린 물체</h3>
+                    <p>질량이 430 g인 돌을 옆의 그림과 같이 지면에서 1.7 m 높이로 들어 올립니다.</p>
+                    <p>돌을 놓으면, 아래로 이동하면서 중력 퍼텐셜 에너지는 감소하고 운동 에너지는 증가합니다.</p>
+                    <p>돌을 놓았을 때 모든 중력 퍼텐셜 에너지가 운동 에너지로 변환된다면, 돌이 지면에 닿기 직전에 얼마나 빠르게 움직이고 있을까요?</p>
+                </div>
+                <!-- right column -->
+                <div class="col-xs-5">
+                    <!-- <figure> -->
+                    <img src="../assets/img/sph3u_03.17.31.svg" alt="Diagram showing an object that changes height has E g only at the top and E k only at the bottom" class="img-responsive">
+
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-10">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-10">
+
+                        <p>주어진 값:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>m</mi>
+                                <mo>=</mo>
+                                <mn>0.430</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">kg</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>h</mi>
+                                <mo>=</mo>
+                                <mn>1.7</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>g</mi>
+                                <mo>=</mo>
+                                <mn>9.8</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <msup>
+                                    <mi mathvariant="normal">s</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p>미지수:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <mo>?</mo>
+                            </math></p>
+
+                        <p>방정식:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mi>m</mi>
+                                <mi>g</mi>
+                                <mi>h</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>1</mn>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mi>m</mi>
+                                <msup>
+                                    <mi>v</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p>풀이:</p>
+                        <p>먼저, 중력 퍼텐셜 에너지의 양을 구해야 합니다. 그런 다음, 모든 에너지가 운동 에너지로 변환되므로, 동일한 에너지 양에 해당하는 속력을 구할 것입니다.
+                        </p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mo>(</mo>
+                                <mn>0.430</mn>
+                                <mo>&#xa0;</mo>
+                                <mi>kg</mi>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mn>9.8</mn>
+                                <mo>&#xa0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <msup>
+                                    <mi mathvariant="normal">s</mi>
+                                    <mn>2</mn>
+                                </msup>
+                                <mo>)</mo>
+                                <mo>(</mo>
+                                <mn>1.7</mn>
+                                <mo>&#xa0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>)</mo>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>7.1638</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">J</mi>
+                            </math></p>
+
+                        <p>따라서,</p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>7.1638</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">J</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <msqrt>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <msub>
+                                                <mi>E</mi>
+                                                <mi>k</mi>
+                                            </msub>
+                                        </mrow>
+                                        <mi>m</mi>
+                                    </mfrac>
+                                </msqrt>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <msqrt>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mo>(</mo>
+                                            <mn>7.1638</mn>
+                                            <mo>&#xa0;</mo>
+                                            <mi mathvariant="normal">J</mi>
+                                            <mo>)</mo>
+                                        </mrow>
+                                        <mrow>
+                                            <mn>0.430</mn>
+                                            <mo>&#xA0;</mo>
+                                            <mi mathvariant="normal">kg</mi>
+                                        </mrow>
+                                    </mfrac>
+                                </msqrt>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>v</mi>
+                                <mo>=</mo>
+                                <mn>5.772</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p>결론:</p>
+                        <p>돌은 지면에 닿기 직전에 5.8 m/s로 움직이고 있습니다.</p>
+
+                        <p>흥미롭게도, 이 문제에서 질량은 실제로 필요하지 않았습니다. 초기 속력이 0이고, 중력 가속도와 변위가 주어졌다는 점을 이용하여 운동학(kinematics)으로도 풀 수 있었을 것입니다. 같은 답을 얻었을 것입니다. 운동학과 에너지 보존 사이에는 깊은 관련이 있습니다.</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ilc-row-text">
+                <!-- left column -->
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예시: 포물선 궤적으로 던진 공</h3>
+                    <p>질량이 145 g인 골프공이 쳐서 처음에 52.0 m/s의 속력으로 날아가며, 다음 그림과 같이 골프 코스를 따라 호를 그리며 비행합니다. 호의 꼭대기에서 속력은 48.0 m/s입니다.
+                        골프공 호의 최대 높이는 얼마일까요?</p>
+
+                    <img src="../assets/img/sph3u_03.17.32.svg" alt="Image with kinetic and gravitate energy" class="img-responsive center-block">
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-11">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-11">
+                        <p>골프공이 지면에 있을 때 높이는 0이므로 중력 퍼텐셜 에너지는 0입니다. 공이 호의 꼭대기에 있을 때는 속력과 높이가 모두 있으므로 중력 퍼텐셜 에너지와 운동 에너지를 모두 가지고 있습니다.</p>
+
+                        <p>주어진 값:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>m</mi>
+                                <mo>=</mo>
+                                <mn>0.145</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">kg</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>g</mi>
+                                <mo>=</mo>
+                                <mn>9.8</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <msup>
+                                    <mi mathvariant="normal">s</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>v</mi>
+                                    <mn>1</mn>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>52</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>v</mi>
+                                    <mn>2</mn>
+                                </msub>
+                                <mo>=</mo>
+                                <mn>48</mn>
+                                <mo>&#xA0;</mo>
+                                <mi mathvariant="normal">m</mi>
+                                <mo>/</mo>
+                                <mi mathvariant="normal">s</mi>
+                            </math></p>
+
+                        <p>미지수:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mi>h</mi>
+                                <mo>=</mo>
+                                <mo>?</mo>
+                            </math></p>
+
+                        <p>방정식:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>T</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>+</mo>
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>k</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mfrac>
+                                    <mn>1</mn>
+                                    <mn>2</mn>
+                                </mfrac>
+                                <mi>m</mi>
+                                <msup>
+                                    <mi>v</mi>
+                                    <mn>2</mn>
+                                </msup>
+                            </math></p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <msub>
+                                    <mi>E</mi>
+                                    <mi>g</mi>
+                                </msub>
+                                <mo>=</mo>
+                                <mi>m</mi>
+                                <mi>g</mi>
+                                <mi>h</mi>
+                            </math></p>
+
+                        <p>풀이:</p>
+
+                        <h4>지면 위의 공</h4>
+
+                        <p>공이 지면에 있을 때:
+                        </p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>T</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>1</mn>
+                                        <mn>2</mn>
+                                    </mfrac>
+                                    <mi>m</mi>
+                                    <msup>
+                                        <mi>v</mi>
+                                        <mn>2</mn>
+                                    </msup>
+                                    <mo>+</mo>
+                                    <mn>0</mn>
+                                </mrow>
+                            </math></p>
+
+                        <p>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>T</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>k</mi>
+                                    </msub>
+                                    <mo>+</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>g</mi>
+                                    </msub>
+                                </mrow>
+                            </math>
+                        </p>
+
+                        <p>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>T</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mn>1</mn>
+                                        <mn>2</mn>
+                                    </mfrac>
+                                    <mo stretchy="false">(</mo>
+                                    <mn>0.145</mn>
+                                    <mo>&nbsp;</mo>
+                                    <mi mathvariant="normal">k</mi>
+                                    <mi mathvariant="normal">g</mi>
+                                    <mo stretchy="false">)</mo>
+                                    <msup>
+                                        <mrow>
+                                            <mrow>
+                                                <mo>(</mo>
+                                                <mrow>
+                                                    <mn>52</mn>
+                                                    <mo>&nbsp;</mo>
+                                                    <mi mathvariant="normal">m</mi>
+                                                    <mo>/</mo>
+
+                                                    <mi mathvariant="normal">s</mi>
+
+                                                </mrow>
+                                                <mo>)</mo>
+                                            </mrow>
+                                        </mrow>
+                                        <mn>2</mn>
+                                    </msup>
+                                </mrow>
+                            </math>
+                        </p>
+
+                        <p>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <msub>
+                                        <mi>E</mi>
+                                        <mi>T</mi>
+                                    </msub>
+                                    <mo>=</mo>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mn>196</mn>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">J</mi>
+                                </mrow>
+                            </math>
+                        </p>
+
+                        <h4>호의 꼭대기</h4>
+
+                        <p>호의 꼭대기에서, 에너지 보존으로 인해 역학적 에너지는 여전히 196 J입니다.</p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mtable columnalign="left">
+                                    <mtr>
+                                        <mtd>
+                                            <mtable columnalign="left">
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <msub>
+                                                                <mi>E</mi>
+                                                                <mi>T</mi>
+                                                            </msub>
+                                                            <mo>=</mo>
+                                                            <msub>
+                                                                <mi>E</mi>
+                                                                <mi>k</mi>
+                                                            </msub>
+                                                            <mo>+</mo>
+                                                            <msub>
+                                                                <mi>E</mi>
+                                                                <mrow>
+                                                                    <msub>
+                                                                        <mi>g</mi>
+                                                                        <mi mathvariant="normal">&#x03C0;
+                                                                        </mi>
+                                                                    </msub>
+
+                                                                </mrow>
+                                                            </msub>
+
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <mn>196</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mi mathvariant="normal">J</mi>
+                                                            <mo>=</mo>
+                                                            <mfrac>
+                                                                <mn>1</mn>
+                                                                <mn>2</mn>
+                                                            </mfrac>
+                                                            <mi>m</mi>
+                                                            <msup>
+                                                                <mi>v</mi>
+                                                                <mn>2</mn>
+                                                            </msup>
+                                                            <mo>+</mo>
+                                                            <mi>m</mi>
+                                                            <mi>g</mi>
+                                                            <mi>h</mi>
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <mn>196</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mi mathvariant="normal">J</mi>
+                                                            <mo>=</mo>
+                                                            <mfrac>
+                                                                <mn>1</mn>
+                                                                <mn>2</mn>
+                                                            </mfrac>
+                                                            <mo stretchy="false">(</mo>
+                                                            <mn>0.145</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mtext>kg</mtext>
+                                                            <mo stretchy="false">)</mo>
+                                                            <msup>
+                                                                <mrow>
+                                                                    <mrow>
+                                                                        <mo>(</mo>
+                                                                        <mrow>
+                                                                            <mn>48</mn>
+                                                                            <mi mathvariant="normal">m</mi>
+                                                                            <mo>/</mo>
+
+                                                                            <mi mathvariant="normal">s</mi>
+
+
+                                                                        </mrow>
+                                                                        <mo>)</mo>
+                                                                    </mrow>
+                                                                </mrow>
+                                                                <mn>2</mn>
+                                                            </msup>
+                                                            <mo>+</mo>
+                                                            <mo stretchy="false">(</mo>
+                                                            <mn>0.145</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mtext>kg</mtext>
+                                                            <mo stretchy="false">)</mo>
+                                                            <mrow>
+                                                                <mo>(</mo>
+                                                                <mrow>
+                                                                    <mn>9.8</mn>
+                                                                    <mo>&nbsp;</mo>
+                                                                    <mi mathvariant="normal">m</mi>
+                                                                    <mo>/</mo>
+                                                                    <msup>
+                                                                        <mi mathvariant="normal">s</mi>
+                                                                        <mn>2</mn>
+                                                                    </msup>
+                                                                </mrow>
+                                                                <mo>)</mo>
+                                                            </mrow>
+                                                            <mi>h</mi>
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+
+                                            </mtable>
+                                        </mtd>
+                                    </mtr>
+                                    <mtr>
+                                        <mtd>
+                                            <mtable columnalign="left">
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <mi>h</mi>
+                                                            <mo>=</mo>
+                                                            <mfrac>
+                                                                <mrow>
+                                                                    <mn>196</mn>
+                                                                    <mtext>&#x2009;</mtext>
+                                                                    <mi mathvariant="normal">J</mi>
+                                                                    <mo>&#x2212;</mo>
+                                                                    <mn>167</mn>
+                                                                    <mtext>&#x2009;</mtext>
+                                                                    <mi mathvariant="normal">J</mi>
+                                                                </mrow>
+                                                                <mrow>
+                                                                    <mn>1.421</mn>
+                                                                    <mfrac>
+                                                                        <mrow>
+                                                                            <mi mathvariant="normal">k</mi>
+                                                                            <mi mathvariant="normal">g</mi>
+                                                                            <mo>&#x22C5;</mo>
+                                                                            <mi mathvariant="normal">m</mi>
+                                                                        </mrow>
+                                                                        <mrow>
+                                                                            <msup>
+                                                                                <mi mathvariant="normal">s
+                                                                                </mi>
+                                                                                <mn>2</mn>
+                                                                            </msup>
+
+                                                                        </mrow>
+                                                                    </mfrac>
+
+                                                                </mrow>
+                                                            </mfrac>
+
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+                                                <mtr columnalign="left">
+                                                    <mtd columnalign="left">
+                                                        <mrow>
+                                                            <mi>h</mi>
+                                                            <mo>=</mo>
+                                                            <mn>20.4</mn>
+                                                            <mtext>&#x2009;</mtext>
+                                                            <mtext>m</mtext>
+                                                        </mrow>
+                                                    </mtd>
+                                                </mtr>
+
+                                            </mtable>
+                                        </mtd>
+                                    </mtr>
+                                </mtable>
+
+                            </math></p>
+
+                        <p>결론:</p>
+                        <p>공의 최대 높이는 20.4 m입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2>백분율 효율(percent efficiency)</h2>
+                    <p>에너지 변환이 일어날 때, 일부 에너지는 항상 열에너지로 변환되며, 이는 종종 분산되어 일을 수행하는 시스템이나 기계가 다시 회수할 수 없게 됩니다. 예를 들어, 휴대전화나 노트북을 사용할 때 약간 따뜻해지는 것을 느낄 수 있습니다. 배터리의 화학 에너지 일부가 열로 변환된 후 손실됩니다. </p>
+                    <p>시스템이나 기계에서 실제로 일로 변환되는 에너지의 양을 유용한 일 또는 에너지 출력이라고 합니다. 시스템이나 기계에 실제로 투입된 에너지를 실제 수행된 일 또는 에너지 입력이라고 합니다. 이 두 양을 비교하면 시스템이나 기계의 효율을 알 수 있습니다.</p>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>공식</h3>
+                    <div class="callout_content_icon"><img src="../assets/icons/formula.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p> <strong>효율</strong></p>
+                            <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                    <mrow>
+                                        <mi mathvariant="normal">&#x0025;</mi>
+                                        <mtext>&#x00A0;</mtext>
+                                        <mi mathvariant="normal">e</mi>
+                                        <mi mathvariant="normal">f</mi>
+                                        <mi mathvariant="normal">f</mi>
+                                        <mi mathvariant="normal">i</mi>
+                                        <mi mathvariant="normal">c</mi>
+                                        <mi mathvariant="normal">i</mi>
+                                        <mi mathvariant="normal">e</mi>
+                                        <mi mathvariant="normal">n</mi>
+                                        <mi mathvariant="normal">c</mi>
+                                        <mi mathvariant="normal">y</mi>
+                                        <mtext>&#x00A0;</mtext>
+                                        <mo>=</mo>
+                                        <mfrac>
+                                            <mrow>
+                                                <mtext>&#x00A0;</mtext>
+                                                <mi mathvariant="normal">e</mi>
+                                                <mi mathvariant="normal">n</mi>
+                                                <mi mathvariant="normal">e</mi>
+                                                <mi mathvariant="normal">r</mi>
+                                                <mi mathvariant="normal">g</mi>
+                                                <mi mathvariant="normal">y</mi>
+                                                <mtext>&#x00A0;</mtext>
+                                                <mi mathvariant="normal">o</mi>
+                                                <mi mathvariant="normal">u</mi>
+                                                <mi mathvariant="normal">t</mi>
+                                                <mi mathvariant="normal">p</mi>
+                                                <mi mathvariant="normal">u</mi>
+                                                <mi mathvariant="normal">t</mi>
+                                                <mtext>&#x00A0;</mtext>
+                                            </mrow>
+                                            <mrow>
+                                                <mtext>&#x00A0;</mtext>
+                                                <mi mathvariant="normal">e</mi>
+                                                <mi mathvariant="normal">n</mi>
+                                                <mi mathvariant="normal">e</mi>
+                                                <mi mathvariant="normal">r</mi>
+                                                <mi mathvariant="normal">g</mi>
+                                                <mi mathvariant="normal">y</mi>
+                                                <mtext>&#x00A0;</mtext>
+                                                <mi mathvariant="normal">i</mi>
+                                                <mi mathvariant="normal">n</mi>
+                                                <mi mathvariant="normal">p</mi>
+                                                <mi mathvariant="normal">u</mi>
+                                                <mi mathvariant="normal">t</mi>
+                                                <mtext>&#x00A0;</mtext>
+                                            </mrow>
+                                        </mfrac>
+                                        <mo>&#x00D7;</mo>
+                                        <mn>100</mn>
+                                        <mi mathvariant="normal">&#x0025;</mi>
+                                    </mrow>
+                                </math></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <p>현실 세계에서의 에너지 변환의 경우, 효율은 100%보다 작아야 합니다. 만약 100%보다 큰 답을 얻었다면, 입력과 출력에 올바른 값을 사용했는지 확인하고 이전 계산을 다시 점검하세요.</p>
+                    <p>다음 표는 몇 가지 일반적인 시스템의 백분율 효율을 보여줍니다.</p>
+                    <table id="myTable2" class="table table-bordered">
+
+                        <thead>
+
+                            <tr>
+                                <th class="column_1 blueBorderLeft" scope="col">시스템</th>
+                                <th class="column_4 blueBorderRight" scope="col">효율</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>전기 가열 패드</td>
+                                <td>99%</td>
+                            </tr>
+                            <tr>
+                                <td>가정용 가스 보일러</td>
+                                <td>85%</td>
+                            </tr>
+                            <tr>
+                                <td>가정용 석유 보일러</td>
+                                <td>66%</td>
+                            </tr>
+                            <tr>
+                                <td>자동차 엔진</td>
+                                <td>26%</td>
+                            </tr>
+                            <tr>
+                                <td>LED 램프</td>
+                                <td>44%</td>
+                            </tr>
+                            <tr>
+                                <td>백열 램프</td>
+                                <td>2%</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <p class="margin-top-lg">에너지 변환이 항상 해당 시스템에서 일을 할 수 있는 형태의 에너지로 귀결되는 것은 아닙니다. 예를 들어, 내연 기관 자동차 엔진은 연료의 화학 에너지를 100% 자동차 추진에 변환하지 않습니다. 에너지 일부는 엔진 부품을 움직이는 데 사용되고, 절반 이상은 열에너지로 변환되며, 나머지 20%만 자동차의 구동계에 사용됩니다. 전기 자동차는 전력망의 에너지를 바퀴의 역학적(운동) 에너지로 변환하는 데 훨씬 더 효율적입니다(60% 변환 효율). 전기 자동차는 제동을 통해 일부 운동 에너지를 배터리의 화학 에너지로 다시 변환할 수 있다는 이점이 있습니다. 또한 공회전 시에는 전기 에너지가 소비되지 않습니다.</p>
+                    <p>구형 형광등과 백열등이 왜 그렇게 비효율적일까요? 전기 에너지가 가시광선 에너지로 변환될 때, 둘 다 빛 에너지로 방출하는 것보다 훨씬 더 많은 양의 열에너지를 부산물로 생성합니다.</p>
+                </div>
+            </div>
+            <div class="row">
+                <!-- left column -->
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>예시: 효율</h3>
+                    <p>다음 그림과 같이 265 J의 에너지를 사용하여 200.0 J의 소리 에너지(sound energy)를 생산하는 태블릿 컴퓨터의 백분율 효율을 계산하세요.</p>
+                    <figure>
+                        <img src="../assets/img/sph3u_03.02.204.svg" alt class="img-responsive center-block">
+                        <figcaption>
+                            <p><a href="../assets/alt/sph3u_03.02.204.html" target="_blank">상세 설명을 보려면 여기를 누르세요.<span class="sr-only">(새 창에서 열림)</span></a></p>
+                        </figcaption>
+                    </figure>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-12">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-12">
+                        <p>주어진 값:</p>
+                        <p>입력: 265 J의 전기 에너지</p>
+                        <p>출력:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mn>2.000</mn>
+                                    <mo>&#x00D7;</mo>
+                                    <msup>
+                                        <mrow>
+                                            <mn>10</mn>
+                                        </mrow>
+                                        <mn>2</mn>
+                                    </msup>
+                                    <mi mathvariant="normal">J</mi>
+                                </mrow>
+                            </math>의 소리 에너지.</p>
+
+                        <p>미지수:</p>
+                        <p>% 효율</p>
+                        <p>방정식:</p>
+
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi mathvariant="normal">&#x0025;</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">f</mi>
+                                    <mi mathvariant="normal">f</mi>
+                                    <mi mathvariant="normal">i</mi>
+                                    <mi mathvariant="normal">c</mi>
+                                    <mi mathvariant="normal">i</mi>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">n</mi>
+                                    <mi mathvariant="normal">c</mi>
+                                    <mi mathvariant="normal">y</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mtext>&#x00A0;</mtext>
+                                            <mi mathvariant="normal">o</mi>
+                                            <mi mathvariant="normal">u</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                            <mi mathvariant="normal">p</mi>
+                                            <mi mathvariant="normal">u</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                            <mtext>&#x00A0;</mtext>
+                                        </mrow>
+                                        <mrow>
+                                            <mtext>&#x00A0;</mtext>
+                                            <mi mathvariant="normal">i</mi>
+                                            <mi mathvariant="normal">n</mi>
+                                            <mi mathvariant="normal">p</mi>
+                                            <mi mathvariant="normal">u</mi>
+                                            <mi mathvariant="normal">t</mi>
+                                            <mtext>&#x00A0;</mtext>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>&#x00D7;</mo>
+                                    <mn>100</mn>
+                                    <mi mathvariant="normal">&#x0025;</mi>
+                                </mrow>
+                            </math></p>
+                        <p>풀이:</p>
+                        <p><math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi mathvariant="normal">&#x0025;</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">f</mi>
+                                    <mi mathvariant="normal">f</mi>
+                                    <mi mathvariant="normal">i</mi>
+                                    <mi mathvariant="normal">c</mi>
+                                    <mi mathvariant="normal">i</mi>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">n</mi>
+                                    <mi mathvariant="normal">c</mi>
+                                    <mi mathvariant="normal">y</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mtext>&#x00A0;</mtext>
+                                            <mn>200.0</mn>
+                                            <mo>&nbsp;</mo>
+                                            <mi mathvariant="normal">J</mi>
+                                            <mtext>&#x00A0;</mtext>
+                                        </mrow>
+                                        <mrow>
+                                            <mtext>&#x00A0;</mtext>
+                                            <mn>265</mn>
+                                            <mo>&nbsp;</mo>
+                                            <mi mathvariant="normal">J</mi>
+                                            <mtext>&#x00A0;</mtext>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>&#x00D7;</mo>
+                                    <mn>100</mn>
+                                    <mi mathvariant="normal">&#x0025;</mi>
+                                </mrow>
+                            </math></p>
+                        <p>
+                            <math xmlns="http://www.w3.org/1998/Math/MathML">
+                                <mrow>
+                                    <mi mathvariant="normal">&#x0025;</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">f</mi>
+                                    <mi mathvariant="normal">f</mi>
+                                    <mi mathvariant="normal">i</mi>
+                                    <mi mathvariant="normal">c</mi>
+                                    <mi mathvariant="normal">i</mi>
+                                    <mi mathvariant="normal">e</mi>
+                                    <mi mathvariant="normal">n</mi>
+                                    <mi mathvariant="normal">c</mi>
+                                    <mi mathvariant="normal">y</mi>
+                                    <mtext>&#x00A0;</mtext>
+                                    <mo>=</mo>
+                                    <mn>75.5</mn>
+                                    <mi mathvariant="normal">&#x0025;</mi>
+                                </mrow>
+                            </math>
+                        </p>
+                        <p>결론:</p>
+                        <p class="margin-top-lg">태블릿 컴퓨터의 에너지 효율은 75.5%입니다. 시스템에 투입된 전기 에너지의 75.5%를 소리 에너지로 변환합니다.</p>
+
+                        <p>나머지 에너지(24.5%)는 열에너지(열)로 손실됩니다.</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row ilc-row-text margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>발전 방법</h3>
+                    <p>많은 전기 장치들이 효율이 높지 않아 많은 에너지를 소비한다는 것을 알았습니다. 이러한 장치들을 작동시키는 데 필요한 에너지는 어디서 얻을까요?</p>
+                    <p>일부는 배터리에 저장된 화학 퍼텐셜 에너지에서 나옵니다. 하지만 대량의 전기 소비를 위해서는 발전소에 의존합니다.</p>
+                    <p>에너지를 전기 에너지로 변환하는 방법은 여러 가지가 있습니다.</p>
+                </div>
+            </div>
+            <div class="row ilc-row-widget">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <!-- *************************** ACCORDION 8 BEGINS ******************************************* -->
+
+                    <div class="accordionILC panel-group" id="accordion8">
+
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion8" href="#accordion8-collapse1" class="collapsed">수력 발전(hydroelectricity)</a></h4>
+                            </div>
+                            <div id="accordion8-collapse1" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img src="../assets/img/sph3u_03.17.42a.jpg" width="200" alt="Graphic of hydroelectric dam supplying electricity" class="img-responsive img-right-33">
+                                    <p><strong>수력 발전</strong>은 옆의 그림과 같이 빠르게 흐르는 폭포를 이용하여 전기 에너지를 생산하는 방법입니다. 이 방법은 약 80%의 에너지 효율을 가집니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion8" href="#accordion8-collapse2" class="collapsed">화력 발전(thermal generation)</a></h4>
+                            </div>
+                            <div id="accordion8-collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img src="../assets/img/sph3u_03.02.206.jpg" alt="Thermal power station in which coal is used to generate energy." width="200" class="img-responsive img-right-33">
+                                    <p><strong>화석 연료(fossil fuels)</strong>는 화석 연료(석탄, 석유 및 천연가스)에 저장된 화학 퍼텐셜 에너지를 전기 에너지로 변환하는 능력에 의존합니다. 화석 연료가 연소되고 생성된 열에너지가 물을 증기로 바꾸며, 이 증기가 터빈을 회전시킵니다. 수력 발전과 마찬가지로 터빈의 운동 에너지가 전기 에너지로 변환됩니다.<br><strong>핵분열(nuclear fission)</strong> 반응은 방사성 우라늄 연료 다발에서 대량의 열에너지를 생산하여 물을 증기로 바꾸는 데에도 사용될 수 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ACCORDION ITEM X -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion8" href="#accordion8-collapse3" class="collapsed">재생 에너지원(renewable energy sources)</a>
+                                </h4>
+                            </div>
+                            <div id="accordion8-collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <img src="../assets/img/sph3u_03.17.42c.jpg" width="250" alt="Graphic showing solar, wind, geothermal, tidal and hydroelectric energy" class="img-responsive img-right-33">
+                                    <p><strong>재생 에너지원</strong>은 화석 연료를 사용하지 않고 전기 에너지를 생산하는 방법입니다. 재생 에너지원은 쉽게 보충될 수 있으며, 전기를 생산할 때 대량의 온실 가스를 생성하지 않습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- END OF ACCORDION ITEMS -->
+                    </div>
+
+                    <!-- *************************** ACCORDION XXX ENDS ******************************************* -->
+
+
+                </div>
+            </div>
+
+        </section>
+        <section id="consolidation">
+            <div class="row banner">
+                <h1><img src="../assets/img/sph3u_03_consolidation.jpg" alt="Consolidation" class="img-responsive" style="width:100%;">
+                </h1>
+
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>다양한 전력 생산 방법에 대해 배웠으니, 이제 그 방법들을 비교해 봅시다.</p>
+                            <p>조사를 하지 않고, 몇 가지 발전 유형의 이름을 말해 보세요:</p>
+
+
+                        </div>
+                    </div>
+                    <p>1. 재생 가능한 발전 방법</p>
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-8">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-8">
+                        <p>태양광, 풍력(터빈), 수력(수력 발전), 바이오매스, 지열, 조력</p>
+                    </div>
+                    <p class="margin-top-lg">2. 재생 불가능한 발전 방법</p>
+
+                    <button class="btn btn-default btn-answer-reveal" id="sph3u_u3la2-suggestedAnswerButton-5">예시 답안</button>
+                    <div class="answer_reveal invisible" id="sph3u_u3la2-suggestedAnswer-5">
+
+
+                        <p>석탄, 원자력, 석유, 천연가스.</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row ilc-row-text">
+                <div class="col-xs-10 col-xs-offset-1">
+
+                    <h2 class="margin-top-lg h3">정보를 갖춘 시민이 되기</h2>
+                    <p>여러분이 알았듯이, 우리 사회는 전기에 크게 의존합니다. 이 학습 활동에서 다양한 발전 방법에 대해 배운 후, 두 가지 재생 에너지원과 두 가지 비재생 에너지원을 조사해 보세요.</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="row ilc-row-callout">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h2 class="h3">노트</h2>
+                    <div class="callout_content_icon"><img src="../assets/icons/notebook.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <p>노트에 다음 T-차트 그래픽 조직자를 만들고, 두 가지 재생 에너지원과 비재생 에너지원의 장점과 단점을 나열하세요.</p>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered" role="presentation">
+                        <tr>
+                            <td colspan="2" style="text-align:center;">발전 방법</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center; width:50%;">장점</td>
+                            <td style="text-align:center; width:50%;">단점</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-top:80px"></td>
+                            <td style="padding-top:80px"></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="row ilc-row-callout margin-top-lg">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <h3>자기 점검 퀴즈</h3>
+                    <div class="callout_content_icon"> <img src="../assets/icons/self_check.svg" alt="" class="img-responsive">
+                        <div class="callout_content">
+                            <h4>이해도를 확인하세요!</h4>
+                            <p>다음 자기 점검 퀴즈를 완료하여 학습 진행 상황과 집중해야 할 영역을 파악하세요.</p>
+                            <p>이 퀴즈는 피드백 용도로만 사용되며, 성적에 반영되지 않습니다. 이 퀴즈에 대한 시도 횟수는 무제한입니다. 시간을 갖고, 최선을 다하며, 제공된 피드백을 반영하세요.</p>
+                            <p><strong>퀴즈</strong>를 눌러 이 도구에 접근하세요.</p> <a href="/d2l/common/dialogs/quickLink/quickLink.d2l?ou=27211480&amp;type=quiz&amp;rcode=eLO-79301449" target="_blank"><img src="../assets/icons/quiz_button.svg" class="action_button callout-image" alt="Quiz"><span class="sr-only">(새 창에서 열림)</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+
+    </main>
+
+    <!-- Compiled GVL, Widgets, ILOs, etc. -->
+    <script src="../dependencies/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../dependencies/vendor.min.js"></script>
+    <script src="../assets/js/bugfixes.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#appContainer {
+    width: 900px;
+    height: 500px;
+    background-color: #FFFFFF;
+    position: relative;
+
+}
+
+canvas {
+  position: absolute;
+  top: 40px;
+  left: 0px;
+}
+
+h1 {
+    padding-left: 0.5em;
+}
+
+#infoContainer {
+  position: absolute;
+  /* display: flex; */
+  top: 50px;
+  left: 18px;
+  z-index: 2;
+  /* flex-direction: row;
+  justify-content: space-evenly; */
+  width: 50%;
+}
+
+h3 {
+    background-color: red;
+    margin-bottom: -1em;
+}
+
+.infoHeading {
+    font-weight: bold;
+    margin-bottom: -1em;
+}
+
+.info {
+    margin-left: 10px;
+    width: 40%;
+}
+
+#metersHeadingContainer {
+    position: absolute;
+    top: 50px;
+    right: 6px;
+    z-index: 2;
+}
+
+#potentialEnergyHeadingContainer {
+    position: absolute;
+    top: 298px;
+    left: 400px;
+    z-index: 2;
+}
+
+#interface {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    position: absolute;
+    top: 320px;
+    left: 15px;
+    width: 100%;
+}
+
+.interfaceElement {
+    display: inline-block;
+    /* width: 22%; */
+    padding-right: 3%;
+}
+
+#columnOne {
+   width: 43%; 
+   padding-left: 3%;
+   padding-right: 3%;
+   line-height: 1.3em; 
+}
+
+#columnTwo {
+    width: 50%;
+}
+
+.uiButton {
+    margin-bottom: 6px !important;
+}
+
+h2 {
+    font-size: 14px;
+}
+
+#metersContainer {
+    position: absolute;
+    left: 15px;
+    top: 298px;
+    z-index: 10;
+}
+
+.c3-region.one {
+  fill: #5392ff;
+}
+
+.c3-region.two {
+  fill: #ff509e;
+}
+
+.c3-region.three {
+    fill: #34bc6e;
+  }
+
+#graph {
+    width: 300px;
+    height: 250px;
+}
+
+.c3-axis-y text 
+{
+  font-size: 11px;
+}
+
+.c3-axis-x text 
+{
+  font-size: 11px; 
+}
+
+input {
+    width: 3em;
+}
+
+.correctIcon {
+    display: inline-block;
+    width: 1em;
+    margin-left: 0.5em;
+}
+
+.correct {
+    color: #007FA3;
+}
+.incorrect {
+    color: #EC1944;
+}
+
+.resultOutput {
+    padding-left: 0.5em;
+}
+
+

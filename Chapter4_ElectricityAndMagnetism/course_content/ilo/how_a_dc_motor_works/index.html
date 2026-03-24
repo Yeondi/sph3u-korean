@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <title>DC 모터의 작동 원리</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <link href="css/ilc_main.css" rel="stylesheet">
+        <link href="css/main.css" rel="stylesheet" />
+
+    </head>
+
+    <body>
+        <div id="mainContainer">
+            <!--div id="instructionsMask"></div-->
+            <!-- <div id="instructionsContainer" data-markdown-id="instructions" data-markdown-processed="false"></div> -->
+            <!--div id="instructionsContainer" data-lang-id="instructions" data-lang-processed="false"></div-->
+            <div id="instructions">
+                <h1><span data-lang-id="title" data-lang-processed="false"></span></h1>
+                <h2><span data-lang-id="subtitle" data-lang-processed="false"></span></h2>
+                <p>이 상호작용 요소는 화면 상단에 N극(North Pole)이 있는 말굽 자석(horseshoe magnet)과
+                    배터리(battery) 및 도선 고리(loop of wire)로 구성된 회로(circuit)를 보여줍니다.</p>
+                <h2>사용 방법</h2>
+
+                <p>1. 흐름 속도 버튼을 사용하여 애니메이션의 속도를 조절하세요.</p>
+                <p>2. 배터리 뒤집기 버튼과 자석 반전 버튼을 사용하여 전류(current)의 방향을 변경하세요.</p>
+                <p>3. 일시정지 버튼을 사용하여 애니메이션을 멈추고, 재생 버튼을 눌러 계속하세요.</p>
+                <p>4. 검은색 화살표는 고리 내 관습적 전류(conventional current)의 방향을 나타내고, 초록색 화살표는
+                    전류가 흐르는 도선에 작용하는 힘(force)의 방향을 나타냅니다.</p>
+                </ol>
+            </div>
+
+
+
+            <canvas
+                alt="화면 상단에 N극이 있는 말굽 자석과 배터리 및 도선 고리로 구성된 회로"
+                id="game-canvas" width="540" height="400" tabindex="-1"></canvas>
+            <div id="ui" class="arrange-horizontally">
+
+
+                <div>
+                    <p><span id="flowspeed" data-lang-id="flowSpeed" data-lang-processed="false"></span>
+                    </p>
+                    <input tabindex="2" type="range" aria-labelledby="flowspeed" min="1" max="100" value="50"
+                        class="slider inputRangeBar" id="flowSpeedSlider">
+                </div>
+                <div class="arrange-horizontally">
+                    <!--h2><span data-lang-id="controls" data-lang-processed="false"/></h2-->
+
+                    <div>
+                        <p>
+                            <button tabindex="2" id="flipBatteryButton" class="btn btn-default"
+                                data-lang-id="flipBattery" data-lang-processed="false"
+                                onClick="reverseFlowPress()"></button>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <button tabindex="2" id="reverseMagnetButton" class="btn btn-default"
+                                data-lang-id="reverseMagnet" data-lang-processed="false"
+                                onClick="reverseMagnetPress()"></button>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            <button tabindex="2" id="controlButton" class="btn btn-primary fullButton"
+                                data-lang-id="startMotor" data-lang-processed="false" onClick="startPause()"></button>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- The toggle drawer-->
+                <!--div id="drawerToggle" tabindex="1">
+                    <div id="toggleSquare">
+                        <img id="toggleArrow" src="assets/images/toggleArrow.png" alt="none">
+                        <span id="instructionLabel" data-lang-id="instructionLabel" data-lang-processed="false"></span>
+                    </div>
+                </div-->
+            </div>
+        </div>
+    </body>
+
+    <script src="libraries/marked.min.js"></script>
+    <script src="https://use.fontawesome.com/dd511ff0f4.js"></script>
+    <script src="js/languageLoader.js"></script>
+    <script src="js/babylon.js"></script>
+    <script src="js/app.js"></script>
+
+
+</html>

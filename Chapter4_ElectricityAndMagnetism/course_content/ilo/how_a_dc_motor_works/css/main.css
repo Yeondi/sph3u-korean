@@ -1,0 +1,108 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+body {
+	background-color: #C6CDD0;
+	display: flex;
+	justify-content: center;
+}
+
+#mainContainer {
+	display: flex;
+    z-index: 1; 
+    position: relative;	
+}
+
+#ui {
+	position: absolute;
+    top: 400px;
+    left: 350px;
+	width: 540px;
+	height: 90px;
+	padding: 10px;
+    z-index: 4;
+    background-color: #F8F9F9; 	
+}
+#instructions {
+    width: 350px; 
+    height: 490px;
+    padding: 20px;
+    background-color: #F8F9F9; 	
+}
+
+canvas {
+    -ms-touch-action: none;
+   z-index: 2; 	
+}
+
+h1 {
+  font-size: 16px;
+}
+
+h2 {
+  font-size: 14px;
+  padding-top: 20px;
+}
+
+hr {
+	width: 240px;
+}
+
+input {
+	margin-right: 8px;
+}
+
+p {
+	margin-bottom: 8px;
+}
+
+
+
+th {
+	width: 130px;
+	text-align: center;
+}
+
+td {
+	text-align: center;
+}
+
+input[type=range] {
+    width: 130px;
+    cursor: pointer;
+}
+
+
+#toggleSquare {
+	position: absolute;
+    top:0px;
+    left: 0px;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+
+
+#toggleArrow {
+	margin-top: -2px;
+    transition: transform 0.5s;
+    transform: rotate(-180deg);
+}
+
+canvas
+{
+    height: 400px;
+}
+
+.arrange-horizontally > * {
+    display: inline-block;
+    text-align: center;
+}
+

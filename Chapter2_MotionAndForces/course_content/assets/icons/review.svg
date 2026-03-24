@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="100px" height="100px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
+<title>Artboard 2</title>
+<g id="review">
+	<circle style="fill:#EFFCEA;stroke:#0E8A16;stroke-width:1.74;stroke-miterlimit:10;" cx="50.24" cy="50.01" r="46.67"/>
+	<g>
+		<path style="opacity:0.15;fill:#0E8A16;" d="M29.868,71.24h32.719c2.361,0,4.281-1.921,4.281-4.281V28.405
+			c0-2.361-1.921-4.281-4.281-4.281H41.37v-1.46c0-0.485-0.393-0.877-0.877-0.877h-5.592c-0.484,0-0.877,0.393-0.877,0.877v1.46
+			h-4.156c-0.484,0-0.877,0.393-0.877,0.877v45.361C28.99,70.847,29.383,71.24,29.868,71.24z"/>
+		<path style="opacity:0.15;fill:#0E8A16;" d="M55.319,81.472h-2.589c-0.484,0-0.877,0.393-0.877,0.877
+			c0,0.485,0.393,0.877,0.877,0.877h2.589c2.505,0,4.543-1.697,4.543-3.783s-2.038-3.783-4.543-3.783H41.969v-2.289
+			c0-0.332-0.188-0.636-0.485-0.785c-0.297-0.148-0.653-0.117-0.919,0.083l-4.218,3.166c-0.221,0.166-0.351,0.426-0.351,0.702
+			s0.13,0.536,0.351,0.702l4.218,3.166c0.155,0.116,0.34,0.176,0.527,0.176c0.134,0,0.268-0.03,0.392-0.093
+			c0.297-0.149,0.485-0.452,0.485-0.785v-2.289h13.349c1.512,0,2.788,0.929,2.788,2.028S56.83,81.472,55.319,81.472z"/>
+	</g>
+	
+		<path style="fill:#90D966;stroke:#0E8A16;stroke-width:1.74;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" d="
+		M32.31,22.7H64.8c1.867,0,3.38,1.513,3.38,3.38v38.28c0,1.867-1.513,3.38-3.38,3.38H32.31l0,0v-45V22.7z"/>
+	
+		<line style="fill:#90D966;stroke:#0E8A16;stroke-width:1.74;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;" x1="61.16" y1="22.7" x2="61.16" y2="67.74"/>
+	<polygon style="fill:#FFFFFF;stroke:#0E8A16;stroke-width:1.74;stroke-linejoin:round;" points="42.86,30.38 40.08,28.09 
+		37.31,30.38 37.31,20.38 42.86,20.38 	"/>
+	<path style="fill:none;stroke:#0E8A16;stroke-width:1.74;stroke-linecap:round;stroke-linejoin:round;" d="M41,73.88h16.58
+		c2,0,3.64,1.29,3.64,2.88l0,0c0,1.6-1.63,2.89-3.64,2.89H55"/>
+	<polygon style="fill:#CDDE54;stroke:#0E8A16;stroke-width:1.74;stroke-linejoin:round;" points="43.45,77.02 39.27,73.88 
+		43.45,70.73 	"/>
+</g>
+</svg>

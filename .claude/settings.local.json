@@ -1,31 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(ls \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM\")",
-      "Bash(ls \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM/course_content\")",
-      "Bash(ls \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM/course_content/lessons\")",
-      "Bash(find \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM\" -name \"*.html\")",
-      "Bash(find \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM\" -name \"*.css\" -o -name \"*.js\")",
-      "Bash(wc -l \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM/course_content/lessons/sph3u_u1la1.html\")",
-      "Bash(python3 translate.py course_content/lessons/sph3u_u1la1.html)",
-      "Bash(wc -l \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM/course_content/lessons/sph3u_u1la2.html\")",
-      "Bash(python3 translate_la2.py)",
-      "Bash(xxd)",
-      "Bash(wc -l \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM/course_content/lessons/sph3u_u1la3.html\")",
-      "Bash(python3 translate_la3.py)",
-      "Bash(python3 translate_la4.py)",
-      "Bash(python3:*)",
-      "Bash(wc -l \"/Users/kyungminryu/Downloads/SPH3U-EN-02-0324-ON-\\(I-D\\) - 3222026 - 1257 AM/course_content/lessons/sph3u_u1la5.html\")",
-      "Bash(python3 -c \":*)",
-      "Bash(gh auth:*)",
-      "Bash(git --version)",
-      "Bash(curl -sL https://github.com/cli/cli/releases/latest/download/gh_2.67.0_macOS_arm64.zip -o /tmp/gh.zip)",
-      "Bash(unzip -o /tmp/gh.zip -d /tmp/gh)",
-      "Bash(curl -sL \"https://github.com/cli/cli/releases/download/v2.67.0/gh_2.67.0_macOS_arm64.zip\" -o /tmp/gh.zip -w \"%{http_code}\")",
-      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh --version)",
-      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh auth:*)",
-      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh repo:*)",
-      "Bash(/tmp/gh/gh_2.67.0_macOS_arm64/bin/gh api:*)"
+      "Bash(mv Chapter1_WavesAndSound/.git .)",
+      "Bash(mv Chapter1_WavesAndSound/.claude .)",
+      "Bash(mv Chapter1_WavesAndSound/* .)",
+      "Bash(wc -l /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter2_MotionAndForces/course_content/lessons/*.html)",
+      "Bash(find /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter2_MotionAndForces/course_content -path */widgets/* -name *.json)",
+      "Bash(wc -l /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter3_EnergyAndSociety/course_content/lessons/*.html)",
+      "Bash(ls -lh /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter3_EnergyAndSociety/course_content/lessons/*.html)",
+      "Bash(ls -lh /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter3_EnergyAndSociety/course_content/assignments/*.html)",
+      "Bash(ls -lh /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter3_EnergyAndSociety/course_content/assets/alt/*.html)",
+      "Bash(ls -lh /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter3_EnergyAndSociety/course_content/assets/locker_docs/*.html)",
+      "Bash(find /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter3_EnergyAndSociety/course_content/ilo -name \"*.json\" -exec wc -l {} +)",
+      "Bash(find /Users/kyungminryu/Desktop/SPH3U-Korean/Chapter3_EnergyAndSociety/course_content/ilo -name \"*.html\" -exec wc -l {} +)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ]
   }
 }

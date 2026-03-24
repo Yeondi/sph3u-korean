@@ -1,0 +1,41 @@
+{
+    "department": "sec",
+    "pairs": 6,
+    "useRandomPairs": false,
+    "shuffleColumns": true,
+    "successMessage": "정답입니다! 잘했습니다!",
+    "basePath": "../assets/img",
+    "columnRatio": "1:1",
+    "items": [
+      {
+        "first": ["", "", "양성자 7개"],
+        "second": ["", "", "질소(N)"]
+      },
+      {
+        "first": ["", "", "양성자 29개"],
+        "second": ["", "", "구리(Cu)"]
+      },
+      {
+        "first": ["", "", "양성자 79개"],
+        "second": ["", "", "금(Au)"]
+      },
+      {
+        "first": ["", "", "양성자 36개"],
+        "second": ["", "", "크립톤(Kr)"]
+      },
+      {
+        "first": ["", "", "양성자 6개"],
+        "second": ["", "", "탄소(C)"]
+      },
+      {
+        "first": ["", "", "양성자 92개"],
+        "second": ["", "", "우라늄(U)"]
+      }
+
+    ],
+    "iloStartLink": "짝짓기 1 상호작용 활동에 들어가거나 링크를 눌러 활동 끝으로 건너뜁니다.",
+    "iloStartText": "짝짓기 1 상호작용 활동을 시작합니다.",
+    "iloEndLink": "링크를 눌러 짝짓기 1 상호작용 활동의 처음으로 돌아갑니다.",
+    "iloEndText": "짝짓기 1 상호작용 활동이 끝났습니다."
+
+  }
