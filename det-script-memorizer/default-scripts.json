@@ -1,5 +1,19 @@
 [
   {
+    "id": "default-1-hobby-archery",
+    "title": "#1. Hobby / Archery",
+    "topic": "Hobby",
+    "text": "When I have free time, I enjoy doing archery.\n\nI actually set up my own shooting area on my land, so I practiced every Saturday.\n\nA few years ago, I watched the Olympic Games and was really impressed by the Korean archery team. That moment sparked my curiosity, so I decided to try it myself.\n\nAt first, my accuracy was terrible, especially outdoors. But the more I practiced, the easier it became to hit the target.\n\nWhat I find most valuable about archery is the focus it requires. In fact, I have noticed that this carries over into my work as a programmer. I can concentrate on problems more clearly and stay locked in for longer.\n\nThat is why archery is not just a hobby for me; it actively makes me better at what I do.",
+    "keyPhrases": []
+  },
+  {
+    "id": "default-2-social-media",
+    "title": "#2. Social Media",
+    "topic": "Social Media",
+    "text": "Social media has both clear benefits and real downsides.\n\nOn the positive side, it is much easier to reconnect with people from your past. For example, I am actually trying to find a Chinese friend whom I studied with at university. Without social media, that would be almost impossible.\n\nBut there are real downsides too. One big problem is safety. Even if your account is set to private, someone can create a fake profile, act friendly, and get full access once you follow them back. That is pretty hard to prevent.\n\nThe other issue is more personal. I just want to relax quietly, play games, or watch short videos without being bombarded by news or other people's posts. Social media makes that really hard.\n\nSo yes, it is useful for staying connected, but it also makes it harder to stay private and harder to just switch off.",
+    "keyPhrases": []
+  },
+  {
     "id": "default-3-technology-ai",
     "title": "#3. Technology / AI",
     "topic": "Technology / AI",
