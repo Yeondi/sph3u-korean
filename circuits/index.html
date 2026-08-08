@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회로이론 개념 학습 — SAIT EET 예습</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2733; --sub:#5a6b7b;
+    --accent:#0f62fe; --accent-soft:#e8f0fe; --ok:#1a8a5a; --ok-soft:#e3f4ec;
+    --warn:#b05c00; --warn-soft:#fff3e0; --line:#dde3ea; --code:#f0f3f7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
+       background:var(--bg); color:var(--ink); line-height:1.75; font-size:16px;}
+  .layout{display:flex; min-height:100vh;}
+
+  /* ── 사이드바 ── */
+  aside{width:270px; flex-shrink:0; background:var(--card); border-right:1px solid var(--line);
+        padding:22px 16px; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  aside h2{font-size:17px; margin-bottom:4px;}
+  aside .sub{font-size:12.5px; color:var(--sub); margin-bottom:14px;}
+  .progress-wrap{margin-bottom:16px;}
+  .progress-bar{height:10px; background:var(--line); border-radius:6px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:var(--ok); transition:width .3s;}
+  .progress-label{font-size:12.5px; color:var(--sub); margin-top:4px;}
+  .navlist{list-style:none;}
+  .navlist li{margin-bottom:2px;}
+  .navlist button{width:100%; text-align:left; border:none; background:none; cursor:pointer;
+        padding:8px 10px; border-radius:8px; font-size:14px; font-family:inherit; color:var(--ink);
+        display:flex; align-items:center; gap:8px; line-height:1.4;}
+  .navlist button:hover{background:var(--accent-soft);}
+  .navlist button.active{background:var(--accent); color:#fff; font-weight:bold;}
+  .navlist .check{width:18px; flex-shrink:0; text-align:center; font-size:13px; color:var(--ok);}
+  .navlist button.active .check{color:#fff;}
+
+  /* ── 본문 ── */
+  main{flex:1; padding:34px 44px 80px; max-width:900px;}
+  section.chapter{display:none;}
+  section.chapter.visible{display:block;}
+  h1{font-size:26px; margin-bottom:6px;}
+  .ch-sub{color:var(--sub); font-size:14px; margin-bottom:24px;}
+  h2{font-size:20px; margin:34px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--accent-soft);}
+  h3{font-size:16.5px; margin:22px 0 8px; color:var(--accent);}
+  p{margin-bottom:12px;}
+  ul,ol{margin:0 0 12px 24px;}
+  li{margin-bottom:6px;}
+  strong{color:#0b3d91;}
+  .en{color:var(--sub); font-size:0.92em;}
+
+  .analogy{background:var(--warn-soft); border-left:4px solid var(--warn);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .analogy::before{content:"💡 비유로 이해하기"; display:block; font-weight:bold; color:var(--warn); font-size:13.5px; margin-bottom:4px;}
+  .keypoint{background:var(--accent-soft); border-left:4px solid var(--accent);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .keypoint::before{content:"📌 핵심 정리"; display:block; font-weight:bold; color:var(--accent); font-size:13.5px; margin-bottom:4px;}
+  .caution{background:#fdecec; border-left:4px solid #c0392b; padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .caution::before{content:"⚠️ 헷갈리기 쉬운 부분"; display:block; font-weight:bold; color:#c0392b; font-size:13.5px; margin-bottom:4px;}
+
+  .formula{background:var(--code); border:1px solid var(--line); border-radius:8px;
+           padding:10px 16px; margin:12px 0; font-size:17px; text-align:center;
+           font-family:'Cambria Math',Georgia,serif; overflow-x:auto;}
+  sub,sup{font-size:0.72em;}
+
+  .tablewrap{overflow-x:auto; margin:14px 0;}
+  table{border-collapse:collapse; width:100%; background:var(--card); font-size:14.5px;}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--accent-soft); font-size:14px;}
+  table.compare th:first-child, table.compare td:first-child{background:#fafbfc; font-weight:bold; white-space:nowrap;}
+
+  .example{background:var(--card); border:1px solid var(--line); border-radius:12px;
+           padding:18px 20px; margin:16px 0;}
+  .example .ex-title{font-weight:bold; color:var(--ok); margin-bottom:8px; font-size:15.5px;}
+  .example .steps{margin-left:4px;}
+  .example .steps li{margin-bottom:8px;}
+
+  .problems{counter-reset:prob; margin-top:8px;}
+  .prob{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 18px; margin-bottom:14px;}
+  .prob .q{margin-bottom:10px;}
+  .prob .q::before{counter-increment:prob; content:"문제 " counter(prob) ". "; font-weight:bold; color:var(--accent);}
+  details{margin-top:8px;}
+  details summary{cursor:pointer; display:inline-block; background:var(--accent-soft); color:var(--accent);
+        padding:6px 14px; border-radius:20px; font-size:13.5px; font-weight:bold; user-select:none; list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary:hover{background:var(--accent); color:#fff;}
+  details[open] summary{background:var(--ok-soft); color:var(--ok);}
+  details .answer{background:var(--ok-soft); border-radius:8px; padding:12px 16px; margin-top:10px; font-size:15px;}
+  details .answer .a-label{font-weight:bold; color:var(--ok);}
+
+  .done-box{margin:36px 0 20px; background:var(--ok-soft); border:1.5px dashed var(--ok);
+        border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:10px; font-size:15.5px;}
+  .done-box input{width:20px; height:20px; accent-color:var(--ok); cursor:pointer;}
+
+  .ch-nav{display:flex; justify-content:space-between; margin-top:14px; gap:12px;}
+  .ch-nav button{border:1px solid var(--line); background:var(--card); border-radius:10px;
+        padding:12px 18px; cursor:pointer; font-family:inherit; font-size:14.5px; color:var(--ink); max-width:48%;}
+  .ch-nav button:hover{border-color:var(--accent); color:var(--accent);}
+  .ch-nav .spacer{flex:1;}
+
+  .toc-card{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 20px; margin-bottom:12px; cursor:pointer;}
+  .toc-card:hover{border-color:var(--accent);}
+  .toc-card .t{font-weight:bold; font-size:16px;}
+  .toc-card .d{font-size:13.5px; color:var(--sub); margin-top:2px;}
+  .toc-card .badge{float:right; font-size:12.5px; color:var(--ok); font-weight:bold;}
+
+  svg.circuit{display:block; margin:14px auto; max-width:100%; background:#fff;
+        border:1px solid var(--line); border-radius:10px;}
+
+  #menuToggle{display:none;}
+  @media (max-width:820px){
+    .layout{flex-direction:column;}
+    aside{width:100%; height:auto; position:static; border-right:none; border-bottom:1px solid var(--line);}
+    main{padding:22px 18px 60px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <h2>⚡ 회로이론 개념 학습</h2>
+  <div class="sub">SAIT EET 1학년 Circuits 예습용</div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 10 챕터 완료</div>
+  </div>
+  <ul class="navlist" id="navList"></ul>
+</aside>
+
+<main id="main">
+
+<!-- ============ 홈(개요) ============ -->
+<section class="chapter" id="ch0">
+  <h1>학습 안내</h1>
+  <p class="ch-sub">캐나다 SAIT — Electrical Engineering Technology 1학년 회로이론(Circuits) 예습 교재</p>
+  <p>이 교재는 자격증 문제은행 대비가 아니라, <strong>대학 수업을 따라가기 위한 개념 이해</strong>를 목표로 만들어졌습니다. 표준 회로이론 커리큘럼 순서를 따르며, 다음 원칙을 지킵니다.</p>
+  <ul>
+    <li>모든 용어는 <strong>문제에 나오기 전에 반드시 먼저 정의</strong>합니다.</li>
+    <li>핵심 용어는 <strong>영어를 병기</strong>합니다. 실제 수업과 교재가 영어이므로, 영어 용어에 익숙해지는 것이 중요합니다.</li>
+    <li>비슷해 보이지만 다른 개념은 <strong>비교표</strong>로 차이를 짚습니다.</li>
+    <li>연습문제의 정답과 해설은 <strong>접혀 있으며</strong>, 먼저 스스로 풀어본 뒤 "정답 및 해설 보기"를 눌러 확인하세요.</li>
+    <li>각 챕터 끝의 <strong>완료 체크</strong>를 누르면 진행 상황이 브라우저에 저장됩니다.</li>
+  </ul>
+  <h2>챕터 목차</h2>
+  <div id="tocCards"></div>
+  <div class="keypoint">권장 학습법: ① 개념 설명을 읽고 → ② 예제를 손으로 따라 풀고 → ③ 연습문제를 정답을 보지 않고 먼저 푼 뒤 → ④ 해설과 비교하세요. 계산기는 사용해도 좋지만, 식을 세우는 과정은 반드시 직접 써 보세요.</div>
+</section>
+
+<!-- ============ 1장 ============ -->
+<section class="chapter" id="ch1">
+  <h1>1장. 전하, 전류, 전압의 기초</h1>
+  <p class="ch-sub">Charge, Current, and Voltage — 회로이론 전체의 출발점</p>
+
+  <h2>1. 전하 <span class="en">(electric charge)</span></h2>
+  <p><strong>전하 <span class="en">(electric charge, 기호 Q 또는 q)</span></strong>는 물질이 가진 전기적 성질의 근원입니다. 전하에는 <strong>양전하(+)</strong>와 <strong>음전하(−)</strong> 두 종류가 있으며, 같은 종류끼리는 밀어내고 다른 종류끼리는 끌어당깁니다.</p>
+  <p>전하의 단위는 <strong>쿨롱 <span class="en">(coulomb, 기호 C)</span></strong>입니다. 전자 <span class="en">(electron)</span> 하나가 가진 전하량은 약 −1.602×10<sup>−19</sup> C로 매우 작기 때문에, 1 C은 약 6.24×10<sup>18</sup>개의 전자가 가진 전하량에 해당합니다.</p>
+  <div class="analogy">전하를 <strong>물 분자</strong>라고 생각해 보세요. 물 분자 하나하나는 아주 작지만, 그것들이 모여 흐르면 "물살"이 됩니다. 마찬가지로 전하 하나하나가 모여 움직이면 "전류"가 됩니다.</div>
+
+  <h2>2. 전류 <span class="en">(electric current)</span></h2>
+  <p><strong>전류 <span class="en">(electric current, 기호 I)</span></strong>는 전하가 <strong>단위 시간당 이동하는 양</strong>입니다. 어떤 단면을 1초 동안 통과한 전하량이 전류입니다.</p>
+  <div class="formula">I = Q / t &nbsp;&nbsp;&nbsp; [전류(A) = 전하량(C) ÷ 시간(s)]</div>
+  <p>단위는 <strong>암페어 <span class="en">(ampere, 기호 A)</span></strong>이며, 1 A = 1 C/s입니다. 즉 1초에 1 C의 전하가 지나가면 1 A입니다.</p>
+  <div class="analogy">전류는 <strong>수도관 속 물의 유량</strong>(1초당 몇 리터가 흐르는가)과 같습니다. 관이 굵고 수압이 세면 물이 많이 흐르듯, 회로 조건에 따라 전류의 크기가 달라집니다.</div>
+  <h3>관습 전류 방향 vs 전자의 실제 이동 방향</h3>
+  <p>금속 도선에서 실제로 움직이는 것은 <strong>전자(−전하)</strong>이지만, 회로 해석에서는 역사적 관례에 따라 <strong>양전하가 움직이는 방향</strong>을 전류의 방향으로 약속합니다. 이를 <strong>관습 전류 <span class="en">(conventional current)</span></strong>라고 합니다. 전자의 실제 이동 방향 <span class="en">(electron flow)</span>과는 <strong>반대</strong>입니다. 회로이론 수업에서는 항상 관습 전류를 사용하므로, 이 약속만 기억하면 혼란이 없습니다.</p>
+  <h3>직류와 교류</h3>
+  <ul>
+    <li><strong>직류 <span class="en">(DC, direct current)</span></strong>: 시간이 지나도 방향이 바뀌지 않는 전류. 예: 배터리.</li>
+    <li><strong>교류 <span class="en">(AC, alternating current)</span></strong>: 방향과 크기가 주기적으로 바뀌는 전류. 예: 가정용 콘센트. (8~10장에서 자세히 다룹니다. 그 전까지는 모두 직류를 다룹니다.)</li>
+  </ul>
+
+  <h2>3. 전압(전위차) <span class="en">(voltage / potential difference)</span></h2>
+  <p>전하가 이동하려면 "밀어주는 힘"의 원천이 필요합니다. <strong>전압 <span class="en">(voltage, 기호 V)</span></strong>은 <strong>단위 전하(1 C)를 두 지점 사이에서 옮기는 데 필요한 에너지</strong>입니다. 두 지점 사이의 전기적 위치에너지 차이라는 뜻에서 <strong>전위차 <span class="en">(potential difference)</span></strong>라고도 부릅니다.</p>
+  <div class="formula">V = W / Q &nbsp;&nbsp;&nbsp; [전압(V) = 에너지(J) ÷ 전하량(C)]</div>
+  <p>단위는 <strong>볼트 <span class="en">(volt, 기호 V)</span></strong>이며, 1 V = 1 J/C입니다.</p>
+  <div class="analogy"><strong>물탱크의 높이 차이</strong>를 떠올려 보세요. 높은 곳의 물탱크와 낮은 곳의 물탱크를 관으로 연결하면 높이 차이(수압 차이) 때문에 물이 흐릅니다. 전압은 이 "높이 차이"에 해당합니다. 높이 차이가 클수록(전압이 클수록) 물(전류)을 세게 밀어냅니다. 중요한 점: <strong>높이는 항상 '어디 기준으로 얼마나 높은가'</strong>로만 의미가 있듯, 전압도 항상 <strong>두 지점 사이의 차이</strong>로 정의됩니다.</div>
+
+  <h2>4. 기전력 <span class="en">(electromotive force, EMF)</span></h2>
+  <p><strong>기전력 <span class="en">(electromotive force, EMF, 기호 ε 또는 E)</span></strong>은 배터리나 발전기 같은 <strong>전원 <span class="en">(source)</span></strong>이 전하에 에너지를 <strong>공급하는 능력</strong>입니다. 단위는 전압과 같은 볼트(V)를 쓰지만, 개념적 역할이 다릅니다. 전원은 물을 낮은 곳에서 높은 곳으로 퍼 올리는 "펌프"이고, 기전력은 그 펌프의 능력입니다.</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>전위차 <span class="en">(potential difference)</span></th><th>기전력 <span class="en">(EMF)</span></th></tr>
+    <tr><td>정의</td><td>회로의 두 지점 사이 전기적 위치에너지 차이</td><td>전원이 단위 전하에 공급하는 에너지</td></tr>
+    <tr><td>역할</td><td>에너지가 <strong>소비</strong>되는 곳(저항 등)에서 측정되는 값</td><td>에너지가 <strong>공급</strong>되는 곳(전원)의 능력</td></tr>
+    <tr><td>비유</td><td>물이 흘러 내려가는 두 지점의 높이 차</td><td>물을 위로 퍼 올리는 펌프의 양정(끌어올리는 높이)</td></tr>
+    <tr><td>단위</td><td>볼트 (V)</td><td>볼트 (V) — 단위는 같음</td></tr>
+    <tr><td>예</td><td>저항 양단에서 잰 3 V</td><td>AA 배터리의 1.5 V</td></tr>
+  </table></div>
+  <div class="caution">실제 배터리는 내부에 약간의 저항(내부 저항 <span class="en">internal resistance</span>)이 있어서, 전류가 흐를 때 배터리 단자에서 잰 전압(단자 전압 <span class="en">terminal voltage</span>)은 기전력보다 조금 작아집니다. "기전력 = 아무것도 연결하지 않았을 때의 전압"이라고 기억해 두면 좋습니다.</div>
+
+  <h2>5. 전력과 에너지 <span class="en">(power and energy)</span></h2>
+  <p><strong>전력 <span class="en">(power, 기호 P)</span></strong>은 <strong>단위 시간당 소비(또는 공급)되는 에너지</strong>입니다. 단위는 <strong>와트 <span class="en">(watt, 기호 W)</span></strong>, 1 W = 1 J/s입니다.</p>
+  <div class="formula">P = V × I &nbsp;&nbsp;&nbsp; [전력(W) = 전압(V) × 전류(A)]</div>
+  <p>이 식은 V = W/Q 와 I = Q/t 를 곱하면 에너지/시간이 된다는 데서 나옵니다. <strong>전기 에너지 <span class="en">(energy, 기호 W 또는 E)</span></strong>는 전력에 시간을 곱한 값입니다.</p>
+  <div class="formula">W = P × t &nbsp;&nbsp;&nbsp; [에너지(J) = 전력(W) × 시간(s)]</div>
+  <p>전기요금 고지서에 나오는 <strong>킬로와트시 <span class="en">(kilowatt-hour, kWh)</span></strong>도 에너지 단위입니다. 1 kWh = 1,000 W × 3,600 s = 3.6×10<sup>6</sup> J.</p>
+
+  <h2>6. 접두어(SI prefix) 정리</h2>
+  <p>회로이론에서는 아주 크거나 작은 값이 자주 나오므로 SI 접두어에 익숙해야 합니다.</p>
+  <div class="tablewrap"><table>
+    <tr><th>접두어</th><th>기호</th><th>배수</th><th>예</th></tr>
+    <tr><td>기가 (giga)</td><td>G</td><td>10<sup>9</sup></td><td>2 GHz</td></tr>
+    <tr><td>메가 (mega)</td><td>M</td><td>10<sup>6</sup></td><td>5 MΩ</td></tr>
+    <tr><td>킬로 (kilo)</td><td>k</td><td>10<sup>3</sup></td><td>10 kV</td></tr>
+    <tr><td>밀리 (milli)</td><td>m</td><td>10<sup>−3</sup></td><td>20 mA</td></tr>
+    <tr><td>마이크로 (micro)</td><td>μ</td><td>10<sup>−6</sup></td><td>47 μF</td></tr>
+    <tr><td>나노 (nano)</td><td>n</td><td>10<sup>−9</sup></td><td>100 nF</td></tr>
+    <tr><td>피코 (pico)</td><td>p</td><td>10<sup>−12</sup></td><td>22 pF</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>기호</th><th>단위</th></tr>
+    <tr><td>전하</td><td>electric charge</td><td>Q, q</td><td>쿨롱 C (coulomb)</td></tr>
+    <tr><td>전류</td><td>electric current</td><td>I</td><td>암페어 A (ampere)</td></tr>
+    <tr><td>전압, 전위차</td><td>voltage, potential difference</td><td>V</td><td>볼트 V (volt)</td></tr>
+    <tr><td>기전력</td><td>electromotive force (EMF)</td><td>ε, E</td><td>볼트 V</td></tr>
+    <tr><td>전력</td><td>power</td><td>P</td><td>와트 W (watt)</td></tr>
+    <tr><td>에너지</td><td>energy</td><td>W, E</td><td>줄 J (joule), kWh</td></tr>
+    <tr><td>직류 / 교류</td><td>direct current (DC) / alternating current (AC)</td><td>—</td><td>—</td></tr>
+    <tr><td>관습 전류</td><td>conventional current</td><td>—</td><td>—</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 1-1. 전류 계산</div>
+    <p>어떤 도선의 단면을 10초 동안 5 C의 전하가 통과했다. 전류는 몇 A인가?</p>
+    <ol class="steps">
+      <li><strong>식 선택:</strong> 전류의 정의 I = Q / t 를 사용한다.</li>
+      <li><strong>값 대입:</strong> I = 5 C ÷ 10 s = 0.5 A.</li>
+      <li><strong>답:</strong> 0.5 A (= 500 mA).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 1-2. 전력과 에너지 계산</div>
+    <p>12 V 배터리가 2 A의 전류를 30분 동안 공급했다. (a) 전력과 (b) 공급한 에너지를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a) 전력:</strong> P = V × I = 12 V × 2 A = 24 W.</li>
+      <li><strong>(b) 시간을 초로 변환:</strong> 30분 = 30 × 60 = 1,800 s.</li>
+      <li><strong>에너지:</strong> W = P × t = 24 W × 1,800 s = 43,200 J = 43.2 kJ.</li>
+      <li><strong>답:</strong> (a) 24 W, (b) 43.2 kJ.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <p>정답을 보지 말고 먼저 풀어 보세요. 다 푼 뒤 "정답 및 해설 보기"를 눌러 확인하세요.</p>
+  <div class="problems">
+    <div class="prob"><div class="q">전하 2 C이 어떤 단면을 4초 동안 통과했다. 전류는 몇 A인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 0.5 A</span><br>I = Q/t = 2 C ÷ 4 s = 0.5 A.</div></details></div>
+    <div class="prob"><div class="q">3 A의 전류가 1분 동안 흘렀다. 통과한 전하량은 몇 C인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 180 C</span><br>I = Q/t 를 Q = I × t 로 변형. 1분 = 60 s이므로 Q = 3 A × 60 s = 180 C.</div></details></div>
+    <div class="prob"><div class="q">어떤 저항 양단 사이에서 6 C의 전하를 옮기는 데 72 J의 에너지가 필요했다. 이 저항 양단의 전위차는 몇 V인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 12 V</span><br>V = W/Q = 72 J ÷ 6 C = 12 V.</div></details></div>
+    <div class="prob"><div class="q">관습 전류(conventional current)의 방향은 무엇을 기준으로 정의되는가? 전자의 실제 이동 방향과 어떤 관계인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 양전하가 이동하는 방향을 기준으로 정의하며, 금속 도선에서 전자의 실제 이동 방향과는 <strong>반대</strong>이다. 회로 해석에서는 항상 관습 전류 방향을 사용한다.</div></details></div>
+    <div class="prob"><div class="q">전위차와 기전력의 차이를 한 문장씩으로 설명하라. (힌트: 에너지를 소비하는 쪽 vs 공급하는 쪽)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전위차는 회로의 두 지점 사이에서 전하가 얻거나 잃는 단위 전하당 에너지(주로 소자에서 <strong>소비</strong>되는 쪽을 잴 때 사용)이고, 기전력은 배터리·발전기 같은 전원이 단위 전하에 <strong>공급</strong>하는 에너지(펌프의 능력)이다. 단위는 둘 다 볼트(V)이다.</div></details></div>
+    <div class="prob"><div class="q">9 V 배터리가 0.5 A의 전류를 공급하고 있다. 배터리가 공급하는 전력은 몇 W인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 4.5 W</span><br>P = V × I = 9 V × 0.5 A = 4.5 W.</div></details></div>
+    <div class="prob"><div class="q">60 W 전구를 5시간 사용했다. 소비한 에너지를 (a) 줄(J), (b) kWh 단위로 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 1.08×10⁶ J, (b) 0.3 kWh</span><br>(a) t = 5 × 3,600 = 18,000 s. W = P×t = 60 × 18,000 = 1,080,000 J = 1.08 MJ.<br>(b) W = 0.06 kW × 5 h = 0.3 kWh. (같은 양을 단위만 다르게 표현한 것)</div></details></div>
+    <div class="prob"><div class="q">다음을 기본 단위로 변환하라: (a) 25 mA를 A로, (b) 4.7 kΩ을 Ω으로, (c) 100 μC을 C로.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> (a) 25 mA = 25×10⁻³ A = 0.025 A. (b) 4.7 kΩ = 4,700 Ω. (c) 100 μC = 100×10⁻⁶ C = 1×10⁻⁴ C.</div></details></div>
+    <div class="prob"><div class="q">어떤 전원이 2 C의 전하에 30 J의 에너지를 공급한다. 이 전원의 기전력은 몇 V인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 15 V</span><br>기전력 = 단위 전하당 공급 에너지 = W/Q = 30 J ÷ 2 C = 15 V.</div></details></div>
+    <div class="prob"><div class="q">1.5 V AA 배터리에 아무 부하도 연결하지 않고 전압계로 재면 1.5 V가 나오지만, 전류를 많이 흘리면 단자 전압이 1.3 V로 떨어졌다. 이 현상의 원인이 되는 개념의 이름은 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 내부 저항 (internal resistance)</span><br>실제 전원 내부에는 작은 저항이 있어, 전류가 흐르면 내부에서 전압이 일부 떨어진다(내부 전압 강하). 그래서 단자 전압 = 기전력 − 내부 전압 강하가 된다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="1" class="done-check"><label>1장 완료! (체크하면 진행 상황에 저장됩니다)</label></div>
+</section>
+
+<!-- ============ 2장 ============ -->
+<section class="chapter" id="ch2">
+  <h1>2장. 옴의 법칙</h1>
+  <p class="ch-sub">Ohm's Law — 전압, 전류, 저항의 관계</p>
+
+  <h2>1. 저항 <span class="en">(resistance)</span></h2>
+  <p><strong>저항 <span class="en">(resistance, 기호 R)</span></strong>은 물질이 <strong>전류의 흐름을 방해하는 정도</strong>입니다. 단위는 <strong>옴 <span class="en">(ohm, 기호 Ω)</span></strong>입니다. 저항이 클수록 같은 전압에서 전류가 적게 흐릅니다. 회로에서 일부러 저항을 만들기 위해 넣는 부품을 <strong>저항기 <span class="en">(resistor)</span></strong>라고 하며, 보통 둘 다 그냥 "저항"이라고 부릅니다.</p>
+  <div class="analogy">수도관 비유에서 저항은 <strong>관이 좁아지는 부분</strong>입니다. 같은 수압(전압)이라도 관이 좁으면(저항이 크면) 물(전류)이 적게 흐릅니다.</div>
+
+  <h3>저항률 — 재료의 고유한 성질</h3>
+  <p><strong>저항률 <span class="en">(resistivity, 기호 ρ, 단위 Ω·m)</span></strong>은 재료 자체가 전류를 얼마나 방해하는지 나타내는 고유 값입니다. 같은 구리라도 도선이 길고 가늘면 저항이 커집니다:</p>
+  <div class="formula">R = ρ × L / A &nbsp;&nbsp; [L: 도선 길이(m), A: 단면적(m²)]</div>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>저항 <span class="en">(resistance, R)</span></th><th>저항률 <span class="en">(resistivity, ρ)</span></th></tr>
+    <tr><td>무엇의 성질?</td><td>특정 <strong>부품/도선 하나</strong>의 성질</td><td><strong>재료 자체</strong>의 고유한 성질</td></tr>
+    <tr><td>무엇에 따라 변함?</td><td>재료 + 길이 + 굵기(+온도)</td><td>재료의 종류(+온도)만</td></tr>
+    <tr><td>단위</td><td>Ω</td><td>Ω·m</td></tr>
+    <tr><td>예</td><td>이 구리선의 저항은 0.5 Ω</td><td>구리의 저항률은 1.68×10⁻⁸ Ω·m</td></tr>
+  </table></div>
+  <ul>
+    <li><strong>도체 <span class="en">(conductor)</span></strong>: 저항률이 매우 낮아 전류가 잘 흐르는 재료 (구리, 알루미늄).</li>
+    <li><strong>절연체 <span class="en">(insulator)</span></strong>: 저항률이 매우 높아 전류가 거의 못 흐르는 재료 (고무, 유리).</li>
+    <li><strong>반도체 <span class="en">(semiconductor)</span></strong>: 그 중간인 재료 (실리콘).</li>
+  </ul>
+
+  <h3>컨덕턴스 — 저항의 역수</h3>
+  <p><strong>컨덕턴스 <span class="en">(conductance, 기호 G)</span></strong>는 전류가 <strong>얼마나 잘 흐르는지</strong>를 나타내며, 저항의 역수입니다. 단위는 <strong>지멘스 <span class="en">(siemens, 기호 S)</span></strong>.</p>
+  <div class="formula">G = 1 / R &nbsp;&nbsp; [S = 1/Ω]</div>
+  <p>예: R = 4 Ω 이면 G = 0.25 S. 병렬 회로(4장)에서 계산을 편하게 해 주는 개념입니다.</p>
+
+  <h2>2. 옴의 법칙 <span class="en">(Ohm's law)</span></h2>
+  <p>저항체에 걸리는 전압과 흐르는 전류는 비례합니다. 이것이 <strong>옴의 법칙</strong>입니다:</p>
+  <div class="formula">V = I × R &nbsp;&nbsp;&nbsp;&nbsp; I = V / R &nbsp;&nbsp;&nbsp;&nbsp; R = V / I</div>
+  <p>세 형태는 모두 같은 식입니다. 구하려는 값에 따라 변형해서 쓰면 됩니다.</p>
+  <div class="analogy">수압(V)이 2배가 되면 물의 흐름(I)도 2배가 됩니다. 관이 2배로 좁아지면(R이 2배) 흐름은 절반이 됩니다. "밀어주는 힘 ÷ 방해하는 정도 = 흐르는 양"으로 기억하세요.</div>
+  <div class="caution">옴의 법칙이 항상 성립하는 것은 아닙니다. 전압-전류가 비례하는 소자를 <strong>선형(옴성) 소자 <span class="en">(linear/ohmic device)</span></strong>라 하고(일반 저항기), 비례하지 않는 소자를 <strong>비선형 소자 <span class="en">(nonlinear device)</span></strong>라고 합니다(다이오드, 전구 필라멘트 등). 이 수업에서는 대부분 선형 소자를 다룹니다.</div>
+
+  <h2>3. 저항에서의 전력</h2>
+  <p>1장에서 배운 전력 공식 P = V × I 에 옴의 법칙(V = IR)을 대입하면, 저항에서 소비되는 전력을 세 가지 형태로 쓸 수 있습니다:</p>
+  <div class="formula">P = V × I = I² × R = V² / R</div>
+  <p>저항에서 소비된 전력은 열로 바뀝니다. 이를 <strong>줄 발열 <span class="en">(Joule heating)</span></strong>이라고 합니다. 실제 저항기에는 견딜 수 있는 최대 전력(<strong>정격 전력 <span class="en">power rating</span></strong>, 예: ¼ W)이 정해져 있습니다.</p>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>기호</th><th>단위</th></tr>
+    <tr><td>저항</td><td>resistance</td><td>R</td><td>옴 Ω (ohm)</td></tr>
+    <tr><td>저항기</td><td>resistor</td><td>—</td><td>—</td></tr>
+    <tr><td>저항률</td><td>resistivity</td><td>ρ</td><td>Ω·m</td></tr>
+    <tr><td>컨덕턴스</td><td>conductance</td><td>G</td><td>지멘스 S (siemens)</td></tr>
+    <tr><td>도체 / 절연체 / 반도체</td><td>conductor / insulator / semiconductor</td><td>—</td><td>—</td></tr>
+    <tr><td>선형(옴성) 소자</td><td>linear (ohmic) device</td><td>—</td><td>—</td></tr>
+    <tr><td>정격 전력</td><td>power rating</td><td>—</td><td>W</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 2-1. 옴의 법칙 기본</div>
+    <p>100 Ω 저항에 12 V 전압을 걸었다. (a) 전류와 (b) 소비 전력을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> I = V/R = 12 V ÷ 100 Ω = 0.12 A = 120 mA.</li>
+      <li><strong>(b)</strong> P = V×I = 12 × 0.12 = 1.44 W. (검산: P = V²/R = 144/100 = 1.44 W ✓)</li>
+      <li><strong>답:</strong> (a) 120 mA, (b) 1.44 W.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 2-2. 전력 공식 선택하기</div>
+    <p>어떤 저항에 50 mA의 전류가 흐르고 있고 저항값은 2.2 kΩ이다. 소비 전력을 구하라.</p>
+    <ol class="steps">
+      <li><strong>주어진 값 확인:</strong> I와 R을 알고 있으므로 P = I²R 형태가 가장 편하다.</li>
+      <li><strong>단위 변환:</strong> 50 mA = 0.05 A, 2.2 kΩ = 2,200 Ω.</li>
+      <li><strong>계산:</strong> P = (0.05)² × 2,200 = 0.0025 × 2,200 = 5.5 W.</li>
+      <li><strong>답:</strong> 5.5 W. (¼ W짜리 저항기를 쓰면 타 버린다 — 정격 전력이 중요한 이유)</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">220 Ω 저항에 11 V를 걸었다. 전류는 몇 mA인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 50 mA</span><br>I = V/R = 11 ÷ 220 = 0.05 A = 50 mA.</div></details></div>
+    <div class="prob"><div class="q">어떤 저항에 30 mA가 흐를 때 양단 전압이 6 V였다. 저항값은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 200 Ω</span><br>R = V/I = 6 ÷ 0.03 = 200 Ω.</div></details></div>
+    <div class="prob"><div class="q">1.5 kΩ 저항에 20 mA가 흐른다. 양단 전압은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 30 V</span><br>V = I×R = 0.02 A × 1,500 Ω = 30 V.</div></details></div>
+    <div class="prob"><div class="q">저항과 저항률의 차이를 설명하라. 같은 재료로 만든 도선의 길이를 2배, 단면적을 2배로 하면 저항은 어떻게 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 저항(R)은 특정 도선·부품 하나의 성질이고, 저항률(ρ)은 재료 고유의 성질이다. R = ρL/A에서 L이 2배, A가 2배가 되면 R = ρ(2L)/(2A) = ρL/A로 <strong>변하지 않는다</strong>.</div></details></div>
+    <div class="prob"><div class="q">R = 50 Ω인 저항의 컨덕턴스 G는 몇 S인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 0.02 S (= 20 mS)</span><br>G = 1/R = 1/50 = 0.02 S.</div></details></div>
+    <div class="prob"><div class="q">100 Ω 저항이 4 W를 소비하고 있다. 흐르는 전류는 몇 A인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 0.2 A</span><br>P = I²R 에서 I² = P/R = 4/100 = 0.04, I = √0.04 = 0.2 A.</div></details></div>
+    <div class="prob"><div class="q">벽 콘센트(120 V)에 연결된 헤어드라이어가 1,500 W를 소비한다. (a) 전류와 (b) 드라이어의 저항(발열체를 하나의 저항으로 볼 때)을 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 12.5 A, (b) 9.6 Ω</span><br>(a) P = VI에서 I = P/V = 1500/120 = 12.5 A.<br>(b) R = V/I = 120/12.5 = 9.6 Ω. (또는 R = V²/P = 14400/1500 = 9.6 Ω)</div></details></div>
+    <div class="prob"><div class="q">어떤 소자에 전압을 2배로 올렸더니 전류가 3배로 늘었다. 이 소자는 선형(옴성) 소자인가? 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 아니다 (비선형 소자)</span><br>선형 소자라면 전압이 2배일 때 전류도 정확히 2배여야 한다(V ∝ I). 비례 관계가 깨졌으므로 비선형 소자이다(예: 다이오드, 온도가 변하는 필라멘트).</div></details></div>
+    <div class="prob"><div class="q">330 Ω 저항에 9 V를 걸려고 한다. 이 저항의 정격 전력이 ¼ W(0.25 W)라면 안전한가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 안전하지 않다</span><br>P = V²/R = 81/330 ≈ 0.245 W. 정격의 98%로 한계에 거의 도달한다. 실무에서는 정격의 50% 이하로 여유를 두는 것이 원칙이므로 ½ W 이상 저항을 써야 한다.</div></details></div>
+    <div class="prob"><div class="q">12 V 자동차 배터리에 연결된 전조등에 5 A가 흐른다. (a) 전조등의 저항, (b) 소비 전력, (c) 2시간 사용 시 소비 에너지(J)를 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 2.4 Ω, (b) 60 W, (c) 432 kJ</span><br>(a) R = V/I = 12/5 = 2.4 Ω.<br>(b) P = VI = 12×5 = 60 W.<br>(c) W = Pt = 60 W × 7,200 s = 432,000 J = 432 kJ.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="2" class="done-check"><label>2장 완료!</label></div>
+</section>
+
+<!-- ============ 3장 ============ -->
+<section class="chapter" id="ch3">
+  <h1>3장. 키르히호프 법칙 (KCL / KVL)</h1>
+  <p class="ch-sub">Kirchhoff's Current Law &amp; Voltage Law — 모든 회로 해석의 기반</p>
+
+  <h2>1. 회로를 설명하는 기본 용어</h2>
+  <p>키르히호프 법칙을 말하려면 먼저 회로의 "지형"을 부르는 이름이 필요합니다.</p>
+  <ul>
+    <li><strong>회로 소자 <span class="en">(circuit element)</span></strong>: 전원, 저항처럼 회로를 구성하는 부품 하나하나.</li>
+    <li><strong>노드(마디) <span class="en">(node)</span></strong>: 두 개 이상의 소자가 <strong>서로 연결되는 접점</strong>. 도선으로만 이어져 있으면 아무리 길어도 같은 노드입니다.</li>
+    <li><strong>가지(지로) <span class="en">(branch)</span></strong>: 두 노드 사이를 잇는 <strong>소자 하나의 경로</strong>.</li>
+    <li><strong>루프(폐로) <span class="en">(loop)</span></strong>: 한 노드에서 출발해 소자들을 지나 <strong>같은 노드로 돌아오는 닫힌 경로</strong>.</li>
+    <li><strong>메시 <span class="en">(mesh)</span></strong>: 루프 중에서 <strong>내부에 다른 루프를 포함하지 않는 가장 작은 루프</strong>. (창문 하나하나라고 생각하면 됩니다. 5장 메시해석에서 씁니다.)</li>
+  </ul>
+  <div class="analogy">도로망에 비유하면 노드는 <strong>교차로</strong>, 가지는 교차로 사이의 <strong>도로 구간</strong>, 루프는 출발점으로 돌아오는 <strong>한 바퀴 경로</strong>입니다.</div>
+
+  <h2>2. 키르히호프 전류 법칙 <span class="en">(KCL, Kirchhoff's Current Law)</span></h2>
+  <div class="keypoint">어느 노드에서든, <strong>들어오는 전류의 합 = 나가는 전류의 합</strong>이다. (같은 말: 노드에 출입하는 모든 전류의 대수합은 0이다.)</div>
+  <p>전하는 노드에서 생기지도, 사라지지도, 쌓이지도 않기 때문입니다(전하 보존 법칙).</p>
+  <div class="analogy">수도관의 <strong>분기점(T자 관)</strong>을 생각하세요. 들어온 물은 반드시 어디론가 나가야 합니다. 1초에 10 L가 들어오고 한쪽으로 3 L가 나간다면, 나머지 한쪽으로는 반드시 7 L가 나갑니다.</div>
+  <div class="example">
+    <div class="ex-title">KCL 적용 모습</div>
+    <p>어떤 노드에 전류 I₁ = 5 A, I₂ = 3 A가 들어오고, I₃와 I₄ = 2 A가 나간다면:</p>
+    <div class="formula">들어옴 = 나감 &nbsp;→&nbsp; 5 + 3 = I₃ + 2 &nbsp;→&nbsp; I₃ = 6 A</div>
+  </div>
+
+  <h2>3. 키르히호프 전압 법칙 <span class="en">(KVL, Kirchhoff's Voltage Law)</span></h2>
+  <div class="keypoint">어느 루프든 <strong>한 바퀴 돌며 만나는 전압(오른 것과 내린 것)의 대수합은 0</strong>이다. (같은 말: 루프에서 전압 상승의 합 = 전압 강하의 합)</div>
+  <p>여기서 새 용어 두 가지를 정의합니다:</p>
+  <ul>
+    <li><strong>전압 상승 <span class="en">(voltage rise)</span></strong>: 루프를 따라가다 전위가 <strong>높아지는</strong> 구간. 주로 전원의 − 단자에서 + 단자로 지날 때.</li>
+    <li><strong>전압 강하 <span class="en">(voltage drop)</span></strong>: 전위가 <strong>낮아지는</strong> 구간. 전류가 흐르는 방향으로 저항을 지날 때 항상 전압 강하가 생깁니다.</li>
+  </ul>
+  <div class="analogy"><strong>등산로 한 바퀴</strong>와 같습니다. 어떤 길로 돌든, 출발점으로 돌아오면 올라간 높이의 합과 내려간 높이의 합은 반드시 같습니다. 전위(전기적 높이)도 마찬가지로, 한 바퀴 돌면 원래 값으로 돌아옵니다.</div>
+  <div class="example">
+    <div class="ex-title">KVL 적용 모습</div>
+    <p>12 V 전원 하나와 저항 두 개가 하나의 루프를 이루고 있고, 첫째 저항의 전압 강하가 7 V라면:</p>
+    <div class="formula">상승의 합 = 강하의 합 &nbsp;→&nbsp; 12 = 7 + V₂ &nbsp;→&nbsp; V₂ = 5 V</div>
+  </div>
+
+  <h2>4. 부호 규약 <span class="en">(sign convention)</span></h2>
+  <p>KCL/KVL을 식으로 쓸 때 부호 실수가 가장 흔한 오류입니다. 다음 약속을 지키면 됩니다.</p>
+  <ul>
+    <li><strong>KCL:</strong> 노드로 들어오는 전류를 +, 나가는 전류를 −로 정하고 합이 0이라고 놓는다. (반대로 정해도 일관되기만 하면 됨)</li>
+    <li><strong>KVL:</strong> 루프 진행 방향으로 돌면서, 소자의 <strong>+ 단자로 들어가면 −(강하), − 단자로 들어가면 +(상승)</strong>로 적는다. 저항은 전류가 들어가는 쪽이 + 단자다.</li>
+    <li><strong>수동 부호 규약 <span class="en">(passive sign convention)</span></strong>: 소자에서 전류가 + 단자로 들어가도록 방향을 잡으면, P = VI가 양수일 때 그 소자는 전력을 <strong>소비</strong>하고, 음수면 <strong>공급</strong>하는 것으로 해석한다.</li>
+  </ul>
+  <div class="caution">전류 방향을 잘못 "추측"해도 괜찮습니다. 계산 결과가 음수로 나오면 "실제 방향이 내가 가정한 것과 반대"라는 뜻일 뿐, 크기는 맞습니다. 처음에 방향을 하나 정하고 끝까지 일관되게 유지하는 것이 핵심입니다.</div>
+
+  <h2>KCL vs KVL 비교</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>KCL (전류 법칙)</th><th>KVL (전압 법칙)</th></tr>
+    <tr><td>적용 대상</td><td>노드 (접점)</td><td>루프 (닫힌 경로)</td></tr>
+    <tr><td>내용</td><td>들어온 전류 합 = 나간 전류 합</td><td>한 바퀴 전압 대수합 = 0</td></tr>
+    <tr><td>근거 법칙</td><td>전하 보존</td><td>에너지 보존</td></tr>
+    <tr><td>비유</td><td>물 분기점: 들어온 만큼 나간다</td><td>등산 한 바퀴: 오른 만큼 내려온다</td></tr>
+    <tr><td>주로 구하는 것</td><td>모르는 전류</td><td>모르는 전압</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th></tr>
+    <tr><td>노드(마디)</td><td>node</td></tr>
+    <tr><td>가지(지로)</td><td>branch</td></tr>
+    <tr><td>루프(폐로)</td><td>loop</td></tr>
+    <tr><td>메시</td><td>mesh</td></tr>
+    <tr><td>키르히호프 전류 법칙</td><td>Kirchhoff's Current Law (KCL)</td></tr>
+    <tr><td>키르히호프 전압 법칙</td><td>Kirchhoff's Voltage Law (KVL)</td></tr>
+    <tr><td>전압 상승 / 전압 강하</td><td>voltage rise / voltage drop</td></tr>
+    <tr><td>수동 부호 규약</td><td>passive sign convention</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 3-1. KCL로 미지 전류 구하기</div>
+    <p>어떤 노드에 I₁ = 8 A가 들어오고, I₂ = 3 A가 나가고, I₃가 나가고, I₄ = 1 A가 들어온다. I₃를 구하라.</p>
+    <ol class="steps">
+      <li><strong>들어오는 전류 합:</strong> I₁ + I₄ = 8 + 1 = 9 A.</li>
+      <li><strong>나가는 전류 합:</strong> I₂ + I₃ = 3 + I₃.</li>
+      <li><strong>KCL 적용:</strong> 9 = 3 + I₃ → I₃ = 6 A.</li>
+      <li><strong>답:</strong> 6 A (나가는 방향).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 3-2. KVL로 미지 전압 구하기</div>
+    <p>전원 24 V와 저항 3개(R₁, R₂, R₃)가 한 루프를 이룬다. R₁의 전압 강하는 6 V, R₂의 전압 강하는 10 V다. R₃의 전압 강하를 구하고, R₃에 4 A가 흐른다면 R₃의 값도 구하라.</p>
+    <ol class="steps">
+      <li><strong>KVL:</strong> 상승 합 = 강하 합 → 24 = 6 + 10 + V₃.</li>
+      <li><strong>V₃ 계산:</strong> V₃ = 24 − 16 = 8 V.</li>
+      <li><strong>옴의 법칙(2장):</strong> R₃ = V₃/I = 8/4 = 2 Ω.</li>
+      <li><strong>답:</strong> V₃ = 8 V, R₃ = 2 Ω.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">노드에 5 A와 2 A가 들어오고, 4 A가 나간다. 네 번째 가지의 전류 크기와 방향(들어옴/나감)은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 3 A, 나가는 방향</span><br>들어옴 합 7 A = 나감 합 4 + I → I = 3 A 나감.</div></details></div>
+    <div class="prob"><div class="q">"도선으로만 이어져 있으면 아무리 길어도 같은 노드"인 이유를 설명하라. (힌트: 이상적인 도선의 저항)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 이상적인 도선은 저항이 0이므로 옴의 법칙에 따라 V = IR = 0, 즉 도선 위 어디서나 전위가 같다. 전위가 같은 점들의 집합은 하나의 노드로 취급한다.</div></details></div>
+    <div class="prob"><div class="q">9 V 전원과 저항 2개로 이루어진 한 루프에서 첫째 저항의 전압 강하가 3.6 V다. 둘째 저항의 전압 강하는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 5.4 V</span><br>KVL: 9 = 3.6 + V₂ → V₂ = 5.4 V.</div></details></div>
+    <div class="prob"><div class="q">KCL의 물리적 근거와 KVL의 물리적 근거는 각각 어떤 보존 법칙인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> KCL은 <strong>전하 보존</strong>(노드에 전하가 쌓이거나 사라지지 않음), KVL은 <strong>에너지 보존</strong>(한 바퀴 돌아온 전하의 에너지는 변하지 않음)이다.</div></details></div>
+    <div class="prob"><div class="q">회로를 해석하다가 어떤 가지 전류가 I = −2 A로 나왔다. 이것은 무엇을 의미하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 처음에 가정한 방향과 <strong>반대 방향</strong>으로 2 A가 흐른다는 뜻이다. 크기는 2 A로 맞으며, 계산이 틀린 것이 아니다.</div></details></div>
+    <div class="prob"><div class="q">전원 12 V, 저항 3개가 한 루프에 있고 각 저항의 전압 강하가 서로 같다. 각 저항의 전압 강하는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 4 V씩</span><br>KVL: 12 = 3V → V = 4 V.</div></details></div>
+    <div class="prob"><div class="q">노드 A에서 나가는 전류가 I₁ = 1.5 A, I₂ = 2.5 A이고 들어오는 전류는 I₃ 하나뿐이다. I₃는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 4 A</span><br>KCL: I₃ = 1.5 + 2.5 = 4 A.</div></details></div>
+    <div class="prob"><div class="q">한 루프를 시계 방향으로 돌며 다음을 만났다: 전원(− → +로 통과, 20 V), 저항 A(강하 8 V), 전원(+ → −로 통과, 5 V), 저항 B(강하 V<sub>B</sub>). V<sub>B</sub>를 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 7 V</span><br>KVL 대수합: +20 − 8 − 5 − V<sub>B</sub> = 0 → V<sub>B</sub> = 7 V. (두 번째 전원은 + → −로 지났으므로 강하로 취급)</div></details></div>
+    <div class="prob"><div class="q">수동 부호 규약에 따라 계산한 어떤 소자의 전력이 P = −15 W로 나왔다. 이 소자는 전력을 소비하는가, 공급하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 공급한다</span><br>수동 부호 규약에서 P &gt; 0이면 소비, P &lt; 0이면 공급이다. 이 소자는 15 W를 공급하고 있다(전원일 가능성이 높다).</div></details></div>
+    <div class="prob"><div class="q">한 회로에서 전원이 공급하는 전력의 합이 40 W다. 저항들이 소비하는 전력의 합은 얼마여야 하는가? 그 근거는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 40 W</span><br>에너지 보존에 의해 회로 전체에서 공급 전력의 합 = 소비 전력의 합이다. 이를 <strong>전력 평형(power balance)</strong>이라 하며, 해석 결과를 검산하는 데 유용하다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="3" class="done-check"><label>3장 완료!</label></div>
+</section>
+
+<!-- ============ 4장 ============ -->
+<section class="chapter" id="ch4">
+  <h1>4장. 직렬·병렬 회로</h1>
+  <p class="ch-sub">Series &amp; Parallel Circuits — 합성저항, 전압 분배, 전류 분배</p>
+
+  <h2>1. 직렬 연결 <span class="en">(series connection)</span></h2>
+  <p>소자들이 <strong>한 줄로 이어져 전류가 지나갈 길이 하나뿐</strong>인 연결을 <strong>직렬 <span class="en">(series)</span></strong>이라고 합니다. 3장의 용어로 말하면, 두 소자가 하나의 노드를 단둘이서만 공유하면 직렬입니다.</p>
+  <svg class="circuit" viewBox="0 0 460 150" width="460">
+    <g stroke="#1c2733" stroke-width="2" fill="none">
+      <path d="M60 40 H140 M200 40 H260 M320 40 H400 V110 H60 V55"/>
+      <rect x="140" y="28" width="60" height="24" fill="#e8f0fe"/>
+      <rect x="260" y="28" width="60" height="24" fill="#e8f0fe"/>
+      <line x1="52" y1="55" x2="68" y2="55"/>
+      <line x1="45" y1="40" x2="75" y2="40"/>
+    </g>
+    <text x="36" y="52" font-size="13">V<tspan baseline-shift="sub" font-size="10">S</tspan></text>
+    <text x="158" y="45" font-size="13">R₁</text>
+    <text x="278" y="45" font-size="13">R₂</text>
+    <text x="215" y="25" font-size="13" fill="#0f62fe">→ I (모든 소자에 동일)</text>
+  </svg>
+  <div class="keypoint">직렬의 핵심: <strong>전류는 모두 같고</strong>, 전압은 저항 크기에 비례해서 나뉜다.</div>
+  <ul>
+    <li>전류가 지나갈 길이 하나이므로 KCL에 의해 <strong>모든 소자에 같은 전류</strong>가 흐릅니다.</li>
+    <li>KVL에 의해 전원 전압은 각 저항의 전압 강하로 나뉩니다: V<sub>S</sub> = V₁ + V₂ + …</li>
+  </ul>
+  <h3>직렬 합성저항 <span class="en">(equivalent resistance)</span></h3>
+  <p>여러 저항을 <strong>하나의 저항으로 바꿔도 회로의 나머지 부분에서 보면 똑같이 동작하는 값</strong>을 <strong>합성저항(등가저항) <span class="en">(equivalent resistance, R<sub>eq</sub>)</span></strong>이라고 합니다. 직렬에서는 단순히 더합니다:</p>
+  <div class="formula">R<sub>eq</sub> = R₁ + R₂ + R₃ + …</div>
+  <div class="analogy">좁은 관을 여러 개 이어 붙이면 물이 지나기 더 힘들어집니다. 방해물이 연달아 있으니 방해는 누적(합산)됩니다.</div>
+  <h3>전압 분배 법칙 <span class="en">(voltage divider rule)</span></h3>
+  <p>직렬 회로에서 특정 저항 R<sub>x</sub>에 걸리는 전압은 전체 전압을 저항 비율로 나눈 것입니다:</p>
+  <div class="formula">V<sub>x</sub> = V<sub>S</sub> × R<sub>x</sub> / R<sub>eq</sub></div>
+  <p>큰 저항이 큰 전압을 가져갑니다. (같은 전류가 흐르니 V = IR에서 R이 크면 V도 큼)</p>
+
+  <h2>2. 병렬 연결 <span class="en">(parallel connection)</span></h2>
+  <p>소자들이 <strong>같은 두 노드 사이에 나란히 걸려 있는</strong> 연결을 <strong>병렬 <span class="en">(parallel)</span></strong>이라고 합니다.</p>
+  <svg class="circuit" viewBox="0 0 460 170" width="460">
+    <g stroke="#1c2733" stroke-width="2" fill="none">
+      <path d="M60 40 H400 M60 130 H400 M60 40 V55 M60 70 V130"/>
+      <path d="M200 40 V58 M200 100 V130 M340 40 V58 M340 100 V130"/>
+      <rect x="188" y="58" width="24" height="42" fill="#e8f0fe"/>
+      <rect x="328" y="58" width="24" height="42" fill="#e8f0fe"/>
+      <line x1="52" y1="70" x2="68" y2="70"/>
+      <line x1="45" y1="55" x2="75" y2="55"/>
+    </g>
+    <text x="30" y="68" font-size="13">V<tspan baseline-shift="sub" font-size="10">S</tspan></text>
+    <text x="218" y="84" font-size="13">R₁</text>
+    <text x="358" y="84" font-size="13">R₂</text>
+    <text x="120" y="32" font-size="13" fill="#0f62fe">노드 A (위쪽 전체)</text>
+    <text x="120" y="152" font-size="13" fill="#0f62fe">노드 B (아래쪽 전체)</text>
+  </svg>
+  <div class="keypoint">병렬의 핵심: <strong>전압은 모두 같고</strong>, 전류는 저항이 작은 쪽으로 더 많이 나뉘어 흐른다.</div>
+  <ul>
+    <li>모두 같은 두 노드에 걸려 있으므로 <strong>모든 소자의 전압이 같습니다</strong>.</li>
+    <li>KCL에 의해 전체 전류는 각 가지 전류의 합입니다: I = I₁ + I₂ + …</li>
+  </ul>
+  <h3>병렬 합성저항</h3>
+  <div class="formula">1/R<sub>eq</sub> = 1/R₁ + 1/R₂ + 1/R₃ + … &nbsp;&nbsp;(컨덕턴스로는 G<sub>eq</sub> = G₁+G₂+…)</div>
+  <p>저항이 <strong>두 개</strong>일 때는 자주 쓰는 간편식이 있습니다:</p>
+  <div class="formula">R<sub>eq</sub> = (R₁ × R₂) / (R₁ + R₂) &nbsp;&nbsp;("곱 나누기 합")</div>
+  <div class="caution">병렬 합성저항은 <strong>항상 가장 작은 저항보다 작습니다</strong>. 계산 결과가 구성 저항보다 크게 나왔다면 계산 실수입니다. 또, 같은 값 R 두 개를 병렬로 하면 R/2, n개면 R/n입니다.</div>
+  <div class="analogy">계산대가 하나뿐인 마트에 계산대를 하나 더 열면(길을 병렬로 추가) 전체적으로 손님이 더 잘 빠져나갑니다. 길을 추가할수록 전체 "방해 정도"는 줄어듭니다.</div>
+  <h3>전류 분배 법칙 <span class="en">(current divider rule)</span></h3>
+  <p>두 저항이 병렬일 때, R₁ 쪽으로 흐르는 전류는:</p>
+  <div class="formula">I₁ = I<sub>전체</sub> × R₂ / (R₁ + R₂) &nbsp;&nbsp;(← 분자에 <strong>반대쪽</strong> 저항!)</div>
+  <p>전류는 저항이 작은(쉬운) 길로 더 많이 흐르기 때문에, 분자에 반대쪽 저항이 옵니다.</p>
+
+  <h2>3. 개방과 단락 <span class="en">(open circuit &amp; short circuit)</span></h2>
+  <ul>
+    <li><strong>개방(회로) <span class="en">(open circuit)</span></strong>: 두 지점이 <strong>끊어져</strong> 있는 상태. R = ∞로 취급하며 <strong>전류가 0</strong>입니다. 예: 열린 스위치, 끊어진 퓨즈.</li>
+    <li><strong>단락(회로) <span class="en">(short circuit)</span></strong>: 두 지점이 <strong>저항 0인 도선으로 직접 연결</strong>된 상태. <strong>전압이 0</strong>이며, 전류는 회로의 나머지가 결정합니다. 저항과 병렬로 단락이 걸리면 전류는 전부 단락 쪽으로만 흐릅니다.</li>
+  </ul>
+
+  <h2>직렬 vs 병렬 비교</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>직렬 (series)</th><th>병렬 (parallel)</th></tr>
+    <tr><td>연결 모양</td><td>한 줄, 전류 길이 하나</td><td>같은 두 노드 사이에 나란히</td></tr>
+    <tr><td>공통인 것</td><td><strong>전류</strong>가 모두 같음</td><td><strong>전압</strong>이 모두 같음</td></tr>
+    <tr><td>나뉘는 것</td><td>전압 (저항에 비례)</td><td>전류 (저항에 반비례)</td></tr>
+    <tr><td>합성저항</td><td>R<sub>eq</sub> = ΣR (커짐)</td><td>1/R<sub>eq</sub> = Σ(1/R) (작아짐)</td></tr>
+    <tr><td>하나가 끊어지면</td><td>전체 회로가 멈춤 (옛날 크리스마스 전구)</td><td>나머지는 계속 동작 (가정 배선)</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th></tr>
+    <tr><td>직렬 / 병렬</td><td>series / parallel</td></tr>
+    <tr><td>합성저항(등가저항)</td><td>equivalent resistance</td></tr>
+    <tr><td>전압 분배 법칙</td><td>voltage divider rule</td></tr>
+    <tr><td>전류 분배 법칙</td><td>current divider rule</td></tr>
+    <tr><td>개방 (회로)</td><td>open circuit</td></tr>
+    <tr><td>단락 (회로)</td><td>short circuit</td></tr>
+    <tr><td>부하</td><td>load (전원에서 전력을 받아 쓰는 쪽)</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 4-1. 직렬 회로와 전압 분배</div>
+    <p>24 V 전원에 R₁ = 2 kΩ, R₂ = 4 kΩ, R₃ = 6 kΩ이 직렬로 연결되어 있다. (a) 합성저항, (b) 전류, (c) R₂의 전압을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> R<sub>eq</sub> = 2 + 4 + 6 = 12 kΩ.</li>
+      <li><strong>(b)</strong> I = V/R<sub>eq</sub> = 24 V ÷ 12 kΩ = 2 mA. (직렬이므로 모든 저항에 2 mA)</li>
+      <li><strong>(c)</strong> 전압 분배: V₂ = 24 × 4/12 = 8 V. (검산: V = IR = 2 mA × 4 kΩ = 8 V ✓)</li>
+      <li><strong>답:</strong> (a) 12 kΩ, (b) 2 mA, (c) 8 V.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 4-2. 병렬 회로와 전류 분배</div>
+    <p>12 V 전원에 R₁ = 6 Ω, R₂ = 3 Ω이 병렬로 연결되어 있다. (a) 합성저항, (b) 전체 전류, (c) 각 저항의 전류를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> R<sub>eq</sub> = (6×3)/(6+3) = 18/9 = 2 Ω. (가장 작은 3 Ω보다 작음 ✓)</li>
+      <li><strong>(b)</strong> I = 12/2 = 6 A.</li>
+      <li><strong>(c)</strong> 병렬이므로 두 저항 모두 12 V가 걸린다. I₁ = 12/6 = 2 A, I₂ = 12/3 = 4 A. (합계 6 A ✓, 작은 저항 쪽으로 더 많이 흐름 ✓)</li>
+      <li><strong>답:</strong> (a) 2 Ω, (b) 6 A, (c) I₁ = 2 A, I₂ = 4 A.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 4-3. 직·병렬 혼합 회로</div>
+    <p>18 V 전원에 R₁ = 4 Ω이 직렬로 있고, 그 뒤에 R₂ = 10 Ω과 R₃ = 15 Ω이 병렬로 연결되어 있다. 전체 전류를 구하라.</p>
+    <ol class="steps">
+      <li><strong>병렬 부분 먼저:</strong> R₂∥R₃ = (10×15)/(10+15) = 150/25 = 6 Ω. (∥는 "병렬"을 나타내는 기호)</li>
+      <li><strong>직렬 합성:</strong> R<sub>eq</sub> = 4 + 6 = 10 Ω.</li>
+      <li><strong>전체 전류:</strong> I = 18/10 = 1.8 A.</li>
+      <li><strong>답:</strong> 1.8 A. 혼합 회로는 항상 "안쪽에서 바깥쪽으로" 단순화한다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">10 Ω, 22 Ω, 68 Ω을 직렬 연결했다. 합성저항은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 100 Ω</span><br>직렬은 단순 합: 10 + 22 + 68 = 100 Ω.</div></details></div>
+    <div class="prob"><div class="q">20 Ω과 30 Ω을 병렬 연결했다. 합성저항은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 12 Ω</span><br>(20×30)/(20+30) = 600/50 = 12 Ω. 가장 작은 20 Ω보다 작으므로 타당하다.</div></details></div>
+    <div class="prob"><div class="q">100 Ω 저항 4개를 병렬로 연결하면 합성저항은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 25 Ω</span><br>같은 값 n개 병렬 = R/n = 100/4 = 25 Ω.</div></details></div>
+    <div class="prob"><div class="q">15 V 전원에 1 kΩ과 2 kΩ이 직렬로 연결됐다. 2 kΩ에 걸리는 전압은? (전압 분배 법칙 사용)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 10 V</span><br>V = 15 × 2k/(1k+2k) = 15 × 2/3 = 10 V.</div></details></div>
+    <div class="prob"><div class="q">8 A의 전류가 4 Ω과 12 Ω의 병렬 조합으로 들어간다. 4 Ω 쪽으로 흐르는 전류는? (전류 분배 법칙 사용)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 6 A</span><br>I₄ = 8 × 12/(4+12) = 8 × 0.75 = 6 A. 저항이 작은 쪽(4 Ω)으로 더 많이 흐른다.</div></details></div>
+    <div class="prob"><div class="q">직렬 회로에서 모든 소자에 공통인 물리량과, 병렬 회로에서 모든 소자에 공통인 물리량은 각각 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 직렬 — <strong>전류</strong>, 병렬 — <strong>전압</strong>. 이 한 쌍이 직렬·병렬 해석의 출발점이다.</div></details></div>
+    <div class="prob"><div class="q">가정집 조명과 콘센트가 직렬이 아니라 병렬로 배선되는 이유를 두 가지 들어라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 병렬이면 모든 기기에 같은 전압(120 V/220 V)이 공급된다. ② 한 기기를 끄거나 고장 나도(개방) 다른 기기는 계속 동작한다. 직렬이면 하나만 꺼져도 전체가 멈추고, 기기 수에 따라 전압이 나뉘어 버린다.</div></details></div>
+    <div class="prob"><div class="q">30 V 전원에 R₁ = 6 Ω이 직렬, 그 뒤 R₂ = 8 Ω과 R₃ = 24 Ω이 병렬이다. (a) 합성저항, (b) 전체 전류, (c) 병렬 부분 양단 전압을 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 12 Ω, (b) 2.5 A, (c) 15 V</span><br>(a) 8∥24 = 192/32 = 6 Ω. R<sub>eq</sub> = 6 + 6 = 12 Ω.<br>(b) I = 30/12 = 2.5 A.<br>(c) 병렬 부분 전압 = I × 6 Ω = 15 V. (검산: R₁에 2.5×6 = 15 V, 합 30 V ✓)</div></details></div>
+    <div class="prob"><div class="q">어떤 저항 R 양단이 도선으로 단락(short)되었다. R에 흐르는 전류는 얼마가 되는가? 그 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 0 A</span><br>단락 도선의 저항이 0이므로 R 양단 전압이 0이 되고, I = V/R = 0/R = 0 A. 전류는 전부 저항이 0인 단락 경로로 흐른다.</div></details></div>
+    <div class="prob"><div class="q">9 V 전원으로 5 V를 만들고 싶다. R₁(위쪽)과 R₂(아래쪽, 출력)로 전압 분배기를 만들 때 R₁ = 8 kΩ이면 R₂는 얼마여야 하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 10 kΩ</span><br>5 = 9 × R₂/(8k + R₂) → 5(8k + R₂) = 9R₂ → 40k = 4R₂ → R₂ = 10 kΩ.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="4" class="done-check"><label>4장 완료!</label></div>
+</section>
+
+<!-- ============ 5장 ============ -->
+<section class="chapter" id="ch5">
+  <h1>5장. 노드해석과 메시해석</h1>
+  <p class="ch-sub">Nodal Analysis &amp; Mesh Analysis — 복잡한 회로를 체계적으로 푸는 두 가지 방법</p>
+
+  <h2>왜 필요한가?</h2>
+  <p>직렬·병렬 합성만으로는 풀 수 없는 회로가 많습니다(예: 전원이 2개 이상인 회로). 노드해석과 메시해석은 KCL·KVL(3장)을 <strong>기계적인 절차</strong>로 바꿔서, 어떤 회로든 연립방정식으로 풀 수 있게 해 줍니다.</p>
+
+  <h2>1. 노드해석 <span class="en">(nodal analysis)</span></h2>
+  <p>먼저 필요한 용어부터 정의합니다:</p>
+  <ul>
+    <li><strong>기준 노드(접지) <span class="en">(reference node / ground)</span></strong>: 전위를 0 V로 <strong>약속</strong>하는 노드. 보통 가장 많은 가지가 연결된 노드(회로 아래쪽)를 고릅니다. 회로도에서 ⏚ 기호로 표시합니다.</li>
+    <li><strong>노드 전압 <span class="en">(node voltage)</span></strong>: 각 노드가 기준 노드보다 얼마나 전위가 높은지 나타내는 값. 1장에서 "전압은 두 지점의 차이"라고 했는데, 기준을 0 V로 고정했으므로 각 노드에 하나의 숫자를 붙일 수 있게 됩니다.</li>
+  </ul>
+  <div class="analogy">해발고도와 같습니다. "해수면 = 0 m"라고 기준을 정하면 모든 산의 높이를 숫자 하나로 말할 수 있습니다. 기준 노드가 해수면, 노드 전압이 해발고도입니다.</div>
+  <h3>노드해석 절차</h3>
+  <ol>
+    <li>기준 노드를 정한다 (0 V).</li>
+    <li>나머지 노드에 전압 변수(V₁, V₂, …)를 붙인다.</li>
+    <li>각 노드에서 <strong>KCL 식</strong>을 세운다. 이때 각 가지의 전류는 옴의 법칙으로 표현: (그 가지 양끝 노드 전압의 차) ÷ 저항.</li>
+    <li>연립방정식을 푼다.</li>
+  </ol>
+  <div class="formula">노드에서 나가는 전류 = (내 노드 전압 − 상대 노드 전압) / R</div>
+
+  <h2>2. 메시해석 <span class="en">(mesh analysis)</span></h2>
+  <p>3장에서 정의한 <strong>메시</strong>(내부에 다른 루프가 없는 최소 루프)를 이용합니다.</p>
+  <ul>
+    <li><strong>메시 전류 <span class="en">(mesh current)</span></strong>: 각 메시를 따라 시계 방향(관례)으로 돈다고 <strong>가정하는 가상의 전류</strong>. 실제 가지 전류는 그 가지를 지나는 메시 전류들의 합/차로 구합니다.</li>
+  </ul>
+  <h3>메시해석 절차</h3>
+  <ol>
+    <li>각 메시에 메시 전류(I₁, I₂, …)를 시계 방향으로 가정한다.</li>
+    <li>각 메시를 따라 <strong>KVL 식</strong>을 세운다. 두 메시가 공유하는 저항에는 (내 메시 전류 − 이웃 메시 전류)가 흐른다.</li>
+    <li>연립방정식을 푼다.</li>
+  </ol>
+
+  <h2>노드해석 vs 메시해석 비교</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>노드해석 (nodal)</th><th>메시해석 (mesh)</th></tr>
+    <tr><td>기반 법칙</td><td>KCL (전류 법칙)</td><td>KVL (전압 법칙)</td></tr>
+    <tr><td>미지수</td><td>노드 전압</td><td>메시 전류</td></tr>
+    <tr><td>식의 개수</td><td>(노드 수 − 1)개</td><td>메시 수만큼</td></tr>
+    <tr><td>유리한 경우</td><td>노드가 적을 때, 전류원이 있을 때</td><td>메시가 적을 때, 전압원이 있을 때</td></tr>
+    <tr><td>둘 다 가능한가?</td><td colspan="2">둘 다 어떤 회로든 풀 수 있다. 식이 더 적게 나오는 쪽을 고르면 된다.</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th></tr>
+    <tr><td>노드해석</td><td>nodal analysis</td></tr>
+    <tr><td>메시해석</td><td>mesh analysis</td></tr>
+    <tr><td>기준 노드, 접지</td><td>reference node, ground</td></tr>
+    <tr><td>노드 전압</td><td>node voltage</td></tr>
+    <tr><td>메시 전류</td><td>mesh current</td></tr>
+    <tr><td>연립방정식</td><td>simultaneous equations</td></tr>
+    <tr><td>전압원 / 전류원</td><td>voltage source / current source</td></tr>
+  </table></div>
+  <div class="caution"><strong>전류원(current source)</strong>이라는 용어가 처음 나왔습니다. 전압원이 "일정한 전압을 유지하는 전원"이라면, 전류원은 <strong>연결된 회로와 무관하게 일정한 전류를 밀어 넣는 전원</strong>입니다. 실물로는 드물지만 회로 해석과 등가회로(6장)에서 중요하게 쓰입니다.</div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 5-1. 노드해석 (노드 1개)</div>
+    <p>노드 A와 기준 노드(0 V) 사이에 세 가지가 연결되어 있다: ① 12 V 전원에서 2 Ω 저항을 거쳐 노드 A로, ② 노드 A에서 4 Ω 저항을 거쳐 기준 노드로, ③ 노드 A에서 4 Ω 저항을 거쳐 기준 노드로. 노드 전압 V<sub>A</sub>를 구하라.</p>
+    <ol class="steps">
+      <li><strong>KCL (노드 A에서 나가는 전류 합 = 0):</strong><br>(V<sub>A</sub> − 12)/2 + V<sub>A</sub>/4 + V<sub>A</sub>/4 = 0</li>
+      <li><strong>양변 ×4:</strong> 2(V<sub>A</sub> − 12) + V<sub>A</sub> + V<sub>A</sub> = 0 → 4V<sub>A</sub> = 24.</li>
+      <li><strong>답:</strong> V<sub>A</sub> = 6 V. (각 4 Ω에는 6/4 = 1.5 A씩, 전원 쪽 가지에는 (12−6)/2 = 3 A. KCL: 3 = 1.5+1.5 ✓)</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 5-2. 메시해석 (메시 2개)</div>
+    <svg class="circuit" viewBox="0 0 500 190" width="500">
+      <g stroke="#1c2733" stroke-width="2" fill="none">
+        <path d="M60 40 H210 M270 40 H440 V150 H60 V60"/>
+        <path d="M250 40 V60 M250 110 V150"/>
+        <rect x="210" y="28" width="60" height="24" fill="#e8f0fe"/>
+        <rect x="238" y="60" width="24" height="50" fill="#e8f0fe"/>
+        <rect x="330" y="28" width="0" height="0"/>
+        <line x1="52" y1="60" x2="68" y2="60"/>
+        <line x1="45" y1="45" x2="75" y2="45"/>
+        <line x1="432" y1="95" x2="448" y2="95"/>
+        <line x1="425" y1="80" x2="455" y2="80"/>
+      </g>
+      <text x="20" y="58" font-size="13">20 V</text>
+      <text x="225" y="22" font-size="13">R₁=2Ω</text>
+      <text x="268" y="90" font-size="13">R₂=4Ω</text>
+      <text x="458" y="93" font-size="13">8 V</text>
+      <text x="140" y="100" font-size="14" fill="#0f62fe">I₁ ↻</text>
+      <text x="340" y="100" font-size="14" fill="#0f62fe">I₂ ↻</text>
+    </svg>
+    <p>왼쪽 메시: 20 V 전원과 R₁ = 2 Ω, 가운데 공유 저항 R₂ = 4 Ω. 오른쪽 메시: R₂와 8 V 전원(전류 방향과 반대로 배치되어 전압 상승이 아닌 강하로 작용). 메시 전류 I₁, I₂(둘 다 시계 방향)를 구하라.</p>
+    <ol class="steps">
+      <li><strong>메시 1 KVL:</strong> 20 = 2·I₁ + 4·(I₁ − I₂) → 6I₁ − 4I₂ = 20.</li>
+      <li><strong>메시 2 KVL:</strong> 0 = 4·(I₂ − I₁) + 8 → −4I₁ + 4I₂ = −8 → I₂ = I₁ − 2.</li>
+      <li><strong>대입:</strong> 6I₁ − 4(I₁ − 2) = 20 → 2I₁ = 12 → I₁ = 6 A, I₂ = 4 A.</li>
+      <li><strong>공유 저항의 실제 전류:</strong> R₂에는 I₁ − I₂ = 2 A가 아래로 흐른다.</li>
+      <li><strong>답:</strong> I₁ = 6 A, I₂ = 4 A.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">노드해석에서 기준 노드(reference node)를 정하는 이유는 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전압은 본래 두 지점의 차이로만 정의되므로, 한 노드를 0 V로 약속해야 각 노드에 "노드 전압"이라는 하나의 숫자를 부여할 수 있다. (해발고도의 기준인 해수면과 같은 역할)</div></details></div>
+    <div class="prob"><div class="q">노드가 4개인 회로를 노드해석으로 풀 때 필요한 KCL 식은 최대 몇 개인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 3개</span><br>기준 노드를 제외한 (노드 수 − 1) = 3개의 노드에 대해 식을 세운다.</div></details></div>
+    <div class="prob"><div class="q">노드 A(전압 V<sub>A</sub>)와 노드 B(전압 V<sub>B</sub>) 사이에 저항 R이 있다. A에서 B로 흐르는 전류를 식으로 나타내라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: I = (V<sub>A</sub> − V<sub>B</sub>) / R</span><br>전류는 전위가 높은 쪽에서 낮은 쪽으로 흐르므로, 출발 노드 전압에서 도착 노드 전압을 뺀 값을 R로 나눈다.</div></details></div>
+    <div class="prob"><div class="q">메시 전류는 "가상의" 전류라고 불린다. 두 메시가 공유하는 가지의 실제 전류는 어떻게 구하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 그 가지를 지나는 두 메시 전류의 <strong>차</strong>(방향이 같으면 합)로 구한다. 예: 시계 방향 I₁, I₂가 공유 저항을 서로 반대로 지나면 실제 전류는 I₁ − I₂.</div></details></div>
+    <div class="prob"><div class="q">노드 A에 세 가지가 연결됐다: 10 V 전원에서 5 Ω을 거쳐 A로, A에서 10 Ω을 거쳐 접지로, A에서 10 Ω을 거쳐 접지로. V<sub>A</sub>는? (예제 5-1과 같은 구조)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 5 V</span><br>KCL: (V<sub>A</sub>−10)/5 + V<sub>A</sub>/10 + V<sub>A</sub>/10 = 0. 양변 ×10: 2V<sub>A</sub>−20+V<sub>A</sub>+V<sub>A</sub> = 0 → 4V<sub>A</sub> = 20 → V<sub>A</sub> = 5 V.</div></details></div>
+    <div class="prob"><div class="q">전압원과 전류원의 차이를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전압원은 흐르는 전류와 무관하게 <strong>양단 전압을 일정</strong>하게 유지하고, 전류원은 걸리는 전압과 무관하게 <strong>흘리는 전류를 일정</strong>하게 유지한다.</div></details></div>
+    <div class="prob"><div class="q">전류원이 많은 회로에는 노드해석과 메시해석 중 어느 쪽이 편리한 경우가 많은가? 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 노드해석</span><br>노드해석의 식은 KCL(전류 합)이므로, 전류원의 값이 식에 <strong>그대로 숫자로 들어가</strong> 미지수가 줄어든다. 반대로 전압원이 많으면 메시해석(KVL)이 편한 경우가 많다.</div></details></div>
+    <div class="prob"><div class="q">메시가 2개인 회로에서 메시 1에만 12 V 전원(전류 방향으로 상승)과 3 Ω이 있고, 공유 저항은 6 Ω이다. 메시 2에는 공유 저항 6 Ω과 3 Ω만 있다(전원 없음). 시계 방향 메시 전류 I₁, I₂의 연립방정식을 세우고 풀어라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: I₁ = 2 A, I₂ = 4/3 A ≈ 1.33 A</span><br>메시 1: 12 = 3I₁ + 6(I₁−I₂) → 9I₁ − 6I₂ = 12.<br>메시 2: 0 = 6(I₂−I₁) + 3I₂ → −6I₁ + 9I₂ = 0 → I₁ = 1.5I₂.<br>대입: 9(1.5I₂) − 6I₂ = 12 → 7.5I₂ = 10 → I₂ = 4/3 A, I₁ = 2 A.</div></details></div>
+    <div class="prob"><div class="q">위 문제에서 공유 저항(6 Ω)에 흐르는 실제 전류의 크기는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 2/3 A ≈ 0.67 A</span><br>공유 가지 전류 = I₁ − I₂ = 2 − 4/3 = 2/3 A (메시 1 방향).</div></details></div>
+    <div class="prob"><div class="q">어떤 회로는 노드가 3개(기준 포함), 메시가 4개다. 노드해석과 메시해석 중 어느 쪽이 식이 적게 나오는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 노드해석 (2개 vs 4개)</span><br>노드해석: 3 − 1 = 2개 식. 메시해석: 4개 식. 미지수가 적은 노드해석이 유리하다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="5" class="done-check"><label>5장 완료!</label></div>
+</section>
+
+<!-- ============ 6장 ============ -->
+<section class="chapter" id="ch6">
+  <h1>6장. 테브난·노턴 정리</h1>
+  <p class="ch-sub">Thévenin's &amp; Norton's Theorems — 복잡한 회로를 단순한 등가회로로</p>
+
+  <h2>1. 등가회로라는 발상</h2>
+  <p><strong>등가회로 <span class="en">(equivalent circuit)</span></strong>란, 바깥에서 보면(특정 두 단자에서 측정하면) 원래 회로와 <strong>완전히 똑같이 동작하는 더 단순한 회로</strong>입니다. 4장의 합성저항도 등가회로의 일종이었습니다. 이 장에서는 전원까지 포함한 회로 전체를 단순화합니다.</p>
+  <p>먼저 용어 두 개를 정의합니다. 관심 있는 두 단자를 a, b라고 할 때:</p>
+  <ul>
+    <li><strong>개방 회로 전압 <span class="en">(open-circuit voltage, V<sub>oc</sub>)</span></strong>: a–b 사이에 아무것도 연결하지 않았을 때(개방, 4장 참고) 두 단자 사이에 나타나는 전압.</li>
+    <li><strong>단락 회로 전류 <span class="en">(short-circuit current, I<sub>sc</sub>)</span></strong>: a–b 사이를 도선으로 직접 연결했을 때(단락) 그 도선에 흐르는 전류.</li>
+  </ul>
+
+  <h2>2. 테브난 정리 <span class="en">(Thévenin's theorem)</span></h2>
+  <div class="keypoint">전원과 저항으로 이루어진 어떤 회로든, 두 단자 a–b에서 보면 <strong>전압원 V<sub>Th</sub> 하나 + 직렬 저항 R<sub>Th</sub> 하나</strong>로 바꿀 수 있다.</div>
+  <ul>
+    <li><strong>테브난 전압 <span class="en">(Thévenin voltage)</span></strong>: V<sub>Th</sub> = V<sub>oc</sub> (a–b 개방 시 전압).</li>
+    <li><strong>테브난 저항 <span class="en">(Thévenin resistance)</span></strong>: R<sub>Th</sub> = 회로 내부의 <strong>모든 전원을 끈 뒤</strong> a–b에서 본 합성저항.</li>
+  </ul>
+  <p>"전원을 끈다"는 것의 의미(중요!):</p>
+  <ul>
+    <li><strong>전압원을 끈다</strong> → 전압 0 V → <strong>단락(도선)</strong>으로 바꾼다.</li>
+    <li><strong>전류원을 끈다</strong> → 전류 0 A → <strong>개방(끊음)</strong>으로 바꾼다.</li>
+  </ul>
+  <div class="analogy">복잡한 수도 시설 전체를, 벽에 달린 <strong>수도꼭지 하나</strong>로 요약하는 것과 같습니다. 꼭지에서 나오는 수압(V<sub>Th</sub>)과 배관의 답답함(R<sub>Th</sub>)만 알면, 뒤에 무엇이 붙어 있는지 몰라도 호스를 연결했을 때 물이 얼마나 나올지 계산할 수 있습니다.</div>
+
+  <h2>3. 노턴 정리 <span class="en">(Norton's theorem)</span></h2>
+  <div class="keypoint">같은 회로를 <strong>전류원 I<sub>N</sub> 하나 + 병렬 저항 R<sub>N</sub> 하나</strong>로도 바꿀 수 있다.</div>
+  <ul>
+    <li><strong>노턴 전류 <span class="en">(Norton current)</span></strong>: I<sub>N</sub> = I<sub>sc</sub> (a–b 단락 시 전류).</li>
+    <li><strong>노턴 저항</strong>: R<sub>N</sub> = R<sub>Th</sub> (테브난 저항과 같음).</li>
+  </ul>
+  <p>테브난과 노턴은 같은 회로의 두 표현이며, 서로 변환할 수 있습니다:</p>
+  <div class="formula">V<sub>Th</sub> = I<sub>N</sub> × R<sub>Th</sub> &nbsp;&nbsp;&nbsp; I<sub>N</sub> = V<sub>Th</sub> / R<sub>Th</sub></div>
+  <p>이 변환을 <strong>소스 변환 <span class="en">(source transformation)</span></strong>이라고 합니다: "전압원 + 직렬 R" ⇄ "전류원 + 병렬 R".</p>
+
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>테브난 등가 (Thévenin)</th><th>노턴 등가 (Norton)</th></tr>
+    <tr><td>구성</td><td>전압원 V<sub>Th</sub> + <strong>직렬</strong> R<sub>Th</sub></td><td>전류원 I<sub>N</sub> + <strong>병렬</strong> R<sub>N</sub></td></tr>
+    <tr><td>전원 값 구하기</td><td>V<sub>Th</sub> = 개방 전압 V<sub>oc</sub></td><td>I<sub>N</sub> = 단락 전류 I<sub>sc</sub></td></tr>
+    <tr><td>저항 값</td><td colspan="2">R<sub>Th</sub> = R<sub>N</sub> (전원 끄고 단자에서 본 합성저항) — 둘이 같다</td></tr>
+    <tr><td>서로의 관계</td><td colspan="2">V<sub>Th</sub> = I<sub>N</sub>·R<sub>Th</sub> 로 언제든 상호 변환 가능</td></tr>
+  </table></div>
+
+  <h2>4. 최대 전력 전달 정리 <span class="en">(maximum power transfer theorem)</span></h2>
+  <p>테브난 등가회로(V<sub>Th</sub>, R<sub>Th</sub>)에 <strong>부하 저항 <span class="en">(load resistance, R<sub>L</sub>)</span></strong>을 연결할 때, 부하가 받는 전력이 최대가 되는 조건은:</p>
+  <div class="formula">R<sub>L</sub> = R<sub>Th</sub> &nbsp;&nbsp;일 때 최대 &nbsp;&nbsp; P<sub>max</sub> = V<sub>Th</sub>² / (4R<sub>Th</sub>)</div>
+  <p>R<sub>L</sub>이 너무 작으면 전압을 못 받고, 너무 크면 전류가 안 흐르기 때문에 중간(R<sub>Th</sub>와 같을 때)이 최적입니다. 스피커 임피던스 매칭 등 실무에서 자주 등장하는 개념입니다.</p>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th></tr>
+    <tr><td>등가회로</td><td>equivalent circuit</td></tr>
+    <tr><td>개방 회로 전압</td><td>open-circuit voltage (V<sub>oc</sub>)</td></tr>
+    <tr><td>단락 회로 전류</td><td>short-circuit current (I<sub>sc</sub>)</td></tr>
+    <tr><td>테브난 전압 / 테브난 저항</td><td>Thévenin voltage / Thévenin resistance</td></tr>
+    <tr><td>노턴 전류</td><td>Norton current</td></tr>
+    <tr><td>소스 변환</td><td>source transformation</td></tr>
+    <tr><td>부하 (저항)</td><td>load (resistance)</td></tr>
+    <tr><td>최대 전력 전달</td><td>maximum power transfer</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 6-1. 테브난 등가회로 구하기</div>
+    <p>12 V 전원에 R₁ = 4 Ω이 직렬로 있고, R₂ = 12 Ω이 그 뒤에서 접지로 연결되어 있다(전압 분배기 구조). R₂ 양단이 출력 단자 a–b다. 테브난 등가회로를 구하라.</p>
+    <ol class="steps">
+      <li><strong>V<sub>Th</sub> (개방 전압):</strong> a–b가 개방이면 R₁→R₂로만 전류가 흐른다. 전압 분배(4장): V<sub>Th</sub> = 12 × 12/(4+12) = 9 V.</li>
+      <li><strong>R<sub>Th</sub> (전원 끄기):</strong> 12 V 전압원을 단락으로 바꾸면, a–b에서 볼 때 R₁과 R₂가 <strong>병렬</strong>이 된다: R<sub>Th</sub> = (4×12)/(4+12) = 3 Ω.</li>
+      <li><strong>답:</strong> V<sub>Th</sub> = 9 V, R<sub>Th</sub> = 3 Ω. (이제 a–b에 어떤 부하를 달아도 "9 V 전원 + 3 Ω 직렬"로 간단히 계산 가능)</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 6-2. 등가회로 활용 + 노턴 변환</div>
+    <p>예제 6-1의 결과를 이용해 (a) a–b에 6 Ω 부하를 달았을 때 부하 전류, (b) 노턴 등가회로, (c) 최대 전력을 받는 부하값과 그때의 전력을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> I<sub>L</sub> = V<sub>Th</sub>/(R<sub>Th</sub>+R<sub>L</sub>) = 9/(3+6) = 1 A.</li>
+      <li><strong>(b)</strong> I<sub>N</sub> = V<sub>Th</sub>/R<sub>Th</sub> = 9/3 = 3 A, R<sub>N</sub> = 3 Ω (전류원 3 A + 병렬 3 Ω).</li>
+      <li><strong>(c)</strong> R<sub>L</sub> = R<sub>Th</sub> = 3 Ω일 때 최대. P<sub>max</sub> = 9²/(4×3) = 81/12 = 6.75 W.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">테브난 등가회로는 어떤 두 요소로 구성되는가? 두 요소는 직렬인가 병렬인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전압원 V<sub>Th</sub>와 저항 R<sub>Th</sub>의 <strong>직렬</strong> 연결. (노턴은 전류원과 저항의 병렬)</div></details></div>
+    <div class="prob"><div class="q">테브난 저항을 구할 때 회로 안의 전압원과 전류원은 각각 어떻게 처리하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전압원 → <strong>단락</strong>(0 V이므로 도선으로), 전류원 → <strong>개방</strong>(0 A이므로 끊음)으로 바꾼 뒤 단자에서 합성저항을 구한다.</div></details></div>
+    <div class="prob"><div class="q">어떤 회로의 개방 전압이 20 V, 단락 전류가 4 A였다. 테브난 등가회로와 노턴 등가회로를 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> R<sub>Th</sub> = V<sub>oc</sub>/I<sub>sc</sub> = 20/4 = 5 Ω. 테브난: 20 V + 직렬 5 Ω. 노턴: 4 A + 병렬 5 Ω.</div></details></div>
+    <div class="prob"><div class="q">"10 V 전압원 + 직렬 2 Ω"을 소스 변환하면 어떤 회로가 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 5 A 전류원 + 병렬 2 Ω</span><br>I<sub>N</sub> = V/R = 10/2 = 5 A, 저항값은 그대로 2 Ω이며 연결만 직렬→병렬로 바뀐다.</div></details></div>
+    <div class="prob"><div class="q">24 V 전원과 직렬 R₁ = 6 Ω, 그 뒤 R₂ = 6 Ω이 접지로 연결된 전압 분배기의 출력 단자(R₂ 양단)에 대한 테브난 등가를 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: V<sub>Th</sub> = 12 V, R<sub>Th</sub> = 3 Ω</span><br>V<sub>Th</sub> = 24 × 6/12 = 12 V. 전원을 단락하면 R₁∥R₂ = 36/12 = 3 Ω.</div></details></div>
+    <div class="prob"><div class="q">위 문제의 회로 출력에 9 Ω 부하를 연결하면 부하 전류와 부하 전압은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 1 A, 9 V</span><br>I = V<sub>Th</sub>/(R<sub>Th</sub>+R<sub>L</sub>) = 12/(3+9) = 1 A. V<sub>L</sub> = 1 × 9 = 9 V.</div></details></div>
+    <div class="prob"><div class="q">테브난 등가(V<sub>Th</sub> = 16 V, R<sub>Th</sub> = 8 Ω)에 연결된 부하가 최대 전력을 받으려면 R<sub>L</sub>은 얼마여야 하며, 그때 전력은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: R<sub>L</sub> = 8 Ω, P<sub>max</sub> = 8 W</span><br>최대 전력 전달 조건 R<sub>L</sub> = R<sub>Th</sub> = 8 Ω. P<sub>max</sub> = V<sub>Th</sub>²/(4R<sub>Th</sub>) = 256/32 = 8 W.</div></details></div>
+    <div class="prob"><div class="q">최대 전력 전달 조건(R<sub>L</sub> = R<sub>Th</sub>)에서 부하 양단 전압은 V<sub>Th</sub>의 몇 배인가? 전달 효율(부하 전력 ÷ 전원 공급 전력)은 몇 %인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: ½배, 효율 50%</span><br>R<sub>L</sub> = R<sub>Th</sub>이면 전압 분배로 부하에 V<sub>Th</sub>/2가 걸린다. 같은 전류가 두 저항에 흐르고 값이 같으므로 소비 전력도 반반 → 효율 50%. (최대 전력 ≠ 최대 효율이라는 점이 중요)</div></details></div>
+    <div class="prob"><div class="q">노턴 등가회로(I<sub>N</sub> = 6 A, R<sub>N</sub> = 4 Ω)의 단자에 12 Ω 부하를 연결했다. 부하에 흐르는 전류는? (힌트: 전류 분배 법칙, 4장)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 1.5 A</span><br>전류 분배: I<sub>L</sub> = 6 × 4/(4+12) = 1.5 A. (또는 테브난으로 변환: V<sub>Th</sub> = 24 V, I = 24/16 = 1.5 A — 같은 답)</div></details></div>
+    <div class="prob"><div class="q">부하를 자주 바꿔 가며 실험해야 하는 회로에서 테브난 등가회로가 특히 유용한 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 원래 회로를 매번 다시 풀 필요 없이, 한 번 구해 둔 V<sub>Th</sub>와 R<sub>Th</sub>에 대해 I = V<sub>Th</sub>/(R<sub>Th</sub>+R<sub>L</sub>) 한 줄로 어떤 부하에 대해서도 즉시 계산할 수 있기 때문이다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="6" class="done-check"><label>6장 완료!</label></div>
+</section>
+
+<!-- ============ 7장 ============ -->
+<section class="chapter" id="ch7">
+  <h1>7장. 커패시터·인덕터와 RC/RL 과도응답</h1>
+  <p class="ch-sub">Capacitors, Inductors &amp; Transients — 에너지를 저장하는 소자와 시간에 따른 변화</p>
+
+  <h2>1. 커패시터 <span class="en">(capacitor)</span></h2>
+  <p><strong>커패시터 <span class="en">(capacitor)</span></strong>는 <strong>전하를 저장하는 소자</strong>입니다. 두 도체 판 사이에 절연체(2장에서 정의)를 끼운 구조로, 판에 전하가 쌓이면서 전기장 형태로 에너지를 저장합니다.</p>
+  <p><strong>커패시턴스(정전용량) <span class="en">(capacitance, 기호 C)</span></strong>는 전하를 저장하는 능력이며, 단위는 <strong>패럿 <span class="en">(farad, 기호 F)</span></strong>입니다. 1 F는 매우 크기 때문에 실무에서는 μF, nF, pF를 주로 씁니다.</p>
+  <div class="formula">Q = C × V &nbsp;&nbsp;[저장 전하(C) = 커패시턴스(F) × 전압(V)] &nbsp;&nbsp;&nbsp; W = ½CV² [저장 에너지(J)]</div>
+  <div class="analogy">커패시터는 <strong>물탱크(또는 고무막이 달린 탱크)</strong>입니다. 물(전하)을 채울수록 수위(전압)가 올라가고, 탱크가 클수록(C가 클수록) 같은 수위까지 채우는 데 더 많은 물이 필요합니다.</div>
+  <div class="keypoint">커패시터의 두 가지 핵심 성질:<br>① 커패시터의 <strong>전압은 갑자기(순간적으로) 변할 수 없다</strong> — 전하가 쌓이는 데 시간이 걸리므로.<br>② 직류(DC)가 오래 흐른 <strong>정상상태에서는 전류가 0</strong> — 다 충전되면 더 이상 전하가 이동하지 않으므로 <strong>개방 회로처럼</strong> 동작한다.</div>
+
+  <h2>2. 인덕터 <span class="en">(inductor)</span></h2>
+  <p><strong>인덕터 <span class="en">(inductor)</span></strong>는 도선을 코일 모양으로 감은 소자로, <strong>전류가 만드는 자기장 형태로 에너지를 저장</strong>합니다. 전류가 변하면 자기장이 변하고, 변화를 방해하는 방향으로 전압이 유도됩니다(전자기 유도).</p>
+  <p><strong>인덕턴스 <span class="en">(inductance, 기호 L)</span></strong>는 전류 변화를 방해하는 능력이며, 단위는 <strong>헨리 <span class="en">(henry, 기호 H)</span></strong>입니다.</p>
+  <div class="formula">W = ½LI² [저장 에너지(J)]</div>
+  <div class="analogy">인덕터는 <strong>무거운 물레방아(관성)</strong>입니다. 멈춰 있는 물레방아는 물살이 밀어도 천천히 돌기 시작하고, 일단 돌기 시작하면 물을 끊어도 관성 때문에 바로 멈추지 않습니다. 인덕터도 전류를 갑자기 늘리거나 줄이는 것을 방해합니다.</div>
+  <div class="keypoint">인덕터의 두 가지 핵심 성질:<br>① 인덕터의 <strong>전류는 갑자기 변할 수 없다</strong> — 자기장이 쌓이는 데 시간이 걸리므로.<br>② 직류 <strong>정상상태에서는 전압이 0</strong> — 전류가 일정해지면 유도 전압이 사라져 <strong>단락(그냥 도선)처럼</strong> 동작한다.</div>
+
+  <h2>커패시터 vs 인덕터 비교</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>커패시터 (capacitor)</th><th>인덕터 (inductor)</th></tr>
+    <tr><td>저장 형태</td><td>전기장 (전하로)</td><td>자기장 (전류로)</td></tr>
+    <tr><td>값 / 단위</td><td>커패시턴스 C, 패럿(F)</td><td>인덕턴스 L, 헨리(H)</td></tr>
+    <tr><td>갑자기 못 변하는 것</td><td><strong>전압</strong></td><td><strong>전류</strong></td></tr>
+    <tr><td>DC 정상상태</td><td>개방 회로처럼 (전류 0)</td><td>단락처럼 (전압 0)</td></tr>
+    <tr><td>저장 에너지</td><td>½CV²</td><td>½LI²</td></tr>
+    <tr><td>비유</td><td>물탱크 (물의 양)</td><td>물레방아 (흐름의 관성)</td></tr>
+  </table></div>
+
+  <h2>3. 과도응답과 정상상태 <span class="en">(transient &amp; steady state)</span></h2>
+  <p>스위치를 켜거나 끄는 순간처럼 회로 조건이 바뀌면, 커패시터·인덕터가 있는 회로는 <strong>새로운 평형에 도달하기까지 시간이 걸립니다</strong>.</p>
+  <ul>
+    <li><strong>과도응답 <span class="en">(transient response)</span></strong>: 조건이 바뀐 직후, 전압·전류가 <strong>변해 가는 과정</strong>.</li>
+    <li><strong>정상상태 <span class="en">(steady state)</span></strong>: 충분히 시간이 지나 값이 <strong>더 이상 변하지 않는 상태</strong>.</li>
+  </ul>
+  <h3>시정수 <span class="en">(time constant, τ)</span></h3>
+  <p>변화의 "빠르기"를 나타내는 값이 <strong>시정수(타우, τ)</strong>입니다. 단위는 초(s)입니다.</p>
+  <div class="formula">RC 회로: τ = R × C &nbsp;&nbsp;&nbsp;&nbsp; RL 회로: τ = L / R</div>
+  <ul>
+    <li>1τ가 지나면 전체 변화량의 약 <strong>63.2%</strong>가 완료됩니다.</li>
+    <li><strong>5τ</strong>가 지나면 약 99.3% — 실용적으로 <strong>"5τ면 정상상태 도달"</strong>로 간주합니다.</li>
+  </ul>
+  <p>예를 들어 방전된 커패시터를 저항을 통해 전압 V<sub>S</sub>로 충전하면, 커패시터 전압은 지수함수 곡선을 그리며 올라갑니다:</p>
+  <div class="formula">충전: v(t) = V<sub>S</sub>(1 − e<sup>−t/τ</sup>) &nbsp;&nbsp;&nbsp; 방전: v(t) = V₀ · e<sup>−t/τ</sup></div>
+  <p>여기서 e ≈ 2.718(자연상수)이고, V₀는 방전 시작 시점의 커패시터 전압입니다. RL 회로의 전류도 같은 모양의 곡선을 따릅니다.</p>
+  <div class="analogy">욕조에 물을 받을 때, 수도꼭지를 틀면 처음엔 빠르게 차다가 수위가 목표에 가까워질수록 (수압 차가 줄어) 천천히 찹니다. "절반 남을 때마다 그 절반을 채우는" 식으로, 이론상 100%에는 영원히 도달하지 않지만 실용적으로는 5τ면 다 찬 것으로 봅니다.</div>
+  <div class="caution">τ 계산에서 R은 "그 소자(C 또는 L)가 <strong>실제로 바라보는</strong> 저항"입니다. 복잡한 회로라면 6장의 테브난 저항 R<sub>Th</sub>를 구해서 τ = R<sub>Th</sub>C 로 계산합니다. 앞 장들이 이렇게 연결됩니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>기호/단위</th></tr>
+    <tr><td>커패시터 / 커패시턴스(정전용량)</td><td>capacitor / capacitance</td><td>C, 패럿 F</td></tr>
+    <tr><td>인덕터 / 인덕턴스</td><td>inductor / inductance</td><td>L, 헨리 H</td></tr>
+    <tr><td>과도응답</td><td>transient response</td><td>—</td></tr>
+    <tr><td>정상상태</td><td>steady state</td><td>—</td></tr>
+    <tr><td>시정수</td><td>time constant</td><td>τ, 초 s</td></tr>
+    <tr><td>충전 / 방전</td><td>charging / discharging</td><td>—</td></tr>
+    <tr><td>지수함수적 (변화)</td><td>exponential</td><td>e ≈ 2.718</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 7-1. RC 충전 회로</div>
+    <p>10 V 전원 — 스위치 — R = 2 kΩ — C = 100 μF 직렬 회로. 커패시터는 완전히 방전된 상태에서 t = 0에 스위치를 닫는다. (a) 시정수, (b) 정상상태 도달까지 걸리는 실용적 시간, (c) t = τ에서의 커패시터 전압, (d) 정상상태의 커패시터 전압과 전류를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> τ = RC = 2,000 × 100×10⁻⁶ = 0.2 s.</li>
+      <li><strong>(b)</strong> 5τ = 1 s.</li>
+      <li><strong>(c)</strong> v(τ) = 10 × (1 − e⁻¹) = 10 × 0.632 = 6.32 V.</li>
+      <li><strong>(d)</strong> 정상상태에서 커패시터는 개방처럼 동작 → 전류 0 A, 전압 강하가 저항에 없으므로 커패시터 전압 = 10 V.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 7-2. RL 회로의 시정수와 정상상태</div>
+    <p>12 V 전원 — R = 6 Ω — L = 3 H 직렬 회로에서 t = 0에 스위치를 닫는다. (a) 시정수, (b) 정상상태 전류, (c) 저장되는 최종 에너지를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> τ = L/R = 3/6 = 0.5 s.</li>
+      <li><strong>(b)</strong> 정상상태에서 인덕터는 단락처럼 동작 → I = V/R = 12/6 = 2 A.</li>
+      <li><strong>(c)</strong> W = ½LI² = ½ × 3 × 2² = 6 J.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">470 μF 커패시터가 12 V로 충전되어 있다. (a) 저장된 전하, (b) 저장된 에너지는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 5.64 mC, (b) 33.8 mJ</span><br>(a) Q = CV = 470×10⁻⁶ × 12 = 5.64×10⁻³ C.<br>(b) W = ½CV² = 0.5 × 470×10⁻⁶ × 144 ≈ 0.0338 J.</div></details></div>
+    <div class="prob"><div class="q">커패시터에서 갑자기 변할 수 없는 것과 인덕터에서 갑자기 변할 수 없는 것은 각각 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 커패시터 — <strong>전압</strong>, 인덕터 — <strong>전류</strong>. (전하와 자기장이 쌓이는 데 시간이 걸리기 때문)</div></details></div>
+    <div class="prob"><div class="q">DC 정상상태에서 커패시터와 인덕터는 각각 무엇처럼 동작하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 커패시터 — <strong>개방 회로</strong>(전류 0), 인덕터 — <strong>단락 회로</strong>(전압 0). DC 정상상태 해석 문제의 핵심 규칙이다.</div></details></div>
+    <div class="prob"><div class="q">R = 10 kΩ, C = 47 μF인 RC 회로의 시정수와, 실용적 정상상태 도달 시간(5τ)은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: τ = 0.47 s, 5τ = 2.35 s</span><br>τ = RC = 10⁴ × 47×10⁻⁶ = 0.47 s.</div></details></div>
+    <div class="prob"><div class="q">R = 100 Ω, L = 50 mH인 RL 회로의 시정수는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 0.5 ms</span><br>τ = L/R = 0.05/100 = 5×10⁻⁴ s = 0.5 ms.</div></details></div>
+    <div class="prob"><div class="q">방전된 커패시터를 20 V 전원으로 충전한다. 시정수가 1 s일 때, t = 1 s와 t = 5 s에서의 커패시터 전압은 대략 얼마인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 12.6 V, 약 19.9 V</span><br>t = τ: 20×(1−e⁻¹) = 20×0.632 = 12.6 V. t = 5τ: 20×(1−e⁻⁵) = 20×0.993 ≈ 19.9 V (사실상 정상상태).</div></details></div>
+    <div class="prob"><div class="q">100 V로 충전된 커패시터를 저항을 통해 방전시킨다. 시정수가 2 s일 때 t = 2 s에서 커패시터 전압은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 36.8 V</span><br>방전식: v = V₀e^(−t/τ) = 100 × e⁻¹ = 36.8 V. (1τ 후에는 처음의 36.8%가 남는다)</div></details></div>
+    <div class="prob"><div class="q">2 H 인덕터에 3 A가 흐르는 정상상태다. 저장된 에너지는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 9 J</span><br>W = ½LI² = 0.5 × 2 × 9 = 9 J.</div></details></div>
+    <div class="prob"><div class="q">24 V 전원 — R₁ = 4 Ω — (노드 A) — R₂ = 8 Ω — 접지로 이어진 회로에서, 커패시터가 노드 A와 접지 사이에 연결되어 있다. DC 정상상태에서 커패시터의 전압은? (힌트: 정상상태에서 커패시터 가지에는 전류가 흐르지 않는다)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 16 V</span><br>커패시터는 개방처럼 동작하므로 전류는 R₁→R₂ 경로로만 흐른다. 커패시터 전압 = 노드 A의 전압 = 전압 분배 24 × 8/(4+8) = 16 V.</div></details></div>
+    <div class="prob"><div class="q">RC 회로에서 충전 속도를 2배 빠르게(시정수를 절반으로) 만들고 싶다. 방법을 두 가지 제시하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> τ = RC이므로 ① R을 절반으로 줄이거나 ② C를 절반으로 줄이면 된다. (예: 같은 커패시터 하나를 직렬로 추가하면 합성 C가 절반이 된다 — 커패시터 직렬은 저항 병렬처럼 계산된다는 것도 수업에서 배우게 된다.)</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="7" class="done-check"><label>7장 완료!</label></div>
+</section>
+
+<!-- ============ 8장 ============ -->
+<section class="chapter" id="ch8">
+  <h1>8장. 페이저와 복소수</h1>
+  <p class="ch-sub">Phasors &amp; Complex Numbers — 교류(AC) 해석을 위한 수학 도구</p>
+
+  <h2>1. 정현파 <span class="en">(sinusoid)</span></h2>
+  <p>1장에서 교류(AC)는 "방향과 크기가 주기적으로 바뀌는 전류"라고 했습니다. 가장 기본적인 교류 파형은 사인 곡선 모양의 <strong>정현파 <span class="en">(sinusoid, sinusoidal waveform)</span></strong>입니다:</p>
+  <div class="formula">v(t) = V<sub>m</sub> sin(ωt + φ)</div>
+  <p>이 식의 각 부분에 이름이 있습니다:</p>
+  <ul>
+    <li><strong>순시값 <span class="en">(instantaneous value, v(t))</span></strong>: 특정 순간 t에서의 실제 값. 시시각각 변합니다.</li>
+    <li><strong>진폭(최댓값) <span class="en">(amplitude / peak value, V<sub>m</sub>)</span></strong>: 파형이 도달하는 가장 큰 값.</li>
+    <li><strong>주기 <span class="en">(period, T)</span></strong>: 파형이 한 번 반복되는 데 걸리는 시간(초).</li>
+    <li><strong>주파수 <span class="en">(frequency, f)</span></strong>: 1초 동안 반복되는 횟수. 단위는 <strong>헤르츠 <span class="en">(hertz, Hz)</span></strong>. f = 1/T. (북미 전력망은 60 Hz, 한국은 60 Hz, 유럽은 50 Hz)</li>
+    <li><strong>각주파수 <span class="en">(angular frequency, ω)</span></strong>: 1초당 도는 각도를 라디안으로 표현한 것. <strong>ω = 2πf</strong> (rad/s). 한 바퀴 = 2π 라디안 = 360°이기 때문입니다.</li>
+    <li><strong>위상(각) <span class="en">(phase (angle), φ)</span></strong>: 파형이 기준보다 얼마나 앞서거나(<strong>앞섬, lead</strong>) 뒤처져(<strong>뒤짐, lag</strong>) 있는지 나타내는 각도.</li>
+  </ul>
+  <div class="analogy">회전하는 <strong>관람차</strong>를 옆에서 보면, 탑승칸의 높이는 사인 곡선을 그립니다. 관람차의 반지름이 진폭, 도는 속도가 각주파수, 어느 위치에서 출발했는지가 위상입니다. 이 "회전하는 것의 그림자가 정현파"라는 그림이 뒤에 나올 페이저의 핵심 아이디어입니다.</div>
+
+  <h3>실효값 <span class="en">(RMS value)</span></h3>
+  <p>교류는 값이 계속 변하는데 "몇 V짜리 교류"라고 말하려면 대표값이 필요합니다. <strong>실효값 <span class="en">(RMS, root-mean-square value)</span></strong>은 <strong>같은 저항에서 같은 평균 전력(열)을 내는 직류 값</strong>으로 정의한 대표값입니다. 정현파의 경우:</p>
+  <div class="formula">V<sub>rms</sub> = V<sub>m</sub> / √2 ≈ 0.707 V<sub>m</sub></div>
+  <div class="caution">"가정용 120 V"는 실효값입니다. 실제 최댓값은 120 × √2 ≈ 170 V까지 올라갑니다. 교류 계기(멀티미터)가 표시하는 값도 대부분 실효값입니다. 문제를 풀 때 "주어진 값이 진폭인지 실효값인지" 반드시 확인하세요.</div>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>순시값 v(t)</th><th>진폭 V<sub>m</sub></th><th>실효값 V<sub>rms</sub></th></tr>
+    <tr><td>의미</td><td>그 순간의 실제 값</td><td>가장 큰 값</td><td>같은 열을 내는 DC 등가값</td></tr>
+    <tr><td>시간에 따라 변함?</td><td>변함 (사인 곡선)</td><td>고정</td><td>고정</td></tr>
+    <tr><td>용도</td><td>파형 자체를 표현</td><td>절연 내압 등 극한값</td><td>전력 계산, 계기 표시값</td></tr>
+  </table></div>
+
+  <h2>2. 복소수 <span class="en">(complex numbers)</span></h2>
+  <p>교류 회로 계산에는 복소수가 도구로 쓰입니다. 개념만 잡으면 어렵지 않습니다.</p>
+  <ul>
+    <li><strong>허수 단위 <span class="en">(imaginary unit)</span></strong>: j = √(−1). (수학에서는 i를 쓰지만 전기에서는 전류 기호 i와 겹치므로 <strong>j</strong>를 씁니다.) j² = −1.</li>
+    <li><strong>복소수 <span class="en">(complex number)</span></strong>: z = a + jb 형태의 수. a를 <strong>실수부 <span class="en">(real part)</span></strong>, b를 <strong>허수부 <span class="en">(imaginary part)</span></strong>라고 합니다.</li>
+  </ul>
+  <p>복소수는 가로축이 실수부, 세로축이 허수부인 <strong>복소평면 <span class="en">(complex plane)</span></strong> 위의 점(화살표)으로 그릴 수 있습니다. 같은 화살표를 두 가지 방법으로 표현합니다:</p>
+  <ul>
+    <li><strong>직교형식 <span class="en">(rectangular form)</span></strong>: z = a + jb — 가로로 a, 세로로 b.</li>
+    <li><strong>극형식 <span class="en">(polar form)</span></strong>: z = r∠θ — 길이(<strong>크기, magnitude</strong>) r와 각도(<strong>편각, angle</strong>) θ.</li>
+  </ul>
+  <h3>두 형식 사이의 변환</h3>
+  <div class="formula">직교→극: r = √(a² + b²), θ = tan⁻¹(b/a) &nbsp;&nbsp;&nbsp; 극→직교: a = r cosθ, b = r sinθ</div>
+  <div class="caution">θ = tan⁻¹(b/a)는 a가 음수인 경우(2·3사분면) 계산기가 틀린 사분면의 답을 준다. 항상 복소평면에 대략 그려 보고 각도가 맞는 사분면에 있는지 확인하는 습관을 들이자.</div>
+  <h3>사칙연산 — 어느 형식이 편한가?</h3>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>직교형식 (a + jb)</th><th>극형식 (r∠θ)</th></tr>
+    <tr><td>덧셈·뺄셈</td><td><strong>편함</strong>: 실수부끼리, 허수부끼리 더한다</td><td>불편 (직교로 변환 후 계산)</td></tr>
+    <tr><td>곱셈</td><td>불편 (전개 필요)</td><td><strong>편함</strong>: 크기는 곱하고 각도는 더한다</td></tr>
+    <tr><td>나눗셈</td><td>불편</td><td><strong>편함</strong>: 크기는 나누고 각도는 뺀다</td></tr>
+  </table></div>
+  <div class="formula">(r₁∠θ₁)(r₂∠θ₂) = r₁r₂ ∠(θ₁+θ₂) &nbsp;&nbsp;&nbsp; (r₁∠θ₁)/(r₂∠θ₂) = (r₁/r₂) ∠(θ₁−θ₂)</div>
+
+  <h2>3. 페이저 <span class="en">(phasor)</span></h2>
+  <p>드디어 핵심입니다. <strong>페이저 <span class="en">(phasor)</span></strong>는 <strong>정현파를 복소수 하나로 요약한 것</strong>입니다.</p>
+  <div class="keypoint">회로의 모든 전압·전류가 <strong>같은 주파수</strong>의 정현파라면, 시간 정보(ωt)는 공통이므로 생략하고 <strong>진폭(또는 실효값)과 위상만</strong> 기록하면 된다:<br><br>v(t) = V<sub>m</sub> sin(ωt + φ) &nbsp;⟷&nbsp; 페이저 <b>V</b> = V<sub>m</sub>∠φ</div>
+  <p>관람차 비유로: 모든 탑승칸이 같은 속도로 돌고 있으니, "지금 어디를 지나는가"를 매 순간 추적할 필요 없이 <strong>사진 한 장(각 칸의 반지름과 각도)</strong>만 찍으면 됩니다. 그 사진이 페이저입니다.</p>
+  <p>페이저의 위력: 정현파끼리의 덧셈(삼각함수 공식이 필요한 지저분한 계산)이 <strong>복소수 덧셈</strong>으로, 미분·적분이 필요한 커패시터·인덕터 계산이 <strong>곱셈·나눗셈</strong>으로 바뀝니다(9장).</p>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>기호/단위</th></tr>
+    <tr><td>정현파</td><td>sinusoid</td><td>—</td></tr>
+    <tr><td>진폭(최댓값)</td><td>amplitude, peak value</td><td>V<sub>m</sub></td></tr>
+    <tr><td>주기 / 주파수</td><td>period / frequency</td><td>T (s) / f (Hz)</td></tr>
+    <tr><td>각주파수</td><td>angular frequency</td><td>ω = 2πf (rad/s)</td></tr>
+    <tr><td>위상(각), 앞섬/뒤짐</td><td>phase (angle), lead / lag</td><td>φ (° 또는 rad)</td></tr>
+    <tr><td>실효값</td><td>RMS (root-mean-square) value</td><td>V<sub>rms</sub></td></tr>
+    <tr><td>복소수, 실수부/허수부</td><td>complex number, real/imaginary part</td><td>z = a + jb</td></tr>
+    <tr><td>직교형식 / 극형식</td><td>rectangular form / polar form</td><td>a + jb / r∠θ</td></tr>
+    <tr><td>페이저</td><td>phasor</td><td><b>V</b> = V∠φ</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 8-1. 정현파 읽기</div>
+    <p>v(t) = 170 sin(377t + 30°) V 에 대해 (a) 진폭, (b) 주파수, (c) 실효값, (d) 페이저 표현을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> V<sub>m</sub> = 170 V.</li>
+      <li><strong>(b)</strong> ω = 377 rad/s → f = ω/2π = 377/6.283 ≈ 60 Hz. (북미 전력망!)</li>
+      <li><strong>(c)</strong> V<sub>rms</sub> = 170/√2 ≈ 120 V.</li>
+      <li><strong>(d)</strong> <b>V</b> = 170∠30° V (진폭 기준. 실효값 기준으로는 120∠30° V — 교재마다 관례가 다르니 수업 방식을 따르자).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 8-2. 복소수 변환과 연산</div>
+    <p>z₁ = 3 + j4, z₂ = 10∠−30° 일 때 (a) z₁을 극형식으로, (b) z₂를 직교형식으로, (c) z₁ × z₂를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> r = √(3²+4²) = 5, θ = tan⁻¹(4/3) = 53.1°. → z₁ = 5∠53.1°.</li>
+      <li><strong>(b)</strong> a = 10cos(−30°) = 8.66, b = 10sin(−30°) = −5. → z₂ = 8.66 − j5.</li>
+      <li><strong>(c)</strong> 곱셈은 극형식이 편하다: 5∠53.1° × 10∠−30° = 50∠23.1°.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">주파수 50 Hz인 정현파의 (a) 주기와 (b) 각주파수는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 20 ms, (b) 314 rad/s</span><br>(a) T = 1/f = 1/50 = 0.02 s. (b) ω = 2πf = 2π×50 ≈ 314.2 rad/s.</div></details></div>
+    <div class="prob"><div class="q">진폭이 100 V인 정현파 전압의 실효값은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 70.7 V</span><br>V<sub>rms</sub> = 100/√2 ≈ 70.7 V.</div></details></div>
+    <div class="prob"><div class="q">실효값 240 V인 교류 전원의 전압 최댓값은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 339 V</span><br>V<sub>m</sub> = V<sub>rms</sub> × √2 = 240 × 1.414 ≈ 339.4 V.</div></details></div>
+    <div class="prob"><div class="q">실효값은 어떤 기준으로 정의된 대표값인가? (전력 관점에서 설명)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 같은 저항에 연결했을 때 <strong>같은 평균 전력(열)을 발생시키는 직류 값</strong>과 같도록 정의한 값이다. 그래서 교류 전력 계산에 실효값을 쓰면 DC와 같은 공식(P = V<sub>rms</sub>I<sub>rms</sub> 등)을 쓸 수 있다.</div></details></div>
+    <div class="prob"><div class="q">z = 6 + j8 을 극형식으로 변환하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 10∠53.1°</span><br>r = √(36+64) = 10, θ = tan⁻¹(8/6) = 53.1°.</div></details></div>
+    <div class="prob"><div class="q">z = 20∠60° 를 직교형식으로 변환하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 10 + j17.3</span><br>a = 20cos60° = 10, b = 20sin60° = 17.32.</div></details></div>
+    <div class="prob"><div class="q">(4∠25°) × (3∠35°) 와 (12∠80°) ÷ (4∠30°) 를 계산하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 12∠60°, 3∠50°</span><br>곱셈: 크기 4×3=12, 각도 25+35=60°. 나눗셈: 크기 12/4=3, 각도 80−30=50°.</div></details></div>
+    <div class="prob"><div class="q">(3 + j2) + (5 − j7) 을 계산하라. 이 계산은 직교형식과 극형식 중 어느 쪽이 편한가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 8 − j5, 직교형식</span><br>덧셈은 실수부끼리(3+5), 허수부끼리(2−7) 더하면 되므로 직교형식이 편하다. 곱셈·나눗셈은 극형식이 편하다.</div></details></div>
+    <div class="prob"><div class="q">v(t) = 50 sin(1000t − 45°) V 를 페이저로 표현하라(진폭 기준). 각주파수와 주파수도 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: <b>V</b> = 50∠−45° V, ω = 1000 rad/s, f ≈ 159 Hz</span><br>페이저는 진폭과 위상만 기록. f = ω/2π = 1000/6.283 ≈ 159.2 Hz.</div></details></div>
+    <div class="prob"><div class="q">전압 v₁은 위상이 20°, v₂는 위상이 −40°다(같은 주파수). v₁은 v₂보다 몇 도 앞서는가(lead)?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 60° 앞선다</span><br>위상차 = 20° − (−40°) = 60°. v₁이 v₂보다 60° 먼저 최댓값에 도달한다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="8" class="done-check"><label>8장 완료!</label></div>
+</section>
+
+<!-- ============ 9장 ============ -->
+<section class="chapter" id="ch9">
+  <h1>9장. AC 정상상태 해석</h1>
+  <p class="ch-sub">AC Steady-State Analysis — 임피던스로 교류 회로 풀기</p>
+
+  <h2>1. 교류에서 소자들은 어떻게 다르게 행동하나</h2>
+  <p>교류(정현파) 전원이 연결되면 저항·커패시터·인덕터가 각기 다르게 반응합니다. 7장에서 배운 성질이 그대로 이어집니다.</p>
+  <ul>
+    <li><strong>저항(R)</strong>: 전압과 전류가 <strong>같은 위상</strong> (동시에 최대, 동시에 0).</li>
+    <li><strong>인덕터(L)</strong>: 전류 변화를 방해하므로 전류가 늦게 따라온다 → <strong>전류가 전압보다 90° 뒤진다(lag)</strong>.</li>
+    <li><strong>커패시터(C)</strong>: 전압이 쌓이는 데 시간이 걸린다 → <strong>전류가 전압보다 90° 앞선다(lead)</strong>.</li>
+  </ul>
+  <div class="keypoint">암기 팁: <strong>"ELI the ICE man"</strong> — <b>L</b>(인덕터)에서는 <b>E</b>(전압)가 <b>I</b>(전류)보다 앞, <b>C</b>(커패시터)에서는 <b>I</b>가 <b>E</b>보다 앞. (E는 전압의 옛 기호)</div>
+
+  <h2>2. 리액턴스 <span class="en">(reactance)</span></h2>
+  <p><strong>리액턴스 <span class="en">(reactance, 기호 X)</span></strong>는 인덕터와 커패시터가 <strong>교류 전류를 방해하는 정도</strong>입니다. 단위는 저항과 같은 옴(Ω)이지만, 에너지를 열로 소비하지 않고 <strong>저장했다가 되돌려 주며 방해</strong>한다는 점이 다릅니다. 주파수에 따라 값이 변합니다:</p>
+  <div class="formula">유도성 리액턴스: X<sub>L</sub> = ωL = 2πfL &nbsp;&nbsp;&nbsp;&nbsp; 용량성 리액턴스: X<sub>C</sub> = 1/(ωC) = 1/(2πfC)</div>
+  <ul>
+    <li><strong>인덕터</strong>: 주파수가 <strong>높을수록</strong> 방해가 커진다 (빠른 변화를 더 싫어함). DC(f=0)에서는 X<sub>L</sub> = 0 → 단락처럼 (7장과 일치 ✓).</li>
+    <li><strong>커패시터</strong>: 주파수가 <strong>높을수록</strong> 방해가 작아진다. DC에서는 X<sub>C</sub> = ∞ → 개방처럼 (7장과 일치 ✓).</li>
+  </ul>
+
+  <h2>3. 임피던스 <span class="en">(impedance)</span></h2>
+  <p><strong>임피던스 <span class="en">(impedance, 기호 Z)</span></strong>는 교류 회로에서 <strong>전류를 방해하는 총 효과를 하나의 복소수로 표현한 것</strong>입니다. 저항 성분(실수부)과 리액턴스 성분(허수부)을 합칩니다:</p>
+  <div class="formula">Z = R + jX &nbsp;&nbsp;(단위 Ω) &nbsp;&nbsp;&nbsp; 저항: Z<sub>R</sub> = R, &nbsp; 인덕터: Z<sub>L</sub> = jX<sub>L</sub>, &nbsp; 커패시터: Z<sub>C</sub> = −jX<sub>C</sub></div>
+  <p>+j는 "전압이 90° 앞섬"(인덕터), −j는 "전압이 90° 뒤짐"(커패시터)이라는 위상 정보를 담고 있습니다. 임피던스의 역수 <strong>어드미턴스 <span class="en">(admittance, Y = 1/Z, 단위 S)</span></strong>는 컨덕턴스(2장)의 교류판입니다.</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>저항 (resistance, R)</th><th>리액턴스 (reactance, X)</th><th>임피던스 (impedance, Z)</th></tr>
+    <tr><td>무엇의 방해?</td><td>DC·AC 모두 방해</td><td>AC만 방해 (L, C의 성질)</td><td>R과 X를 합친 <strong>총 방해</strong></td></tr>
+    <tr><td>에너지</td><td>열로 <strong>소비</strong></td><td>저장했다 <strong>되돌려줌</strong></td><td>둘 다 포함</td></tr>
+    <tr><td>주파수 의존?</td><td>아니오</td><td><strong>예</strong> (X<sub>L</sub>=ωL, X<sub>C</sub>=1/ωC)</td><td>예 (X 성분 때문)</td></tr>
+    <tr><td>수학적 형태</td><td>실수</td><td>실수 (부호로 종류 구분)</td><td><strong>복소수</strong> Z = R + jX</td></tr>
+    <tr><td>위상 효과</td><td>없음 (0°)</td><td>±90° 위상차 유발</td><td>0°~±90° 사이</td></tr>
+  </table></div>
+
+  <h2>4. 페이저 형태의 옴의 법칙</h2>
+  <div class="keypoint">교류 회로 해석의 핵심 공식: <b>V</b> = <b>I</b> × Z<br>페이저 전압 = 페이저 전류 × 임피던스. 2장의 옴의 법칙과 모양이 같다!</div>
+  <p>더 좋은 소식: <strong>직렬·병렬 합성, 전압/전류 분배, KCL/KVL, 노드/메시 해석, 테브난 정리까지 — 3~6장의 모든 기법이 R을 Z로 바꾸기만 하면 교류에서 그대로 성립</strong>합니다. 계산이 복소수로 바뀔 뿐입니다.</p>
+  <div class="formula">직렬: Z<sub>eq</sub> = Z₁ + Z₂ + … &nbsp;&nbsp;&nbsp; 병렬: Z<sub>eq</sub> = (Z₁Z₂)/(Z₁+Z₂)</div>
+  <p>직렬 RLC 회로의 임피던스를 예로 들면:</p>
+  <div class="formula">Z = R + j(X<sub>L</sub> − X<sub>C</sub>) &nbsp;&nbsp; 크기 |Z| = √(R² + (X<sub>L</sub>−X<sub>C</sub>)²), &nbsp; 위상 θ = tan⁻¹((X<sub>L</sub>−X<sub>C</sub>)/R)</div>
+  <ul>
+    <li>X<sub>L</sub> &gt; X<sub>C</sub>: 회로 전체가 <strong>유도성 <span class="en">(inductive)</span></strong> — 전류가 전압보다 뒤짐(lag).</li>
+    <li>X<sub>C</sub> &gt; X<sub>L</sub>: 회로 전체가 <strong>용량성 <span class="en">(capacitive)</span></strong> — 전류가 전압보다 앞섬(lead).</li>
+  </ul>
+
+  <h2>5. 공진 <span class="en">(resonance)</span> — 맛보기</h2>
+  <p>직렬 RLC 회로에서 X<sub>L</sub> = X<sub>C</sub>가 되는 특별한 주파수가 있습니다. 이때 허수부가 0이 되어 임피던스가 최소(Z = R)가 되고 전류가 최대가 됩니다. 이 현상을 <strong>공진 <span class="en">(resonance)</span></strong>, 그 주파수를 <strong>공진 주파수 <span class="en">(resonant frequency)</span></strong>라고 합니다:</p>
+  <div class="formula">f<sub>r</sub> = 1 / (2π√(LC))</div>
+  <p>라디오 채널 선택, 필터 설계의 원리입니다. 자세한 내용은 2학기 과정에서 다루지만, 개념은 알아 두세요.</p>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>기호/단위</th></tr>
+    <tr><td>리액턴스 (유도성/용량성)</td><td>reactance (inductive/capacitive)</td><td>X<sub>L</sub>, X<sub>C</sub> (Ω)</td></tr>
+    <tr><td>임피던스</td><td>impedance</td><td>Z (Ω, 복소수)</td></tr>
+    <tr><td>어드미턴스</td><td>admittance</td><td>Y = 1/Z (S)</td></tr>
+    <tr><td>유도성 / 용량성 (회로)</td><td>inductive / capacitive (circuit)</td><td>—</td></tr>
+    <tr><td>공진 / 공진 주파수</td><td>resonance / resonant frequency</td><td>f<sub>r</sub> (Hz)</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 9-1. 리액턴스 계산</div>
+    <p>60 Hz에서 (a) L = 100 mH 인덕터, (b) C = 50 μF 커패시터의 리액턴스를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> X<sub>L</sub> = 2πfL = 2π × 60 × 0.1 = 37.7 Ω.</li>
+      <li><strong>(b)</strong> X<sub>C</sub> = 1/(2πfC) = 1/(2π × 60 × 50×10⁻⁶) = 1/0.01885 = 53.1 Ω.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 9-2. 직렬 RL 회로의 AC 해석</div>
+    <p>실효값 120 V, 60 Hz 전원에 R = 30 Ω과 X<sub>L</sub> = 40 Ω인 인덕터가 직렬로 연결됐다. (a) 임피던스(극형식), (b) 전류의 실효값과 위상, (c) 각 소자의 전압을 구하라. (전원 전압을 기준 0°로 둔다)</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> Z = 30 + j40 → |Z| = √(900+1600) = 50 Ω, θ = tan⁻¹(40/30) = 53.1°. Z = 50∠53.1° Ω.</li>
+      <li><strong>(b)</strong> <b>I</b> = <b>V</b>/Z = 120∠0° ÷ 50∠53.1° = 2.4∠−53.1° A. 전류 2.4 A가 전압보다 53.1° 뒤진다(유도성 회로 ✓).</li>
+      <li><strong>(c)</strong> V<sub>R</sub> = I×R = 2.4×30 = 72 V, V<sub>L</sub> = I×X<sub>L</sub> = 2.4×40 = 96 V.</li>
+      <li><strong>주의:</strong> 72 + 96 = 168 ≠ 120! 교류에서는 위상이 달라 크기를 그냥 더하면 안 되고 복소수(페이저)로 더해야 한다: √(72²+96²) = 120 V ✓. 이것이 페이저를 배우는 이유다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">저항과 리액턴스는 단위가 같은데(둘 다 Ω) 무엇이 다른가? (에너지 관점)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 저항은 전기 에너지를 <strong>열로 소비</strong>하며 방해하고, 리액턴스는 에너지를 <strong>저장했다가 되돌려 주면서</strong> 방해한다(순소비 0). 또 리액턴스는 주파수에 따라 변하고 ±90° 위상차를 만든다.</div></details></div>
+    <div class="prob"><div class="q">1 kHz에서 10 mH 인덕터의 리액턴스는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 62.8 Ω</span><br>X<sub>L</sub> = 2πfL = 2π × 1000 × 0.01 = 62.8 Ω.</div></details></div>
+    <div class="prob"><div class="q">60 Hz에서 X<sub>C</sub> = 100 Ω이 되게 하려면 커패시턴스는 몇 μF이어야 하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 26.5 μF</span><br>C = 1/(2πfX<sub>C</sub>) = 1/(2π×60×100) = 2.65×10⁻⁵ F = 26.5 μF.</div></details></div>
+    <div class="prob"><div class="q">주파수를 2배로 올리면 X<sub>L</sub>과 X<sub>C</sub>는 각각 어떻게 변하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> X<sub>L</sub> = 2πfL은 <strong>2배</strong>가 되고, X<sub>C</sub> = 1/(2πfC)는 <strong>절반</strong>이 된다.</div></details></div>
+    <div class="prob"><div class="q">R = 40 Ω, X<sub>L</sub> = 30 Ω인 직렬 RL 회로의 임피던스를 직교형식과 극형식으로 나타내라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: Z = 40 + j30 = 50∠36.9° Ω</span><br>|Z| = √(1600+900) = 50, θ = tan⁻¹(30/40) = 36.9°.</div></details></div>
+    <div class="prob"><div class="q">위 회로에 실효값 100 V(위상 0°) 전원을 연결하면 전류의 페이저는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: <b>I</b> = 2∠−36.9° A</span><br><b>I</b> = <b>V</b>/Z = 100∠0° ÷ 50∠36.9° = 2∠−36.9° A. 전류가 뒤지므로(lag) 유도성 회로다.</div></details></div>
+    <div class="prob"><div class="q">직렬 RLC 회로에서 R = 10 Ω, X<sub>L</sub> = 25 Ω, X<sub>C</sub> = 15 Ω이다. (a) 임피던스, (b) 이 회로는 유도성인가 용량성인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) Z = 10 + j10 = 14.1∠45° Ω, (b) 유도성</span><br>X = X<sub>L</sub> − X<sub>C</sub> = +10 Ω (양수 → 유도성 → 전류가 전압보다 뒤짐). |Z| = √200 ≈ 14.1 Ω.</div></details></div>
+    <div class="prob"><div class="q">커패시터에서 전류와 전압 중 어느 쪽이 90° 앞서는가? 인덕터에서는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 커패시터 — <strong>전류가 앞선다</strong>(ICE). 인덕터 — <strong>전압이 앞선다</strong>(= 전류가 뒤진다, ELI).</div></details></div>
+    <div class="prob"><div class="q">직렬 RL 회로에서 V<sub>R</sub> = 30 V, V<sub>L</sub> = 40 V(실효값)로 측정됐다. 전원 전압의 실효값은? 왜 70 V가 아닌가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 50 V</span><br>V<sub>R</sub>과 V<sub>L</sub>은 위상이 90° 다르므로 페이저 합으로: √(30²+40²) = 50 V. 크기를 산술적으로 더하는 것(70 V)은 위상을 무시한 잘못된 계산이다.</div></details></div>
+    <div class="prob"><div class="q">L = 100 mH, C = 100 μF인 직렬 RLC 회로의 공진 주파수는? 공진에서 임피던스는 어떻게 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 50.3 Hz, Z = R (최소)</span><br>f<sub>r</sub> = 1/(2π√(LC)) = 1/(2π√(0.1×10⁻⁴)) = 1/(2π×3.16×10⁻³) ≈ 50.3 Hz. 공진에서 X<sub>L</sub> = X<sub>C</sub>로 상쇄되어 임피던스는 순수 저항 R만 남고 전류가 최대가 된다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="9" class="done-check"><label>9장 완료!</label></div>
+</section>
+
+<!-- ============ 10장 ============ -->
+<section class="chapter" id="ch10">
+  <h1>10장. 교류 전력</h1>
+  <p class="ch-sub">AC Power — 유효전력, 무효전력, 피상전력, 그리고 역률</p>
+
+  <h2>1. 교류에서 전력이 복잡해지는 이유</h2>
+  <p>1장에서 전력은 P = V × I 라고 했습니다. 직류에서는 이걸로 충분하지만, 교류에서는 전압과 전류가 계속 변하고 <strong>위상차(8장)</strong>까지 있어서 이야기가 복잡해집니다. 순간순간의 전력인 <strong>순시전력 <span class="en">(instantaneous power, p(t) = v(t)×i(t))</span></strong>은 시간에 따라 출렁이며, 심지어 음수가 되는 순간도 있습니다 — 리액턴스(9장)가 저장했던 에너지를 전원으로 <strong>되돌려 보내는</strong> 순간입니다.</p>
+  <p>그래서 교류 전력은 세 가지로 나누어 다룹니다. 전압·전류의 실효값(8장)과 그 사이 위상차 θ(= 임피던스의 각)를 사용합니다.</p>
+
+  <h2>2. 세 가지 전력</h2>
+  <h3>유효전력 <span class="en">(real power / active power, P)</span></h3>
+  <p>실제로 <strong>일(열, 빛, 회전)로 소비되는 평균 전력</strong>. 저항 성분이 소비합니다. 단위는 <strong>와트(W)</strong>.</p>
+  <div class="formula">P = V<sub>rms</sub> I<sub>rms</sub> cos θ &nbsp;&nbsp;[W]</div>
+  <h3>무효전력 <span class="en">(reactive power, Q)</span></h3>
+  <p>인덕터·커패시터가 <strong>저장했다 되돌리기를 반복하는, 왕복만 하는 전력</strong>. 일은 하지 않지만 그만큼의 전류가 실제로 배선을 오가야 합니다. 단위는 구분을 위해 <strong>바 <span class="en">(var, volt-ampere reactive)</span></strong>를 씁니다.</p>
+  <div class="formula">Q = V<sub>rms</sub> I<sub>rms</sub> sin θ &nbsp;&nbsp;[var]</div>
+  <h3>피상전력 <span class="en">(apparent power, S)</span></h3>
+  <p>전압과 전류의 실효값을 <strong>그냥 곱한 값</strong>. "겉보기 전력"이라는 뜻으로, 전원과 배선이 실제로 감당해야 하는 용량을 나타냅니다. 단위는 <strong>볼트암페어 <span class="en">(VA, volt-ampere)</span></strong>.</p>
+  <div class="formula">S = V<sub>rms</sub> I<sub>rms</sub> &nbsp;&nbsp;[VA]</div>
+  <div class="analogy"><strong>생맥주 잔</strong>에 비유하면: 잔 전체(맥주+거품)가 피상전력 S, 실제로 마시는 맥주가 유효전력 P, 자리만 차지하는 거품이 무효전력 Q입니다. 잔(전선·변압기)은 거품까지 포함한 전체 부피를 감당해야 하지만, 갈증을 해소하는 건 맥주뿐입니다.</div>
+
+  <h2>3. 전력 삼각형과 역률</h2>
+  <p>세 전력은 직각삼각형 관계입니다. 이를 <strong>전력 삼각형 <span class="en">(power triangle)</span></strong>이라고 합니다:</p>
+  <svg class="circuit" viewBox="0 0 420 200" width="420">
+    <g stroke="#1c2733" stroke-width="2.5" fill="none">
+      <line x1="70" y1="160" x2="310" y2="160" stroke="#1a8a5a"/>
+      <line x1="310" y1="160" x2="310" y2="50" stroke="#b05c00"/>
+      <line x1="70" y1="160" x2="310" y2="50" stroke="#0f62fe"/>
+      <path d="M110 160 A40 40 0 0 0 106 143" stroke="#5a6b7b" stroke-width="1.5"/>
+    </g>
+    <text x="160" y="182" font-size="14" fill="#1a8a5a">P (유효전력, W)</text>
+    <text x="318" y="110" font-size="14" fill="#b05c00">Q (무효전력, var)</text>
+    <text x="120" y="85" font-size="14" fill="#0f62fe">S (피상전력, VA)</text>
+    <text x="118" y="152" font-size="13" fill="#5a6b7b">θ</text>
+  </svg>
+  <div class="formula">S² = P² + Q² &nbsp;&nbsp;&nbsp; P = S cos θ &nbsp;&nbsp;&nbsp; Q = S sin θ</div>
+  <p><strong>역률 <span class="en">(power factor, PF)</span></strong>은 피상전력 중 실제로 일하는 비율입니다:</p>
+  <div class="formula">역률 PF = P / S = cos θ &nbsp;&nbsp;(0 ~ 1)</div>
+  <ul>
+    <li><strong>뒤진(지상) 역률 <span class="en">(lagging power factor)</span></strong>: 전류가 전압보다 뒤짐 — <strong>유도성</strong> 부하(모터, 변압기). 산업 현장의 대부분.</li>
+    <li><strong>앞선(진상) 역률 <span class="en">(leading power factor)</span></strong>: 전류가 앞섬 — <strong>용량성</strong> 부하.</li>
+    <li>순수 저항 부하는 θ = 0°, PF = 1 (모든 전력이 유효전력).</li>
+  </ul>
+  <h3>역률 개선 <span class="en">(power factor correction)</span></h3>
+  <p>역률이 낮으면 같은 일(P)을 하는 데 더 큰 전류가 필요해 배선 손실이 커지고, 전력회사가 요금을 더 물립니다. 유도성 부하(+Q)에 <strong>커패시터를 병렬로 추가</strong>하면 커패시터의 −Q가 상쇄해 역률이 1에 가까워집니다. 실무에서 매우 중요한 기법입니다.</p>
+
+  <h2>유효 vs 무효 vs 피상 전력 비교</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>유효전력 P<br><span class="en">(real power)</span></th><th>무효전력 Q<br><span class="en">(reactive power)</span></th><th>피상전력 S<br><span class="en">(apparent power)</span></th></tr>
+    <tr><td>의미</td><td>실제로 소비되는 평균 전력</td><td>저장·반환을 왕복만 하는 전력</td><td>V×I 겉보기 전력 (전체 용량)</td></tr>
+    <tr><td>단위</td><td>와트 (W)</td><td>바 (var)</td><td>볼트암페어 (VA)</td></tr>
+    <tr><td>담당 소자</td><td>저항 (R)</td><td>인덕터(+), 커패시터(−)</td><td>—</td></tr>
+    <tr><td>공식</td><td>VI cosθ</td><td>VI sinθ</td><td>VI (= √(P²+Q²))</td></tr>
+    <tr><td>비유(맥주잔)</td><td>맥주</td><td>거품</td><td>잔 전체</td></tr>
+    <tr><td>어디에 중요?</td><td>전기요금(가정), 일의 양</td><td>전압 안정, 역률 관리</td><td>변압기·발전기·배선 용량</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>기호/단위</th></tr>
+    <tr><td>순시전력</td><td>instantaneous power</td><td>p(t), W</td></tr>
+    <tr><td>유효전력 (실전력)</td><td>real power, active power</td><td>P, W</td></tr>
+    <tr><td>무효전력</td><td>reactive power</td><td>Q, var</td></tr>
+    <tr><td>피상전력</td><td>apparent power</td><td>S, VA</td></tr>
+    <tr><td>전력 삼각형</td><td>power triangle</td><td>S² = P² + Q²</td></tr>
+    <tr><td>역률</td><td>power factor (PF)</td><td>cos θ</td></tr>
+    <tr><td>지상(뒤진) / 진상(앞선)</td><td>lagging / leading</td><td>—</td></tr>
+    <tr><td>역률 개선</td><td>power factor correction</td><td>—</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 10-1. 세 가지 전력 계산</div>
+    <p>실효값 120 V 전원에 연결된 부하에 실효값 10 A의 전류가 흐르고, 전류는 전압보다 30° 뒤진다. P, Q, S와 역률을 구하라.</p>
+    <ol class="steps">
+      <li><strong>S:</strong> S = VI = 120 × 10 = 1,200 VA.</li>
+      <li><strong>P:</strong> P = S cosθ = 1,200 × cos30° = 1,200 × 0.866 = 1,039 W.</li>
+      <li><strong>Q:</strong> Q = S sinθ = 1,200 × 0.5 = 600 var (전류가 뒤지므로 유도성, +Q).</li>
+      <li><strong>역률:</strong> PF = cos30° = 0.866 (지상/lagging).</li>
+      <li><strong>검산:</strong> √(1039² + 600²) ≈ 1,200 ✓.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 10-2. 전력 삼각형 거꾸로 풀기</div>
+    <p>어떤 공장 부하가 P = 8 kW를 소비하며 역률은 0.8(지상)이다. (a) 피상전력, (b) 무효전력을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> PF = P/S 에서 S = P/PF = 8,000/0.8 = 10 kVA.</li>
+      <li><strong>(b)</strong> Q = √(S² − P²) = √(100 − 64) kvar = 6 kvar. (cosθ = 0.8이면 sinθ = 0.6인 3-4-5 삼각형)</li>
+      <li><strong>답:</strong> S = 10 kVA, Q = 6 kvar (유도성).</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">유효전력, 무효전력, 피상전력의 단위가 각각 다른 이유는 무엇을 구분하기 위해서인가? 각 단위를 써라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 물리적 성격이 다른 세 값(실제 소비 / 왕복 / 겉보기)을 혼동하지 않기 위해서다. P — 와트(W), Q — 바(var), S — 볼트암페어(VA).</div></details></div>
+    <div class="prob"><div class="q">실효값 240 V, 5 A, 위상차 0°(순수 저항 부하)일 때 P, Q, S는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: P = 1,200 W, Q = 0 var, S = 1,200 VA</span><br>θ = 0이면 cosθ = 1, sinθ = 0. 저항 부하는 피상전력 전부가 유효전력이다(PF = 1).</div></details></div>
+    <div class="prob"><div class="q">S = 5 kVA, P = 4 kW인 부하의 역률과 무효전력은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: PF = 0.8, Q = 3 kvar</span><br>PF = P/S = 4/5 = 0.8. Q = √(25−16) = 3 kvar (3-4-5 삼각형).</div></details></div>
+    <div class="prob"><div class="q">"지상(lagging) 역률"은 어떤 종류의 부하에서 생기며, 무엇이 무엇보다 뒤진다는 뜻인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 유도성 부하(모터, 변압기 등)에서 생기며, <strong>전류가 전압보다</strong> 위상이 뒤진다는 뜻이다.</div></details></div>
+    <div class="prob"><div class="q">실효값 120 V 전원에서 유효전력 600 W를 소비하는 부하의 역률이 0.5다. (a) 피상전력과 (b) 전류를 구하라. 역률이 1이라면 전류는 얼마였겠는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 1,200 VA, (b) 10 A / 역률 1이면 5 A</span><br>(a) S = P/PF = 600/0.5 = 1,200 VA. (b) I = S/V = 1200/120 = 10 A. 역률 1이면 S = P = 600 VA → I = 5 A. 같은 일을 하는데 낮은 역률은 <strong>2배의 전류</strong>를 요구한다 — 역률 개선이 필요한 이유.</div></details></div>
+    <div class="prob"><div class="q">무효전력은 "일을 하지 않는" 전력인데도 전력회사가 관리하는(요금을 물리는) 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 무효전력만큼의 전류가 실제로 송전선과 변압기를 오가야 하므로, 배선 굵기·변압기 용량을 키워야 하고 선로의 열 손실(I²R)도 커지기 때문이다. 일은 안 하지만 설비 부담은 실재한다.</div></details></div>
+    <div class="prob"><div class="q">모터 부하의 역률을 개선하려면 어떤 소자를 어떻게 연결하는가? 원리는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 커패시터를 부하에 병렬로 연결</span><br>모터(유도성)의 +Q를 커패시터의 −Q가 상쇄하여 전체 무효전력을 줄인다. Q가 줄면 같은 P에 대해 S와 전류가 줄어 역률이 1에 가까워진다.</div></details></div>
+    <div class="prob"><div class="q">P = 12 kW, Q = 9 kvar(유도성)인 부하의 S와 역률은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: S = 15 kVA, PF = 0.8 (지상)</span><br>S = √(12²+9²) = √225 = 15 kVA. PF = 12/15 = 0.8.</div></details></div>
+    <div class="prob"><div class="q">발전기와 변압기의 용량 표기는 W가 아니라 kVA(피상전력)로 하는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 설비의 한계는 발열, 즉 <strong>흘릴 수 있는 전류와 걸 수 있는 전압</strong>으로 정해지는데, 이는 부하의 역률과 무관하게 V×I = S로 결정되기 때문이다. 어떤 역률의 부하가 연결될지는 설비 제조사가 알 수 없다.</div></details></div>
+    <div class="prob"><div class="q">실효값 208 V, 60 Hz 전원에 임피던스 Z = 40 + j30 Ω(9장)인 부하가 연결됐다. (a) 전류 실효값, (b) 역률, (c) P를 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 4.16 A, (b) 0.8 지상, (c) 약 692 W</span><br>(a) |Z| = √(1600+900) = 50 Ω → I = 208/50 = 4.16 A.<br>(b) θ = tan⁻¹(30/40) = 36.9° → PF = cos36.9° = 0.8, 허수부가 +이므로 유도성(지상).<br>(c) P = VI cosθ = 208 × 4.16 × 0.8 ≈ 692 W. (검산: P = I²R = 4.16² × 40 ≈ 692 W ✓)</div></details></div>
+  </div>
+
+  <div class="keypoint">🎉 여기까지 왔다면 SAIT 1학년 회로이론의 핵심 개념 지도를 모두 그린 것입니다. 수업에서는 이 개념들을 영어로, 더 많은 계산 연습과 함께 다루게 됩니다. 이 교재의 영어 용어들을 다시 훑어보고 가면 첫 수업부터 훨씬 편할 거예요.</div>
+
+  <div class="done-box"><input type="checkbox" data-ch="10" class="done-check"><label>10장 완료! 전체 과정 수료 🎓</label></div>
+</section>
+
+<!-- ###CH_END### -->
+
+</main>
+</div>
+
+<script>
+const CHAPTERS = [
+  {id:0, title:"학습 안내", short:"개요", desc:"이 교재의 사용법과 전체 목차"},
+  {id:1, title:"1장. 전하·전류·전압 기초", short:"1장", desc:"전하, 전류, 전압(전위차), 기전력, 전력과 에너지"},
+  {id:2, title:"2장. 옴의 법칙", short:"2장", desc:"저항, 저항률, 컨덕턴스, V=IR, 전력 공식"},
+  {id:3, title:"3장. 키르히호프 법칙 (KCL/KVL)", short:"3장", desc:"노드·가지·루프, 전류법칙, 전압법칙, 부호 규약"},
+  {id:4, title:"4장. 직렬·병렬 회로", short:"4장", desc:"합성저항, 전압 분배, 전류 분배, 개방과 단락"},
+  {id:5, title:"5장. 노드해석·메시해석", short:"5장", desc:"기준 노드, 노드 전압법, 메시 전류법"},
+  {id:6, title:"6장. 테브난·노턴 정리", short:"6장", desc:"등가회로, 소스 변환, 최대 전력 전달"},
+  {id:7, title:"7장. 커패시터·인덕터와 RC/RL 과도응답", short:"7장", desc:"커패시턴스, 인덕턴스, 시정수, 충전·방전"},
+  {id:8, title:"8장. 페이저와 복소수", short:"8장", desc:"정현파, 실효값(RMS), 복소수, 페이저 표현"},
+  {id:9, title:"9장. AC 정상상태 해석", short:"9장", desc:"리액턴스, 임피던스, 페이저 옴의 법칙, 공진"},
+  {id:10, title:"10장. 교류 전력", short:"10장", desc:"유효·무효·피상전력, 역률, 전력 삼각형"}
+];
+const KEY = "eet-circuits-progress";
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ progress = {}; }
+
+function saveProgress(){ try{ localStorage.setItem(KEY, JSON.stringify(progress)); }catch(e){} }
+
+function buildNav(){
+  const nav = document.getElementById("navList");
+  nav.innerHTML = "";
+  CHAPTERS.forEach(c => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.dataset.ch = c.id;
+    const done = c.id > 0 && progress[c.id];
+    btn.innerHTML = `<span class="check">${c.id===0 ? "🏠" : (done ? "✔" : "·")}</span><span>${c.title}</span>`;
+    btn.onclick = () => showChapter(c.id);
+    li.appendChild(btn); nav.appendChild(li);
+  });
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  const total = CHAPTERS.length - 1;
+  const done = Object.keys(progress).filter(k => progress[k]).length;
+  document.getElementById("progressFill").style.width = (done/total*100) + "%";
+  document.getElementById("progressLabel").textContent = `${done} / ${total} 챕터 완료`;
+}
+
+function buildToc(){
+  const wrap = document.getElementById("tocCards");
+  wrap.innerHTML = "";
+  CHAPTERS.slice(1).forEach(c => {
+    const d = document.createElement("div");
+    d.className = "toc-card";
+    d.innerHTML = `<span class="badge">${progress[c.id] ? "✔ 완료" : ""}</span><div class="t">${c.title}</div><div class="d">${c.desc}</div>`;
+    d.onclick = () => showChapter(c.id);
+    wrap.appendChild(d);
+  });
+}
+
+function buildChapterNavs(){
+  CHAPTERS.forEach(c => {
+    if(c.id === 0) return;
+    const sec = document.getElementById("ch"+c.id);
+    if(!sec) return;
+    const nav = document.createElement("div");
+    nav.className = "ch-nav";
+    const prev = c.id - 1, next = c.id + 1;
+    let html = "";
+    html += `<button onclick="showChapter(${prev})">← ${prev===0 ? "학습 안내" : CHAPTERS[prev].title}</button>`;
+    if(next < CHAPTERS.length){
+      html += `<button onclick="showChapter(${next})">${CHAPTERS[next].title} →</button>`;
+    } else {
+      html += `<button onclick="showChapter(0)">🏠 처음으로</button>`;
+    }
+    nav.innerHTML = html;
+    sec.appendChild(nav);
+  });
+}
+
+function showChapter(n){
+  document.querySelectorAll("section.chapter").forEach(s => s.classList.remove("visible"));
+  const sec = document.getElementById("ch"+n);
+  if(sec) sec.classList.add("visible");
+  document.querySelectorAll("#navList button").forEach(b => b.classList.toggle("active", +b.dataset.ch === n));
+  if(n === 0) buildToc();
+  window.scrollTo({top:0});
+  try{ localStorage.setItem(KEY+"-last", n); }catch(e){}
+}
+
+document.addEventListener("change", e => {
+  if(e.target.classList && e.target.classList.contains("done-check")){
+    progress[e.target.dataset.ch] = e.target.checked;
+    saveProgress(); buildNav();
+  }
+});
+
+function initChecks(){
+  document.querySelectorAll(".done-check").forEach(cb => {
+    cb.checked = !!progress[cb.dataset.ch];
+  });
+}
+
+buildNav();
+buildChapterNavs();
+initChecks();
+let last = 0;
+try{ last = parseInt(localStorage.getItem(KEY+"-last")) || 0; }catch(e){}
+showChapter(last);
+</script>
+</body>
+</html>
