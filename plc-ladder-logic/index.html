@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLC와 래더 로직 — SAIT EET 예습</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2733; --sub:#5a6b7b;
+    --accent:#16803c; --accent-soft:#e6f4ea; --ok:#1a8a5a; --ok-soft:#e3f4ec;
+    --warn:#b05c00; --warn-soft:#fff3e0; --line:#dde3ea; --code:#f0f3f7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
+       background:var(--bg); color:var(--ink); line-height:1.75; font-size:16px;}
+  .layout{display:flex; min-height:100vh;}
+
+  /* ── 사이드바 ── */
+  aside{width:270px; flex-shrink:0; background:var(--card); border-right:1px solid var(--line);
+        padding:22px 16px; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  aside h2{font-size:17px; margin-bottom:4px;}
+  aside .sub{font-size:12.5px; color:var(--sub); margin-bottom:14px;}
+  aside .sub a{color:var(--sub);}
+  .progress-wrap{margin-bottom:16px;}
+  .progress-bar{height:10px; background:var(--line); border-radius:6px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:var(--ok); transition:width .3s;}
+  .progress-label{font-size:12.5px; color:var(--sub); margin-top:4px;}
+  .navlist{list-style:none;}
+  .navlist li{margin-bottom:2px;}
+  .navlist button{width:100%; text-align:left; border:none; background:none; cursor:pointer;
+        padding:8px 10px; border-radius:8px; font-size:14px; font-family:inherit; color:var(--ink);
+        display:flex; align-items:center; gap:8px; line-height:1.4;}
+  .navlist button:hover{background:var(--accent-soft);}
+  .navlist button.active{background:var(--accent); color:#fff; font-weight:bold;}
+  .navlist .check{width:18px; flex-shrink:0; text-align:center; font-size:13px; color:var(--ok);}
+  .navlist button.active .check{color:#fff;}
+
+  /* ── 본문 ── */
+  main{flex:1; padding:34px 44px 80px; max-width:900px;}
+  section.chapter{display:none;}
+  section.chapter.visible{display:block;}
+  h1{font-size:26px; margin-bottom:6px;}
+  .ch-sub{color:var(--sub); font-size:14px; margin-bottom:24px;}
+  h2{font-size:20px; margin:34px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--accent-soft);}
+  h3{font-size:16.5px; margin:22px 0 8px; color:var(--accent);}
+  p{margin-bottom:12px;}
+  ul,ol{margin:0 0 12px 24px;}
+  li{margin-bottom:6px;}
+  strong{color:#0b3d91;}
+  .en{color:var(--sub); font-size:0.92em;}
+
+  .analogy{background:var(--warn-soft); border-left:4px solid var(--warn);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .analogy::before{content:"💡 비유로 이해하기"; display:block; font-weight:bold; color:var(--warn); font-size:13.5px; margin-bottom:4px;}
+  .keypoint{background:var(--accent-soft); border-left:4px solid var(--accent);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .keypoint::before{content:"📌 핵심 정리"; display:block; font-weight:bold; color:var(--accent); font-size:13.5px; margin-bottom:4px;}
+  .caution{background:#fdecec; border-left:4px solid #c0392b; padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .caution::before{content:"⚠️ 헷갈리기 쉬운 부분"; display:block; font-weight:bold; color:#c0392b; font-size:13.5px; margin-bottom:4px;}
+
+  .formula{background:var(--code); border:1px solid var(--line); border-radius:8px;
+           padding:10px 16px; margin:12px 0; font-size:17px; text-align:center;
+           font-family:'Cambria Math',Georgia,serif; overflow-x:auto;}
+  sub,sup{font-size:0.72em;}
+
+  .ladder{background:#1c2733; color:#d7e3ee; border-radius:10px; padding:14px 18px; margin:12px 0;
+          font-family:Consolas,'Courier New',monospace; font-size:14px; line-height:1.6; overflow-x:auto; white-space:pre;}
+
+  .tablewrap{overflow-x:auto; margin:14px 0;}
+  table{border-collapse:collapse; width:100%; background:var(--card); font-size:14.5px;}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--accent-soft); font-size:14px;}
+  table.compare th:first-child, table.compare td:first-child{background:#fafbfc; font-weight:bold; white-space:nowrap;}
+
+  .example{background:var(--card); border:1px solid var(--line); border-radius:12px;
+           padding:18px 20px; margin:16px 0;}
+  .example .ex-title{font-weight:bold; color:var(--ok); margin-bottom:8px; font-size:15.5px;}
+  .example .steps{margin-left:4px;}
+  .example .steps li{margin-bottom:8px;}
+
+  .problems{counter-reset:prob; margin-top:8px;}
+  .prob{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 18px; margin-bottom:14px;}
+  .prob .q{margin-bottom:10px;}
+  .prob .q::before{counter-increment:prob; content:"문제 " counter(prob) ". "; font-weight:bold; color:var(--accent);}
+  details{margin-top:8px;}
+  details summary{cursor:pointer; display:inline-block; background:var(--accent-soft); color:var(--accent);
+        padding:6px 14px; border-radius:20px; font-size:13.5px; font-weight:bold; user-select:none; list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary:hover{background:var(--accent); color:#fff;}
+  details[open] summary{background:var(--ok-soft); color:var(--ok);}
+  details .answer{background:var(--ok-soft); border-radius:8px; padding:12px 16px; margin-top:10px; font-size:15px;}
+  details .answer .a-label{font-weight:bold; color:var(--ok);}
+
+  .done-box{margin:36px 0 20px; background:var(--ok-soft); border:1.5px dashed var(--ok);
+        border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:10px; font-size:15.5px;}
+  .done-box input{width:20px; height:20px; accent-color:var(--ok); cursor:pointer;}
+
+  .ch-nav{display:flex; justify-content:space-between; margin-top:14px; gap:12px;}
+  .ch-nav button{border:1px solid var(--line); background:var(--card); border-radius:10px;
+        padding:12px 18px; cursor:pointer; font-family:inherit; font-size:14.5px; color:var(--ink); max-width:48%;}
+  .ch-nav button:hover{border-color:var(--accent); color:var(--accent);}
+  .ch-nav .spacer{flex:1;}
+
+  .toc-card{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 20px; margin-bottom:12px; cursor:pointer;}
+  .toc-card:hover{border-color:var(--accent);}
+  .toc-card .t{font-weight:bold; font-size:16px;}
+  .toc-card .d{font-size:13.5px; color:var(--sub); margin-top:2px;}
+  .toc-card .badge{float:right; font-size:12.5px; color:var(--ok); font-weight:bold;}
+
+  #menuToggle{display:none;}
+  @media (max-width:820px){
+    .layout{flex-direction:column;}
+    aside{width:100%; height:auto; position:static; border-right:none; border-bottom:1px solid var(--line);}
+    main{padding:22px 18px 60px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <h2>🪜 PLC와 래더 로직</h2>
+  <div class="sub">SAIT EET 2학년 CNTR 309·358 예습용 · <a href="../">← Study Hub</a></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 7 챕터 완료</div>
+  </div>
+  <ul class="navlist" id="navList"></ul>
+</aside>
+
+<main id="main">
+
+<!-- ============ 홈(개요) ============ -->
+<section class="chapter" id="ch0">
+  <h1>학습 안내</h1>
+  <p class="ch-sub">캐나다 SAIT — Electrical Engineering Technology 2학년 PLC 프로그래밍(CNTR 309, CNTR 358) 예습 교재</p>
+  <p><strong>PLC <span class="en">(Programmable Logic Controller, 프로그래머블 로직 컨트롤러)</span></strong>는 공장 자동화의 심장입니다. SAIT 2학년 과정에서 가장 실습 비중이 크고, 취업과도 직결되는 과목이므로 이 교재는 <strong>최우선 순위</strong>로 만들어졌습니다. 회로이론 교재와 같은 원칙을 따릅니다.</p>
+  <ul>
+    <li>모든 용어는 <strong>문제에 나오기 전에 반드시 먼저 정의</strong>합니다.</li>
+    <li>핵심 용어는 <strong>영어를 병기</strong>합니다. 실제 수업·소프트웨어(Studio 5000, RSLogix)가 모두 영어이므로 영어 용어에 익숙해지는 것이 매우 중요합니다.</li>
+    <li>비슷해 보이지만 다른 개념(NO vs NC, TON vs TOF 등)은 <strong>비교표</strong>로 차이를 짚습니다.</li>
+    <li>연습문제의 정답과 해설은 <strong>접혀 있으며</strong>, 먼저 스스로 풀어본 뒤 확인하세요.</li>
+    <li>각 챕터 끝의 <strong>완료 체크</strong>를 누르면 진행 상황이 브라우저에 저장됩니다.</li>
+  </ul>
+  <h2>챕터 목차</h2>
+  <div id="tocCards"></div>
+  <div class="keypoint">권장 학습법: 래더 로직은 "읽기"보다 "그리기"로 익혀야 합니다. 각 예제의 래더 다이어그램을 종이에 직접 옮겨 그리고, 입력이 켜졌을 때 전류(논리)가 어떻게 흐르는지 손가락으로 따라가 보세요. SAIT 실습실의 Allen-Bradley 장비를 만나기 전에 종이 위에서 먼저 익숙해지는 것이 목표입니다.</div>
+</section>
+
+<!-- ============ 1장 ============ -->
+<section class="chapter" id="ch1">
+  <h1>1장. PLC란 무엇인가</h1>
+  <p class="ch-sub">Programmable Logic Controller — 릴레이 제어반을 대체한 산업용 컴퓨터</p>
+
+  <h2>1. 릴레이 제어의 시대 <span class="en">(relay control)</span></h2>
+  <p>PLC를 이해하려면 PLC가 <strong>무엇을 대체했는지</strong>부터 알아야 합니다. <strong>릴레이 <span class="en">(relay, 계전기)</span></strong>는 전자석으로 스위치(접점)를 여닫는 부품입니다. 코일에 전류가 흐르면 전자석이 접점을 당겨서 다른 회로를 켜거나 끕니다. 1970년대까지 공장의 자동화 로직(예: "버튼을 누르면 모터가 돌고, 센서가 감지되면 멈춘다")은 수백 개의 릴레이를 전선으로 연결한 <strong>릴레이 제어반 <span class="en">(relay control panel)</span></strong>으로 구현했습니다.</p>
+  <p>문제는 <strong>로직을 바꾸려면 전선을 다시 깔아야 한다</strong>는 것이었습니다. 자동차 모델이 바뀔 때마다 공장 제어반을 통째로 재배선하는 데 몇 주가 걸렸습니다.</p>
+  <h2>2. PLC의 등장 <span class="en">(Programmable Logic Controller)</span></h2>
+  <p><strong>PLC <span class="en">(Programmable Logic Controller)</span></strong>는 릴레이 로직을 <strong>프로그램(소프트웨어)</strong>으로 바꾼 산업용 컴퓨터입니다. 로직을 바꿀 때 전선을 다시 까는 대신 프로그램만 수정하면 됩니다. 1968년 GM의 요구로 개발된 최초의 PLC(Modicon)가 그 시작이며, 지금은 Allen-Bradley(Rockwell Automation), Siemens 등이 대표 제조사입니다. SAIT 실습실에서는 주로 <strong>Allen-Bradley</strong> 계열(SLC 500, CompactLogix, Studio 5000/RSLogix 소프트웨어)을 사용합니다.</p>
+  <div class="analogy">릴레이 제어반이 <strong>손으로 배선한 크리스마스 전구 뭉치</strong>라면, PLC는 <strong>스마트 조명 앱</strong>입니다. 전구(입출력 기기)는 그대로 두고, 깜빡이는 패턴(로직)만 앱에서 바꾸면 됩니다. 배선을 뜯을 필요가 없습니다.</div>
+
+  <h2>3. PLC의 구성 요소</h2>
+  <ul>
+    <li><strong>CPU(프로세서) <span class="en">(processor)</span></strong>: 프로그램을 저장하고 실행하는 두뇌.</li>
+    <li><strong>입력 모듈 <span class="en">(input module)</span></strong>: 버튼, 스위치, 센서 등 <strong>현장의 신호를 받아들이는</strong> 부분.</li>
+    <li><strong>출력 모듈 <span class="en">(output module)</span></strong>: 모터, 램프, 솔레노이드 밸브 등 <strong>현장 기기를 켜고 끄는</strong> 부분.</li>
+    <li><strong>전원 공급 장치 <span class="en">(power supply)</span></strong>: PLC 자체에 전원을 공급.</li>
+    <li><strong>프로그래밍 장치 <span class="en">(programming device)</span></strong>: 프로그램을 작성해 넣는 PC(Studio 5000 등).</li>
+  </ul>
+  <ul>
+    <li><strong>입력 기기 <span class="en">(input device)</span></strong> 예: 푸시버튼 <span class="en">(pushbutton)</span>, 리밋 스위치 <span class="en">(limit switch)</span>, 근접 센서 <span class="en">(proximity sensor)</span>, 광전 센서 <span class="en">(photoelectric sensor)</span>.</li>
+    <li><strong>출력 기기 <span class="en">(output device)</span></strong> 예: 모터 스타터 <span class="en">(motor starter)</span>, 표시등 <span class="en">(pilot light)</span>, 솔레노이드 밸브 <span class="en">(solenoid valve)</span>, 부저.</li>
+  </ul>
+
+  <h2>4. 스캔 사이클 <span class="en">(scan cycle)</span> — PLC가 일하는 방식</h2>
+  <p>PLC는 프로그램을 한 번만 실행하고 끝내지 않습니다. 다음 3단계를 <strong>초당 수백~수천 번</strong> 무한 반복합니다. 이 반복 한 바퀴를 <strong>스캔 <span class="en">(scan)</span></strong>, 걸리는 시간을 <strong>스캔 타임 <span class="en">(scan time, 보통 수 ms)</span></strong>이라고 합니다.</p>
+  <ol>
+    <li><strong>입력 읽기 <span class="en">(input scan)</span></strong>: 모든 입력 단자의 상태(ON/OFF)를 읽어 메모리(입력 이미지 테이블)에 저장.</li>
+    <li><strong>프로그램 실행 <span class="en">(program scan)</span></strong>: 래더 로직을 <strong>위에서 아래로, 왼쪽에서 오른쪽으로</strong> 한 렁씩 평가.</li>
+    <li><strong>출력 쓰기 <span class="en">(output scan)</span></strong>: 계산된 결과를 실제 출력 단자에 반영.</li>
+  </ol>
+  <div class="analogy">스캔 사이클은 <strong>요리사의 루틴</strong>과 같습니다. ① 주문서를 확인하고(입력 읽기) → ② 레시피 순서대로 조리하고(프로그램 실행) → ③ 완성된 접시를 내보냅니다(출력 쓰기). 그리고 즉시 다시 주문서를 봅니다. 요리 중간에 새 주문이 들어와도 <strong>지금 하던 조리가 끝나기 전에는 반영되지 않는다</strong>는 점이 중요합니다.</div>
+  <div class="caution">입력이 실제로 바뀌어도 <strong>다음 입력 스캔 전까지는 프로그램에 반영되지 않습니다</strong>. 또 프로그램 중간에 출력 명령이 참이 되어도 실제 출력은 <strong>출력 쓰기 단계에서 한꺼번에</strong> 반영됩니다. 스캔 타임보다 짧은 신호는 놓칠 수 있다는 것도 시험 단골 포인트입니다.</div>
+
+  <h2>5. 릴레이 제어 vs PLC 비교</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>릴레이 제어반 <span class="en">(relay panel)</span></th><th>PLC</th></tr>
+    <tr><td>로직 구현</td><td>물리적 배선 (hard-wired)</td><td>소프트웨어 프로그램</td></tr>
+    <tr><td>로직 변경</td><td>재배선 필요 — 느리고 비쌈</td><td>프로그램 수정 — 빠르고 저렴</td></tr>
+    <tr><td>복잡한 기능(타이머·카운터·연산)</td><td>별도 하드웨어 추가 필요</td><td>명령어로 내장</td></tr>
+    <tr><td>고장 진단</td><td>테스터로 일일이 확인</td><td>소프트웨어에서 상태 모니터링</td></tr>
+    <tr><td>접점 수명</td><td>기계식 — 마모됨</td><td>메모리 비트 — 무한</td></tr>
+    <tr><td>동작 방식</td><td>모든 회로가 동시에(병렬로) 반응</td><td>스캔 순서대로 순차 평가</td></tr>
+  </table></div>
+  <div class="keypoint">래더 로직 <span class="en">(ladder logic)</span>이 릴레이 회로도 모양을 그대로 본떠 만들어진 이유: 당시 릴레이 회로도를 읽을 줄 알던 전기 기술자들이 <strong>재교육 없이 바로 쓸 수 있게</strong> 하기 위해서였습니다. 그래서 래더 로직을 배우면 릴레이 회로도도 읽을 수 있고, 그 반대도 마찬가지입니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>릴레이(계전기)</td><td>relay</td><td>전자석으로 접점을 여닫는 부품</td></tr>
+    <tr><td>릴레이 제어반</td><td>relay control panel, hard-wired logic</td><td>PLC 이전 방식</td></tr>
+    <tr><td>프로그래머블 로직 컨트롤러</td><td>Programmable Logic Controller (PLC)</td><td>산업용 제어 컴퓨터</td></tr>
+    <tr><td>입력/출력 모듈</td><td>input / output (I/O) module</td><td>현장 신호의 출입구</td></tr>
+    <tr><td>스캔 사이클</td><td>scan cycle</td><td>입력 읽기→실행→출력 쓰기 반복</td></tr>
+    <tr><td>스캔 타임</td><td>scan time</td><td>한 바퀴 도는 시간 (수 ms)</td></tr>
+    <tr><td>래더 로직(래더 다이어그램)</td><td>ladder logic, ladder diagram (LD)</td><td>PLC 표준 프로그래밍 언어</td></tr>
+    <tr><td>리밋 스위치 / 근접 센서</td><td>limit switch / proximity sensor</td><td>대표적 입력 기기</td></tr>
+    <tr><td>솔레노이드 밸브</td><td>solenoid valve</td><td>대표적 출력 기기(공압·유압 제어)</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 1-1. 입력·출력 기기 분류</div>
+    <p>다음 기기를 입력 기기와 출력 기기로 분류하라: 푸시버튼, 모터 스타터, 근접 센서, 표시등, 리밋 스위치, 솔레노이드 밸브.</p>
+    <ol class="steps">
+      <li><strong>기준 세우기:</strong> PLC에게 정보를 <strong>주는</strong> 것은 입력, PLC가 <strong>움직이는</strong> 것은 출력이다.</li>
+      <li><strong>입력:</strong> 푸시버튼(사람의 명령), 근접 센서(물체 감지), 리밋 스위치(위치 감지).</li>
+      <li><strong>출력:</strong> 모터 스타터(모터 기동), 표시등(상태 표시), 솔레노이드 밸브(실린더 구동).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 1-2. 스캔 타임과 신호 폭</div>
+    <p>어떤 PLC의 스캔 타임이 10 ms이다. 센서 신호가 4 ms 동안만 ON이 되었다면 PLC가 이 신호를 항상 감지할 수 있는가?</p>
+    <ol class="steps">
+      <li><strong>원리:</strong> 입력은 매 스캔의 "입력 읽기" 순간에만 샘플링된다.</li>
+      <li><strong>비교:</strong> 신호 폭 4 ms &lt; 스캔 타임 10 ms. 신호가 두 입력 읽기 사이(최대 10 ms 간격)에 켜졌다 꺼지면 읽히지 않는다.</li>
+      <li><strong>답:</strong> 항상 감지할 수 없다(놓칠 수 있다). 신호 폭이 스캔 타임보다 확실히 길거나, 고속 입력 기능을 써야 한다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <p>정답을 보지 말고 먼저 풀어 보세요.</p>
+  <div class="problems">
+    <div class="prob"><div class="q">PLC는 무엇의 약자이며, 무엇을 대체하기 위해 만들어졌는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Programmable Logic Controller. 물리적 배선으로 로직을 구현하던 <strong>릴레이 제어반(hard-wired relay panel)</strong>을 대체하기 위해 만들어졌다.</div></details></div>
+    <div class="prob"><div class="q">릴레이(relay)의 동작 원리를 한 문장으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 코일에 전류를 흘리면 전자석이 되어 접점(스위치)을 당겨 여닫음으로써, 작은 신호로 다른 회로를 켜고 끄는 부품이다.</div></details></div>
+    <div class="prob"><div class="q">스캔 사이클의 3단계를 순서대로 쓰라 (영어 명칭 포함).</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 입력 읽기 (input scan) → ② 프로그램 실행 (program scan) → ③ 출력 쓰기 (output scan). 이 순서를 무한 반복한다.</div></details></div>
+    <div class="prob"><div class="q">릴레이 제어 대비 PLC의 장점을 3가지 이상 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 로직 변경 시 재배선 불필요(프로그램만 수정), ② 타이머·카운터·연산 기능 내장, ③ 고장 진단·모니터링 용이, ④ 접점 마모 없음, ⑤ 설치 공간 절약 등.</div></details></div>
+    <div class="prob"><div class="q">다음 중 입력 기기가 아닌 것은? (a) 리밋 스위치 (b) 광전 센서 (c) 솔레노이드 밸브 (d) 푸시버튼</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (c)</span><br>솔레노이드 밸브는 PLC가 구동하는 <strong>출력 기기</strong>다. 나머지는 모두 PLC에 신호를 주는 입력 기기.</div></details></div>
+    <div class="prob"><div class="q">래더 로직이 릴레이 회로도와 닮은 모양으로 설계된 역사적 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 당시 릴레이 회로도에 익숙했던 전기 기술자들이 <strong>재교육 없이 바로 읽고 쓸 수 있도록</strong> 릴레이 회로도의 표기법을 그대로 본떴다.</div></details></div>
+    <div class="prob"><div class="q">프로그램 실행 단계에서 래더 로직은 어떤 순서로 평가되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 위에서 아래로(렁 순서), 각 렁 안에서는 왼쪽에서 오른쪽으로 평가된다. 릴레이 제어반이 모든 회로에 동시에 전기가 흐르는 것과 달리, PLC는 <strong>순차적</strong>으로 평가한다.</div></details></div>
+    <div class="prob"><div class="q">스캔 타임이 20 ms인 PLC에서, 8 ms 폭의 펄스 신호를 확실히 잡으려면 어떤 문제가 있는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 펄스 폭(8 ms)이 스캔 타임(20 ms)보다 짧아, 두 입력 읽기 사이에 펄스가 켜졌다 꺼지면 <strong>신호를 놓친다</strong>. 고속 카운터 입력이나 인터럽트 입력 같은 특수 기능을 사용해야 한다.</div></details></div>
+    <div class="prob"><div class="q">프로그램 중간의 어떤 렁에서 출력 명령이 참(ON)으로 계산되었다. 실제 출력 단자는 언제 켜지는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 그 즉시가 아니라, 해당 스캔의 <strong>출력 쓰기(output scan) 단계</strong>에서 켜진다. 프로그램 실행 중에는 메모리(출력 이미지 테이블)의 비트만 바뀐다.</div></details></div>
+    <div class="prob"><div class="q">SAIT 실습에서 쓰는 Allen-Bradley PLC의 프로그래밍 소프트웨어 이름을 하나 이상 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Studio 5000 (Logix Designer) — CompactLogix/ControlLogix용. 구형 SLC 500 계열은 RSLogix 500을 사용한다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="1" class="done-check"><label>1장 완료! (체크하면 진행 상황에 저장됩니다)</label></div>
+</section>
+
+<!-- ============ 2장 ============ -->
+<section class="chapter" id="ch2">
+  <h1>2장. 래더 로직 기본 문법</h1>
+  <p class="ch-sub">Rung, Contact, Coil — 래더 다이어그램을 읽고 쓰는 법</p>
+
+  <h2>1. 래더 다이어그램의 뼈대</h2>
+  <p><strong>래더 다이어그램 <span class="en">(ladder diagram, LD)</span></strong>은 세로로 선 두 개의 <strong>레일 <span class="en">(power rail)</span></strong> 사이에 가로줄들이 걸린, 사다리 모양의 그림입니다.</p>
+  <ul>
+    <li><strong>렁 <span class="en">(rung)</span></strong>: 사다리의 가로 발판 하나. <strong>조건(왼쪽)과 동작(오른쪽)</strong>으로 이루어진 논리 한 줄입니다.</li>
+    <li><strong>접점 <span class="en">(contact)</span></strong>: 렁의 왼쪽에 놓이는 <strong>조건(입력)</strong> 기호. 스위치처럼 논리의 흐름을 잇거나 끊습니다.</li>
+    <li><strong>코일 <span class="en">(coil)</span></strong>: 렁의 오른쪽 끝에 놓이는 <strong>동작(출력)</strong> 기호. 렁의 조건이 모두 참이면 코일이 켜집니다(ON).</li>
+  </ul>
+  <p>렁의 조건이 성립해 왼쪽 레일에서 오른쪽 코일까지 논리가 이어지는 것을 <strong>"렁이 참이다"</strong> 또는 <strong>로직 연속성 <span class="en">(logic continuity)</span>이 성립한다</strong>고 말합니다.</p>
+  <div class="ladder">|--[ ]----[ ]--------------( )--|
+|  조건1   조건2            동작  |
+|   (contact)              (coil)|</div>
+  <div class="analogy">렁 하나는 <strong>"만약 ~라면, ~해라"라는 문장 한 줄</strong>입니다. 접점들은 "만약(if)" 부분, 코일은 "해라(then)" 부분입니다. 래더 프로그램 전체는 이런 문장들이 위에서 아래로 나열된 <strong>규칙 목록</strong>이고, PLC는 이 목록을 매 스캔마다 처음부터 끝까지 다시 읽습니다.</div>
+
+  <h2>2. NO 접점과 NC 접점 <span class="en">(normally open / normally closed)</span></h2>
+  <p>접점에는 두 종류가 있습니다. Allen-Bradley 용어로는 XIC/XIO라고 부릅니다.</p>
+  <ul>
+    <li><strong>NO 접점(a접점) <span class="en">(normally open, XIC — Examine If Closed)</span></strong> 기호 <strong>—[ ]—</strong>: 평소에는 끊겨 있고, 대응하는 비트가 <strong>ON일 때 통(通)</strong>합니다. "비트가 1인지 검사한다"로 읽으면 정확합니다.</li>
+    <li><strong>NC 접점(b접점) <span class="en">(normally closed, XIO — Examine If Open)</span></strong> 기호 <strong>—[/]—</strong>: 평소에는 이어져 있고, 비트가 <strong>ON이 되면 끊깁니다</strong>. "비트가 0인지 검사한다"로 읽습니다.</li>
+  </ul>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>NO 접점 (XIC) —[ ]—</th><th>NC 접점 (XIO) —[/]—</th></tr>
+    <tr><td>영어 이름</td><td>normally open, Examine If Closed</td><td>normally closed, Examine If Open</td></tr>
+    <tr><td>참이 되는 조건</td><td>비트가 <strong>1 (ON)</strong>일 때</td><td>비트가 <strong>0 (OFF)</strong>일 때</td></tr>
+    <tr><td>읽는 법</td><td>"이 신호가 있으면"</td><td>"이 신호가 없으면"</td></tr>
+    <tr><td>대표 용도</td><td>스타트 버튼, 센서 감지 조건</td><td>정지 버튼, 인터록(금지 조건)</td></tr>
+  </table></div>
+  <div class="caution">NO/NC는 <strong>실제 버튼의 기계적 구조</strong>에도 쓰이고 <strong>래더의 접점 명령</strong>에도 쓰이는 말이라 혼동하기 쉽습니다. 래더의 —[ ]—, —[/]—는 물리적 스위치가 아니라 <strong>메모리 비트를 검사하는 명령</strong>입니다. 예를 들어 실제 배선에 NC형 정지 버튼(누르면 끊김)을 쓰고, 래더에는 NO 접점 —[ ]—을 놓는 조합이 실무 표준입니다(4장 뒤 6장 예제에서 다시 다룹니다). "래더 기호 = 비트 검사"라고 못 박아 두세요.</div>
+
+  <h2>3. 코일 명령 <span class="en">(output instructions)</span></h2>
+  <ul>
+    <li><strong>OTE <span class="en">(Output Energize)</span></strong> 기호 <strong>—( )—</strong>: 렁이 참이면 비트를 1로, 거짓이면 0으로 만든다. 가장 기본 출력.</li>
+    <li><strong>OTL <span class="en">(Output Latch)</span></strong> 기호 <strong>—(L)—</strong>: 렁이 참이 되는 순간 비트를 1로 만들고, 렁이 거짓이 되어도 <strong>1을 유지</strong>한다.</li>
+    <li><strong>OTU <span class="en">(Output Unlatch)</span></strong> 기호 <strong>—(U)—</strong>: 렁이 참이면 (래치된) 비트를 0으로 되돌린다. OTL과 짝으로 쓴다.</li>
+  </ul>
+  <div class="caution">같은 출력 주소에 OTE 코일을 <strong>두 렁 이상에서 중복 사용하면 안 됩니다</strong>. 스캔은 위에서 아래로 진행되므로 <strong>마지막 렁의 결과만</strong> 실제 출력에 반영됩니다. 이를 이중 코일 문제 <span class="en">(duplicate/double coil)</span>라고 하며, 초보자가 가장 많이 하는 실수입니다.</div>
+
+  <h2>4. 직렬 = AND, 병렬 = OR</h2>
+  <p>접점을 <strong>한 줄로 이어 붙이면(직렬)</strong> 모든 조건이 참이어야 하므로 <strong>AND</strong>, 접점을 <strong>가지로 나란히 놓으면(병렬, branch)</strong> 하나만 참이어도 되므로 <strong>OR</strong>입니다.</p>
+  <div class="ladder">AND (직렬):  |--[A]--[B]-------( Y )--|   → Y = A AND B
+
+OR (병렬):   |--[A]--+---------( Y )--|
+             |       |               |
+             |--[B]--+               |   → Y = A OR B</div>
+  <div class="keypoint">디지털 회로(불 대수)를 배웠다면: 직렬 접점 = AND 게이트, 병렬 접점 = OR 게이트, NC 접점 = NOT. 래더 로직은 불 대수를 그림으로 그린 것입니다.</div>
+
+  <h2>5. 주소 체계 <span class="en">(addressing)</span></h2>
+  <p>접점·코일이 검사하거나 조작하는 비트에는 <strong>주소 <span class="en">(address)</span></strong> 또는 <strong>태그 <span class="en">(tag)</span></strong>가 붙습니다.</p>
+  <div class="tablewrap"><table>
+    <tr><th>계열</th><th>방식</th><th>예</th><th>의미</th></tr>
+    <tr><td>SLC 500 (RSLogix 500)</td><td>고정 주소</td><td>I:1/0</td><td>Input, 슬롯 1, 0번 단자</td></tr>
+    <tr><td>SLC 500</td><td>고정 주소</td><td>O:2/3</td><td>Output, 슬롯 2, 3번 단자</td></tr>
+    <tr><td>SLC 500</td><td>내부 비트</td><td>B3:0/5</td><td>Binary 파일 3, 워드 0, 비트 5</td></tr>
+    <tr><td>CompactLogix (Studio 5000)</td><td>태그 이름</td><td>Start_PB, Motor_Run</td><td>이름 기반 태그 (tag-based)</td></tr>
+  </table></div>
+  <p>내부 비트 <span class="en">(internal bit, B3 등)</span>는 실제 단자에 연결되지 않은 <strong>메모리 전용 릴레이</strong>로, 6장의 시퀀스 제어에서 "단계 기억"에 쓰는 핵심 도구입니다.</p>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>기호</th></tr>
+    <tr><td>렁(가로줄)</td><td>rung</td><td>사다리 한 칸</td></tr>
+    <tr><td>레일(모선)</td><td>power rail</td><td>좌우 세로선</td></tr>
+    <tr><td>접점</td><td>contact</td><td>—[ ]—, —[/]—</td></tr>
+    <tr><td>NO 접점(a접점)</td><td>normally open (XIC)</td><td>—[ ]—</td></tr>
+    <tr><td>NC 접점(b접점)</td><td>normally closed (XIO)</td><td>—[/]—</td></tr>
+    <tr><td>코일(출력)</td><td>coil (OTE, Output Energize)</td><td>—( )—</td></tr>
+    <tr><td>래치 / 언래치</td><td>latch (OTL) / unlatch (OTU)</td><td>—(L)—, —(U)—</td></tr>
+    <tr><td>가지(분기)</td><td>branch (병렬 = OR)</td><td>—</td></tr>
+    <tr><td>로직 연속성</td><td>logic continuity</td><td>렁이 참이 되는 것</td></tr>
+    <tr><td>주소 / 태그</td><td>address / tag</td><td>I:1/0, Start_PB</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 2-1. 래더 렁 읽기</div>
+    <p>다음 렁에서 램프(Lamp)가 켜지는 조건을 말로 설명하라.</p>
+    <div class="ladder">|--[Sensor_A]--+--[/Door_Closed]--( Lamp )--|
+|              |                            |
+|--[Sensor_B]--+                            |</div>
+    <ol class="steps">
+      <li><strong>구조 분석:</strong> Sensor_A와 Sensor_B가 병렬(OR), 그 뒤에 Door_Closed의 NC 접점이 직렬(AND).</li>
+      <li><strong>식으로:</strong> Lamp = (Sensor_A OR Sensor_B) AND (NOT Door_Closed).</li>
+      <li><strong>말로:</strong> 센서 A 또는 B가 감지되고, <strong>동시에 문이 닫혀 있지 않을 때</strong>(Door_Closed 비트가 0일 때) 램프가 켜진다.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 2-2. 조건을 래더로 옮기기</div>
+    <p>"컨베이어 모터(Motor)는 전원 스위치(Power_SW)가 켜져 있고, 비상정지(E_Stop 비트)가 눌리지 않았으며, 시작 버튼(Start_PB) 또는 원격 시작(Remote_Start) 중 하나가 눌렸을 때 돈다"를 래더 한 렁으로 그려라.</p>
+    <ol class="steps">
+      <li><strong>조건 분해:</strong> Power_SW = AND 조건(NO), E_Stop 눌리지 않음 = AND 조건(NC, —[/]—), Start_PB와 Remote_Start = 서로 OR(병렬 가지).</li>
+      <li><strong>래더 작성:</strong>
+      <div class="ladder">|--[Power_SW]--[/E_Stop]--+--[Start_PB]------+--( Motor )--|
+|                         |                  |             |
+|                         +--[Remote_Start]--+             |</div></li>
+      <li><strong>검산:</strong> Motor = Power_SW AND (NOT E_Stop) AND (Start_PB OR Remote_Start). 조건과 일치한다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">렁(rung), 접점(contact), 코일(coil)의 역할을 각각 한 문장으로 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 렁은 "조건 → 동작"으로 이루어진 논리 한 줄, 접점은 렁 왼쪽에서 비트 상태를 검사하는 조건 기호, 코일은 렁이 참일 때 비트를 켜는(끄는) 출력 기호이다.</div></details></div>
+    <div class="prob"><div class="q">XIC와 XIO는 각각 무엇의 약자이며, 비트가 어떤 값일 때 참이 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> XIC = Examine If Closed (NO 접점, —[ ]—): 비트가 <strong>1</strong>일 때 참. XIO = Examine If Open (NC 접점, —[/]—): 비트가 <strong>0</strong>일 때 참.</div></details></div>
+    <div class="prob"><div class="q">접점의 직렬 연결과 병렬 연결은 각각 어떤 논리 연산에 해당하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 직렬 = AND (모두 참이어야 렁이 참), 병렬(branch) = OR (하나만 참이어도 렁이 참).</div></details></div>
+    <div class="prob"><div class="q">다음 렁의 논리식을 쓰라: |--[A]--[/B]--+--[C]--+--( Y )--|  (C는 A·B 접점 전체와 병렬이 아니라, 별도 가지로 A–B 직렬 구간과 병렬이다)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: Y = (A AND NOT B) OR C</span><br>A와 B의 NC가 직렬(AND NOT), 그 묶음과 C가 병렬(OR).</div></details></div>
+    <div class="prob"><div class="q">OTE, OTL, OTU의 차이를 설명하라. OTL로 켠 비트는 어떻게 꺼야 하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> OTE는 렁이 참이면 1, 거짓이면 0(렁 상태를 그대로 따름). OTL은 한 번 참이 되면 렁이 거짓이 되어도 1을 <strong>유지</strong>(래치). OTU는 렁이 참일 때 래치된 비트를 0으로 되돌린다. OTL로 켠 비트는 같은 주소의 <strong>OTU 렁</strong>으로 꺼야 한다.</div></details></div>
+    <div class="prob"><div class="q">같은 출력 주소에 OTE 코일을 서로 다른 두 렁에 쓰면 어떤 일이 생기는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 스캔이 위에서 아래로 진행되므로 <strong>아래(마지막) 렁의 평가 결과만</strong> 출력에 반영된다. 위 렁이 참이어도 아래 렁이 거짓이면 출력은 꺼진다. 이중 코일(duplicate coil)이라 부르는 대표적 오류.</div></details></div>
+    <div class="prob"><div class="q">SLC 500 주소 I:3/5 와 O:4/1 은 각각 무엇을 뜻하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> I:3/5 = 입력(Input) 모듈, 슬롯 3, 단자 5. O:4/1 = 출력(Output) 모듈, 슬롯 4, 단자 1.</div></details></div>
+    <div class="prob"><div class="q">내부 비트(B3 등, internal bit)는 실제 단자와 어떻게 다르며 무엇에 쓰는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 실제 입출력 단자에 연결되지 않은 <strong>메모리 전용 비트</strong>(소프트웨어 릴레이)다. 중간 계산 결과 저장, 상태(단계) 기억, 시퀀스 제어의 스텝 관리 등에 쓴다.</div></details></div>
+    <div class="prob"><div class="q">"모터는 센서1과 센서2가 <strong>모두</strong> 감지되고 리셋 버튼이 눌려 있지 <strong>않을</strong> 때 돈다"를 논리식과 래더(문자)로 표현하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Motor = S1 AND S2 AND (NOT Reset).<br>래더: |--[S1]--[S2]--[/Reset]--( Motor )--|</div></details></div>
+    <div class="prob"><div class="q">램프가 "스위치 A가 꺼져 있거나, B와 C가 동시에 켜졌을 때" 점등된다. 논리식을 쓰고 래더 구조(직렬/병렬)를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Lamp = (NOT A) OR (B AND C).<br>가지 1: A의 NC 접점 —[/A]—. 가지 2: B, C의 NO 접점 직렬 —[B]--[C]—. 두 가지를 병렬로 묶어 코일 (Lamp)에 연결.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="2" class="done-check"><label>2장 완료!</label></div>
+</section>
+
+<!-- ============ 3장 ============ -->
+<section class="chapter" id="ch3">
+  <h1>3장. 기본 회로 패턴</h1>
+  <p class="ch-sub">Seal-in, Start/Stop, Interlock — 모든 PLC 프로그램의 재료가 되는 3대 패턴</p>
+
+  <h2>1. 자기유지 회로 <span class="en">(seal-in / latching circuit)</span></h2>
+  <p>푸시버튼 <span class="en">(momentary pushbutton)</span>은 <strong>누르는 동안만</strong> 신호가 나옵니다. 손을 떼면 신호가 사라지죠. 그런데 모터는 버튼에서 손을 떼도 계속 돌아야 합니다. 이를 해결하는 것이 <strong>자기유지 <span class="en">(seal-in, holding, latching)</span></strong>입니다: <strong>출력 자신의 접점을 시작 버튼과 병렬로 넣어</strong>, 출력이 한 번 켜지면 그 접점이 스스로 조건을 유지하게 만듭니다.</p>
+  <div class="ladder">|--[Start_PB]--+--[/Stop_PB]--( Motor )--|
+|              |                         |
+|--[Motor]-----+                         |
+   ↑ 출력 자신의 NO 접점 (seal-in contact)</div>
+  <p>동작 순서: ① Start를 누르면 렁이 참 → Motor ON. ② 다음 스캔부터 Motor 접점이 참이므로 Start에서 손을 떼도 렁이 계속 참. ③ Stop을 누르면(NC 접점이 끊겨) 렁이 거짓 → Motor OFF, seal-in도 풀림.</p>
+  <div class="analogy"><strong>천장 형광등 스위치와 현관 센서등</strong>을 비교해 보세요. 센서등은 손을 흔드는 동안만 켜지지만(푸시버튼처럼), 형광등은 스위치를 한 번 딸깍하면 계속 켜져 있습니다. 자기유지는 "순간 신호"를 "지속 상태"로 바꿔 주는 <strong>딸깍 스위치의 소프트웨어 버전</strong>입니다.</div>
+
+  <h3>Seal-in(OTE) 방식 vs Latch(OTL/OTU) 방식</h3>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>Seal-in (OTE + 자기 접점)</th><th>Latch (OTL / OTU)</th></tr>
+    <tr><td>유지 방법</td><td>자기 접점의 병렬 가지로 렁을 계속 참으로 유지</td><td>비트 자체가 메모리에 유지됨</td></tr>
+    <tr><td>끄는 방법</td><td>렁의 직렬 조건(Stop 등)을 끊음</td><td>OTU 렁을 참으로 만듦</td></tr>
+    <tr><td>정전 후 복전 시</td><td>렁 조건이 거짓이므로 <strong>꺼진 상태로 시작</strong> (안전)</td><td>비트가 유지되어 <strong>갑자기 재기동할 수 있음</strong> (주의)</td></tr>
+    <tr><td>권장 용도</td><td>모터 기동 등 안전이 중요한 출력</td><td>알람 기억, 상태 플래그</td></tr>
+  </table></div>
+  <div class="caution">복전 시 기계가 저절로 재기동하면 큰 사고로 이어질 수 있습니다. 그래서 <strong>모터류 출력에는 seal-in 방식이 표준</strong>이고, OTL은 "기억"이 목적일 때만 씁니다. 시험과 실무 모두에서 중요한 구분입니다.</div>
+
+  <h2>2. 스타트/스톱 회로와 배선 관례 <span class="en">(start/stop station)</span></h2>
+  <p>위 자기유지 회로가 바로 표준 <strong>스타트/스톱 회로</strong>입니다. 여기서 실무 배선 관례 하나를 반드시 알아야 합니다: <strong>정지 버튼은 물리적으로 NC형 버튼을 쓰고, 래더에는 NO 접점 —[ ]—을 놓습니다.</strong></p>
+  <ul>
+    <li>물리 NC 버튼: 평소에 전기가 흐르고 있음 → PLC 입력 비트는 평소 <strong>1</strong>.</li>
+    <li>래더의 —[Stop]— (XIC): 비트가 1이므로 평소 참 → 모터 운전 가능.</li>
+    <li>버튼을 누르면 배선이 끊겨 비트가 0 → 접점 거짓 → 모터 정지.</li>
+    <li><strong>핵심 이유: 배선이 단선되어도 비트가 0이 되어 모터가 멈춘다</strong> — 고장이 곧 정지가 되는 <strong>페일 세이프 <span class="en">(fail-safe)</span></strong> 설계.</li>
+  </ul>
+  <div class="caution">"정지 버튼이니까 래더에도 NC 기호 —[/]—를 쓰겠지"라고 생각하기 쉽지만, <strong>물리 버튼이 NC이면 래더는 NO</strong>가 됩니다. 물리 접점과 래더 기호가 "이중 부정"처럼 조합된다는 점이 이 과목 최대의 혼동 포인트입니다. 위 배선 관례 문단을 그대로 외워 두세요.</div>
+
+  <h2>3. 인터록 <span class="en">(interlock)</span></h2>
+  <p><strong>인터록 <span class="en">(interlock)</span></strong>은 <strong>두 출력이 동시에 켜지는 것을 금지</strong>하는 안전 패턴입니다. 대표 예: 모터 정회전/역회전 <span class="en">(forward/reverse)</span>. 둘이 동시에 켜지면 전원이 단락되므로, <strong>각 렁에 상대 출력의 NC 접점</strong>을 넣습니다.</p>
+  <div class="ladder">|--[Fwd_PB]--+--[/Stop]--[/Rev]--( Fwd )--|
+|--[Fwd]-----+                            |
+|                                         |
+|--[Rev_PB]--+--[/Stop]--[/Fwd]--( Rev )--|
+|--[Rev]-----+                            |</div>
+  <p>Fwd가 켜져 있는 동안 Rev 렁의 —[/Fwd]—가 거짓이 되어 Rev는 절대 켜질 수 없습니다(반대도 동일). 이는 소프트웨어 인터록이며, 실무에서는 전자접촉기 <span class="en">(contactor)</span>의 기계적 인터록을 함께 써서 이중으로 보호합니다.</p>
+  <div class="analogy">인터록은 <strong>은행 금고의 이중문</strong>과 같습니다. 바깥문이 열려 있으면 안쪽 문이 잠기고, 안쪽 문이 열려 있으면 바깥문이 잠깁니다. 두 문이 동시에 열리는 상황 자체를 구조적으로 막는 것입니다.</div>
+
+  <h2>4. 원샷 <span class="en">(one-shot, ONS)</span></h2>
+  <p><strong>원샷 <span class="en">(one-shot, ONS 명령)</span></strong>은 조건이 거짓→참으로 바뀌는 <strong>상승 에지 <span class="en">(rising edge)</span></strong>에서 <strong>한 스캔 동안만</strong> 참이 되는 명령입니다. 버튼을 아무리 오래 눌러도 "눌린 순간"을 한 번만 잡고 싶을 때(카운트 1회 증가, 값 1회 복사 등) 사용합니다.</p>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>핵심</th></tr>
+    <tr><td>자기유지</td><td>seal-in, holding, latching circuit</td><td>출력 자신의 접점으로 상태 유지</td></tr>
+    <tr><td>순간동작 푸시버튼</td><td>momentary pushbutton</td><td>누르는 동안만 신호</td></tr>
+    <tr><td>페일 세이프</td><td>fail-safe</td><td>고장 시 안전한 쪽(정지)으로</td></tr>
+    <tr><td>인터록</td><td>interlock</td><td>동시 동작 금지</td></tr>
+    <tr><td>정회전 / 역회전</td><td>forward / reverse</td><td>인터록의 대표 대상</td></tr>
+    <tr><td>전자접촉기</td><td>contactor</td><td>모터용 대형 릴레이</td></tr>
+    <tr><td>원샷</td><td>one-shot (ONS)</td><td>상승 에지에서 1스캔만 참</td></tr>
+    <tr><td>상승 에지</td><td>rising edge</td><td>0→1로 바뀌는 순간</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 3-1. 스타트/스톱 회로의 동작 추적</div>
+    <p>표준 스타트/스톱 회로(위 1절 래더)에서, 다음 순서로 조작할 때 Motor의 상태 변화를 스캔 단위로 추적하라: ① Start 누름 → ② Start 뗌 → ③ Stop 누름 → ④ Stop 뗌.</p>
+    <ol class="steps">
+      <li><strong>① Start 누름:</strong> Start_PB=1, Stop 비트=1(NC 버튼이라 평소 1) → 렁 참 → Motor=1.</li>
+      <li><strong>② Start 뗌:</strong> Start_PB=0이지만 병렬의 —[Motor]— 접점이 1 → 렁 여전히 참 → Motor 유지(자기유지 성립).</li>
+      <li><strong>③ Stop 누름:</strong> Stop 비트=0 → —[Stop]— 거짓 → 렁 거짓 → Motor=0. 동시에 seal-in 접점도 0.</li>
+      <li><strong>④ Stop 뗌:</strong> Stop 비트=1로 복귀하지만 Start_PB=0, Motor 접점=0이라 렁은 거짓 → Motor는 꺼진 채 유지. <strong>재기동하려면 Start를 다시 눌러야 한다.</strong></li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 3-2. 인터록 설계</div>
+    <p>배수 펌프 P1, P2가 있다. 요구사항: 각각 자기 버튼(PB1, PB2)으로 기동, 공용 정지 버튼(Stop)으로 정지, 두 펌프는 절대 동시에 돌면 안 된다. 래더를 설계하라.</p>
+    <ol class="steps">
+      <li><strong>패턴 선택:</strong> 각 펌프에 자기유지 + 상대 펌프 NC 접점(인터록) + 공용 Stop.</li>
+      <li><strong>래더:</strong>
+      <div class="ladder">|--[PB1]--+--[Stop]--[/P2]--( P1 )--|
+|--[P1]---+                        |
+|                                  |
+|--[PB2]--+--[Stop]--[/P1]--( P2 )--|
+|--[P2]---+                        |</div>
+      (Stop은 물리 NC 버튼 + 래더 NO 접점 관례를 따름)</li>
+      <li><strong>검증:</strong> P1 운전 중 PB2를 눌러도 —[/P1]—이 거짓이라 P2는 켜지지 않는다. P1을 정지시킨 뒤에야 P2 기동 가능. ✓</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">자기유지(seal-in) 회로가 필요한 이유를 푸시버튼의 특성과 연결해 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 푸시버튼은 순간동작(momentary)이라 손을 떼면 신호가 사라진다. 출력 자신의 NO 접점을 시작 버튼과 병렬로 넣으면, 한 번 켜진 출력이 스스로 렁 조건을 유지하므로 순간 신호를 지속 상태로 바꿀 수 있다.</div></details></div>
+    <div class="prob"><div class="q">seal-in 접점은 시작 버튼과 직렬로 넣는가, 병렬로 넣는가? 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 병렬.</span><br>시작 버튼 "또는" 자기 접점 중 하나만 참이어도 렁이 유지되어야 하므로 OR(병렬)이다. 직렬로 넣으면 버튼을 떼는 순간 렁이 끊겨 유지가 안 된다.</div></details></div>
+    <div class="prob"><div class="q">정지 버튼에 물리 NC형 버튼 + 래더 NO 접점 —[ ]— 조합을 쓰는 이유는 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 페일 세이프(fail-safe).</span><br>NC 버튼은 평소 전기가 흘러 비트가 1이고, 래더의 NO 접점이 참이 되어 운전이 가능하다. 버튼을 누르거나 <strong>배선이 단선되면</strong> 비트가 0이 되어 즉시 정지한다. 고장이 곧 정지가 되는 안전한 설계다.</div></details></div>
+    <div class="prob"><div class="q">Stop 배선이 단선된 상태에서 Start를 누르면 모터는 어떻게 되는가? (위 관례대로 배선했을 때)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 기동되지 않는다.</span><br>단선이면 Stop 입력 비트가 0 → 래더의 —[Stop]— 접점이 거짓 → 렁이 참이 될 수 없다. 위험한 상태에서 기동을 막아 주므로 이것이 바로 페일 세이프의 효과다.</div></details></div>
+    <div class="prob"><div class="q">seal-in(OTE) 방식과 OTL 래치 방식의 가장 중요한 실무적 차이(정전 복구 시 동작)를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> seal-in은 복전 시 렁 조건이 거짓이므로 출력이 <strong>꺼진 채로 시작</strong>한다(안전). OTL은 래치 비트가 메모리에 유지되어 복전 시 <strong>기계가 갑자기 재기동할 위험</strong>이 있다. 그래서 모터류에는 seal-in이 표준이다.</div></details></div>
+    <div class="prob"><div class="q">인터록(interlock)의 목적은 무엇이며, 래더에서 어떻게 구현하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 두 출력(예: 정회전/역회전)이 동시에 켜지는 것을 금지하는 것. 각 출력 렁에 <strong>상대 출력의 NC 접점 —[/상대]—</strong>을 직렬로 넣어, 상대가 켜져 있는 동안 자기 렁이 참이 될 수 없게 한다.</div></details></div>
+    <div class="prob"><div class="q">정/역회전 회로에서 소프트웨어 인터록만으로 충분하지 않아 함께 쓰는 하드웨어 안전장치는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전자접촉기(contactor)의 <strong>기계적 인터록</strong>(mechanical interlock). PLC 고장·출력 모듈 고착 등 소프트웨어가 못 막는 상황까지 하드웨어로 이중 보호한다.</div></details></div>
+    <div class="prob"><div class="q">ONS(one-shot) 명령은 언제, 몇 스캔 동안 참이 되는가? 어떤 상황에 쓰는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 렁 조건이 0→1로 바뀌는 <strong>상승 에지</strong>에서 <strong>딱 1스캔</strong> 동안만 참. 버튼을 길게 눌러도 한 번만 동작해야 하는 경우(카운트 +1, 값 복사, 토글 등)에 쓴다.</div></details></div>
+    <div class="prob"><div class="q">버튼 하나(PB)로 램프를 누를 때마다 켜졌다 꺼졌다 하게(토글) 만들려 한다. ONS가 없으면 왜 문제가 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 버튼을 누르고 있는 동안 매 스캔(초당 수백 번)마다 토글 로직이 실행되어 램프가 미친 듯이 켜졌다 꺼졌다를 반복한다. ONS로 "눌린 순간 1스캔"만 잡아야 한 번 누름 = 한 번 토글이 된다.</div></details></div>
+    <div class="prob"><div class="q">컨베이어 모터 요구사항: Start로 기동, Stop으로 정지, 과부하 신호(Overload 비트, 평소 0/이상 시 1)가 뜨면 즉시 정지하고 Start를 다시 눌러야 재기동. 래더를 설계하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span><br>|--[Start]--+--[Stop]--[/Overload]--( Motor )--|<br>|--[Motor]--+<br>Overload가 1이 되면 —[/Overload]—가 거짓 → 렁 거짓 → 모터 정지 + seal-in 해제. Overload가 사라져도 자동 재기동하지 않고 Start를 다시 눌러야 한다(자기유지가 이미 풀렸기 때문).</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="3" class="done-check"><label>3장 완료!</label></div>
+</section>
+
+<!-- ============ 4장 ============ -->
+<section class="chapter" id="ch4">
+  <h1>4장. 타이머</h1>
+  <p class="ch-sub">TON, TOF, RTO — 시간을 다루는 명령과 타이머 비트(EN/TT/DN)</p>
+
+  <h2>1. 타이머 명령의 공통 구조</h2>
+  <p><strong>타이머 <span class="en">(timer)</span></strong>는 렁 조건에 따라 시간을 재는 출력 명령입니다. Allen-Bradley 타이머는 다음 파라미터와 상태 비트를 가집니다.</p>
+  <ul>
+    <li><strong>프리셋 <span class="en">(preset, PRE)</span></strong>: 목표 시간(설정값).</li>
+    <li><strong>누적값 <span class="en">(accumulated value, ACC)</span></strong>: 현재까지 잰 시간. ACC가 PRE에 도달하면 타이머 완료.</li>
+    <li><strong>타임 베이스 <span class="en">(time base)</span></strong>: 시간 단위(1초, 0.01초 등). PRE × time base = 실제 시간.</li>
+  </ul>
+  <p>상태 비트 3형제:</p>
+  <ul>
+    <li><strong>EN <span class="en">(Enable bit)</span></strong>: 타이머 렁 조건이 참인 동안 1.</li>
+    <li><strong>TT <span class="en">(Timer Timing bit)</span></strong>: 타이머가 <strong>시간을 재는 중</strong>일 때 1.</li>
+    <li><strong>DN <span class="en">(Done bit)</span></strong>: ACC가 PRE에 <strong>도달하면</strong> 1. 다른 렁에서 —[T4:0/DN]— 접점으로 검사해 사용.</li>
+  </ul>
+
+  <h2>2. TON — 온 딜레이 타이머 <span class="en">(Timer ON-delay)</span></h2>
+  <p><strong>TON</strong>은 렁이 참이 된 뒤 <strong>설정 시간이 지나면 DN이 켜지는</strong> 타이머입니다. "켜지는 것을 지연"시킵니다. 렁이 도중에 거짓이 되면 ACC는 <strong>0으로 리셋</strong>됩니다.</p>
+  <div class="ladder">|--[Start_SW]------[TON T4:0, PRE 5s]--|
+|--[T4:0/DN]-------( Motor )-----------|
+→ 스위치를 켜고 5초 후에 모터 기동. 도중에 끄면 처음부터 다시.</div>
+  <div class="analogy">TON은 <strong>전자레인지</strong>입니다. 시작 버튼을 누르면 시간을 재기 시작하고, 설정 시간이 다 되어야 "띵"(DN 비트)이 울립니다. 도중에 문을 열면(렁 거짓) 타이머가 멈추고 처음으로 돌아갑니다.</div>
+
+  <h2>3. TOF — 오프 딜레이 타이머 <span class="en">(Timer OFF-delay)</span></h2>
+  <p><strong>TOF</strong>는 반대로 <strong>렁이 참인 동안 DN이 즉시 켜져 있고</strong>, 렁이 <strong>거짓이 된 뒤 설정 시간이 지나면 DN이 꺼지는</strong> 타이머입니다. "꺼지는 것을 지연"시킵니다.</p>
+  <div class="ladder">|--[Door_Open]-----[TOF T4:1, PRE 30s]--|
+|--[T4:1/DN]-------( Light )------------|
+→ 문이 열리면 즉시 점등, 문이 닫힌 뒤 30초 더 켜져 있다가 소등.</div>
+  <div class="analogy">TOF는 <strong>자동차 헤드라이트의 "에스코트 기능"</strong>입니다. 시동을 끄면(입력 OFF) 즉시 꺼지는 게 아니라, 현관까지 걸어갈 30초 동안 더 켜져 있다가 꺼집니다.</div>
+
+  <h2>4. RTO — 보존형 타이머 <span class="en">(Retentive Timer On)</span></h2>
+  <p><strong>RTO</strong>는 TON과 같지만, 렁이 거짓이 되어도 <strong>ACC가 리셋되지 않고 보존</strong>됩니다. 렁이 다시 참이 되면 이어서 잽니다. 리셋하려면 별도의 <strong>RES <span class="en">(Reset)</span></strong> 명령을 같은 주소에 써야 합니다. 용도: 장비 누적 가동시간 측정, 끊겼다 이어지는 공정 시간 합산.</p>
+
+  <h3>세 타이머 비교</h3>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>TON (on-delay)</th><th>TOF (off-delay)</th><th>RTO (retentive)</th></tr>
+    <tr><td>시간을 재는 때</td><td>렁이 <strong>참</strong>인 동안</td><td>렁이 <strong>거짓</strong>이 된 후</td><td>렁이 참인 동안 (누적)</td></tr>
+    <tr><td>DN이 켜지는 때</td><td>참 유지 PRE 경과 후</td><td>렁이 참이 되는 <strong>즉시</strong></td><td>누적 ACC = PRE 도달 시</td></tr>
+    <tr><td>DN이 꺼지는 때</td><td>렁이 거짓이 되는 즉시</td><td>거짓 후 PRE 경과 시</td><td>RES 명령 실행 시</td></tr>
+    <tr><td>렁 거짓 시 ACC</td><td><strong>0으로 리셋</strong></td><td>(거짓 동안 증가)</td><td><strong>보존됨</strong></td></tr>
+    <tr><td>대표 용도</td><td>기동 지연, 순차 기동</td><td>여운 점등, 팬 후운전</td><td>누적 가동시간</td></tr>
+  </table></div>
+  <div class="caution">TOF에서 가장 헷갈리는 점: <strong>DN 비트는 렁이 참이 되는 순간 곧바로 1</strong>이 됩니다(지연 없이). 지연되는 것은 "꺼지는 쪽"입니다. "TON = 켜짐 지연, TOF = 꺼짐 지연"으로 외우고, DN의 파형을 직접 그려 보세요.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>온 딜레이 타이머</td><td>TON (Timer ON-delay)</td><td>켜짐을 지연</td></tr>
+    <tr><td>오프 딜레이 타이머</td><td>TOF (Timer OFF-delay)</td><td>꺼짐을 지연</td></tr>
+    <tr><td>보존형 타이머</td><td>RTO (Retentive Timer On)</td><td>ACC 보존, RES로 리셋</td></tr>
+    <tr><td>프리셋(설정값)</td><td>preset (PRE)</td><td>목표 시간</td></tr>
+    <tr><td>누적값</td><td>accumulated value (ACC)</td><td>현재 잰 시간</td></tr>
+    <tr><td>타임 베이스</td><td>time base</td><td>1 s, 0.01 s 등</td></tr>
+    <tr><td>완료 비트</td><td>done bit (DN)</td><td>시간 도달 표시</td></tr>
+    <tr><td>인에이블 비트 / 타이밍 비트</td><td>enable bit (EN) / timer timing bit (TT)</td><td>렁 참 / 측정 중</td></tr>
+    <tr><td>리셋</td><td>reset (RES)</td><td>ACC를 0으로</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 4-1. 순차 기동 (staggered start)</div>
+    <p>Start를 누르면 컨베이어 C1이 즉시 기동하고, 5초 후 C2가, 다시 5초 후 C3가 기동해야 한다(대전류 동시 기동 방지). 래더를 설계하라.</p>
+    <ol class="steps">
+      <li><strong>구조:</strong> C1은 표준 스타트/스톱 자기유지. C1이 도는 동안 TON 두 개를 걸어 시차를 만든다.</li>
+      <li><strong>래더:</strong>
+      <div class="ladder">|--[Start]--+--[Stop]--------( C1 )-------|
+|--[C1]-----+                            |
+|--[C1]------------[TON T4:1, PRE 5s]----|
+|--[T4:1/DN]-------( C2 )----------------|
+|--[T4:1/DN]-------[TON T4:2, PRE 5s]----|
+|--[T4:2/DN]-------( C3 )----------------|</div></li>
+      <li><strong>동작 확인:</strong> C1 ON → 5초 후 T4:1/DN → C2 ON과 동시에 T4:2 시작 → 다시 5초 후 C3 ON. Stop을 누르면 C1이 꺼지고 T4:1 렁이 거짓 → 모든 타이머 리셋, C2·C3도 꺼진다. ✓</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 4-2. TON+TOF 조합 — 환기팬 후운전</div>
+    <p>도장 부스: 스프레이 건 신호(Spray)가 켜지면 환기팬(Fan)이 즉시 돌고, 스프레이가 끝난 뒤에도 60초 동안 더 돌아야 한다. 어떤 타이머를 어떻게 쓰는가?</p>
+    <ol class="steps">
+      <li><strong>요구 분석:</strong> "입력 ON → 출력 즉시 ON, 입력 OFF → 출력이 60초 늦게 OFF" = 전형적인 <strong>꺼짐 지연 = TOF</strong>.</li>
+      <li><strong>래더:</strong>
+      <div class="ladder">|--[Spray]---------[TOF T4:3, PRE 60s]--|
+|--[T4:3/DN]-------( Fan )--------------|</div></li>
+      <li><strong>동작:</strong> Spray ON 순간 DN=1 → Fan 즉시 ON. Spray OFF 후 60초간 DN 유지 → Fan 후운전 → 60초 뒤 DN=0, Fan OFF. ✓</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">PRE와 ACC는 각각 무엇인가? 타이머는 언제 "완료"되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> PRE(preset)는 목표 설정 시간, ACC(accumulated value)는 현재까지 잰 누적 시간. ACC가 PRE에 도달하면 완료되어 DN 비트가 1이 된다.</div></details></div>
+    <div class="prob"><div class="q">TON의 DN 비트는 언제 켜지고 언제 꺼지는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 렁이 참으로 유지된 채 PRE 시간이 경과하면 켜지고, 렁이 거짓이 되는 <strong>즉시</strong> 꺼진다(ACC도 0으로 리셋).</div></details></div>
+    <div class="prob"><div class="q">TOF의 DN 비트는 언제 켜지고 언제 꺼지는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 렁이 참이 되는 <strong>즉시</strong> 켜지고, 렁이 거짓이 된 후 PRE 시간이 경과하면 꺼진다. "꺼짐이 지연"되는 타이머다.</div></details></div>
+    <div class="prob"><div class="q">TON과 RTO의 차이는 무엇이며, RTO를 리셋하려면 무엇이 필요한가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> TON은 렁이 거짓이 되면 ACC가 0으로 돌아가지만, RTO는 ACC가 <strong>보존</strong>되어 다음에 이어서 잰다. RTO는 같은 타이머 주소에 대한 <strong>RES(Reset) 명령</strong>이 실행되어야 ACC가 0이 된다.</div></details></div>
+    <div class="prob"><div class="q">time base 0.01 s인 타이머로 2.5초를 재려면 PRE 값은 얼마인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: PRE = 250</span><br>실제 시간 = PRE × time base → 2.5 s ÷ 0.01 s = 250.</div></details></div>
+    <div class="prob"><div class="q">EN, TT, DN 비트의 의미를 각각 쓰고, TON에서 렁이 참이 된 직후(아직 PRE 미도달)의 세 비트 값을 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> EN = 렁 조건이 참, TT = 시간 측정 중, DN = 완료. 렁 참 직후에는 EN=1, TT=1, DN=0. (PRE 도달 후에는 EN=1, TT=0, DN=1)</div></details></div>
+    <div class="prob"><div class="q">버튼을 누르면 3초 후에 부저가 울리기 시작해, 버튼을 떼면 즉시 멈추게 하려 한다. 타이머 종류와 래더를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: TON.</span><br>|--[PB]----[TON T4:0, PRE 3s]--|<br>|--[T4:0/DN]----( Buzzer )--|<br>누르는 동안 3초 경과 시 DN=1 → 부저 ON. 떼면 렁 거짓 → DN 즉시 0 → 부저 OFF.</div></details></div>
+    <div class="prob"><div class="q">복도 조명: 인체 감지(Motion) 시 즉시 점등, 감지가 사라진 후 90초 뒤 소등. 타이머 종류와 래더를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: TOF.</span><br>|--[Motion]----[TOF T4:1, PRE 90s]--|<br>|--[T4:1/DN]----( Light )--|<br>감지 즉시 DN=1(점등), 감지 종료 후 90초 유지 후 DN=0(소등).</div></details></div>
+    <div class="prob"><div class="q">기계의 누적 가동시간이 100시간에 도달하면 정비 램프를 켜고, 정비 완료 버튼으로 리셋하려 한다. 어떤 타이머를 쓰고 왜 그런가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: RTO.</span><br>기계는 켜졌다 꺼졌다를 반복하므로, 렁이 거짓이 되어도 ACC가 보존되는 RTO가 필요하다. RTO의 렁 조건 = 기계 운전 비트, DN → 정비 램프. 정비 완료 버튼 렁에 RES 명령을 넣어 ACC를 0으로 되돌린다.</div></details></div>
+    <div class="prob"><div class="q">TON 타이머(PRE 10s)의 렁이 6초 동안 참이었다가 1초 거짓, 다시 참이 되었다. DN이 켜지는 것은 다시 참이 된 시점부터 몇 초 후인가? 같은 상황에서 RTO라면?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: TON은 10초 후, RTO는 4초 후.</span><br>TON은 거짓이 된 순간 ACC가 0으로 리셋되므로 처음부터 10초를 다시 재야 한다. RTO는 ACC=6이 보존되므로 나머지 4초만 더 재면 DN이 켜진다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="4" class="done-check"><label>4장 완료!</label></div>
+</section>
+
+<!-- ============ 5장 ============ -->
+<section class="chapter" id="ch5">
+  <h1>5장. 카운터</h1>
+  <p class="ch-sub">CTU, CTD, RES — 개수를 세는 명령</p>
+
+  <h2>1. 카운터 명령의 공통 구조 <span class="en">(counter)</span></h2>
+  <p><strong>카운터 <span class="en">(counter)</span></strong>는 렁 조건이 거짓→참으로 바뀌는 <strong>상승 에지 <span class="en">(rising edge)</span></strong>마다 수를 세는 명령입니다. 타이머와 같은 구조의 파라미터를 가집니다.</p>
+  <ul>
+    <li><strong>프리셋 <span class="en">(preset, PRE)</span></strong>: 목표 개수.</li>
+    <li><strong>누적값 <span class="en">(accumulated value, ACC)</span></strong>: 현재까지 센 개수.</li>
+    <li><strong>DN <span class="en">(Done bit)</span></strong>: ACC ≥ PRE가 되면 1.</li>
+    <li><strong>CU/CD <span class="en">(Count Up / Count Down enable bit)</span></strong>: 해당 렁이 참인 동안 1.</li>
+  </ul>
+  <div class="caution">타이머와 결정적 차이: 타이머(TON)는 렁이 <strong>참인 동안 계속</strong> 시간을 재지만, 카운터는 <strong>에지에서 1씩만</strong> 셉니다. 렁이 아무리 오래 참이어도 한 번 바뀔 때 1만 셉니다(내장 원샷처럼 동작). 그리고 카운터의 ACC는 렁이 거짓이 되어도 <strong>보존</strong>됩니다 — RTO처럼 RES 명령으로만 0이 됩니다.</div>
+
+  <h2>2. CTU와 CTD <span class="en">(Count Up / Count Down)</span></h2>
+  <ul>
+    <li><strong>CTU <span class="en">(Count Up)</span></strong>: 에지마다 ACC를 <strong>+1</strong>. ACC ≥ PRE이면 DN=1.</li>
+    <li><strong>CTD <span class="en">(Count Down)</span></strong>: 에지마다 ACC를 <strong>−1</strong>. 같은 주소의 CTU와 짝지어 "현재 재고" 같은 증감 카운트에 사용.</li>
+    <li><strong>RES <span class="en">(Reset)</span></strong>: 같은 주소의 카운터 ACC를 0으로 리셋.</li>
+  </ul>
+  <div class="ladder">|--[Box_Sensor]----[CTU C5:0, PRE 12]--|
+|--[C5:0/DN]-------( Full_Lamp )-------|
+|--[Reset_PB]------[RES C5:0]----------|
+→ 상자가 12개 지나가면 램프 점등, 리셋 버튼으로 0부터 다시.</div>
+  <div class="analogy">카운터는 <strong>버스 요금함의 승객 계수기</strong>입니다. 승객이 한 명 <strong>지나갈 때마다</strong>(에지) 숫자가 1씩 올라가고, 승객이 문 앞에 서 있기만 해서는(레벨) 숫자가 올라가지 않습니다. 만석(PRE)이 되면 "만원" 표시등(DN)이 켜지고, 종점에서 리셋(RES)합니다.</div>
+
+  <h3>주차장 예 — CTU와 CTD의 합작</h3>
+  <p>같은 카운터 주소 C5:1에 대해, 입구 센서는 CTU 렁에, 출구 센서는 CTD 렁에 연결하면 ACC가 <strong>현재 주차 대수</strong>가 됩니다. PRE를 만차 대수로 두면 DN이 "만차" 표시가 됩니다.</p>
+
+  <h3>타이머 vs 카운터 비교</h3>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>타이머 (TON)</th><th>카운터 (CTU)</th></tr>
+    <tr><td>ACC가 증가하는 조건</td><td>렁이 참인 <strong>동안</strong> (시간 경과)</td><td>렁의 <strong>상승 에지</strong>마다 +1</td></tr>
+    <tr><td>렁 거짓 시 ACC</td><td>0으로 리셋 (TON 기준)</td><td><strong>보존</strong></td></tr>
+    <tr><td>리셋 방법</td><td>렁을 거짓으로 (TON) / RES (RTO)</td><td>RES 명령</td></tr>
+    <tr><td>DN 조건</td><td>ACC = PRE (시간 도달)</td><td>ACC ≥ PRE (개수 도달)</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>가산 카운터</td><td>CTU (Count Up)</td><td>에지마다 +1</td></tr>
+    <tr><td>감산 카운터</td><td>CTD (Count Down)</td><td>에지마다 −1</td></tr>
+    <tr><td>리셋</td><td>RES (Reset)</td><td>ACC를 0으로</td></tr>
+    <tr><td>상승 에지</td><td>rising edge (false→true transition)</td><td>카운트되는 순간</td></tr>
+    <tr><td>프리셋 / 누적값</td><td>preset (PRE) / accumulated value (ACC)</td><td>목표 / 현재 개수</td></tr>
+    <tr><td>완료 비트</td><td>done bit (DN)</td><td>ACC ≥ PRE</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 5-1. 포장 라인 — 12개 채우면 배출</div>
+    <p>병 감지 센서(Bottle)가 12번 감지되면 배출 실린더(Eject)를 3초간 작동시키고, 카운터를 자동 리셋해 다음 상자를 세게 하라.</p>
+    <ol class="steps">
+      <li><strong>구조:</strong> CTU로 12개 감지 → DN으로 TON 기동 + Eject ON → TON 완료(3초)에 Eject OFF와 카운터 RES.</li>
+      <li><strong>래더:</strong>
+      <div class="ladder">|--[Bottle]--------[CTU C5:0, PRE 12]---|
+|--[C5:0/DN]--[/T4:0/DN]--( Eject )-----|
+|--[C5:0/DN]-------[TON T4:0, PRE 3s]---|
+|--[T4:0/DN]-------[RES C5:0]-----------|</div></li>
+      <li><strong>동작:</strong> 12번째 병에서 DN=1 → Eject ON + 타이머 시작 → 3초 후 T4:0/DN=1 → Eject 렁의 —[/T4:0/DN]—이 거짓이 되어 Eject OFF, 동시에 RES로 카운터 0 → DN=0 → 타이머도 리셋되어 처음 상태로. ✓</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 5-2. 주차장 만차 표시</div>
+    <p>50면 주차장. 입구 센서(In_Sensor), 출구 센서(Out_Sensor)로 현재 대수를 세고, 만차 시 Full 램프를 켜라.</p>
+    <ol class="steps">
+      <li><strong>구조:</strong> 같은 카운터 주소 C5:1에 CTU(입구)와 CTD(출구)를 함께 사용. ACC = 현재 주차 대수.</li>
+      <li><strong>래더:</strong>
+      <div class="ladder">|--[In_Sensor]-----[CTU C5:1, PRE 50]--|
+|--[Out_Sensor]----[CTD C5:1, PRE 50]--|
+|--[C5:1/DN]-------( Full_Lamp )-------|</div></li>
+      <li><strong>동작:</strong> 차 진입마다 ACC+1, 출차마다 ACC−1. ACC가 50에 도달하면 DN=1 → Full 램프 ON. 한 대가 나가면 ACC=49 → DN=0 → 램프 OFF. ✓</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">카운터는 렁이 참인 "동안" 세는가, 참으로 "바뀔 때" 세는가? 정확히 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 참으로 <strong>바뀌는 순간(상승 에지, false→true)</strong>에만 1을 센다. 렁이 계속 참으로 유지되어도 추가로 세지 않는다.</div></details></div>
+    <div class="prob"><div class="q">CTU의 DN 비트가 켜지는 조건을 부등호로 쓰라. ACC가 PRE를 넘어 계속 증가할 수 있는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ACC ≥ PRE일 때 DN=1. ACC는 PRE에서 멈추지 않고 에지가 올 때마다 계속 증가한다(DN은 계속 1 유지).</div></details></div>
+    <div class="prob"><div class="q">카운터의 ACC는 렁이 거짓이 되면 0으로 돌아가는가? 0으로 만들려면 어떻게 하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 돌아가지 않는다(<strong>보존</strong>된다). 같은 카운터 주소에 대한 <strong>RES 명령</strong> 렁을 참으로 만들어야 0이 된다.</div></details></div>
+    <div class="prob"><div class="q">타이머(TON)와 카운터(CTU)의 차이를 "ACC 증가 방식"과 "렁 거짓 시 동작" 두 관점에서 비교하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 증가 방식 — TON은 렁이 참인 <strong>동안 연속으로</strong>(시간), CTU는 <strong>에지마다 1씩</strong>(개수). 렁 거짓 시 — TON은 ACC가 0으로 리셋, CTU는 ACC 보존.</div></details></div>
+    <div class="prob"><div class="q">같은 주소의 CTU와 CTD를 함께 쓰면 무엇을 만들 수 있는가? 예를 들어 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 증감(up/down) 카운트 — 하나의 ACC를 두 이벤트가 올리고 내린다. 예: 주차장(입차 +1, 출차 −1 → ACC = 현재 대수), 창고 재고(입고/출고).</div></details></div>
+    <div class="prob"><div class="q">제품 100개 생산마다 윤활 알람을 울리고, 알람 확인 버튼(Ack)으로 리셋하려 한다. 래더를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span><br>|--[Product_Sensor]--[CTU C5:2, PRE 100]--|<br>|--[C5:2/DN]--( Alarm )--|<br>|--[Ack_PB]--[RES C5:2]--|<br>100번째 감지에서 DN=1 → 알람. Ack를 누르면 ACC=0, DN=0으로 복귀.</div></details></div>
+    <div class="prob"><div class="q">센서가 채터링(짧은 시간에 여러 번 ON/OFF 반복)하면 카운터에 어떤 문제가 생기는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 에지마다 세므로 물체 하나에 여러 번 카운트되는 <strong>과다 계수</strong>가 발생한다. 대책: 센서 신호에 짧은 TON(디바운스 타이머)을 걸거나, 히스테리시스 있는 센서를 쓴다.</div></details></div>
+    <div class="prob"><div class="q">불량품 센서(Reject)가 5회 감지되면 라인을 정지(Line_Stop)시키려 한다. 단, 교대 시작 버튼(Shift_Start)을 누르면 카운트가 0에서 다시 시작한다. 래더를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span><br>|--[Reject]--[CTU C5:3, PRE 5]--|<br>|--[C5:3/DN]--( Line_Stop )--|<br>|--[Shift_Start]--[RES C5:3]--|</div></details></div>
+    <div class="prob"><div class="q">CTU 카운터(PRE 10)의 ACC가 현재 7이다. CTD 렁에 에지가 3번 들어오면 ACC와 DN은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: ACC = 4, DN = 0.</span><br>7 − 3 = 4. ACC(4) &lt; PRE(10)이므로 DN은 0.</div></details></div>
+    <div class="prob"><div class="q">회전 기계의 축에 1회전당 1펄스 센서가 있다. 카운터와 타이머를 조합해 "1분간 회전수(RPM)"를 대략 측정하는 아이디어를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답(개념):</span> 펄스를 CTU로 세고, TON(또는 자유진동 타이머)으로 60초(짧게는 6초 × 10배)마다 ① ACC 값을 다른 워드로 복사(MOV)한 뒤 ② RES로 카운터를 리셋한다. 복사된 값이 그 구간의 회전수 = RPM이다. 실무에서는 고속 카운터(HSC) 입력을 쓴다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="5" class="done-check"><label>5장 완료!</label></div>
+</section>
+
+<!-- ============ 6장 ============ -->
+<section class="chapter" id="ch6">
+  <h1>6장. 시퀀스 제어 설계</h1>
+  <p class="ch-sub">Sequential Control — 내부 비트로 "단계"를 관리하고, A+B+B−A− 실린더 시퀀스를 설계한다</p>
+
+  <h2>1. 시퀀스 제어란 <span class="en">(sequential control)</span></h2>
+  <p><strong>시퀀스 제어 <span class="en">(sequential control)</span></strong>는 여러 동작이 <strong>정해진 순서</strong>대로, 각 단계의 <strong>완료 조건</strong>이 확인되어야 다음으로 넘어가는 제어입니다. 세탁기(급수→세탁→헹굼→탈수), 자동문, 조립 라인 대부분이 시퀀스 제어입니다.</p>
+  <p>초보자가 시퀀스를 접점 조합만으로 짜려 하면 금방 한계에 부딪힙니다. 같은 센서 신호가 <strong>공정의 어느 단계냐에 따라 다른 의미</strong>를 갖기 때문입니다. 해결책은 <strong>"지금 몇 단계인지"를 내부 비트로 기억</strong>하는 것입니다.</p>
+
+  <h2>2. 스텝 비트 기법 <span class="en">(step/state bit method)</span></h2>
+  <p>단계마다 내부 비트(B3:0/1 = Step1, B3:0/2 = Step2, …)를 하나씩 배정하고, 다음 규칙으로 렁을 짭니다.</p>
+  <div class="keypoint">각 스텝 비트의 렁 공식:<br><strong>Step N = (Step N−1 AND 전이 조건) 으로 SET, 자기유지, Step N+1이 켜지면(또는 리셋 조건에서) 해제</strong><br>그리고 출력은 스텝 비트로만 구동합니다: <strong>출력 = 해당 동작이 필요한 스텝들의 OR</strong>.</div>
+  <ul>
+    <li><strong>전이 조건 <span class="en">(transition condition)</span></strong>: 현재 단계가 끝났음을 알리는 신호(센서, 타이머 DN 등).</li>
+    <li>이 기법은 국제 표준 언어 <strong>SFC <span class="en">(Sequential Function Chart)</span></strong>의 사고방식을 래더로 옮긴 것입니다. Step = SFC의 스텝, 전이 조건 = transition.</li>
+  </ul>
+  <div class="analogy"><strong>보드게임의 말(토큰)</strong>을 떠올리세요. 말이 놓인 칸(켜져 있는 스텝 비트)이 "지금 할 일"을 결정하고, 주사위 조건(전이 조건)이 맞아야 말이 다음 칸으로 이동합니다. 말은 언제나 <strong>한 칸에만</strong> 있습니다 — 스텝 비트도 한 번에 하나만 켜져 있어야 합니다.</div>
+
+  <h2>3. 공압 실린더 표기법 <span class="en">(pneumatic cylinder notation)</span></h2>
+  <p>자동화 수업의 고전 예제인 <strong>공압 실린더 <span class="en">(pneumatic cylinder)</span></strong> 시퀀스 표기를 정의합니다.</p>
+  <ul>
+    <li><strong>A+, B+</strong>: 실린더 A, B의 <strong>전진 <span class="en">(extend)</span></strong>.</li>
+    <li><strong>A−, B−</strong>: 실린더 A, B의 <strong>후진 <span class="en">(retract)</span></strong>.</li>
+    <li>각 실린더에는 끝 위치를 알리는 <strong>리밋 스위치/리드 센서</strong>가 있습니다: a0(A 후진 끝), a1(A 전진 끝), b0(B 후진 끝), b1(B 전진 끝).</li>
+    <li>실린더는 <strong>솔레노이드 밸브 <span class="en">(solenoid valve)</span></strong>로 구동합니다. 여기서는 편측 솔레노이드(single-solenoid, 스프링 복귀: 솔레노이드 ON=전진, OFF=후진)를 가정합니다.</li>
+  </ul>
+  <p><strong>A+B+B−A−</strong>는 "A 전진 → B 전진 → B 후진 → A 후진"의 4단계 시퀀스라는 뜻입니다. (SAIT 실습에서 SLC 500으로 다루는 바로 그 과제입니다.)</p>
+
+  <h2>4. 설계 예제: A+B+B−A− 시퀀스</h2>
+  <p>스텝 비트 기법을 그대로 적용해 봅시다. 시작 버튼(Start)으로 1사이클 실행한다고 합시다.</p>
+  <div class="tablewrap"><table>
+    <tr><th>스텝</th><th>동작</th><th>이 단계로 들어가는 전이 조건</th><th>출력 상태</th></tr>
+    <tr><td>Step1</td><td>A+ (A 전진)</td><td>대기 상태에서 Start AND a0 AND b0</td><td>Sol_A = ON</td></tr>
+    <tr><td>Step2</td><td>B+ (B 전진)</td><td>Step1 AND a1 (A 전진 완료)</td><td>Sol_A = ON 유지, Sol_B = ON</td></tr>
+    <tr><td>Step3</td><td>B− (B 후진)</td><td>Step2 AND b1 (B 전진 완료)</td><td>Sol_A = ON 유지, Sol_B = OFF</td></tr>
+    <tr><td>Step4</td><td>A− (A 후진)</td><td>Step3 AND b0 (B 후진 완료)</td><td>Sol_A = OFF</td></tr>
+    <tr><td>(종료)</td><td>대기 복귀</td><td>Step4 AND a0 (A 후진 완료)</td><td>모두 OFF</td></tr>
+  </table></div>
+  <div class="caution">편측 솔레노이드에서는 "A가 전진 상태를 유지해야 하는 단계(Step1~3)" 내내 Sol_A가 켜져 있어야 합니다. 그래서 출력 렁은 <strong>Sol_A = Step1 OR Step2 OR Step3</strong>, <strong>Sol_B = Step2</strong>가 됩니다. "B−"라는 별도 출력이 있는 게 아니라 <strong>Sol_B를 끄는 것</strong>이 B−라는 점에 주의하세요.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>시퀀스 제어</td><td>sequential control</td><td>정해진 순서대로 진행</td></tr>
+    <tr><td>스텝(단계) 비트</td><td>step / state bit</td><td>내부 비트로 단계 기억</td></tr>
+    <tr><td>전이 조건</td><td>transition condition</td><td>다음 단계로 넘어가는 조건</td></tr>
+    <tr><td>순차 기능 차트</td><td>SFC (Sequential Function Chart)</td><td>IEC 61131-3 표준 언어</td></tr>
+    <tr><td>공압 실린더</td><td>pneumatic cylinder</td><td>압축공기로 왕복 운동</td></tr>
+    <tr><td>전진 / 후진</td><td>extend (+) / retract (−)</td><td>A+, A− 표기</td></tr>
+    <tr><td>편측/양측 솔레노이드 밸브</td><td>single- / double-solenoid valve</td><td>스프링 복귀 / 양쪽 코일</td></tr>
+    <tr><td>리드 센서(자기 센서)</td><td>reed sensor / reed switch</td><td>실린더 위치 검출</td></tr>
+    <tr><td>1사이클 / 연속 운전</td><td>single cycle / continuous cycle</td><td>운전 모드</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 6-1. A+B+B−A− 래더 전체 설계</div>
+    <p>위 스텝 표를 래더 로직으로 완성하라. (내부 비트 S1~S4, 편측 솔레노이드 Sol_A, Sol_B)</p>
+    <ol class="steps">
+      <li><strong>스텝 렁 (자기유지 + 다음 스텝에서 해제):</strong>
+      <div class="ladder">|--[Start]--[a0]--[b0]--+--[/S2]--( S1 )--|
+|--[S1]-----------------+                 |
+|                                         |
+|--[S1]--[a1]--+--------[/S3]--( S2 )-----|
+|--[S2]--------+                          |
+|                                         |
+|--[S2]--[b1]--+--------[/S4]--( S3 )-----|
+|--[S3]--------+                          |
+|                                         |
+|--[S3]--[b0]--+--------[/a0]--( S4 )-----|
+|--[S4]--------+                          |</div>
+      각 스텝은 "이전 스텝 AND 센서"로 켜지고 자기유지하며, 다음 스텝(또는 마지막은 a0 복귀)이 켜지면 NC 접점이 끊겨 해제된다.</li>
+      <li><strong>출력 렁:</strong>
+      <div class="ladder">|--[S1]--+------------------( Sol_A )--|
+|--[S2]--+                             |
+|--[S3]--+                             |
+|                                      |
+|--[S2]---------------------( Sol_B )--|</div>
+      Sol_A는 S1~S3 동안 유지(A 전진 유지), Sol_B는 S2에서만 ON(B+), S3에서 OFF되며 스프링으로 B−.</li>
+      <li><strong>동작 추적:</strong> Start(a0·b0 확인) → S1 → Sol_A ON → A 전진 → a1 → S2(S1 해제) → Sol_B ON → B 전진 → b1 → S3(S2 해제) → Sol_B OFF → B 후진 → b0 → S4(S3 해제) → Sol_A OFF → A 후진 → a0 → S4 해제, 대기 복귀. ✓</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 6-2. 시퀀스에 시간 단계 넣기</div>
+    <p>A+ (클램프) → 3초 대기 (접착제 경화) → A− (해제) 시퀀스를 설계하라.</p>
+    <ol class="steps">
+      <li><strong>단계 정의:</strong> S1 = A 전진, S2 = 3초 대기, S3 없음(대기 후 바로 해제 = S2 해제로 처리 가능하지만 명시적으로 스텝을 쓰는 것이 확장에 유리).</li>
+      <li><strong>전이 조건:</strong> S1→S2는 a1(전진 완료), S2→종료는 <strong>타이머 DN</strong>. 시간도 센서와 똑같이 "전이 조건"이 될 수 있다는 것이 포인트.</li>
+      <li><strong>래더:</strong>
+      <div class="ladder">|--[Start]--[a0]--+--[/S2]--( S1 )--------|
+|--[S1]-----------+                       |
+|--[S1]--[a1]--+--[/T4:0/DN]--( S2 )------|
+|--[S2]--------+                          |
+|--[S2]------------[TON T4:0, PRE 3s]-----|
+|--[S1]--+---------( Sol_A )--------------|
+|--[S2]--+                                |</div>
+      S2에서 3초 경과 → T4:0/DN이 S2를 해제 → Sol_A OFF → A 후진. ✓</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">시퀀스 제어를 접점 조합만으로(스텝 비트 없이) 구현하기 어려운 근본 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 같은 센서 신호가 <strong>공정 단계에 따라 다른 의미</strong>를 갖기 때문. 예: A+B+B−A−에서 b0(B 후진 끝)는 시작 전에도 참이고 B− 완료 후에도 참이다. "지금 몇 단계인지"라는 상태 정보가 없으면 두 상황을 구별할 수 없다.</div></details></div>
+    <div class="prob"><div class="q">스텝 비트 렁의 표준 공식(켜는 조건, 유지, 끄는 조건)을 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Step N은 (Step N−1 AND 전이 조건)으로 켜지고, 자기 접점으로 <strong>자기유지</strong>하며, Step N+1이 켜지면(직렬의 —[/StepN+1]—이 끊겨) 해제된다. 출력은 스텝 비트들의 OR로만 구동한다.</div></details></div>
+    <div class="prob"><div class="q">A+B+B−A− 표기에서 +와 −는 무엇을 뜻하며, a1 센서는 무엇을 감지하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> + = 전진(extend), − = 후진(retract). a1은 실린더 A의 <strong>전진 끝 위치</strong>를 감지하는 센서다(a0는 후진 끝).</div></details></div>
+    <div class="prob"><div class="q">편측(single) 솔레노이드 밸브와 양측(double) 솔레노이드 밸브의 차이를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 편측: 코일이 하나, ON이면 전진·OFF이면 스프링이 후진시킴 → 출력을 <strong>유지</strong>해야 전진 상태 유지. 양측: 전진 코일·후진 코일이 따로 있어 짧은 펄스로 전환하며, 공기가 유지되는 한 <strong>마지막 위치를 기억</strong>한다(전원 꺼져도 위치 유지).</div></details></div>
+    <div class="prob"><div class="q">A+B+B−A− 예제(편측 솔레노이드)에서 Sol_A가 S1~S3 내내 켜져 있어야 하는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 편측 솔레노이드는 OFF되는 순간 스프링이 실린더를 후진시킨다. A는 시퀀스상 마지막(S4)에서야 후진해야 하므로, B가 전진·후진하는 동안(S2, S3)에도 Sol_A를 계속 ON으로 유지해야 A가 전진 상태를 지킨다.</div></details></div>
+    <div class="prob"><div class="q">A+B+B−A−에서 Step1의 진입 조건에 Start 외에 a0와 b0를 AND로 넣는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 두 실린더가 모두 <strong>원위치(홈 포지션)</strong>에 있음을 확인하고 시작하기 위해서다. 이전 사이클이 비정상 종료되어 실린더가 중간에 있는 상태에서 기동하면 충돌·불량이 생길 수 있다. "홈 확인 후 기동"은 시퀀스 설계의 기본 안전 수칙이다.</div></details></div>
+    <div class="prob"><div class="q">B+A+A−B− 시퀀스의 스텝 표(스텝, 동작, 전이 조건, 출력)를 만들어라. (편측 솔레노이드)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span><br>S1: B+ ← Start·a0·b0 / Sol_B=ON<br>S2: A+ ← S1·b1 / Sol_B 유지, Sol_A=ON<br>S3: A− ← S2·a1 / Sol_A=OFF (Sol_B 유지)<br>S4: B− ← S3·a0 / Sol_B=OFF<br>종료 ← S4·b0.<br>출력: Sol_B = S1 OR S2 OR S3, Sol_A = S2.</div></details></div>
+    <div class="prob"><div class="q">"연속 운전(continuous cycle)" 모드를 추가하려면 무엇을 바꾸면 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 마지막 스텝이 끝나는 조건(S4·a0)을 Step1의 진입 조건에 OR로 추가하되, 연속 모드 선택 스위치(Auto)와 AND한다: S1 진입 = (Start OR (S4·a0·Auto))·a0·b0. 사이클 종료가 곧 다음 사이클의 시작 신호가 된다.</div></details></div>
+    <div class="prob"><div class="q">시퀀스 도중 비상정지(E-Stop)가 눌리면 모든 스텝 비트와 출력을 즉시 끄려 한다. 구현 방법 두 가지를 제시하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 모든 스텝 자기유지 렁에 —[E_Stop_OK]— (정상 시 1) 접점을 직렬로 넣어, 비상 시 모든 스텝이 동시에 해제되게 한다. ② 스텝 비트를 OTL/OTU로 관리한다면 E-Stop 렁에서 모든 스텝을 OTU로 언래치한다. 실무에선 여기에 더해 <strong>하드웨어 안전 회로</strong>(안전 릴레이로 밸브 전원 차단)가 반드시 병행된다.</div></details></div>
+    <div class="prob"><div class="q">전이 조건으로 센서 대신 타이머를 쓸 수 있는가? A+ → 5초 유지 → A− 시퀀스로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 쓸 수 있다.</span><br>"대기" 스텝(S2)을 만들고 S2가 TON을 구동, T/DN을 S2에서 나가는 전이 조건으로 쓴다. S1: A+ ← Start·a0, S2: 유지 ← S1·a1, S2에서 TON 5s, T/DN으로 S2 해제 → Sol_A OFF → A−. 시간도 센서와 동등한 전이 조건이다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="6" class="done-check"><label>6장 완료!</label></div>
+</section>
+
+<!-- ============ 7장 ============ -->
+<section class="chapter" id="ch7">
+  <h1>7장. 아날로그 I/O, PID, HMI</h1>
+  <p class="ch-sub">Analog I/O, PID Control, HMI — ON/OFF를 넘어 "얼마나"를 다루는 제어</p>
+
+  <h2>1. 디지털 신호 vs 아날로그 신호</h2>
+  <p>지금까지의 입력·출력은 모두 ON/OFF 두 값뿐인 <strong>디지털(이산) 신호 <span class="en">(digital/discrete signal)</span></strong>였습니다. 그러나 온도, 압력, 유량, 레벨 같은 물리량은 연속적으로 변하는 <strong>아날로그 신호 <span class="en">(analog signal)</span></strong>입니다.</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>디지털(이산) <span class="en">(discrete)</span></th><th>아날로그 <span class="en">(analog)</span></th></tr>
+    <tr><td>값</td><td>0 또는 1 (ON/OFF)</td><td>범위 안의 연속값</td></tr>
+    <tr><td>예</td><td>버튼, 리밋 스위치, 램프</td><td>온도 센서, 압력 트랜스미터, 제어 밸브 개도</td></tr>
+    <tr><td>표준 신호</td><td>24 VDC ON/OFF</td><td><strong>4–20 mA</strong>, 0–10 V</td></tr>
+    <tr><td>모듈</td><td>디지털 I/O 모듈</td><td>아날로그 I/O 모듈 (ADC/DAC 내장)</td></tr>
+  </table></div>
+  <p>산업 표준 아날로그 신호는 <strong>4–20 mA 전류 루프 <span class="en">(current loop)</span></strong>입니다. 측정 범위의 최솟값 = 4 mA, 최댓값 = 20 mA로 보냅니다. 0 mA가 아닌 <strong>4 mA에서 시작하는 이유</strong>: 0 mA는 "단선(고장)"과 구별할 수 없기 때문입니다. 4 mA 미만이면 배선 고장으로 판단할 수 있습니다 <span class="en">(live zero)</span>. 또 전류 신호는 전압 신호와 달리 긴 배선에서도 값이 줄지 않습니다.</p>
+
+  <h2>2. 스케일링 <span class="en">(scaling)</span></h2>
+  <p>아날로그 입력 모듈은 4–20 mA를 <strong>정수 원시값 <span class="en">(raw value)</span></strong>(예: 3277~16384, 또는 0~32767 등 모듈마다 다름)으로 변환해 줍니다. 이 원시값을 실제 공학 단위 <span class="en">(engineering units)</span>(°C, kPa, %)로 바꾸는 계산이 <strong>스케일링 <span class="en">(scaling)</span></strong>이며, 직선 보간(1차함수)입니다.</p>
+  <div class="formula">공학값 = (원시값 − 원시최소) × (공학최대 − 공학최소) / (원시최대 − 원시최소) + 공학최소</div>
+  <p>PLC에서는 SCL/SCP(Scale with Parameters) 명령이나 CPT(연산) 명령으로 구현합니다.</p>
+  <div class="analogy">스케일링은 <strong>온도계 눈금 바꿔 읽기</strong>입니다. 화씨 눈금(원시값)으로 적힌 온도계를 섭씨(공학값)로 읽으려면 1차함수 변환(°C = (°F−32)×5/9)이 필요한 것과 완전히 같은 계산입니다.</div>
+
+  <h2>3. PID 제어 개념 <span class="en">(PID control)</span></h2>
+  <p>아날로그 값을 목표에 맞추는 대표적 방법이 <strong>PID 제어</strong>입니다. 먼저 용어부터.</p>
+  <ul>
+    <li><strong>공정 변수 <span class="en">(process variable, PV)</span></strong>: 현재 측정값 (예: 현재 온도 72 °C).</li>
+    <li><strong>설정값 <span class="en">(setpoint, SP)</span></strong>: 목표값 (예: 목표 온도 80 °C).</li>
+    <li><strong>오차 <span class="en">(error, E)</span></strong>: E = SP − PV (예: +8 °C).</li>
+    <li><strong>제어 출력 <span class="en">(control variable/output, CV)</span></strong>: 조작량 (예: 히터 출력 %, 밸브 개도 %).</li>
+  </ul>
+  <p>PID는 오차를 세 가지 방식으로 보고 출력을 만듭니다:</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>P — 비례 <span class="en">(Proportional)</span></th><th>I — 적분 <span class="en">(Integral)</span></th><th>D — 미분 <span class="en">(Derivative)</span></th></tr>
+    <tr><td>무엇을 보나</td><td><strong>지금</strong> 오차의 크기</td><td><strong>과거</strong> 오차의 누적</td><td><strong>미래</strong> — 오차의 변화 속도</td></tr>
+    <tr><td>역할</td><td>오차에 비례해 밀어붙임</td><td>남아 있는 잔류 오차 제거</td><td>급변을 미리 감지해 제동</td></tr>
+    <tr><td>약점</td><td>P만으로는 <strong>잔류 오차(offset)</strong>가 남음</td><td>과하면 느려지고 출렁임(오버슈트)</td><td>노이즈에 민감</td></tr>
+  </table></div>
+  <div class="analogy"><strong>자동차 크루즈 컨트롤(운전자)</strong>로 이해해 보세요. 목표 100 km/h(SP), 현재 80 km/h(PV). <strong>P</strong>: "20이나 느리네" → 차이가 클수록 액셀을 깊게 밟는다. <strong>I</strong>: "아까부터 계속 95에 머물러 있네(잔류 오차)" → 조금씩 더 밟아 정확히 100에 맞춘다. <strong>D</strong>: "속도가 급격히 붙고 있네" → 목표를 지나치기 전에 미리 발을 살짝 뗀다.</div>
+  <div class="caution">ON/OFF 제어(서모스탯처럼 경계에서 켰다 껐다)와 PID를 혼동하지 마세요. ON/OFF 제어는 값이 목표 주위를 계속 오르내리고(사이클링), 채터링을 막으려 <strong>불감대 <span class="en">(deadband)</span></strong>를 둡니다. PID는 출력을 <strong>연속량(0~100%)</strong>으로 조절해 목표에 정착시킵니다. PLC에서는 PID 명령 블록에 PV·SP·튜닝 상수(K<sub>p</sub>, K<sub>i</sub>, K<sub>d</sub>)를 넣으면 CV를 계산해 줍니다.</div>
+
+  <h2>4. HMI <span class="en">(Human-Machine Interface)</span></h2>
+  <p><strong>HMI <span class="en">(Human-Machine Interface)</span></strong>는 운전자가 공정을 보고 조작하는 <strong>터치스크린/화면 장치</strong>입니다(Allen-Bradley 계열: PanelView, 소프트웨어: FactoryTalk View). HMI는 로직을 실행하지 않습니다 — <strong>PLC 메모리의 태그를 읽고 쓰는 창문</strong>일 뿐입니다.</p>
+  <ul>
+    <li>HMI의 버튼 → PLC의 내부 비트에 쓰기 (물리 버튼과 병렬로 래더에서 사용).</li>
+    <li>HMI의 숫자 표시/그래프 → PLC의 데이터(온도, 카운트 값)를 읽어 표시.</li>
+    <li>알람 화면 → PLC의 알람 비트를 감시해 이력 표시.</li>
+    <li>통신: PLC와 HMI는 산업 네트워크(Ethernet/IP 등 — /protection-and-networks/ 교재 참고)로 태그를 주고받는다.</li>
+  </ul>
+  <div class="analogy">PLC가 <strong>주방(요리사)</strong>라면 HMI는 <strong>키오스크</strong>입니다. 키오스크는 요리를 하지 않습니다. 주문(비트 쓰기)을 주방에 전달하고, 조리 상태(데이터 읽기)를 화면에 보여줄 뿐입니다. 키오스크가 꺼져도 주방(PLC)은 계속 돌아갑니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>이산(디지털) 신호 / 아날로그 신호</td><td>discrete / analog signal</td><td>ON-OFF / 연속값</td></tr>
+    <tr><td>전류 루프</td><td>4–20 mA current loop</td><td>산업 표준 아날로그 신호</td></tr>
+    <tr><td>라이브 제로</td><td>live zero</td><td>최솟값=4 mA → 단선 감지 가능</td></tr>
+    <tr><td>스케일링</td><td>scaling</td><td>원시값→공학 단위 변환</td></tr>
+    <tr><td>공학 단위</td><td>engineering units</td><td>°C, kPa, % 등</td></tr>
+    <tr><td>공정 변수 / 설정값 / 오차 / 제어 출력</td><td>process variable (PV) / setpoint (SP) / error / control variable (CV)</td><td>PID의 4대 용어</td></tr>
+    <tr><td>비례·적분·미분 제어</td><td>PID (Proportional–Integral–Derivative) control</td><td>연속 피드백 제어</td></tr>
+    <tr><td>잔류 오차</td><td>offset (steady-state error)</td><td>P 단독 제어의 한계</td></tr>
+    <tr><td>불감대</td><td>deadband</td><td>ON/OFF 제어의 채터링 방지</td></tr>
+    <tr><td>휴먼 머신 인터페이스</td><td>HMI (Human-Machine Interface)</td><td>PanelView 등</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 7-1. 아날로그 입력 스케일링</div>
+    <p>압력 트랜스미터: 0~600 kPa를 4~20 mA로 전송. 아날로그 모듈은 4 mA를 원시값 3277, 20 mA를 16384로 변환한다. 원시값이 9830일 때 압력은 몇 kPa인가?</p>
+    <ol class="steps">
+      <li><strong>스케일링 공식 적용:</strong> 공학값 = (9830 − 3277) × (600 − 0) / (16384 − 3277) + 0.</li>
+      <li><strong>계산:</strong> = 6553 × 600 / 13107 = 3,931,800 / 13107 ≈ 300 kPa.</li>
+      <li><strong>답:</strong> 약 300 kPa. (원시 범위의 딱 절반 → 압력 범위의 절반이 나오는지 확인하는 것이 좋은 검산법 ✓)</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 7-2. PID 용어 적용 — 탱크 온도 제어</div>
+    <p>탱크 온도를 80 °C로 유지하려 한다. 현재 온도 74 °C, 히터는 0~100% 출력. PV, SP, E를 밝히고, P 제어만 사용할 때 생기는 문제와 I의 역할을 설명하라.</p>
+    <ol class="steps">
+      <li><strong>용어 대입:</strong> PV = 74 °C (측정값), SP = 80 °C (목표), E = SP − PV = +6 °C. CV = 히터 출력 %.</li>
+      <li><strong>P 제어의 문제:</strong> 출력 = K<sub>p</sub>×E이므로, 온도가 SP에 도달해 E=0이 되면 출력도 0이 된다. 그런데 탱크는 계속 열을 잃으므로 출력 0으로는 80 °C를 유지할 수 없다. 결국 E가 0이 아닌 어떤 값(예: 78 °C에서 평형)에서 멈추는 <strong>잔류 오차(offset)</strong>가 생긴다.</li>
+      <li><strong>I의 역할:</strong> 적분항은 "남아 있는 오차를 시간에 걸쳐 누적"하므로, 작은 오차라도 계속되면 출력을 서서히 올려 <strong>E를 정확히 0으로</strong> 만든다(78 → 80 °C로 끌어올림).</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">디지털(이산) 신호와 아날로그 신호의 차이를 예를 들어 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 디지털은 ON/OFF 두 상태뿐(리밋 스위치, 램프), 아날로그는 범위 안의 연속값(온도 센서의 4–20 mA, 밸브 개도 0–100%)이다.</div></details></div>
+    <div class="prob"><div class="q">산업 표준 아날로그 신호가 0–20 mA가 아니라 4–20 mA인 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 라이브 제로(live zero) 때문.</span><br>최솟값을 4 mA로 두면 0 mA(전류 없음)는 곧 <strong>단선·고장</strong>을 의미하게 되어, 측정값 0과 배선 고장을 구별할 수 있다.</div></details></div>
+    <div class="prob"><div class="q">긴 배선에서 전압 신호(0–10 V)보다 전류 신호(4–20 mA)가 유리한 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 직렬 루프에 흐르는 전류는 배선 저항과 관계없이 <strong>루프 전체에서 같은 값</strong>이다(KCL). 전압 신호는 배선 저항의 전압 강하만큼 수신단에서 값이 줄어들어 오차가 생긴다. 전류 신호는 노이즈에도 강하다.</div></details></div>
+    <div class="prob"><div class="q">스케일링 공식을 쓰고, 각 항의 의미를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 공학값 = (원시값−원시최소)×(공학최대−공학최소)/(원시최대−원시최소)+공학최소. 원시 범위에서 현재 위치의 비율을 구해, 그 비율을 공학 단위 범위에 직선(1차함수)으로 대응시키는 보간식이다.</div></details></div>
+    <div class="prob"><div class="q">온도 트랜스미터: 0~200 °C = 4~20 mA, 모듈 원시값 3277~16384. 원시값 13107일 때 온도는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 150 °C</span><br>(13107−3277)/(16384−3277) = 9830/13107 = 0.75 → 0.75 × 200 = 150 °C.</div></details></div>
+    <div class="prob"><div class="q">PV, SP, E, CV의 뜻을 각각 쓰라 (영어 원어 포함).</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> PV(process variable) = 현재 측정값, SP(setpoint) = 목표값, E(error) = SP−PV, CV(control variable/output) = 제어기가 내보내는 조작량(히터 %, 밸브 개도 등).</div></details></div>
+    <div class="prob"><div class="q">P, I, D 각 항이 오차의 어떤 측면(현재/과거/미래)을 보는지, 그리고 각 항의 대표적 역할을 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> P = <strong>현재</strong> 오차 크기에 비례한 출력(주된 추진력), I = <strong>과거</strong> 오차의 누적으로 잔류 오차 제거, D = 오차의 변화율로 <strong>미래</strong>를 예측해 오버슈트를 억제(제동).</div></details></div>
+    <div class="prob"><div class="q">P 제어만 쓰면 생기는 "offset(잔류 오차)"이란 무엇이며, 어느 항이 이를 없애는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> PV가 SP에 못 미친 채(또는 넘은 채) 일정한 오차를 남기고 평형에 도달하는 현상. E=0이면 P 출력도 0이 되는 구조적 한계 때문이다. <strong>적분(I) 항</strong>이 지속되는 오차를 누적해 출력을 보정, 오차를 0으로 만든다.</div></details></div>
+    <div class="prob"><div class="q">가정용 보일러 서모스탯(ON/OFF 제어)에 불감대(deadband)를 두는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 경계 온도 부근에서 미세한 온도 변화로 히터가 초 단위로 켜졌다 꺼졌다를 반복(채터링)하는 것을 막기 위해서다. 예: 79 °C에서 켜고 81 °C에서 끄면(불감대 2 °C) 스위칭 횟수가 크게 줄어 기기 수명이 보호된다.</div></details></div>
+    <div class="prob"><div class="q">HMI는 로직을 실행하는가? HMI 화면의 "시작" 버튼이 모터를 기동시키는 과정을 PLC와의 관계로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> HMI는 로직을 실행하지 않는다. 버튼을 터치하면 HMI가 통신(예: Ethernet/IP)으로 <strong>PLC의 내부 비트(태그)에 1을 쓴다</strong>. PLC 래더가 그 비트를 물리 버튼과 병렬 접점으로 검사해 모터 출력 렁을 참으로 만든다. 로직과 안전 판단은 전부 PLC 쪽에 있다.</div></details></div>
+  </div>
+
+  <div class="keypoint">🎉 여기까지 왔다면 SAIT의 CNTR 309·358 실습에서 만나게 될 핵심 개념(래더 문법 → 패턴 → 타이머/카운터 → 시퀀스 → 아날로그/PID/HMI)의 지도를 모두 그린 것입니다. 실습 전, 각 장의 영어 용어(rung, seal-in, TON, CTU, setpoint…)를 소리 내어 읽어 보고 가세요 — 수업에서 바로 들리기 시작할 겁니다.</div>
+
+  <div class="done-box"><input type="checkbox" data-ch="7" class="done-check"><label>7장 완료! 전체 과정 수료 🎓</label></div>
+</section>
+
+<!-- ###CH_END### -->
+
+</main>
+</div>
+
+<script>
+const CHAPTERS = [
+  {id:0, title:"학습 안내", short:"개요", desc:"이 교재의 사용법과 전체 목차"},
+  {id:1, title:"1장. PLC란 무엇인가", short:"1장", desc:"릴레이 제어 vs PLC, 구성 요소, 스캔 사이클"},
+  {id:2, title:"2장. 래더 로직 기본 문법", short:"2장", desc:"렁, 접점(NO/NC), 코일, 주소 체계"},
+  {id:3, title:"3장. 기본 회로 패턴", short:"3장", desc:"자기유지(seal-in), 스타트/스톱, 인터록"},
+  {id:4, title:"4장. 타이머", short:"4장", desc:"TON, TOF, RTO와 타이머 비트(EN/TT/DN)"},
+  {id:5, title:"5장. 카운터", short:"5장", desc:"CTU, CTD, RES, 타이머+카운터 조합"},
+  {id:6, title:"6장. 시퀀스 제어 설계", short:"6장", desc:"스텝 비트로 단계 관리, A+B+B−A− 실린더 예제"},
+  {id:7, title:"7장. 아날로그 I/O·PID·HMI", short:"7장", desc:"아날로그 신호 스케일링, PID 제어 개념, HMI 연동"}
+];
+const KEY = "eet-plc-progress";
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ progress = {}; }
+
+function saveProgress(){ try{ localStorage.setItem(KEY, JSON.stringify(progress)); }catch(e){} }
+
+function buildNav(){
+  const nav = document.getElementById("navList");
+  nav.innerHTML = "";
+  CHAPTERS.forEach(c => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.dataset.ch = c.id;
+    const done = c.id > 0 && progress[c.id];
+    btn.innerHTML = `<span class="check">${c.id===0 ? "🏠" : (done ? "✔" : "·")}</span><span>${c.title}</span>`;
+    btn.onclick = () => showChapter(c.id);
+    li.appendChild(btn); nav.appendChild(li);
+  });
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  const total = CHAPTERS.length - 1;
+  const done = Object.keys(progress).filter(k => progress[k]).length;
+  document.getElementById("progressFill").style.width = (done/total*100) + "%";
+  document.getElementById("progressLabel").textContent = `${done} / ${total} 챕터 완료`;
+}
+
+function buildToc(){
+  const wrap = document.getElementById("tocCards");
+  wrap.innerHTML = "";
+  CHAPTERS.slice(1).forEach(c => {
+    const d = document.createElement("div");
+    d.className = "toc-card";
+    d.innerHTML = `<span class="badge">${progress[c.id] ? "✔ 완료" : ""}</span><div class="t">${c.title}</div><div class="d">${c.desc}</div>`;
+    d.onclick = () => showChapter(c.id);
+    wrap.appendChild(d);
+  });
+}
+
+function buildChapterNavs(){
+  CHAPTERS.forEach(c => {
+    if(c.id === 0) return;
+    const sec = document.getElementById("ch"+c.id);
+    if(!sec) return;
+    const nav = document.createElement("div");
+    nav.className = "ch-nav";
+    const prev = c.id - 1, next = c.id + 1;
+    let html = "";
+    html += `<button onclick="showChapter(${prev})">← ${prev===0 ? "학습 안내" : CHAPTERS[prev].title}</button>`;
+    if(next < CHAPTERS.length){
+      html += `<button onclick="showChapter(${next})">${CHAPTERS[next].title} →</button>`;
+    } else {
+      html += `<button onclick="showChapter(0)">🏠 처음으로</button>`;
+    }
+    nav.innerHTML = html;
+    sec.appendChild(nav);
+  });
+}
+
+function showChapter(n){
+  document.querySelectorAll("section.chapter").forEach(s => s.classList.remove("visible"));
+  const sec = document.getElementById("ch"+n);
+  if(sec) sec.classList.add("visible");
+  document.querySelectorAll("#navList button").forEach(b => b.classList.toggle("active", +b.dataset.ch === n));
+  if(n === 0) buildToc();
+  window.scrollTo({top:0});
+  try{ localStorage.setItem(KEY+"-last", n); }catch(e){}
+}
+
+document.addEventListener("change", e => {
+  if(e.target.classList && e.target.classList.contains("done-check")){
+    progress[e.target.dataset.ch] = e.target.checked;
+    saveProgress(); buildNav();
+  }
+});
+
+function initChecks(){
+  document.querySelectorAll(".done-check").forEach(cb => {
+    cb.checked = !!progress[cb.dataset.ch];
+  });
+}
+
+buildNav();
+buildChapterNavs();
+initChecks();
+let last = 0;
+try{ last = parseInt(localStorage.getItem(KEY+"-last")) || 0; }catch(e){}
+showChapter(last);
+</script>
+</body>
+</html>

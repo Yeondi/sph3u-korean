@@ -85,6 +85,30 @@
   .card.physics .tag, .card.physics .go { color: #a78bfa; }
   .card.det:hover { border-color: #34d399; }
   .card.det .tag, .card.det .go { color: #34d399; }
+  .card.digital:hover { border-color: #c084fc; }
+  .card.digital .tag, .card.digital .go { color: #c084fc; }
+  .card.math:hover { border-color: #2dd4bf; }
+  .card.math .tag, .card.math .go { color: #2dd4bf; }
+  .card.powerelec:hover { border-color: #fb923c; }
+  .card.powerelec .tag, .card.powerelec .go { color: #fb923c; }
+  .card.plc:hover { border-color: #4ade80; }
+  .card.plc .tag, .card.plc .go { color: #4ade80; }
+  .card.machines:hover { border-color: #f87171; }
+  .card.machines .tag, .card.machines .go { color: #f87171; }
+  .card.grid:hover { border-color: #60a5fa; }
+  .card.grid .tag, .card.grid .go { color: #60a5fa; }
+  .card.protection:hover { border-color: #facc15; }
+  .card.protection .tag, .card.protection .go { color: #facc15; }
+  .section-label {
+    max-width: 1000px;
+    width: 100%;
+    padding: 1.5rem 1.5rem 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #64748b;
+  }
   footer {
     margin-top: auto;
     padding: 1.5rem;
@@ -99,15 +123,78 @@
   <p>학습 도구 모음 — 필요한 곳으로 이동하세요</p>
 </header>
 
+<div class="section-label">SAIT EET · 1학년 (Year 1)</div>
 <div class="grid">
   <a class="card circuits" href="circuits/">
     <span class="icon">⚡</span>
-    <span class="tag">SAIT EET · 회로이론</span>
+    <span class="tag">SAIT EET Y1 · 회로이론</span>
     <h2>회로이론 개념 학습</h2>
-    <p>SAIT Electrical Engineering Technology 1학년 Circuits 예습 교재. 전하·전압 기초부터 교류 전력까지 10챕터, 연습문제 100제 + 진행 체크.</p>
+    <p>ELCT 205·ELEC 291 대응. 전하·전압 기초부터 교류 전력까지 10챕터, 연습문제 100제 + 진행 체크.</p>
     <span class="go">시작하기 →</span>
   </a>
 
+  <a class="card digital" href="digital-circuits/">
+    <span class="icon">🔢</span>
+    <span class="tag">SAIT EET Y1 · ELTR 232</span>
+    <h2>디지털·전자회로</h2>
+    <p>2진수·16진수, 논리 게이트와 진리표, 불 대수, 플립플롭, 카운터, 다이오드·BJT·MOSFET 스위칭까지 6챕터 + 연습문제 60제.</p>
+    <span class="go">시작하기 →</span>
+  </a>
+
+  <a class="card math" href="engineering-math/">
+    <span class="icon">📐</span>
+    <span class="tag">SAIT EET Y1 · MATH 237·280</span>
+    <h2>공학 수학</h2>
+    <p>삼각함수와 사인파, 벡터·복소수·페이저, 지수·로그, 그리고 미분·적분의 회로 응용(C·L 공식, RMS 유도)까지 6챕터.</p>
+    <span class="go">시작하기 →</span>
+  </a>
+
+  <a class="card powerelec" href="power-electronics/">
+    <span class="icon">🔌</span>
+    <span class="tag">SAIT EET Y1 · ELTR 262</span>
+    <h2>전력전자</h2>
+    <p>반파·전파·브리지 정류, 커패시터 필터와 리플, SCR·트라이악 위상 제어, PWM과 벅·부스트 컨버터까지 5챕터.</p>
+    <span class="go">시작하기 →</span>
+  </a>
+</div>
+
+<div class="section-label">SAIT EET · 2학년 (Year 2)</div>
+<div class="grid">
+  <a class="card plc" href="plc-ladder-logic/">
+    <span class="icon">🪜</span>
+    <span class="tag">SAIT EET Y2 · CNTR 309·358</span>
+    <h2>PLC와 래더 로직</h2>
+    <p>렁·접점·코일 문법, 자기유지·인터록, TON/TOF 타이머, CTU/CTD 카운터, A+B+B−A− 시퀀스 설계, 아날로그 I/O·PID·HMI까지 7챕터.</p>
+    <span class="go">시작하기 →</span>
+  </a>
+
+  <a class="card machines" href="rotating-machines/">
+    <span class="icon">⚙️</span>
+    <span class="tag">SAIT EET Y2 · ELEC 306·352·353</span>
+    <h2>회전기와 변압기</h2>
+    <p>전자기 유도, 변압기 권선비, DC 모터(직권·분권), 3상 유도 전동기와 슬립, 동기기와 기동 방식(Y-Δ, 소프트스타터, VFD)까지 5챕터.</p>
+    <span class="go">시작하기 →</span>
+  </a>
+
+  <a class="card grid" href="power-generation-grid/">
+    <span class="icon">🗼</span>
+    <span class="tag">SAIT EET Y2 · ELEC 302·361</span>
+    <h2>발전과 전력계통</h2>
+    <p>역률 개선, 3상 Y/Δ 결선과 √3 계산, 발전-송전-배전 구조, 송전 손실과 고전압, 계통 보호·운영의 큰 그림까지 5챕터.</p>
+    <span class="go">시작하기 →</span>
+  </a>
+
+  <a class="card protection" href="protection-and-networks/">
+    <span class="icon">🛡️</span>
+    <span class="tag">SAIT EET Y2 · ELEC 364·ELCM 374</span>
+    <h2>보호와 산업 네트워크</h2>
+    <p>퓨즈·차단기와 시간-전류 특성, 보호 계전기와 ANSI 번호, 접지·본딩·GFCI, 산업 네트워크와 Modbus·Ethernet/IP 등 프로토콜까지 5챕터.</p>
+    <span class="go">시작하기 →</span>
+  </a>
+</div>
+
+<div class="section-label">기타 학습 도구</div>
+<div class="grid">
   <a class="card physics" href="sph3u.html">
     <span class="icon">🌊</span>
     <span class="tag">Ontario Grade 11 · SPH3U</span>

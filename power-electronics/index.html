@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>전력전자 개념 학습 — SAIT EET 예습</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2733; --sub:#5a6b7b;
+    --accent:#c2410c; --accent-soft:#feece0; --ok:#1a8a5a; --ok-soft:#e3f4ec;
+    --warn:#b05c00; --warn-soft:#fff3e0; --line:#dde3ea; --code:#f0f3f7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
+       background:var(--bg); color:var(--ink); line-height:1.75; font-size:16px;}
+  .layout{display:flex; min-height:100vh;}
+
+  aside{width:270px; flex-shrink:0; background:var(--card); border-right:1px solid var(--line);
+        padding:22px 16px; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  aside h2{font-size:17px; margin-bottom:4px;}
+  aside .sub{font-size:12.5px; color:var(--sub); margin-bottom:14px;}
+  aside .sub a{color:var(--sub);}
+  .progress-wrap{margin-bottom:16px;}
+  .progress-bar{height:10px; background:var(--line); border-radius:6px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:var(--ok); transition:width .3s;}
+  .progress-label{font-size:12.5px; color:var(--sub); margin-top:4px;}
+  .navlist{list-style:none;}
+  .navlist li{margin-bottom:2px;}
+  .navlist button{width:100%; text-align:left; border:none; background:none; cursor:pointer;
+        padding:8px 10px; border-radius:8px; font-size:14px; font-family:inherit; color:var(--ink);
+        display:flex; align-items:center; gap:8px; line-height:1.4;}
+  .navlist button:hover{background:var(--accent-soft);}
+  .navlist button.active{background:var(--accent); color:#fff; font-weight:bold;}
+  .navlist .check{width:18px; flex-shrink:0; text-align:center; font-size:13px; color:var(--ok);}
+  .navlist button.active .check{color:#fff;}
+
+  main{flex:1; padding:34px 44px 80px; max-width:900px;}
+  section.chapter{display:none;}
+  section.chapter.visible{display:block;}
+  h1{font-size:26px; margin-bottom:6px;}
+  .ch-sub{color:var(--sub); font-size:14px; margin-bottom:24px;}
+  h2{font-size:20px; margin:34px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--accent-soft);}
+  h3{font-size:16.5px; margin:22px 0 8px; color:var(--accent);}
+  p{margin-bottom:12px;}
+  ul,ol{margin:0 0 12px 24px;}
+  li{margin-bottom:6px;}
+  strong{color:#0b3d91;}
+  .en{color:var(--sub); font-size:0.92em;}
+
+  .analogy{background:var(--warn-soft); border-left:4px solid var(--warn);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .analogy::before{content:"💡 비유로 이해하기"; display:block; font-weight:bold; color:var(--warn); font-size:13.5px; margin-bottom:4px;}
+  .keypoint{background:var(--accent-soft); border-left:4px solid var(--accent);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .keypoint::before{content:"📌 핵심 정리"; display:block; font-weight:bold; color:var(--accent); font-size:13.5px; margin-bottom:4px;}
+  .caution{background:#fdecec; border-left:4px solid #c0392b; padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .caution::before{content:"⚠️ 헷갈리기 쉬운 부분"; display:block; font-weight:bold; color:#c0392b; font-size:13.5px; margin-bottom:4px;}
+
+  .formula{background:var(--code); border:1px solid var(--line); border-radius:8px;
+           padding:10px 16px; margin:12px 0; font-size:17px; text-align:center;
+           font-family:'Cambria Math',Georgia,serif; overflow-x:auto;}
+  sub,sup{font-size:0.72em;}
+
+  .ladder{background:#1c2733; color:#d7e3ee; border-radius:10px; padding:14px 18px; margin:12px 0;
+          font-family:Consolas,'Courier New',monospace; font-size:14px; line-height:1.6; overflow-x:auto; white-space:pre;}
+
+  .tablewrap{overflow-x:auto; margin:14px 0;}
+  table{border-collapse:collapse; width:100%; background:var(--card); font-size:14.5px;}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--accent-soft); font-size:14px;}
+  table.compare th:first-child, table.compare td:first-child{background:#fafbfc; font-weight:bold; white-space:nowrap;}
+
+  .example{background:var(--card); border:1px solid var(--line); border-radius:12px;
+           padding:18px 20px; margin:16px 0;}
+  .example .ex-title{font-weight:bold; color:var(--ok); margin-bottom:8px; font-size:15.5px;}
+  .example .steps{margin-left:4px;}
+  .example .steps li{margin-bottom:8px;}
+
+  .problems{counter-reset:prob; margin-top:8px;}
+  .prob{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 18px; margin-bottom:14px;}
+  .prob .q{margin-bottom:10px;}
+  .prob .q::before{counter-increment:prob; content:"문제 " counter(prob) ". "; font-weight:bold; color:var(--accent);}
+  details{margin-top:8px;}
+  details summary{cursor:pointer; display:inline-block; background:var(--accent-soft); color:var(--accent);
+        padding:6px 14px; border-radius:20px; font-size:13.5px; font-weight:bold; user-select:none; list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary:hover{background:var(--accent); color:#fff;}
+  details[open] summary{background:var(--ok-soft); color:var(--ok);}
+  details .answer{background:var(--ok-soft); border-radius:8px; padding:12px 16px; margin-top:10px; font-size:15px;}
+  details .answer .a-label{font-weight:bold; color:var(--ok);}
+
+  .done-box{margin:36px 0 20px; background:var(--ok-soft); border:1.5px dashed var(--ok);
+        border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:10px; font-size:15.5px;}
+  .done-box input{width:20px; height:20px; accent-color:var(--ok); cursor:pointer;}
+
+  .ch-nav{display:flex; justify-content:space-between; margin-top:14px; gap:12px;}
+  .ch-nav button{border:1px solid var(--line); background:var(--card); border-radius:10px;
+        padding:12px 18px; cursor:pointer; font-family:inherit; font-size:14.5px; color:var(--ink); max-width:48%;}
+  .ch-nav button:hover{border-color:var(--accent); color:var(--accent);}
+  .ch-nav .spacer{flex:1;}
+
+  .toc-card{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 20px; margin-bottom:12px; cursor:pointer;}
+  .toc-card:hover{border-color:var(--accent);}
+  .toc-card .t{font-weight:bold; font-size:16px;}
+  .toc-card .d{font-size:13.5px; color:var(--sub); margin-top:2px;}
+  .toc-card .badge{float:right; font-size:12.5px; color:var(--ok); font-weight:bold;}
+
+  #menuToggle{display:none;}
+  @media (max-width:820px){
+    .layout{flex-direction:column;}
+    aside{width:100%; height:auto; position:static; border-right:none; border-bottom:1px solid var(--line);}
+    main{padding:22px 18px 60px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <h2>🔌 전력전자</h2>
+  <div class="sub">SAIT EET 1학년 ELTR 262 예습용 · <a href="../">← Study Hub</a></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 챕터 완료</div>
+  </div>
+  <ul class="navlist" id="navList"></ul>
+</aside>
+
+<main id="main">
+
+<!-- ============ 홈(개요) ============ -->
+<section class="chapter" id="ch0">
+  <h1>학습 안내</h1>
+  <p class="ch-sub">캐나다 SAIT — Electrical Engineering Technology 1학년 전력전자(ELTR 262 Power Electronics) 예습 교재</p>
+  <p><strong>전력전자 <span class="en">(power electronics)</span></strong>는 반도체 소자로 <strong>전기 에너지의 형태를 바꾸는</strong> 기술입니다. 콘센트의 AC를 노트북용 DC로(정류·컨버터), 배터리 DC를 모터용 가변 전압으로(DC-DC), 벽의 60 Hz를 모터 속도 제어용 가변 주파수로(인버터) — 충전기부터 전기차, 태양광까지 모든 곳에 있습니다. 이 교재는 회로이론과 디지털·전자회로(다이오드·트랜지스터) 교재를 잇는 다리입니다.</p>
+  <ul>
+    <li>모든 용어는 <strong>문제에 나오기 전에 반드시 먼저 정의</strong>합니다.</li>
+    <li>핵심 용어는 <strong>영어를 병기</strong>합니다. 수업·교재·데이터시트가 모두 영어입니다.</li>
+    <li>비슷한 개념(반파 vs 전파, SCR vs 트라이악, 리니어 vs 스위칭)은 <strong>비교표</strong>로 짚습니다.</li>
+    <li>연습문제 정답·해설은 <strong>접혀 있습니다</strong>. 먼저 풀고 확인하세요.</li>
+    <li>챕터 끝의 <strong>완료 체크</strong>로 진행 상황이 저장됩니다.</li>
+  </ul>
+  <h2>챕터 목차</h2>
+  <div id="tocCards"></div>
+  <div class="keypoint">선수 지식: 다이오드의 순방향 0.7 V 강하(디지털·전자회로 교재 6장), 사인파의 피크·실효값(공학 수학 6장). 이 두 가지만 알면 바로 시작할 수 있습니다.</div>
+</section>
+
+<!-- ============ 1장 ============ -->
+<section class="chapter" id="ch1">
+  <h1>1장. 전력전자 개요 — 스위치로 하는 변환</h1>
+  <p class="ch-sub">Power Electronics Overview — 왜 "스위칭"이 모든 것의 열쇠인가</p>
+
+  <h2>1. 전력 변환의 4가지 형태 <span class="en">(power conversion)</span></h2>
+  <p><strong>전력 변환 <span class="en">(power conversion)</span></strong>은 전기 에너지의 형태(AC/DC, 전압, 주파수)를 바꾸는 일입니다. 입력과 출력의 조합으로 네 가지가 있습니다.</p>
+  <div class="tablewrap"><table>
+    <tr><th>변환</th><th>이름</th><th>English</th><th>대표 예</th></tr>
+    <tr><td>AC → DC</td><td><strong>정류기</strong></td><td>rectifier</td><td>휴대폰 충전기의 앞단</td></tr>
+    <tr><td>DC → DC</td><td><strong>DC-DC 컨버터</strong></td><td>DC-DC converter (chopper)</td><td>노트북 내부 전원, USB-PD</td></tr>
+    <tr><td>DC → AC</td><td><strong>인버터</strong></td><td>inverter</td><td>태양광 계통 연계, 전기차 모터 구동</td></tr>
+    <tr><td>AC → AC</td><td><strong>AC 컨트롤러 / 사이클로컨버터</strong></td><td>AC controller</td><td>조광기(디머), VFD 내부</td></tr>
+  </table></div>
+
+  <h2>2. 왜 스위칭인가 — 효율의 원리</h2>
+  <p>반도체 소자가 전력을 다루는 방식은 두 가지입니다.</p>
+  <ul>
+    <li><strong>선형(리니어) 방식 <span class="en">(linear regulation)</span></strong>: 트랜지스터를 "반쯤 열린 밸브"(활성 영역)로 써서 남는 전압을 <strong>열로 태워</strong> 버림.</li>
+    <li><strong>스위칭 방식 <span class="en">(switching)</span></strong>: 소자를 <strong>완전 ON 아니면 완전 OFF</strong>로만 씀. ON일 때는 전압이 거의 0(V×I≈0), OFF일 때는 전류가 0(V×I=0) → <strong>이론상 손실 0</strong>.</li>
+  </ul>
+  <div class="formula">소자의 손실 P = V<sub>소자</sub> × I &nbsp;→&nbsp; 완전 ON(V≈0)이거나 완전 OFF(I=0)이면 P ≈ 0</div>
+  <div class="analogy"><strong>수도꼭지로 물 온도(평균 유량) 조절하기</strong>를 생각해 보세요. 리니어 방식은 꼭지를 반만 열어 두는 것 — 꼭지(소자)에서 압력이 소모되며 마찰열이 납니다. 스위칭 방식은 꼭지를 <strong>초당 수만 번 활짝 열었다 꽉 잠갔다</strong> 하며 열려 있는 시간의 비율로 평균 유량을 맞추는 것입니다. 꼭지가 항상 "완전 개방 아니면 완전 폐쇄"라 마찰 손실이 거의 없습니다.</div>
+  <div class="keypoint">전력전자의 제1원리: <strong>"소자를 스위치로만 쓰면 손실이 최소"</strong>. 그래서 이 과목의 소자들(다이오드, SCR, MOSFET)은 전부 스위치이고, 남은 문제는 "언제 켜고 끌 것인가"(제어)와 "울퉁불퉁해진 파형을 어떻게 매끈하게 할 것인가"(필터)입니다.</div>
+
+  <h2>3. 이 과목의 스위치 소자 한눈에 보기</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>다이오드 <span class="en">(diode)</span></th><th>SCR <span class="en">(thyristor)</span></th><th>파워 MOSFET / IGBT</th></tr>
+    <tr><td>켜짐 제어</td><td>불가 — 극성이 맞으면 저절로 ON</td><td>게이트 펄스로 <strong>켜는 시점 선택</strong></td><td>게이트 신호로 <strong>켜고 끄기 자유</strong></td></tr>
+    <tr><td>꺼짐 제어</td><td>불가 — 전류가 0이 되면 OFF</td><td>불가 — 전류가 0이 되어야 OFF</td><td>가능 (완전 제어)</td></tr>
+    <tr><td>분류</td><td>비제어 소자</td><td>반제어 소자</td><td>완전 제어 소자</td></tr>
+    <tr><td>주 용도</td><td>정류(2장)</td><td>위상 제어(4장)</td><td>고주파 스위칭 컨버터(5장)</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>전력전자</td><td>power electronics</td><td>반도체로 전력 변환</td></tr>
+    <tr><td>정류기</td><td>rectifier</td><td>AC → DC</td></tr>
+    <tr><td>인버터</td><td>inverter</td><td>DC → AC</td></tr>
+    <tr><td>DC-DC 컨버터</td><td>DC-DC converter</td><td>DC 전압 변환</td></tr>
+    <tr><td>선형 방식 / 스위칭 방식</td><td>linear / switching regulation</td><td>열로 소모 / ON-OFF</td></tr>
+    <tr><td>효율</td><td>efficiency (η = P<sub>out</sub>/P<sub>in</sub>)</td><td>스위칭의 존재 이유</td></tr>
+    <tr><td>사이리스터</td><td>thyristor (SCR)</td><td>반제어 스위치</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 1-1. 변환 종류 식별</div>
+    <p>다음 장치에 들어 있는 변환기의 종류를 말하라: (a) 휴대폰 충전기, (b) 태양광 패널의 계통 연계 장치, (c) 전기차에서 400 V 배터리로 12 V 전장품에 전원 공급.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> 콘센트 AC → 배터리 충전용 DC = <strong>정류기</strong>(+DC-DC). </li>
+      <li><strong>(b)</strong> 패널의 DC → 계통의 AC = <strong>인버터</strong>.</li>
+      <li><strong>(c)</strong> 400 V DC → 12 V DC = <strong>DC-DC 컨버터</strong>(강압형).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 1-2. 리니어 vs 스위칭 손실 비교</div>
+    <p>12 V 입력에서 5 V, 2 A를 출력한다. (a) 리니어 레귤레이터의 소자 손실과 효율, (b) 효율 92%인 스위칭 컨버터의 손실을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a) 리니어:</strong> 소자가 (12−5) = 7 V를 떠안은 채 2 A를 흘린다 → 손실 = 7×2 = 14 W. 출력 = 5×2 = 10 W. 효율 = 10/(10+14) ≈ 42%.</li>
+      <li><strong>(b) 스위칭:</strong> P<sub>in</sub> = 10/0.92 ≈ 10.9 W → 손실 ≈ 0.9 W.</li>
+      <li><strong>비교:</strong> 14 W(방열판 필수) vs 0.9 W. 같은 일을 하는데 손실이 15배 차이 — 스위칭 방식이 표준이 된 이유다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <p>정답을 보지 말고 먼저 풀어 보세요.</p>
+  <div class="problems">
+    <div class="prob"><div class="q">전력 변환 4가지(입력→출력)와 각각의 영어 명칭을 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> AC→DC = rectifier(정류기), DC→DC = DC-DC converter, DC→AC = inverter(인버터), AC→AC = AC controller/cycloconverter.</div></details></div>
+    <div class="prob"><div class="q">스위칭 방식이 고효율인 이유를 "소자 손실 P = V×I" 관점에서 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 완전 ON이면 소자 양단 전압 V ≈ 0, 완전 OFF면 전류 I = 0. 어느 상태든 곱 V×I ≈ 0이므로 소자에서 열로 사라지는 전력이 거의 없다. 중간(활성) 상태는 V와 I가 동시에 커서 손실이 크다.</div></details></div>
+    <div class="prob"><div class="q">다이오드, SCR, MOSFET을 "켜짐/꺼짐을 제어할 수 있는가" 기준으로 분류하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 다이오드 = 비제어(극성이 결정), SCR = 반제어(켜기는 게이트로, 끄기는 전류 0에 의존), MOSFET/IGBT = 완전 제어(게이트로 켜고 끄기 모두 가능).</div></details></div>
+    <div class="prob"><div class="q">24 V 입력, 12 V/1 A 출력 리니어 레귤레이터의 손실과 효율을 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 손실 12 W, 효율 50%</span><br>소자 강하 12 V × 1 A = 12 W. 출력 12 W / 입력 24 W = 50%.</div></details></div>
+    <div class="prob"><div class="q">효율 95%인 컨버터가 190 W를 출력 중이다. 입력 전력과 내부 손실은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 입력 200 W, 손실 10 W</span><br>P<sub>in</sub> = 190/0.95 = 200 W.</div></details></div>
+    <div class="prob"><div class="q">전기차에는 어떤 변환기들이 쓰이는지 두 가지 이상 예를 들라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답(예):</span> ① 완속충전기(OBC): 계통 AC → 배터리 DC (정류기), ② 구동용 인버터: 배터리 DC → 모터 3상 AC, ③ 강압 DC-DC: 고전압 배터리 → 12 V 전장, ④ 급속충전 스테이션 내부의 대용량 정류기.</div></details></div>
+    <div class="prob"><div class="q">손실이 큰 변환기에 방열판(heatsink)이 필요한 이유와, 스위칭 방식이 기기 소형화에 기여하는 이유를 연결해 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 손실은 전부 열이 되므로 태워 없앨 금속 덩어리(방열판)가 필요하다. 스위칭 방식은 손실이 작아 방열판이 작아지고, 높은 스위칭 주파수 덕에 변압기·인덕터·커패시터도 작아져 전체 기기가 소형·경량이 된다(휴대폰 충전기가 손바닥만 한 이유).</div></details></div>
+    <div class="prob"><div class="q">"조광기(디머)로 백열등 밝기를 줄이는 것"과 "직렬 저항으로 줄이는 것"의 차이를 손실 관점에서 비교하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 직렬 저항은 남는 전력을 저항에서 <strong>열로 소모</strong>한다(리니어 방식과 같은 원리). 조광기는 트라이악 스위치로 파형의 일부를 <strong>잘라내</strong>(위상 제어, 4장) 평균 전력을 줄이므로 제어 소자의 손실이 거의 없다.</div></details></div>
+    <div class="prob"><div class="q">SCR이 "반(半)제어" 소자인 이유를 한 문장으로 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 게이트 신호로 <strong>켜는 시점은 선택</strong>할 수 있지만, 한 번 켜지면 게이트로는 끌 수 없고 <strong>전류가 0으로 떨어져야</strong>(AC의 반주기 끝 등) 꺼지기 때문이다.</div></details></div>
+    <div class="prob"><div class="q">이 과목에서 배울 내용을 "스위치 선택 → 제어 → 필터"의 흐름으로 요약해 보라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답(요약):</span> ① 목적에 맞는 스위치 소자를 고르고(다이오드/SCR/MOSFET), ② 언제 켜고 끌지를 제어해 원하는 평균 전압·파형을 만들고(정류, 위상 제어, PWM), ③ 스위칭으로 생긴 맥동(리플)을 L·C 필터로 매끈하게 다듬는다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="1" class="done-check"><label>1장 완료! (체크하면 진행 상황에 저장됩니다)</label></div>
+</section>
+
+<!-- ============ 2장 ============ -->
+<section class="chapter" id="ch2">
+  <h1>2장. 정류회로 — 반파·전파·브리지</h1>
+  <p class="ch-sub">Rectifiers — AC를 DC로 바꾸는 첫 단계</p>
+
+  <h2>1. 정류란 <span class="en">(rectification)</span></h2>
+  <p><strong>정류 <span class="en">(rectification)</span></strong>는 방향이 번갈아 바뀌는 AC를 <strong>한 방향으로만 흐르는</strong> 파형으로 바꾸는 일입니다. 도구는 "전기의 체크 밸브"인 다이오드입니다. 정류 직후의 출력은 아직 <strong>맥동하는 DC <span class="en">(pulsating DC)</span></strong>이며, 매끈하게 만드는 것은 3장 필터의 몫입니다.</p>
+  <div class="analogy">정류기는 <strong>회전문을 한 방향으로만 돌게 만드는 래칫(ratchet)</strong>입니다. 사람들이 앞뒤로 밀어도(AC) 문은 한 방향으로만 돌아갑니다(DC 방향). 다만 미는 힘이 오락가락하니 회전 속도는 여전히 울퉁불퉁 — 그것이 맥동(리플)입니다.</div>
+
+  <h2>2. 반파 정류 <span class="en">(half-wave rectifier)</span></h2>
+  <p>다이오드 <strong>1개</strong>를 AC와 부하 사이에 직렬로 넣습니다. 양의 반주기에는 순방향이라 통과, 음의 반주기에는 역방향이라 차단 — 출력은 <strong>양의 반쪽만 남은 파형</strong>입니다.</p>
+  <div class="ladder">입력 AC:   ∿∿∿  (양·음 반복)
+반파 출력:  ∩_∩_∩_   (양의 반주기만, 절반은 공백)</div>
+  <ul>
+    <li>평균(DC) 출력 전압: <strong>V<sub>avg</sub> = V<sub>m</sub>/π ≈ 0.318 V<sub>m</sub></strong> (다이오드 강하 무시 시).</li>
+    <li>출력 맥동 주파수 = 입력 주파수 (60 Hz 입력 → 60 Hz 맥동).</li>
+    <li>장점: 부품 최소. 단점: 반주기를 버려 효율·품질 나쁨 → 실무에서는 거의 전파/브리지 사용.</li>
+  </ul>
+
+  <h2>3. 전파 정류 <span class="en">(full-wave rectifier)</span></h2>
+  <p>음의 반주기도 버리지 않고 <strong>뒤집어서</strong> 사용합니다. 두 가지 구현이 있습니다.</p>
+  <ul>
+    <li><strong>중간탭 방식 <span class="en">(center-tapped full-wave)</span></strong>: 중간탭 변압기 + 다이오드 2개. 변압기 반쪽씩 번갈아 사용.</li>
+    <li><strong>브리지 정류 <span class="en">(bridge rectifier)</span></strong>: 다이오드 <strong>4개</strong>를 다이아몬드로 배치. 변압기 중간탭 불필요 — <strong>가장 널리 쓰이는 표준</strong>. 매 순간 다이오드 2개가 직렬로 도통합니다.</li>
+  </ul>
+  <div class="ladder">전파 출력:  ∩∩∩∩∩∩   (음의 반주기가 접혀 올라옴, 공백 없음)</div>
+  <ul>
+    <li>평균 출력 전압: <strong>V<sub>avg</sub> = 2V<sub>m</sub>/π ≈ 0.637 V<sub>m</sub></strong> — 반파의 2배.</li>
+    <li>맥동 주파수 = 입력의 <strong>2배</strong> (60 Hz → 120 Hz) → 필터가 쉬워짐(3장).</li>
+  </ul>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>반파 <span class="en">(half-wave)</span></th><th>중간탭 전파 <span class="en">(center-tap)</span></th><th>브리지 <span class="en">(bridge)</span></th></tr>
+    <tr><td>다이오드 수</td><td>1</td><td>2</td><td>4</td></tr>
+    <tr><td>V<sub>avg</sub> (필터 없이)</td><td>0.318 V<sub>m</sub></td><td>0.637 V<sub>m</sub></td><td>0.637 V<sub>m</sub></td></tr>
+    <tr><td>맥동 주파수 (60 Hz 입력)</td><td>60 Hz</td><td>120 Hz</td><td>120 Hz</td></tr>
+    <tr><td>변압기</td><td>불필요(또는 일반)</td><td><strong>중간탭 필수</strong></td><td>일반이면 됨</td></tr>
+    <tr><td>도통 경로의 다이오드 강하</td><td>0.7 V (1개)</td><td>0.7 V (1개)</td><td><strong>1.4 V (2개 직렬)</strong></td></tr>
+  </table></div>
+  <div class="caution">브리지에서는 전류가 항상 <strong>다이오드 2개를 거쳐</strong> 흐르므로 도통 강하가 약 1.4 V입니다. 저전압 회로(5 V 등)에서는 이 1.4 V가 무시 못 할 손실이라, 정확한 계산 문제에서 반드시 빼야 합니다: V<sub>peak(out)</sub> = V<sub>m</sub> − 1.4 V.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>정류</td><td>rectification</td><td>AC → 한 방향 파형</td></tr>
+    <tr><td>맥동 DC</td><td>pulsating DC</td><td>필터 전의 출력</td></tr>
+    <tr><td>반파 / 전파 정류기</td><td>half-wave / full-wave rectifier</td><td>0.318 / 0.637 V<sub>m</sub></td></tr>
+    <tr><td>중간탭 변압기</td><td>center-tapped transformer</td><td>전파(2다이오드)용</td></tr>
+    <tr><td>브리지 정류기</td><td>bridge rectifier</td><td>다이오드 4개, 표준</td></tr>
+    <tr><td>평균(DC) 전압</td><td>average (DC) voltage, V<sub>avg</sub></td><td>DC 전압계가 읽는 값</td></tr>
+    <tr><td>맥동(리플) 주파수</td><td>ripple frequency</td><td>반파 f, 전파 2f</td></tr>
+    <tr><td>역내전압</td><td>PIV (peak inverse voltage)</td><td>다이오드가 견딜 역전압</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 2-1. 브리지 정류기 출력 계산</div>
+    <p>변압기 2차 전압이 12 V(RMS)인 브리지 정류기가 있다. (a) 피크 출력 전압(다이오드 강하 포함), (b) 필터 없는 평균 출력 전압, (c) 60 Hz 입력일 때 맥동 주파수를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a) 피크:</strong> V<sub>m</sub> = 12 × √2 ≈ 17.0 V. 브리지는 다이오드 2개 직렬 → 17.0 − 1.4 = <strong>15.6 V</strong>.</li>
+      <li><strong>(b) 평균:</strong> V<sub>avg</sub> = 0.637 × 15.6 ≈ <strong>9.9 V</strong>.</li>
+      <li><strong>(c) 맥동:</strong> 전파이므로 2 × 60 = <strong>120 Hz</strong>.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 2-2. 반파 vs 전파 선택</div>
+    <p>같은 변압기(피크 20 V)로 반파와 브리지 정류를 각각 구성했다. 평균 전압을 비교하고, 배터리 충전기에는 어느 쪽이 유리한지 근거와 함께 답하라. (다이오드 강하 무시)</p>
+    <ol class="steps">
+      <li><strong>반파:</strong> V<sub>avg</sub> = 0.318 × 20 = 6.36 V.</li>
+      <li><strong>브리지:</strong> V<sub>avg</sub> = 0.637 × 20 = 12.7 V — 2배.</li>
+      <li><strong>선택:</strong> 브리지. 같은 변압기에서 평균 전압(전달 에너지)이 2배이고, 맥동 주파수가 2배라 같은 필터로 더 매끈한 출력을 얻는다. 반파는 변압기 활용률도 나빠 소용량 신호용 외에는 쓰지 않는다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">반파 정류기에서 음의 반주기 동안 출력이 0인 이유를 다이오드 동작으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 음의 반주기에는 다이오드가 역방향 바이어스가 되어 차단(개방)되므로 부하에 전류가 흐르지 않아 출력 전압이 0이다.</div></details></div>
+    <div class="prob"><div class="q">피크 30 V인 AC를 반파 정류하면(다이오드 무시) 평균 출력은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 9.55 V</span><br>V<sub>avg</sub> = V<sub>m</sub>/π = 30/3.1416 ≈ 9.55 V.</div></details></div>
+    <div class="prob"><div class="q">같은 피크 30 V를 전파 정류하면 평균 출력은? 반파의 몇 배인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 19.1 V, 2배</span><br>V<sub>avg</sub> = 2V<sub>m</sub>/π = 0.637×30 ≈ 19.1 V.</div></details></div>
+    <div class="prob"><div class="q">브리지 정류기에 다이오드가 4개 필요하지만 중간탭 방식은 2개면 되는 이유는? 그런데도 브리지가 표준인 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 중간탭 방식은 변압기 권선을 반쪽씩 번갈아 쓰므로 다이오드 2개로 전파가 된다. 그러나 <strong>중간탭 변압기가 필요</strong>하고 권선 절반씩만 사용해 변압기가 크고 비싸진다. 브리지는 다이오드 4개(저렴)로 일반 변압기 전체 권선을 활용하므로 전체 비용·크기에서 유리해 표준이 되었다.</div></details></div>
+    <div class="prob"><div class="q">60 Hz 입력에서 반파와 전파의 맥동 주파수는 각각 얼마이며, 맥동 주파수가 높으면 왜 유리한가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 반파 60 Hz, 전파 120 Hz. 맥동 주파수가 높으면 파형의 골 사이 간격이 짧아 <strong>필터 커패시터가 버텨야 하는 시간이 절반</strong>이 되므로, 같은 커패시터로 리플이 절반으로 줄어든다(3장).</div></details></div>
+    <div class="prob"><div class="q">변압기 2차가 24 V RMS인 브리지 정류기의 피크 출력 전압(다이오드 1.4 V 고려)은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 32.5 V</span><br>V<sub>m</sub> = 24√2 = 33.9 V → 33.9 − 1.4 = 32.5 V.</div></details></div>
+    <div class="prob"><div class="q">브리지 정류기에서 양의 반주기 동안 도통하는 다이오드는 몇 개이며 어떻게 연결되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 대각선 위치의 <strong>2개가 직렬로</strong> 도통한다(전원→D1→부하→D2→전원). 음의 반주기에는 나머지 대각선 2개가 도통해, 부하에는 항상 같은 방향으로 전류가 흐른다.</div></details></div>
+    <div class="prob"><div class="q">PIV(peak inverse voltage)란 무엇이며, 다이오드 선정에서 왜 중요한가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 차단 상태의 다이오드에 걸리는 <strong>최대 역방향 전압</strong>. 다이오드의 역내전압 정격이 회로의 PIV보다 낮으면 항복으로 파손된다. 예: 반파 정류에서 PIV = V<sub>m</sub>, 여유를 두어 2배 이상 정격을 선정하는 것이 관례다.</div></details></div>
+    <div class="prob"><div class="q">DC 전압계로 반파 정류 출력(피크 17 V, 무필터)을 재면 대략 얼마가 표시되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 5.4 V</span><br>DC 전압계는 평균값을 읽는다: 0.318 × 17 ≈ 5.4 V.</div></details></div>
+    <div class="prob"><div class="q">자전거 발전기(AC)를 그대로 LED에 연결하면 LED가 깜빡이는 이유와, 브리지 정류를 넣으면 어떻게 달라지는지 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> LED는 다이오드라 한쪽 반주기에만 켜지므로 회전 주파수에 맞춰 깜빡인다(스스로 반파 정류하는 셈). 브리지를 넣으면 음의 반주기도 접혀 올라와 켜지는 구간이 2배(전파)가 되어 깜빡임이 절반 주기로 줄고, 커패시터 필터(3장)까지 더하면 연속 점등이 된다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="2" class="done-check"><label>2장 완료!</label></div>
+</section>
+
+<!-- ============ 3장 ============ -->
+<section class="chapter" id="ch3">
+  <h1>3장. 필터링과 리플</h1>
+  <p class="ch-sub">Filtering &amp; Ripple — 맥동 DC를 매끈한 DC로</p>
+
+  <h2>1. 커패시터 필터 <span class="en">(capacitor filter)</span></h2>
+  <p>정류기 출력에 <strong>커패시터를 부하와 병렬</strong>로 답니다. 원리는 커패시터의 본성 그대로입니다: 전압이 오르는 동안 <strong>충전</strong>하고, 정류 파형이 골짜기로 떨어지는 동안 <strong>방전하며 부하를 대신 부양</strong>합니다. 결과적으로 출력은 피크 근처에서 톱니 모양으로 살짝 출렁이는 DC가 됩니다.</p>
+  <div class="ladder">필터 전:  ∩∩∩∩∩  (0까지 떨어지는 맥동)
+필터 후:  ‾\‾\‾\  (피크 근처에서 톱니처럼 살짝 출렁임 = 리플)</div>
+  <div class="analogy"><strong>물탱크(저수조)</strong>입니다. 펌프(정류기)가 물을 간헐적으로 퍼 올려도, 탱크(커패시터)가 물을 저장했다가 꾸준히 내보내므로 수도꼭지(부하)의 물줄기는 거의 일정합니다. 탱크가 클수록(C가 클수록), 그리고 펌프질이 잦을수록(맥동 주파수가 높을수록) 수위 변동(리플)이 작아집니다.</div>
+
+  <h2>2. 리플 전압 <span class="en">(ripple voltage)</span></h2>
+  <p>필터 후에도 남는 출렁임을 <strong>리플 <span class="en">(ripple)</span></strong>이라 합니다. 근사식(전파 정류 + 커패시터 필터):</p>
+  <div class="formula">V<sub>r(pp)</sub> ≈ I<sub>load</sub> / (f<sub>ripple</sub> × C) &nbsp;&nbsp;&nbsp; [피크-피크 리플 = 부하 전류 ÷ (맥동 주파수 × 커패시턴스)]</div>
+  <ul>
+    <li>부하 전류가 클수록(방전이 빠를수록) 리플 <strong>증가</strong>.</li>
+    <li>C가 클수록, 맥동 주파수가 높을수록 리플 <strong>감소</strong> — 전파(120 Hz)가 반파(60 Hz)보다 유리한 이유.</li>
+    <li>품질 지표: <strong>리플률 <span class="en">(ripple factor)</span></strong> = 리플 성분 / DC 성분 (작을수록 좋음).</li>
+  </ul>
+  <div class="caution">커패시터 필터를 달면 DC 출력이 <strong>평균값(0.637 V<sub>m</sub>)이 아니라 피크값(≈V<sub>m</sub>) 근처</strong>로 올라갑니다. "필터 없으면 평균값, 필터 있으면 피크 근처"를 구분하지 않으면 계산이 크게 어긋납니다. 또 커패시터가 피크에서만 짧고 굵게 충전 전류를 끌어가므로 다이오드에는 <strong>큰 서지(돌입) 전류 <span class="en">(surge/inrush current)</span></strong>가 흐른다는 점도 시험 포인트입니다.</div>
+
+  <h2>3. 더 좋은 필터 — LC, π형</h2>
+  <ul>
+    <li><strong>인덕터(초크) 입력 필터 <span class="en">(choke filter)</span></strong>: 인덕터를 직렬로 — 전류의 변화를 막는 성질로 리플 전류를 억제.</li>
+    <li><strong>π형 필터 <span class="en">(pi filter, C-L-C)</span></strong>: 커패시터-인덕터-커패시터 조합으로 리플을 한 번 더 걸러냄.</li>
+    <li>원리 요약: <strong>C는 병렬로 전압을 붙잡고, L은 직렬로 전류를 붙잡는다</strong> — 둘 다 "변화를 싫어하는" 성질을 이용한 것.</li>
+  </ul>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>필터</td><td>filter</td><td>맥동 제거 회로</td></tr>
+    <tr><td>평활 커패시터</td><td>smoothing (filter) capacitor</td><td>부하와 병렬</td></tr>
+    <tr><td>리플 (전압)</td><td>ripple (voltage)</td><td>남은 출렁임, V<sub>r(pp)</sub></td></tr>
+    <tr><td>리플률</td><td>ripple factor</td><td>리플/DC 비율</td></tr>
+    <tr><td>초크(인덕터) 필터</td><td>choke (inductor) filter</td><td>직렬 L</td></tr>
+    <tr><td>π형 필터</td><td>pi (π) filter</td><td>C-L-C</td></tr>
+    <tr><td>서지(돌입) 전류</td><td>surge / inrush current</td><td>피크 충전 시 다이오드 부담</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 3-1. 리플 전압 계산</div>
+    <p>브리지 정류(60 Hz 입력, 맥동 120 Hz) 출력에 1,000 μF 필터 커패시터가 달려 있고 부하 전류는 0.5 A다. 피크-피크 리플 전압을 구하라.</p>
+    <ol class="steps">
+      <li><strong>공식:</strong> V<sub>r(pp)</sub> ≈ I / (f·C).</li>
+      <li><strong>대입:</strong> = 0.5 ÷ (120 × 1000×10⁻⁶) = 0.5 ÷ 0.12 ≈ 4.2 V.</li>
+      <li><strong>답:</strong> 약 4.2 V<sub>pp</sub>. 리플을 절반으로 줄이려면 C를 2,000 μF로 늘리면 된다(반비례).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 3-2. 필터 유무에 따른 출력 비교</div>
+    <p>피크 17 V 브리지 정류기(다이오드 강하 무시)에서 (a) 필터 없을 때 DC(평균) 출력, (b) 충분히 큰 커패시터 필터를 달았을 때(무부하 근사) 출력을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a) 무필터:</strong> V<sub>avg</sub> = 0.637 × 17 ≈ 10.8 V.</li>
+      <li><strong>(b) 필터:</strong> 커패시터가 피크까지 충전되어 유지 → 출력 ≈ V<sub>m</sub> = 17 V.</li>
+      <li><strong>비교:</strong> 같은 회로인데 10.8 V vs 17 V — 필터가 "평균"이 아니라 "피크"를 붙잡기 때문. 부하가 걸리면 17 V에서 리플의 절반만큼 내려온 값이 실제 평균이 된다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">필터 커패시터는 부하와 직렬로 다는가, 병렬로 다는가? 동작 원리와 함께 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 병렬.</span><br>정류 전압이 오를 때 충전하고, 내려갈 때 부하로 방전하며 전압을 떠받친다. 병렬이어야 부하 양단 전압을 직접 유지할 수 있다.</div></details></div>
+    <div class="prob"><div class="q">리플 전압을 줄이는 방법을 세 가지 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 커패시턴스 C를 키운다, ② 전파(브리지) 정류로 맥동 주파수를 2배로 한다, ③ LC(초크)·π형 필터를 추가한다. (부하 전류를 줄이는 것도 리플을 줄이지만 설계 조건상 불가한 경우가 많다)</div></details></div>
+    <div class="prob"><div class="q">V_r(pp) ≈ I/(fC)에서 부하 전류가 2배가 되면 리플은? C를 4배로 하면?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전류 2배 → 리플 2배(비례). C 4배 → 리플 1/4(반비례).</div></details></div>
+    <div class="prob"><div class="q">반파(60 Hz 맥동)와 브리지(120 Hz 맥동)에 같은 C, 같은 부하를 연결하면 리플 비는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 반파가 2배 크다.</span><br>리플 ∝ 1/f. 커패시터가 다음 피크까지 2배 오래 버텨야 하기 때문이다.</div></details></div>
+    <div class="prob"><div class="q">120 Hz 맥동, 2,200 μF, 부하 1 A일 때 리플 전압을 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 3.8 V</span><br>1 ÷ (120 × 0.0022) = 1/0.264 ≈ 3.79 V.</div></details></div>
+    <div class="prob"><div class="q">리플을 1 V 이하로 하고 싶다. 맥동 120 Hz, 부하 0.6 A라면 최소 커패시턴스는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 5,000 μF</span><br>C ≥ I/(f·V<sub>r</sub>) = 0.6/(120×1) = 0.005 F = 5,000 μF.</div></details></div>
+    <div class="prob"><div class="q">필터 커패시터를 단 정류기의 다이오드에 짧고 큰 전류 펄스가 흐르는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 커패시터 전압이 피크 근처에 머물러 있으므로, 다이오드는 입력 파형이 커패시터 전압보다 높아지는 <strong>피크 부근의 짧은 구간에만</strong> 도통한다. 그 짧은 시간에 부하가 한 주기 동안 쓸 전하를 몰아서 충전해야 하므로 전류가 크고 뾰족해진다(서지 전류). 첫 전원 투입 때는 빈 커패시터 때문에 더 큰 돌입 전류가 흐른다.</div></details></div>
+    <div class="prob"><div class="q">"C는 전압을 붙잡고 L은 전류를 붙잡는다"를 각 소자의 기본 성질(어떤 변화를 싫어하는가)로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 커패시터는 전압의 급변을 싫어하므로(i = C dv/dt) 병렬로 달면 출력 <strong>전압</strong>의 출렁임을 흡수한다. 인덕터는 전류의 급변을 싫어하므로(v = L di/dt) 직렬로 넣으면 <strong>전류</strong>의 맥동을 억제한다. 이 둘을 조합한 것이 LC·π형 필터다.</div></details></div>
+    <div class="prob"><div class="q">π형 필터의 구성(소자 배치)을 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 커패시터(병렬) → 인덕터(직렬) → 커패시터(병렬)의 C-L-C 구조. 회로도를 그리면 그리스 문자 π 모양이라 붙은 이름이다.</div></details></div>
+    <div class="prob"><div class="q">오실로스코프로 전원장치 출력을 봤더니 DC 12 V 위에 120 Hz 톱니 물결이 보인다. 이 전원의 정류 방식은 반파인가 전파인가? (60 Hz 지역)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 전파(브리지).</span><br>리플 주파수가 입력(60 Hz)의 2배인 120 Hz이기 때문. 반파라면 리플이 60 Hz로 보인다. 리플 주파수는 정류 방식을 알려주는 지문이다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="3" class="done-check"><label>3장 완료!</label></div>
+</section>
+
+<!-- ============ 4장 ============ -->
+<section class="chapter" id="ch4">
+  <h1>4장. SCR과 트라이악 — 위상 제어</h1>
+  <p class="ch-sub">Thyristors — "켜는 시점을 고르는" 스위치와 조광기의 원리</p>
+
+  <h2>1. SCR <span class="en">(Silicon Controlled Rectifier)</span></h2>
+  <p><strong>SCR</strong>은 다이오드처럼 한 방향으로만 흐르되, <strong>게이트 <span class="en">(gate)</span> 신호를 줘야 비로소 켜지는</strong> 3단자 소자입니다(애노드·캐소드·게이트). 사이리스터 <span class="en">(thyristor)</span> 계열의 대표입니다.</p>
+  <ul>
+    <li><strong>점호(트리거) <span class="en">(firing/triggering)</span></strong>: 순방향 상태에서 게이트에 짧은 전류 펄스를 주면 도통 시작.</li>
+    <li><strong>래칭 <span class="en">(latching)</span></strong>: 한 번 켜지면 게이트를 떼어도 <strong>계속 도통</strong> — 내부가 재생 궤환 구조이기 때문.</li>
+    <li><strong>턴오프 <span class="en">(turn-off/commutation)</span></strong>: 게이트로는 못 끈다. <strong>전류가 유지 전류 <span class="en">(holding current)</span> 이하로 떨어져야</strong> 꺼진다. AC에서는 매 반주기 끝(전류 0 통과점 <span class="en">zero crossing</span>)에서 자연히 꺼진다.</li>
+  </ul>
+  <div class="analogy">SCR은 <strong>쥐덫</strong>입니다. 장전해 두면(순방향 대기) 방아쇠를 살짝 건드리는 순간(게이트 펄스) 철컥 작동하고, 그 뒤로는 방아쇠에서 손을 떼도 멈추지 않습니다. 다시 장전하려면 덫을 완전히 풀어야(전류 0) 합니다.</div>
+
+  <h2>2. 위상 제어 <span class="en">(phase control)</span></h2>
+  <p>AC 반주기(180°) 중 <strong>어느 각도에서 점호하느냐</strong>로 부하에 전달되는 전력을 조절하는 방법입니다. 점호를 늦출수록 파형의 앞부분이 잘려 나가 평균 전력이 줄어듭니다.</p>
+  <ul>
+    <li><strong>점호각 <span class="en">(firing/delay angle, α)</span></strong>: 반주기 시작부터 점호까지의 각도. α = 0° → 최대 전력, α = 90° → 절반 근처, α → 180° → 거의 0.</li>
+    <li><strong>도통각 <span class="en">(conduction angle)</span></strong> = 180° − α.</li>
+  </ul>
+  <div class="ladder">α = 0°:   ∩∩∩∩  (반주기 전체 도통 — 최대 밝기)
+α = 90°:  ▗∩▗∩  (반주기의 뒤 절반만 도통 — 중간 밝기)
+α = 150°: ..▖..▖ (끝부분만 도통 — 어두움)</div>
+
+  <h2>3. 트라이악과 다이액 <span class="en">(TRIAC and DIAC)</span></h2>
+  <p><strong>트라이악 <span class="en">(TRIAC)</span></strong>은 SCR 두 개를 <strong>서로 반대 방향으로 병렬</strong>한 것과 같은 소자로, <strong>양방향</strong> 도통이 가능합니다. AC의 양·음 반주기를 모두 제어할 수 있어 가정용 조광기 <span class="en">(dimmer)</span>, 전열기·팬 속도 제어의 표준입니다. <strong>다이액 <span class="en">(DIAC)</span></strong>은 일정 전압(약 30 V)에서 양방향으로 급격히 도통하는 2단자 소자로, 트라이악 게이트에 <strong>깔끔한 점호 펄스</strong>를 만들어 주는 방아쇠 역할을 합니다(RC 지연 + 다이액 + 트라이악 = 전형적 조광기 회로).</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>SCR</th><th>트라이악 <span class="en">(TRIAC)</span></th></tr>
+    <tr><td>도통 방향</td><td>한 방향 (단방향)</td><td><strong>양방향</strong></td></tr>
+    <tr><td>제어 가능한 반주기</td><td>양(+)의 반주기만</td><td>양·음 모두</td></tr>
+    <tr><td>구조 비유</td><td>제어 가능한 다이오드</td><td>SCR 2개 역병렬</td></tr>
+    <tr><td>대표 용도</td><td>대전력 정류·DC 부하, 배터리 충전기</td><td>AC 조광기, 히터·팬 제어</td></tr>
+    <tr><td>전력 용량</td><td>매우 큼 (수천 A급까지)</td><td>중소 전력</td></tr>
+  </table></div>
+  <div class="caution">SCR/트라이악은 위상 제어로 파형을 "잘라" 쓰므로 부하 전류가 사인파가 아니게 됩니다 → <strong>고조파 <span class="en">(harmonics)</span></strong>와 전자기 잡음이 발생합니다. 또 트라이악은 켜고 끄는 시점만 제어할 뿐, MOSFET처럼 아무 때나 끌 수는 없습니다(전류 0에서만 꺼짐). "반제어"라는 본질은 SCR과 같습니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>사이리스터</td><td>thyristor</td><td>SCR 계열 총칭</td></tr>
+    <tr><td>실리콘 제어 정류기</td><td>SCR (silicon controlled rectifier)</td><td>게이트로 켜는 다이오드</td></tr>
+    <tr><td>게이트 / 점호(트리거)</td><td>gate / firing (triggering)</td><td>켜는 신호</td></tr>
+    <tr><td>점호각 / 도통각</td><td>firing (delay) angle α / conduction angle</td><td>합이 180°</td></tr>
+    <tr><td>유지 전류</td><td>holding current</td><td>이하로 떨어지면 꺼짐</td></tr>
+    <tr><td>영점 통과</td><td>zero crossing</td><td>AC에서 자연 소호되는 순간</td></tr>
+    <tr><td>트라이악 / 다이액</td><td>TRIAC / DIAC</td><td>양방향 스위치 / 트리거 소자</td></tr>
+    <tr><td>조광기</td><td>dimmer</td><td>위상 제어의 대표 응용</td></tr>
+    <tr><td>고조파</td><td>harmonics</td><td>파형 왜곡의 부작용</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 4-1. SCR 동작 판정</div>
+    <p>다음 각 상황에서 SCR의 상태(ON/OFF)를 판정하라. ① 순방향 전압 + 게이트 펄스 없음, ② 순방향 + 게이트 펄스 인가, ③ ②의 상태에서 게이트 신호 제거, ④ 전류가 유지 전류 이하로 감소.</p>
+    <ol class="steps">
+      <li><strong>①</strong> OFF — 순방향이어도 게이트 신호가 없으면 차단(다이오드와 다른 점).</li>
+      <li><strong>②</strong> ON — 점호되어 도통 시작.</li>
+      <li><strong>③</strong> 여전히 ON — 래칭 성질. 게이트는 "시동 버튼"일 뿐이다.</li>
+      <li><strong>④</strong> OFF — 유일한 끄는 방법. AC에서는 매 영점 통과에서 자동으로 일어난다.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 4-2. 조광기 개념 문제</div>
+    <p>트라이악 조광기에서 점호각을 α = 30°에서 α = 120°로 늦추면 전등 밝기와 도통각은 어떻게 되는가?</p>
+    <ol class="steps">
+      <li><strong>도통각:</strong> 180° − 30° = 150° → 180° − 120° = 60°로 감소.</li>
+      <li><strong>전달 전력:</strong> 파형에서 잘려나가는 부분이 커져 평균(실효) 전압 감소 → <strong>밝기 감소</strong>.</li>
+      <li><strong>정리:</strong> 점호각 α ↑ = 도통각 ↓ = 전력 ↓. 조광기 손잡이는 결국 RC 지연으로 α를 바꾸는 장치다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">SCR의 세 단자 이름을 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 애노드(anode), 캐소드(cathode), 게이트(gate).</div></details></div>
+    <div class="prob"><div class="q">SCR과 다이오드의 차이를 "켜지는 조건"으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 다이오드는 순방향 전압만 걸리면 저절로 켜지지만, SCR은 순방향이어도 <strong>게이트 펄스가 있어야</strong> 켜진다. 즉 "켜지는 시점을 선택할 수 있는 다이오드"다.</div></details></div>
+    <div class="prob"><div class="q">한 번 켜진 SCR을 끄는 방법은 무엇인가? 게이트로 끌 수 있는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 게이트로는 끌 수 없다. 애노드 전류를 <strong>유지 전류(holding current) 이하로</strong> 떨어뜨려야 한다(전원 차단, 강제 전류 전환, 또는 AC의 영점 통과).</div></details></div>
+    <div class="prob"><div class="q">AC 회로에서 SCR이 매 주기 자동으로 꺼지는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> AC 전류는 매 반주기 끝에서 0을 통과(zero crossing)하므로, 그 순간 전류가 유지 전류 이하가 되어 SCR이 자연 소호된다. 그래서 매 반주기마다 게이트 펄스로 다시 점호해야 한다.</div></details></div>
+    <div class="prob"><div class="q">점호각 α와 도통각의 관계식을 쓰고, α = 45°일 때 도통각을 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 도통각 = 180° − α. α = 45° → 도통각 135°.</div></details></div>
+    <div class="prob"><div class="q">점호각을 키우면 부하 전력은 어떻게 되는가? 조광기에서 이것이 의미하는 바는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 파형의 앞부분이 더 많이 잘려 평균·실효 전압이 줄어 <strong>전력이 감소</strong>한다. 조광기 손잡이를 돌려 어둡게 하는 것 = α를 키우는 것.</div></details></div>
+    <div class="prob"><div class="q">트라이악이 SCR과 다른 점 두 가지를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① <strong>양방향</strong>으로 도통할 수 있다(SCR 2개 역병렬과 등가). ② 따라서 AC의 양·음 반주기를 모두 제어할 수 있다. (전력 용량은 SCR보다 작아 중소 전력용)</div></details></div>
+    <div class="prob"><div class="q">다이액(DIAC)은 조광기 회로에서 무슨 역할을 하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> RC 회로로 지연된 전압이 다이액의 브레이크오버 전압(~30 V)에 도달하는 순간 급격히 도통하여, 트라이악 게이트에 <strong>짧고 확실한 점호 펄스</strong>를 만들어 준다. 점호 시점을 일정하게 만들어 깜빡임을 줄인다.</div></details></div>
+    <div class="prob"><div class="q">백열등 조광기에는 트라이악을 쓰는데, 대전류 DC 배터리 충전기의 제어 정류에는 SCR을 쓴다. 이유를 각각 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 조광기 부하는 AC이므로 양·음 반주기를 모두 제어하는 <strong>트라이악</strong>이 적합하다. 충전기는 AC→DC로 한 방향 전류만 필요하고 대전류 용량이 요구되므로, 단방향이지만 전력 용량이 큰 <strong>SCR</strong>(제어 정류기)이 적합하다.</div></details></div>
+    <div class="prob"><div class="q">위상 제어 방식의 부작용(전원 품질 측면)을 한 가지 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전류 파형이 사인파에서 잘려 나가 <strong>고조파(harmonics)</strong>와 EMI(전자기 간섭)가 발생한다. 심하면 역률 저하, 중성선 과열, 다른 기기 오동작을 일으켜 필터·규제(IEC 고조파 규격)가 필요하다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="4" class="done-check"><label>4장 완료!</label></div>
+</section>
+
+<!-- ============ 5장 ============ -->
+<section class="chapter" id="ch5">
+  <h1>5장. 스위칭 레귤레이터와 DC-DC 컨버터</h1>
+  <p class="ch-sub">Switching Regulators — PWM으로 전압을 마음대로 바꾸는 기술</p>
+
+  <h2>1. 리니어 레귤레이터의 한계 <span class="en">(linear regulator)</span></h2>
+  <p><strong>리니어 레귤레이터 <span class="en">(linear regulator)</span></strong>(7805 같은 3단자 IC)는 트랜지스터를 가변 저항처럼 써서 남는 전압을 열로 버리며 출력을 일정하게 유지합니다. 간단하고 잡음이 없지만, 1장에서 봤듯 <strong>효율이 V<sub>out</sub>/V<sub>in</sub>을 넘지 못하고</strong>, <strong>승압이 불가능</strong>합니다.</p>
+
+  <h2>2. 듀티 사이클과 PWM <span class="en">(duty cycle, PWM)</span></h2>
+  <p>스위칭 방식의 핵심 개념 두 가지를 먼저 정의합니다.</p>
+  <ul>
+    <li><strong>듀티 사이클 <span class="en">(duty cycle, D)</span></strong>: 스위칭 한 주기 중 <strong>ON 시간의 비율</strong>. D = t<sub>on</sub>/T (0~1, %로도 표기).</li>
+    <li><strong>PWM <span class="en">(Pulse Width Modulation, 펄스 폭 변조)</span></strong>: 주파수는 고정하고 <strong>펄스의 폭(=듀티 사이클)을 조절</strong>해 평균값을 제어하는 방식.</li>
+  </ul>
+  <div class="formula">평균 전압 = 입력 전압 × D &nbsp;&nbsp;&nbsp; (예: 12 V를 D = 0.5로 스위칭 → 평균 6 V)</div>
+  <div class="analogy">PWM은 <strong>전등 스위치를 초고속으로 껐다 켰다 하는 것</strong>입니다. 1초에 수만 번, "켜짐 30% : 꺼짐 70%"로 깜빡이면 눈(그리고 LC 필터)에는 30% 밝기로 보입니다. 밝기 조절 손잡이 대신 <strong>켜져 있는 시간의 비율</strong>로 조절하는 것 — 손실 없이 평균을 만드는 마법입니다.</div>
+
+  <h2>3. 벅 컨버터 <span class="en">(buck converter)</span> — 강압</h2>
+  <p><strong>벅(강압) 컨버터 <span class="en">(buck/step-down converter)</span></strong>는 스위치(MOSFET) + 다이오드 + 인덕터 + 커패시터로 이루어진 가장 기본적인 DC-DC 컨버터입니다.</p>
+  <ul>
+    <li>스위치 ON: 입력이 인덕터를 통해 부하로 — 인덕터에 에너지 저장(전류 증가).</li>
+    <li>스위치 OFF: 인덕터가 전류를 계속 흘리려는 성질(v = L di/dt) 때문에 다이오드(환류 다이오드 <span class="en">freewheeling diode</span>)를 통해 부하로 방출.</li>
+    <li>LC가 스위칭 맥동을 평활 → 출력은 매끈한 DC.</li>
+  </ul>
+  <div class="formula">V<sub>out</sub> = D × V<sub>in</sub> &nbsp;&nbsp;&nbsp; [벅 컨버터: 출력은 항상 입력보다 낮다]</div>
+
+  <h2>4. 부스트 컨버터 <span class="en">(boost converter)</span> — 승압</h2>
+  <p><strong>부스트(승압) 컨버터 <span class="en">(boost/step-up converter)</span></strong>는 같은 부품을 재배치해 <strong>입력보다 높은 출력</strong>을 만듭니다.</p>
+  <ul>
+    <li>스위치 ON: 인덕터가 입력에 직결되어 에너지를 <strong>비축</strong>.</li>
+    <li>스위치 OFF: 인덕터가 전류를 유지하려고 <strong>입력 전압 위에 자기 전압을 얹어</strong> 다이오드를 통해 출력 커패시터로 방출 — 그래서 출력이 입력보다 높다.</li>
+  </ul>
+  <div class="formula">V<sub>out</sub> = V<sub>in</sub> / (1 − D) &nbsp;&nbsp;&nbsp; [D가 클수록 더 높이 승압]</div>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>리니어 레귤레이터</th><th>벅 컨버터</th><th>부스트 컨버터</th></tr>
+    <tr><td>출력 전압</td><td>입력보다 낮게만</td><td>입력보다 낮게 (V<sub>out</sub>=DV<sub>in</sub>)</td><td>입력보다 <strong>높게</strong> (V<sub>in</sub>/(1−D))</td></tr>
+    <tr><td>효율</td><td>낮음 (V<sub>out</sub>/V<sub>in</sub>)</td><td>높음 (85~97%)</td><td>높음 (85~95%)</td></tr>
+    <tr><td>잡음(리플/EMI)</td><td>거의 없음</td><td>있음 (스위칭 잡음)</td><td>있음</td></tr>
+    <tr><td>부품</td><td>IC 하나 + C</td><td>스위치·다이오드·L·C</td><td>동일 부품 재배치</td></tr>
+    <tr><td>대표 용도</td><td>소전류·저잡음 (센서 전원)</td><td>CPU 전원, USB 충전</td><td>배터리→고전압 (LED 백라이트, 5→12 V)</td></tr>
+  </table></div>
+  <div class="caution">부스트의 식 V<sub>out</sub> = V<sub>in</sub>/(1−D)에서 D→1이면 출력이 무한대? 아닙니다 — 실제로는 소자 저항·손실 때문에 D를 크게 올리면 효율이 급락하고 전압이 무너집니다. 실무 승압비는 보통 5배 이내로 잡습니다. "식은 이상적 모델"이라는 감각을 늘 유지하세요.</div>
+  <div class="keypoint">이 장의 개념은 다른 교재와 이렇게 연결됩니다: PWM은 PLC 교재의 아날로그 출력·모터 속도 제어(VFD)와, 인덕터의 에너지 저장은 공학 수학 5장의 v = L di/dt와, 스위칭 손실 개념은 디지털 교재 6장의 MOSFET과 이어집니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>리니어 레귤레이터</td><td>linear regulator</td><td>남는 전압을 열로</td></tr>
+    <tr><td>스위칭 레귤레이터</td><td>switching regulator (SMPS)</td><td>Switched-Mode Power Supply</td></tr>
+    <tr><td>듀티 사이클</td><td>duty cycle (D)</td><td>ON 시간 비율</td></tr>
+    <tr><td>펄스 폭 변조</td><td>PWM (pulse width modulation)</td><td>폭으로 평균 제어</td></tr>
+    <tr><td>벅(강압) 컨버터</td><td>buck (step-down) converter</td><td>V<sub>out</sub> = DV<sub>in</sub></td></tr>
+    <tr><td>부스트(승압) 컨버터</td><td>boost (step-up) converter</td><td>V<sub>out</sub> = V<sub>in</sub>/(1−D)</td></tr>
+    <tr><td>환류 다이오드</td><td>freewheeling diode</td><td>인덕터 전류의 우회로</td></tr>
+    <tr><td>스위칭 주파수</td><td>switching frequency</td><td>수십 kHz~수 MHz</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 5-1. 벅 컨버터 설계 기초</div>
+    <p>차량 배터리 12 V에서 5 V USB 출력을 만드는 벅 컨버터의 듀티 사이클을 구하라. 출력 2 A일 때 입력 전류는? (효율 90%)</p>
+    <ol class="steps">
+      <li><strong>듀티 사이클:</strong> D = V<sub>out</sub>/V<sub>in</sub> = 5/12 ≈ 0.417 (약 42%).</li>
+      <li><strong>출력 전력:</strong> 5 V × 2 A = 10 W. 입력 전력 = 10/0.9 ≈ 11.1 W.</li>
+      <li><strong>입력 전류:</strong> 11.1 W ÷ 12 V ≈ 0.93 A.</li>
+      <li><strong>주목:</strong> 입력 전류(0.93 A)가 출력 전류(2 A)보다 <strong>작다</strong> — 컨버터는 전압만 바꾸는 게 아니라 전류도 반대로 바뀐다(전력 보존). 리니어라면 입력도 2 A였을 것이다.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 5-2. 부스트 컨버터 계산</div>
+    <p>3.7 V 리튬 배터리로 12 V를 만들려 한다. 필요한 듀티 사이클은?</p>
+    <ol class="steps">
+      <li><strong>식 변형:</strong> V<sub>out</sub> = V<sub>in</sub>/(1−D) → 1−D = V<sub>in</sub>/V<sub>out</sub> = 3.7/12 = 0.308.</li>
+      <li><strong>D 계산:</strong> D = 1 − 0.308 = 0.692.</li>
+      <li><strong>답:</strong> 약 69%. 스위치가 한 주기의 69%를 인덕터 에너지 비축에 쓰고, 31% 동안 그 에너지를 12 V로 방출한다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">듀티 사이클의 정의를 쓰고, 주기 50 μs 중 ON이 20 μs이면 D는 얼마인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: D = t_on/T = 20/50 = 0.4 (40%)</span></div></details></div>
+    <div class="prob"><div class="q">PWM이 "손실 없이" 평균 전압을 만드는 원리를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 스위치를 완전 ON/OFF로만 오가며 ON 시간 비율(D)로 평균을 조절한다. 소자가 중간 상태에 머물지 않으므로 V×I 손실이 거의 없고, LC 필터가 펄스를 평균값으로 평활한다.</div></details></div>
+    <div class="prob"><div class="q">24 V 입력 벅 컨버터에서 D = 0.25일 때 출력 전압은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 6 V</span><br>V<sub>out</sub> = DV<sub>in</sub> = 0.25 × 24.</div></details></div>
+    <div class="prob"><div class="q">벅 컨버터에서 스위치가 OFF인 동안 부하 전류는 어떤 경로로 흐르는가? 그 소자의 이름은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 인덕터가 전류를 유지하려는 성질 때문에 <strong>환류 다이오드(freewheeling diode)</strong>를 통해 "인덕터→부하→다이오드→인덕터"의 루프로 계속 흐른다. (동기식 컨버터는 다이오드 대신 두 번째 MOSFET을 쓴다)</div></details></div>
+    <div class="prob"><div class="q">부스트 컨버터가 입력보다 높은 전압을 만들 수 있는 물리적 이유를 인덕터의 성질로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 스위치가 OFF되는 순간 인덕터는 전류를 유지하려고(v = L di/dt) <strong>스스로 전압을 발생</strong>시키는데, 이 전압이 입력 전압에 <strong>직렬로 더해져</strong> 출력으로 전달되므로 출력이 입력보다 높아진다.</div></details></div>
+    <div class="prob"><div class="q">5 V 입력 부스트 컨버터에서 D = 0.6일 때 이상적 출력 전압은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 12.5 V</span><br>V<sub>out</sub> = 5/(1−0.6) = 5/0.4.</div></details></div>
+    <div class="prob"><div class="q">9 V에서 3.3 V를 만드는 두 방법(리니어, 벅)의 효율을 비교하라. (벅은 90% 가정, 부하 1 A)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 리니어: 효율 ≈ V<sub>out</sub>/V<sub>in</sub> = 3.3/9 ≈ 37%, 손실 (9−3.3)×1 = 5.7 W. 벅: 효율 90%, 손실 ≈ 3.3/0.9 − 3.3 ≈ 0.37 W. 벅이 압도적으로 유리하다. 단, 잡음에 민감한 회로에는 리니어가 낫다.</div></details></div>
+    <div class="prob"><div class="q">스위칭 주파수를 높이면(예: 50 kHz → 1 MHz) 어떤 장단점이 있는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 장점 — 같은 리플에 필요한 L·C가 작아져 부품이 <strong>소형화</strong>된다. 단점 — 스위칭 횟수 자체가 늘어 <strong>스위칭 손실</strong>과 EMI가 증가한다. 효율과 크기 사이의 트레이드오프다.</div></details></div>
+    <div class="prob"><div class="q">벅 컨버터의 출력 전류가 입력 전류보다 클 수 있는 이유를 전력 보존으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 이상적 컨버터는 P<sub>in</sub> = P<sub>out</sub>, 즉 V<sub>in</sub>I<sub>in</sub> = V<sub>out</sub>I<sub>out</sub>. 전압을 낮추면 그 비율만큼 전류는 커진다(변압기와 같은 원리의 DC 버전). 12 V/1 A 입력 → 5 V/2.16 A 출력(90% 효율)이 가능한 이유다.</div></details></div>
+    <div class="prob"><div class="q">휴대폰 고속충전기(USB-PD)가 작으면서도 뜨겁지 않은 이유를 이 과목의 개념 두 가지 이상으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① <strong>스위칭 방식(SMPS)</strong>이라 손실(발열)이 작다. ② <strong>높은 스위칭 주파수</strong>(수백 kHz)를 쓰므로 변압기·필터 부품이 아주 작아진다. ③ 효율이 90%를 넘어 30 W급 출력에도 손실은 2~3 W 수준이라 방열판이 거의 필요 없다.</div></details></div>
+  </div>
+
+  <div class="keypoint">🎉 정류 → 필터 → 위상 제어 → 스위칭 컨버터까지, ELTR 262의 골격을 완주했습니다. 이 과목은 로터리 머신(모터 구동)과 PLC(아날로그 제어)의 기반이기도 합니다 — VFD(가변 주파수 드라이브)를 만나면 "정류기 + DC 링크 + 인버터"라는 이 교재의 조합으로 되어 있음을 알아보게 될 거예요.</div>
+
+  <div class="done-box"><input type="checkbox" data-ch="5" class="done-check"><label>5장 완료! 전체 과정 수료 🎓</label></div>
+</section>
+
+<!-- ###CH_END### -->
+
+</main>
+</div>
+
+<script>
+const CHAPTERS = [
+  {id:0, title:"학습 안내", short:"개요", desc:"이 교재의 사용법과 전체 목차"},
+  {id:1, title:"1장. 전력전자 개요 — 스위치로 하는 변환", short:"1장", desc:"4대 변환, 스위칭이 효율의 열쇠인 이유"},
+  {id:2, title:"2장. 정류회로 — 반파·전파·브리지", short:"2장", desc:"rectifier의 세 형태와 출력 파형, 평균 전압"},
+  {id:3, title:"3장. 필터링과 리플", short:"3장", desc:"커패시터 필터, 리플 전압, 부하와 리플의 관계"},
+  {id:4, title:"4장. SCR과 트라이악 — 위상 제어", short:"4장", desc:"사이리스터 동작, 게이트 점호, 조광기 원리"},
+  {id:5, title:"5장. 스위칭 레귤레이터와 DC-DC 컨버터", short:"5장", desc:"리니어 vs 스위칭, PWM, 벅·부스트 개념"}
+];
+const KEY = "eet-powerelec-progress";
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ progress = {}; }
+
+function saveProgress(){ try{ localStorage.setItem(KEY, JSON.stringify(progress)); }catch(e){} }
+
+function buildNav(){
+  const nav = document.getElementById("navList");
+  nav.innerHTML = "";
+  CHAPTERS.forEach(c => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.dataset.ch = c.id;
+    const done = c.id > 0 && progress[c.id];
+    btn.innerHTML = `<span class="check">${c.id===0 ? "🏠" : (done ? "✔" : "·")}</span><span>${c.title}</span>`;
+    btn.onclick = () => showChapter(c.id);
+    li.appendChild(btn); nav.appendChild(li);
+  });
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  const total = CHAPTERS.length - 1;
+  const done = Object.keys(progress).filter(k => progress[k]).length;
+  document.getElementById("progressFill").style.width = (done/total*100) + "%";
+  document.getElementById("progressLabel").textContent = `${done} / ${total} 챕터 완료`;
+}
+
+function buildToc(){
+  const wrap = document.getElementById("tocCards");
+  wrap.innerHTML = "";
+  CHAPTERS.slice(1).forEach(c => {
+    const d = document.createElement("div");
+    d.className = "toc-card";
+    d.innerHTML = `<span class="badge">${progress[c.id] ? "✔ 완료" : ""}</span><div class="t">${c.title}</div><div class="d">${c.desc}</div>`;
+    d.onclick = () => showChapter(c.id);
+    wrap.appendChild(d);
+  });
+}
+
+function buildChapterNavs(){
+  CHAPTERS.forEach(c => {
+    if(c.id === 0) return;
+    const sec = document.getElementById("ch"+c.id);
+    if(!sec) return;
+    const nav = document.createElement("div");
+    nav.className = "ch-nav";
+    const prev = c.id - 1, next = c.id + 1;
+    let html = "";
+    html += `<button onclick="showChapter(${prev})">← ${prev===0 ? "학습 안내" : CHAPTERS[prev].title}</button>`;
+    if(next < CHAPTERS.length){
+      html += `<button onclick="showChapter(${next})">${CHAPTERS[next].title} →</button>`;
+    } else {
+      html += `<button onclick="showChapter(0)">🏠 처음으로</button>`;
+    }
+    nav.innerHTML = html;
+    sec.appendChild(nav);
+  });
+}
+
+function showChapter(n){
+  document.querySelectorAll("section.chapter").forEach(s => s.classList.remove("visible"));
+  const sec = document.getElementById("ch"+n);
+  if(sec) sec.classList.add("visible");
+  document.querySelectorAll("#navList button").forEach(b => b.classList.toggle("active", +b.dataset.ch === n));
+  if(n === 0) buildToc();
+  window.scrollTo({top:0});
+  try{ localStorage.setItem(KEY+"-last", n); }catch(e){}
+}
+
+document.addEventListener("change", e => {
+  if(e.target.classList && e.target.classList.contains("done-check")){
+    progress[e.target.dataset.ch] = e.target.checked;
+    saveProgress(); buildNav();
+  }
+});
+
+function initChecks(){
+  document.querySelectorAll(".done-check").forEach(cb => {
+    cb.checked = !!progress[cb.dataset.ch];
+  });
+}
+
+buildNav();
+buildChapterNavs();
+initChecks();
+let last = 0;
+try{ last = parseInt(localStorage.getItem(KEY+"-last")) || 0; }catch(e){}
+showChapter(last);
+</script>
+</body>
+</html>

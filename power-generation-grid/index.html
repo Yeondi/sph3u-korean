@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>발전과 전력계통 개념 학습 — SAIT EET 예습</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2733; --sub:#5a6b7b;
+    --accent:#0f62fe; --accent-soft:#e8f0fe; --ok:#1a8a5a; --ok-soft:#e3f4ec;
+    --warn:#b05c00; --warn-soft:#fff3e0; --line:#dde3ea; --code:#f0f3f7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
+       background:var(--bg); color:var(--ink); line-height:1.75; font-size:16px;}
+  .layout{display:flex; min-height:100vh;}
+
+  aside{width:270px; flex-shrink:0; background:var(--card); border-right:1px solid var(--line);
+        padding:22px 16px; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  aside h2{font-size:17px; margin-bottom:4px;}
+  aside .sub{font-size:12.5px; color:var(--sub); margin-bottom:14px;}
+  aside .sub a{color:var(--sub);}
+  .progress-wrap{margin-bottom:16px;}
+  .progress-bar{height:10px; background:var(--line); border-radius:6px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:var(--ok); transition:width .3s;}
+  .progress-label{font-size:12.5px; color:var(--sub); margin-top:4px;}
+  .navlist{list-style:none;}
+  .navlist li{margin-bottom:2px;}
+  .navlist button{width:100%; text-align:left; border:none; background:none; cursor:pointer;
+        padding:8px 10px; border-radius:8px; font-size:14px; font-family:inherit; color:var(--ink);
+        display:flex; align-items:center; gap:8px; line-height:1.4;}
+  .navlist button:hover{background:var(--accent-soft);}
+  .navlist button.active{background:var(--accent); color:#fff; font-weight:bold;}
+  .navlist .check{width:18px; flex-shrink:0; text-align:center; font-size:13px; color:var(--ok);}
+  .navlist button.active .check{color:#fff;}
+
+  main{flex:1; padding:34px 44px 80px; max-width:900px;}
+  section.chapter{display:none;}
+  section.chapter.visible{display:block;}
+  h1{font-size:26px; margin-bottom:6px;}
+  .ch-sub{color:var(--sub); font-size:14px; margin-bottom:24px;}
+  h2{font-size:20px; margin:34px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--accent-soft);}
+  h3{font-size:16.5px; margin:22px 0 8px; color:var(--accent);}
+  p{margin-bottom:12px;}
+  ul,ol{margin:0 0 12px 24px;}
+  li{margin-bottom:6px;}
+  strong{color:#0b3d91;}
+  .en{color:var(--sub); font-size:0.92em;}
+
+  .analogy{background:var(--warn-soft); border-left:4px solid var(--warn);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .analogy::before{content:"💡 비유로 이해하기"; display:block; font-weight:bold; color:var(--warn); font-size:13.5px; margin-bottom:4px;}
+  .keypoint{background:var(--accent-soft); border-left:4px solid var(--accent);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .keypoint::before{content:"📌 핵심 정리"; display:block; font-weight:bold; color:var(--accent); font-size:13.5px; margin-bottom:4px;}
+  .caution{background:#fdecec; border-left:4px solid #c0392b; padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .caution::before{content:"⚠️ 헷갈리기 쉬운 부분"; display:block; font-weight:bold; color:#c0392b; font-size:13.5px; margin-bottom:4px;}
+
+  .formula{background:var(--code); border:1px solid var(--line); border-radius:8px;
+           padding:10px 16px; margin:12px 0; font-size:17px; text-align:center;
+           font-family:'Cambria Math',Georgia,serif; overflow-x:auto;}
+  sub,sup{font-size:0.72em;}
+
+  .ladder{background:#1c2733; color:#d7e3ee; border-radius:10px; padding:14px 18px; margin:12px 0;
+          font-family:Consolas,'Courier New',monospace; font-size:14px; line-height:1.6; overflow-x:auto; white-space:pre;}
+
+  .tablewrap{overflow-x:auto; margin:14px 0;}
+  table{border-collapse:collapse; width:100%; background:var(--card); font-size:14.5px;}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--accent-soft); font-size:14px;}
+  table.compare th:first-child, table.compare td:first-child{background:#fafbfc; font-weight:bold; white-space:nowrap;}
+
+  .example{background:var(--card); border:1px solid var(--line); border-radius:12px;
+           padding:18px 20px; margin:16px 0;}
+  .example .ex-title{font-weight:bold; color:var(--ok); margin-bottom:8px; font-size:15.5px;}
+  .example .steps{margin-left:4px;}
+  .example .steps li{margin-bottom:8px;}
+
+  .problems{counter-reset:prob; margin-top:8px;}
+  .prob{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 18px; margin-bottom:14px;}
+  .prob .q{margin-bottom:10px;}
+  .prob .q::before{counter-increment:prob; content:"문제 " counter(prob) ". "; font-weight:bold; color:var(--accent);}
+  details{margin-top:8px;}
+  details summary{cursor:pointer; display:inline-block; background:var(--accent-soft); color:var(--accent);
+        padding:6px 14px; border-radius:20px; font-size:13.5px; font-weight:bold; user-select:none; list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary:hover{background:var(--accent); color:#fff;}
+  details[open] summary{background:var(--ok-soft); color:var(--ok);}
+  details .answer{background:var(--ok-soft); border-radius:8px; padding:12px 16px; margin-top:10px; font-size:15px;}
+  details .answer .a-label{font-weight:bold; color:var(--ok);}
+
+  .done-box{margin:36px 0 20px; background:var(--ok-soft); border:1.5px dashed var(--ok);
+        border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:10px; font-size:15.5px;}
+  .done-box input{width:20px; height:20px; accent-color:var(--ok); cursor:pointer;}
+
+  .ch-nav{display:flex; justify-content:space-between; margin-top:14px; gap:12px;}
+  .ch-nav button{border:1px solid var(--line); background:var(--card); border-radius:10px;
+        padding:12px 18px; cursor:pointer; font-family:inherit; font-size:14.5px; color:var(--ink); max-width:48%;}
+  .ch-nav button:hover{border-color:var(--accent); color:var(--accent);}
+  .ch-nav .spacer{flex:1;}
+
+  .toc-card{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 20px; margin-bottom:12px; cursor:pointer;}
+  .toc-card:hover{border-color:var(--accent);}
+  .toc-card .t{font-weight:bold; font-size:16px;}
+  .toc-card .d{font-size:13.5px; color:var(--sub); margin-top:2px;}
+  .toc-card .badge{float:right; font-size:12.5px; color:var(--ok); font-weight:bold;}
+
+  #menuToggle{display:none;}
+  @media (max-width:820px){
+    .layout{flex-direction:column;}
+    aside{width:100%; height:auto; position:static; border-right:none; border-bottom:1px solid var(--line);}
+    main{padding:22px 18px 60px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <h2>🗼 발전과 전력계통</h2>
+  <div class="sub">SAIT EET 2학년 ELEC 302·361 예습용 · <a href="../">← Study Hub</a></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 챕터 완료</div>
+  </div>
+  <ul class="navlist" id="navList"></ul>
+</aside>
+
+<main id="main">
+
+<!-- ============ 홈(개요) ============ -->
+<section class="chapter" id="ch0">
+  <h1>학습 안내</h1>
+  <p class="ch-sub">캐나다 SAIT — Electrical Engineering Technology 2학년 전력계통 과목(ELEC 302 Generation and Grid Operations, ELEC 361 Power System Analysis) 예습 교재</p>
+  <p>이 교재는 회로이론 교재 10장(교류 전력)에서 배운 <strong>유효·무효·피상전력과 역률</strong>을 이어받아, 그 개념들이 실제로 활약하는 무대 — <strong>발전소에서 콘센트까지의 전력계통 <span class="en">(power system, the grid)</span></strong> — 로 시야를 넓힙니다. 3상 시스템의 Y/Δ 계산도 여기서 다룹니다.</p>
+  <ul>
+    <li>모든 용어는 <strong>문제에 나오기 전에 반드시 먼저 정의</strong>합니다.</li>
+    <li>핵심 용어는 <strong>영어를 병기</strong>합니다. 계통 용어는 특히 영어 약어(PF, kVAR, HV…)가 그대로 쓰입니다.</li>
+    <li>비슷한 개념(Y vs Δ, 송전 vs 배전 등)은 <strong>비교표</strong>로 짚습니다.</li>
+    <li>연습문제 정답·해설은 <strong>접혀 있습니다</strong>. 먼저 풀고 확인하세요.</li>
+    <li>챕터 끝의 <strong>완료 체크</strong>로 진행 상황이 저장됩니다.</li>
+  </ul>
+  <h2>챕터 목차</h2>
+  <div id="tocCards"></div>
+  <div class="keypoint">선수 지식: 회로이론 교재 10장(P, Q, S, 역률, 전력 삼각형). 1장이 그 복습으로 시작하므로 잊었어도 괜찮습니다. 모터·변압기 지식은 /rotating-machines/ 교재와 상호 보완됩니다.</div>
+</section>
+
+<!-- ============ 1장 ============ -->
+<section class="chapter" id="ch1">
+  <h1>1장. 교류 전력 복습과 역률 개선</h1>
+  <p class="ch-sub">AC Power Review &amp; Power Factor Correction — 회로이론 10장을 계통의 언어로 다시 읽기</p>
+
+  <h2>1. 세 가지 전력 복습 <span class="en">(P, Q, S)</span></h2>
+  <p>회로이론 교재 10장의 핵심을 계통 관점에서 다시 정의합니다.</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>유효전력 P <span class="en">(active/real power)</span></th><th>무효전력 Q <span class="en">(reactive power)</span></th><th>피상전력 S <span class="en">(apparent power)</span></th></tr>
+    <tr><td>단위</td><td>W, kW, MW</td><td>VAR, kVAR <span class="en">(volt-ampere reactive)</span></td><td>VA, kVA, MVA</td></tr>
+    <tr><td>정체</td><td>실제로 일(열·빛·회전)이 되는 전력</td><td>L·C와 전원 사이를 <strong>왕복만</strong> 하는 전력</td><td>V×I 그대로의 곱 (설비 용량 기준)</td></tr>
+    <tr><td>공식</td><td>P = VI cosθ</td><td>Q = VI sinθ</td><td>S = VI, S² = P² + Q²</td></tr>
+    <tr><td>계통에서의 의미</td><td>연료가 실제로 타는 양, 요금의 기본</td><td>전압을 떠받치는 데 필요하지만 선로를 점유</td><td>발전기·변압기·전선의 <strong>용량 한도</strong></td></tr>
+  </table></div>
+  <p><strong>역률 <span class="en">(power factor, PF)</span></strong> = P/S = cos θ. 부하 전류가 전압보다 뒤지면 <strong>지상 <span class="en">(lagging, 유도성 — 모터·변압기)</span></strong>, 앞서면 <strong>진상 <span class="en">(leading, 용량성)</span></strong>입니다. 산업 현장의 부하는 대부분 모터이므로 <strong>지상</strong>입니다.</p>
+  <div class="analogy">맥주잔 비유가 표준입니다. 잔의 크기 = S(설비 용량), 마실 수 있는 맥주 = P, 거품 = Q. 거품(무효전력)이 많으면 같은 잔(전선·변압기)으로 마실 수 있는 맥주(유효전력)가 줄어듭니다. 역률 = 맥주/잔 비율. 전력회사가 거품 많은 손님(저역률 공장)에게 페널티를 물리는 이유입니다.</div>
+
+  <h2>2. 왜 역률을 개선하는가</h2>
+  <p>같은 P를 공급할 때 역률이 낮으면 전류가 커집니다: I = P/(V·PF). 전류가 커지면:</p>
+  <ul>
+    <li>선로·변압기 <strong>I²R 손실 증가</strong> (전류 제곱에 비례!).</li>
+    <li>같은 설비로 보낼 수 있는 유효전력 감소 (kVA 용량 잠식).</li>
+    <li>선로 전압 강하 증가.</li>
+    <li>전력회사의 <strong>역률 페널티 요금</strong> (보통 PF 0.9~0.95 미만 시).</li>
+  </ul>
+
+  <h2>3. 커패시터에 의한 역률 개선 <span class="en">(power factor correction)</span></h2>
+  <p>유도성 부하의 +Q(지상 무효전력)를, 부하와 병렬로 단 <strong>커패시터 뱅크 <span class="en">(capacitor bank)</span></strong>의 −Q로 상쇄합니다. P는 그대로 두고 Q만 줄여 전력 삼각형을 눕히는 것입니다.</p>
+  <div class="formula">필요한 커패시터 용량: Q<sub>C</sub> = P × (tanθ₁ − tanθ₂) &nbsp;&nbsp; [θ₁: 현재 각, θ₂: 목표 각]</div>
+  <div class="caution">역률을 정확히 1.0으로 만들지 않고 보통 0.95~0.98에서 멈춥니다. 부하가 줄었을 때 커패시터가 남아돌면 <strong>과보상(진상 운전)</strong>이 되어 전압 상승·공진 문제가 생기기 때문입니다. "역률 개선 = 항상 1.0"이 아니라는 점, 시험 포인트입니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>유효전력 / 무효전력 / 피상전력</td><td>active (real) / reactive / apparent power</td><td>W / VAR / VA</td></tr>
+    <tr><td>역률</td><td>power factor (PF = cos θ)</td><td>P/S</td></tr>
+    <tr><td>지상 / 진상</td><td>lagging / leading</td><td>유도성 / 용량성</td></tr>
+    <tr><td>전력 삼각형</td><td>power triangle</td><td>P-Q-S 직각삼각형</td></tr>
+    <tr><td>역률 개선(보상)</td><td>power factor correction</td><td>병렬 커패시터</td></tr>
+    <tr><td>커패시터 뱅크</td><td>capacitor bank</td><td>공장·변전소에 설치</td></tr>
+    <tr><td>과보상</td><td>overcompensation (leading operation)</td><td>커패시터 과다</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 1-1. 전력 삼각형 계산</div>
+    <p>공장이 480 V에서 100 kW를 소비하며 역률은 0.7 지상이다. (a) 피상전력 S, (b) 무효전력 Q, (c) 선로 전류를 구하라. (단상 등가로 계산)</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> S = P/PF = 100/0.7 ≈ 142.9 kVA.</li>
+      <li><strong>(b)</strong> Q = √(S²−P²) = √(142.9²−100²) = √(20,420−10,000) ≈ 102 kVAR.</li>
+      <li><strong>(c)</strong> I = S/V = 142,900/480 ≈ 298 A.</li>
+      <li><strong>주목:</strong> 유효전력은 100 kW인데 설비는 143 kVA를 감당해야 한다 — 저역률의 낭비가 수치로 보인다.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 1-2. 역률 개선 커패시터 용량</div>
+    <p>위 공장(100 kW, PF 0.7)의 역률을 0.95로 개선하려면 몇 kVAR의 커패시터가 필요한가? 개선 후 전류는?</p>
+    <ol class="steps">
+      <li><strong>각도:</strong> θ₁ = cos⁻¹0.7 = 45.6°, θ₂ = cos⁻¹0.95 = 18.2°.</li>
+      <li><strong>커패시터 용량:</strong> Q<sub>C</sub> = 100 × (tan45.6° − tan18.2°) = 100 × (1.020 − 0.329) ≈ 69 kVAR.</li>
+      <li><strong>개선 후:</strong> S′ = 100/0.95 = 105.3 kVA → I′ = 105,300/480 ≈ 219 A.</li>
+      <li><strong>효과:</strong> 전류 298 → 219 A (27% 감소). 선로 손실은 전류 제곱에 비례하므로 (219/298)² ≈ 0.54 — 절반 가까이 줄어든다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <p>정답을 보지 말고 먼저 풀어 보세요.</p>
+  <div class="problems">
+    <div class="prob"><div class="q">P, Q, S의 이름(한/영)과 단위를 각각 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> P = 유효전력(active/real power), W. Q = 무효전력(reactive power), VAR. S = 피상전력(apparent power), VA.</div></details></div>
+    <div class="prob"><div class="q">무효전력은 "쓸모없는 전력"인가? 계통에서 Q의 역할을 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 아니다.</span><br>Q는 모터·변압기의 자기장을 만들고 <strong>계통 전압을 떠받치는</strong> 데 반드시 필요하다. 다만 일로 변하지 않고 왕복만 하면서 선로 용량을 점유하므로, "필요하지만 최소화해야 할" 전력이다.</div></details></div>
+    <div class="prob"><div class="q">P = 60 kW, Q = 80 kVAR인 부하의 S와 역률을 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: S = 100 kVA, PF = 0.6</span><br>S = √(60²+80²) = 100. PF = P/S = 0.6.</div></details></div>
+    <div class="prob"><div class="q">공장 부하가 대부분 "지상 역률"인 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 주된 부하가 유도 전동기·변압기 같은 <strong>유도성(인덕턴스) 기기</strong>이기 때문이다. 인덕터는 전류가 전압보다 뒤지므로(lagging) 공장 전체가 지상 역률이 된다.</div></details></div>
+    <div class="prob"><div class="q">같은 100 kW를 공급할 때 PF 1.0과 PF 0.5에서 선로 전류는 몇 배 차이나는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 2배</span><br>I = P/(V·PF) ∝ 1/PF. 0.5에서는 1.0의 2배 전류가 흐르고, I²R 손실은 4배가 된다.</div></details></div>
+    <div class="prob"><div class="q">역률 개선 커패시터를 부하와 직렬이 아닌 병렬로 다는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 병렬로 달아야 부하 전압을 바꾸지 않으면서, 부하가 요구하는 지상 무효전력을 커패시터가 <strong>현지에서 공급</strong>(상쇄)해 전원에서 오는 전류만 줄일 수 있다. 직렬로 달면 부하 전압 자체가 변해 버린다.</div></details></div>
+    <div class="prob"><div class="q">P = 200 kW, PF 0.8 → 0.95로 개선하는 데 필요한 Q_C를 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 84 kVAR</span><br>tan(cos⁻¹0.8) = 0.75, tan(cos⁻¹0.95) = 0.329. Q<sub>C</sub> = 200×(0.75−0.329) = 84.2 kVAR.</div></details></div>
+    <div class="prob"><div class="q">역률 개선의 경제적 이득을 세 가지 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 역률 페널티 요금 회피, ② 선로·변압기 I²R 손실 감소(전기요금 절감), ③ 설비 여유 용량 확보(kVA 잠식 해소 — 증설 없이 부하 추가 가능), ④ 전압 강하 개선.</div></details></div>
+    <div class="prob"><div class="q">커패시터를 너무 많이 달아 PF가 진상이 되면 어떤 문제가 있는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 경부하 시 전압이 오히려 <strong>상승</strong>하고(페란티 유사 효과), 계통 인덕턴스와의 공진·고조파 증폭 위험이 생기며, 진상 무효전력도 지상과 마찬가지로 선로를 점유한다. 그래서 목표를 0.95~0.98 지상에 둔다.</div></details></div>
+    <div class="prob"><div class="q">변압기와 발전기의 정격이 kW가 아닌 kVA(MVA)인 이유를 역률과 연결해 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 기기의 발열 한계는 전압과 <strong>전류</strong>로 정해지는데, 부하 역률은 기기 제조사가 알 수 없다. 같은 전류라도 역률에 따라 kW는 달라지므로, 역률과 무관한 V×A(피상전력)로 용량을 표기한다. 실제 공급 가능한 kW = kVA × 부하의 PF.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="1" class="done-check"><label>1장 완료! (체크하면 진행 상황에 저장됩니다)</label></div>
+</section>
+
+<!-- ============ 2장 ============ -->
+<section class="chapter" id="ch2">
+  <h1>2장. 3상 시스템 — Y와 Δ</h1>
+  <p class="ch-sub">Three-Phase Systems — 선간과 상, √3 하나로 정리하는 3상 계산</p>
+
+  <h2>1. 왜 3상인가 <span class="en">(why three-phase)</span></h2>
+  <p><strong>3상 시스템 <span class="en">(three-phase system)</span></strong>은 120°씩 어긋난 세 개의 전압원을 한 세트로 쓰는 방식입니다. 단상 대비 장점:</p>
+  <ul>
+    <li>같은 전력을 <strong>더 적은 도체 재료</strong>로 전송 (전선 6가닥 대신 3~4가닥).</li>
+    <li>순간 전력의 합이 <strong>일정</strong> → 발전기·모터의 토크가 매끈.</li>
+    <li>회전 자기장이 저절로 생겨 <strong>유도 전동기</strong>가 가능 (/rotating-machines/ 4장).</li>
+    <li>세 상의 합이 항상 0 → 평형 부하에서는 <strong>중성선에 전류가 없다</strong>.</li>
+  </ul>
+
+  <h2>2. Y 결선과 Δ 결선 <span class="en">(wye and delta connections)</span></h2>
+  <p>세 코일(전원이든 부하든)을 연결하는 방법은 두 가지입니다.</p>
+  <ul>
+    <li><strong>Y(와이/스타) 결선 <span class="en">(wye/star connection)</span></strong>: 세 코일의 한쪽 끝을 <strong>중성점 <span class="en">(neutral point)</span></strong>에 모으고 반대쪽 셋을 선로로. 중성선 <span class="en">(neutral wire)</span>을 뽑을 수 있어 <strong>두 가지 전압</strong>(선간/상)을 제공.</li>
+    <li><strong>Δ(델타) 결선 <span class="en">(delta connection)</span></strong>: 세 코일을 고리(삼각형)로 이어 꼭짓점 셋을 선로로. 중성선 없음.</li>
+  </ul>
+  <p>용어 정의 — 이 두 쌍을 구분하는 것이 3상의 전부입니다:</p>
+  <ul>
+    <li><strong>선간 전압 <span class="en">(line voltage, V<sub>L</sub>)</span></strong>: 선로 두 가닥 사이의 전압. / <strong>상 전압 <span class="en">(phase voltage, V<sub>φ</sub>)</span></strong>: 코일 하나에 걸리는 전압.</li>
+    <li><strong>선 전류 <span class="en">(line current, I<sub>L</sub>)</span></strong>: 선로에 흐르는 전류. / <strong>상 전류 <span class="en">(phase current, I<sub>φ</sub>)</span></strong>: 코일 하나에 흐르는 전류.</li>
+  </ul>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>Y 결선 <span class="en">(wye)</span></th><th>Δ 결선 <span class="en">(delta)</span></th></tr>
+    <tr><td>전압 관계</td><td><strong>V<sub>L</sub> = √3 × V<sub>φ</sub></strong></td><td>V<sub>L</sub> = V<sub>φ</sub></td></tr>
+    <tr><td>전류 관계</td><td>I<sub>L</sub> = I<sub>φ</sub></td><td><strong>I<sub>L</sub> = √3 × I<sub>φ</sub></strong></td></tr>
+    <tr><td>중성선</td><td>있음 (4선식 가능)</td><td>없음 (3선식)</td></tr>
+    <tr><td>대표 용도</td><td>배전(두 전압 제공: 347/600 V, 120/208 V), 발전기</td><td>모터·변압기 권선, 송전측</td></tr>
+  </table></div>
+  <div class="keypoint">√3 ≈ 1.732 하나만 기억하면 됩니다. Y는 <strong>전압에</strong>, Δ는 <strong>전류에</strong> √3이 붙습니다. 예: 캐나다 상업용 120/208 V 시스템 — 상 전압 120 V(콘센트), 선간 전압 120×√3 ≈ 208 V(대형 장비). SAIT 실습실 표준인 347/600 V도 같은 관계(347×√3 ≈ 600)입니다.</div>
+  <div class="caution">"내 콘센트는 120 V인데 3상 모터 명판은 208 V네?" — 둘 다 같은 계통입니다. 상 전압을 말하는지 선간 전압을 말하는지 <strong>항상 명시</strong>해야 합니다. 북미 계통 문제에서 전압이 주어지면 별도 언급이 없는 한 <strong>선간 전압</strong>입니다.</div>
+
+  <h2>3. 3상 전력 <span class="en">(three-phase power)</span></h2>
+  <div class="formula">P = √3 × V<sub>L</sub> × I<sub>L</sub> × cosθ &nbsp;&nbsp;&nbsp; S = √3 × V<sub>L</sub> × I<sub>L</sub> &nbsp;&nbsp;&nbsp; [Y든 Δ든 동일한 공식]</div>
+  <p>유도: 총 전력 = 3 × (상 전압 × 상 전류 × cosθ)인데, 선간 값으로 바꾸면 Y·Δ 어느 쪽이든 √3·V<sub>L</sub>·I<sub>L</sub>·cosθ로 정리됩니다. <strong>cosθ의 θ는 언제나 "상 전압과 상 전류" 사이의 각</strong>입니다(선간 값 사이의 각이 아님).</p>
+  <div class="analogy">3상은 <strong>3인 조정(로잉) 팀</strong>입니다. 세 명이 정확히 1/3박자씩 어긋나게 노를 저으면 배는 출렁임 없이 미끄러지듯 나아갑니다(순간 전력 일정). 한 명이 빠지거나 박자가 흐트러지면(불평형) 배가 출렁이기 시작하죠 — 그것이 불평형 부하의 진동·중성선 전류입니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>3상 시스템</td><td>three-phase system</td><td>120° 간격</td></tr>
+    <tr><td>Y(와이/스타) 결선</td><td>wye (star) connection</td><td>중성점 있음</td></tr>
+    <tr><td>Δ(델타) 결선</td><td>delta connection</td><td>고리형</td></tr>
+    <tr><td>선간 전압 / 상 전압</td><td>line voltage / phase voltage</td><td>Y: V<sub>L</sub>=√3V<sub>φ</sub></td></tr>
+    <tr><td>선 전류 / 상 전류</td><td>line current / phase current</td><td>Δ: I<sub>L</sub>=√3I<sub>φ</sub></td></tr>
+    <tr><td>중성점 / 중성선</td><td>neutral point / neutral wire</td><td>Y 전용</td></tr>
+    <tr><td>평형 / 불평형 부하</td><td>balanced / unbalanced load</td><td>세 상이 같은가</td></tr>
+    <tr><td>상 순서</td><td>phase sequence (rotation)</td><td>모터 회전 방향 결정</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 2-1. Y 결선 계산</div>
+    <p>선간 600 V 계통에 Y 결선 부하가 연결되어 선 전류 20 A가 흐른다(PF 0.9). (a) 상 전압, (b) 상 전류, (c) 3상 유효전력을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> Y: V<sub>φ</sub> = V<sub>L</sub>/√3 = 600/1.732 ≈ 347 V. (SAIT 표준 347/600 V!)</li>
+      <li><strong>(b)</strong> Y: I<sub>φ</sub> = I<sub>L</sub> = 20 A.</li>
+      <li><strong>(c)</strong> P = √3 × 600 × 20 × 0.9 = 1.732 × 600 × 20 × 0.9 ≈ 18.7 kW.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 2-2. Δ 결선 계산</div>
+    <p>선간 208 V에 Δ 결선 히터(순저항, 상당 저항 10 Ω)가 연결됐다. (a) 상 전류, (b) 선 전류, (c) 총 전력을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> Δ에서 각 저항에는 선간 전압이 그대로: I<sub>φ</sub> = 208/10 = 20.8 A.</li>
+      <li><strong>(b)</strong> Δ: I<sub>L</sub> = √3 × 20.8 ≈ 36 A.</li>
+      <li><strong>(c)</strong> P = √3 × 208 × 36 × 1(순저항) ≈ 12.97 kW. (검산: 3 × I<sub>φ</sub>²R = 3 × 20.8² × 10 ≈ 12.98 kW ✓)</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">Y 결선과 Δ 결선에서 √3이 각각 어느 쌍(전압/전류)에 붙는지 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Y — 전압: V<sub>L</sub> = √3V<sub>φ</sub> (전류는 같음). Δ — 전류: I<sub>L</sub> = √3I<sub>φ</sub> (전압은 같음).</div></details></div>
+    <div class="prob"><div class="q">상 전압 120 V인 Y 계통의 선간 전압은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 208 V</span><br>120 × 1.732 = 207.8 V. 북미 상업 건물의 120/208 V 시스템.</div></details></div>
+    <div class="prob"><div class="q">선간 600 V Y 계통의 상 전압은? (캐나다 산업 표준)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 347 V</span><br>600/√3 = 346.4 V → 347/600 V 시스템(캐나다 조명·산업용).</div></details></div>
+    <div class="prob"><div class="q">평형 Y 부하에서 중성선 전류가 0인 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 세 상 전류의 크기가 같고 위상이 정확히 120°씩 어긋나면 벡터(페이저) 합이 0이 된다. 중성선에는 세 상 전류의 합이 흐르므로 0. 불평형이 되면 그 차이만큼 중성선에 전류가 흐른다.</div></details></div>
+    <div class="prob"><div class="q">Δ 결선에 중성선이 없는 이유를 구조로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 세 코일이 고리(삼각형)로 이어져 있어 코일들이 모이는 <strong>공통 중성점 자체가 존재하지 않는다</strong>. 꼭짓점 3개가 모두 선로로 나가는 3선식이다.</div></details></div>
+    <div class="prob"><div class="q">선간 480 V, 선 전류 50 A, PF 0.85인 3상 부하의 유효전력은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 35.3 kW</span><br>P = √3 × 480 × 50 × 0.85 = 1.732×480×50×0.85 ≈ 35,340 W.</div></details></div>
+    <div class="prob"><div class="q">3상 모터가 30 kW를 소비한다(선간 600 V, PF 0.8). 선 전류는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 약 36.1 A</span><br>I<sub>L</sub> = P/(√3·V<sub>L</sub>·PF) = 30,000/(1.732×600×0.8) ≈ 36.1 A.</div></details></div>
+    <div class="prob"><div class="q">같은 부하 코일 3개를 Y로 연결했다가 Δ로 바꾸면 소비 전력은 몇 배가 되는가? (같은 선간 전압)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 3배</span><br>Δ에서는 각 코일에 √3배 전압이 걸리므로(V<sub>L</sub> vs V<sub>L</sub>/√3) 코일당 전력이 (√3)² = 3배. 이 성질을 거꾸로 이용한 것이 Y-Δ 기동(기동 시 Y로 전력·전류를 1/3로)이다.</div></details></div>
+    <div class="prob"><div class="q">3상 전력 공식 P = √3·V_L·I_L·cosθ에서 θ는 무엇과 무엇 사이의 각인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> <strong>상 전압과 상 전류</strong> 사이의 각(= 부하 임피던스 각). 선간 전압과 선 전류 사이의 각이 아니다(선간 전압은 상 전압과 30° 어긋나 있다).</div></details></div>
+    <div class="prob"><div class="q">3상 모터의 회전 방향을 바꾸려면 어떻게 하는가? 그 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 세 선 중 <strong>임의의 두 선을 서로 바꿔</strong> 연결한다. 상 순서(phase sequence)가 반대가 되어 회전 자기장의 방향이 뒤집히기 때문이다. 현장 배선 후 회전 방향 확인이 필수인 이유다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="2" class="done-check"><label>2장 완료!</label></div>
+</section>
+
+<!-- ============ 3장 ============ -->
+<section class="chapter" id="ch3">
+  <h1>3장. 발전-송전-배전 계통 구조</h1>
+  <p class="ch-sub">Generation, Transmission &amp; Distribution — 발전소에서 콘센트까지의 여정</p>
+
+  <h2>1. 전력계통의 전체 그림 <span class="en">(the power system)</span></h2>
+  <p><strong>전력계통 <span class="en">(power system, the grid)</span></strong>은 세 구간으로 나뉩니다.</p>
+  <div class="ladder">발전소 ──[승압 변압기]── 송전(수백 kV) ──[변전소]── 배전(수십 kV~수백 V) ── 수용가
+Generation      step-up        Transmission     substation    Distribution        customer</div>
+  <ul>
+    <li><strong>발전 <span class="en">(generation)</span></strong>: 동기 발전기가 기계 에너지를 전기로 변환. 발전기 출력 전압은 보통 13.8~25 kV.</li>
+    <li><strong>송전 <span class="en">(transmission)</span></strong>: 승압 변압기로 <strong>115~765 kV</strong>까지 올려 장거리 전송. 캐나다 앨버타의 주요 송전 전압은 138/240/500 kV.</li>
+    <li><strong>배전 <span class="en">(distribution)</span></strong>: 변전소 <span class="en">(substation)</span>에서 낮춘 중전압(예: 25 kV)으로 시가지에 뿌리고, 주상/패드 변압기가 최종 이용 전압(북미 120/240 V, 상업 120/208 V, 산업 347/600 V)으로 강압.</li>
+  </ul>
+  <div class="analogy">계통은 <strong>도로망</strong>입니다. 송전선은 도시 사이를 잇는 <strong>고속도로</strong>(고전압 = 고속, 진출입 제한), 배전선은 동네 <strong>일반 도로</strong>, 변전소는 <strong>인터체인지</strong>(속도/전압을 바꿔 갈아타는 곳), 주상 변압기는 <strong>집 앞 골목 진입로</strong>입니다.</div>
+
+  <h2>2. 발전 방식 <span class="en">(generation types)</span></h2>
+  <div class="tablewrap"><table>
+    <tr><th>방식</th><th>English</th><th>에너지원 → 회전</th><th>특징</th></tr>
+    <tr><td>수력</td><td>hydroelectric</td><td>물의 낙차 → 수차</td><td>기동 빠름, 캐나다 전체 1위 전원</td></tr>
+    <tr><td>천연가스(복합)</td><td>natural gas (combined cycle)</td><td>가스터빈+증기터빈</td><td>앨버타의 주력, 부하 추종 우수</td></tr>
+    <tr><td>풍력 / 태양광</td><td>wind / solar (PV)</td><td>바람 / 반도체(회전 없음)</td><td>연료비 0, 출력 변동(간헐성), 태양광은 인버터로 계통 연계</td></tr>
+    <tr><td>원자력</td><td>nuclear</td><td>핵분열 열 → 증기터빈</td><td>대용량 기저부하 <span class="en">(base load)</span></td></tr>
+    <tr><td>석탄</td><td>coal</td><td>연소 열 → 증기터빈</td><td>캐나다에서 퇴출 진행</td></tr>
+  </table></div>
+  <ul>
+    <li><strong>기저부하 <span class="en">(base load)</span></strong>: 하루 종일 깔려 있는 최소 수요 — 대용량·저비용 전원이 담당.</li>
+    <li><strong>첨두부하 <span class="en">(peak load)</span></strong>: 하루 중 최대 수요 시간대 — 기동이 빠른 가스·수력이 담당 <span class="en">(peaking plant)</span>.</li>
+  </ul>
+
+  <h2>3. 변전소의 역할 <span class="en">(substation)</span></h2>
+  <ul>
+    <li><strong>전압 변환</strong>: 전력 변압기로 승압/강압.</li>
+    <li><strong>개폐 <span class="en">(switching)</span></strong>: 차단기 <span class="en">(circuit breaker)</span>·단로기 <span class="en">(disconnect switch)</span>로 선로를 잇고 끊음.</li>
+    <li><strong>보호</strong>: 계전기가 고장을 감지해 차단기를 동작 (5장, /protection-and-networks/).</li>
+    <li><strong>감시·제어</strong>: SCADA로 원격 감시(5장).</li>
+    <li>모선 <span class="en">(bus/busbar)</span>: 변전소 안에서 여러 회로가 접속되는 공통 도체.</li>
+  </ul>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>전력계통</td><td>power system, (electrical) grid</td><td>—</td></tr>
+    <tr><td>발전 / 송전 / 배전</td><td>generation / transmission / distribution</td><td>3대 구간</td></tr>
+    <tr><td>승압/강압 변압기</td><td>step-up / step-down transformer</td><td>구간 경계마다</td></tr>
+    <tr><td>변전소</td><td>substation</td><td>변압+개폐+보호</td></tr>
+    <tr><td>모선</td><td>bus (busbar)</td><td>공통 접속 도체</td></tr>
+    <tr><td>차단기 / 단로기</td><td>circuit breaker / disconnect switch</td><td>부하 차단 가능 / 불가</td></tr>
+    <tr><td>기저부하 / 첨두부하</td><td>base load / peak load</td><td>전원 구성의 기준</td></tr>
+    <tr><td>주상 변압기</td><td>pole-mounted (distribution) transformer</td><td>최종 강압</td></tr>
+    <tr><td>수용가</td><td>customer (load)</td><td>전기의 종착지</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 3-1. 전압 단계 추적</div>
+    <p>앨버타의 가스 발전소(발전기 18 kV)에서 캘거리의 주택(120/240 V)까지, 전압이 바뀌는 지점을 순서대로 나열하라. (송전 240 kV, 배전 25 kV 가정)</p>
+    <ol class="steps">
+      <li><strong>발전소 승압 변전소:</strong> 18 kV → 240 kV (송전용 승압).</li>
+      <li><strong>장거리 송전:</strong> 240 kV 선로로 도시 근교까지.</li>
+      <li><strong>1차 변전소:</strong> 240 kV → 25 kV (배전용 강압).</li>
+      <li><strong>배전 선로:</strong> 25 kV로 시가지 주택가까지.</li>
+      <li><strong>주상 변압기:</strong> 25 kV → 120/240 V (최종 강압, 중간탭으로 두 전압 제공).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 3-2. 전원 구성(base vs peak) 판단</div>
+    <p>어느 지역의 수요가 야간 4 GW, 저녁 피크 7 GW이다. 원자력 3.5 GW, 가스 3 GW, 수력 1.5 GW를 보유할 때 합리적인 운용을 설명하라.</p>
+    <ol class="steps">
+      <li><strong>기저부하:</strong> 하루 종일 필요한 4 GW 근처는 연료비가 싸고 출력 조절이 느린 <strong>원자력(3.5 GW) + 가스 일부</strong>가 담당.</li>
+      <li><strong>첨두부하:</strong> 저녁에만 필요한 추가 3 GW는 기동·조절이 빠른 <strong>가스와 수력</strong>이 담당(수력은 몇 분 만에 출력 조절 가능).</li>
+      <li><strong>원리:</strong> "느리고 싼 전원은 바닥에, 빠르고 비싼 전원은 꼭대기에" — 전원 구성(dispatch)의 기본 논리다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">전력계통의 3대 구간과 각 구간의 대략적 전압 범위(북미 기준)를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 발전(generation) 13.8~25 kV → 송전(transmission) 115~765 kV → 배전(distribution) 수 kV~수십 kV(선로), 최종 120/240, 120/208, 347/600 V(이용 전압).</div></details></div>
+    <div class="prob"><div class="q">발전소 출구에 승압 변압기를 두는 이유는? (다음 장의 예고)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 같은 전력을 보낼 때 전압을 높이면 전류가 줄어 선로의 I²R <strong>송전 손실이 급감</strong>하기 때문(4장에서 정량적으로 다룸). 장거리일수록 고전압이 유리하다.</div></details></div>
+    <div class="prob"><div class="q">변전소(substation)의 기능을 세 가지 이상 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 전압 변환(변압기), ② 회로 개폐(차단기·단로기), ③ 고장 보호(계전기+차단기), ④ 계측·원격 감시(SCADA), ⑤ 무효전력 보상(커패시터 뱅크).</div></details></div>
+    <div class="prob"><div class="q">차단기(circuit breaker)와 단로기(disconnect switch)의 결정적 차이는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 차단기는 <strong>부하 전류·고장 전류가 흐르는 중에도</strong> 아크를 소호하며 끊을 수 있다. 단로기는 전류를 끊는 능력이 없어 <strong>무전류 상태에서만</strong> 조작하며, 점검 시 눈에 보이는 분리(가시적 개방)를 만들어 안전을 확보하는 용도다.</div></details></div>
+    <div class="prob"><div class="q">기저부하와 첨두부하의 정의를 쓰고, 각각에 적합한 발전 방식을 예로 들라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 기저부하 = 하루 종일 유지되는 최소 수요 — 원자력·대형 수력 등 대용량 저비용 전원. 첨두부하 = 하루 중 최대 수요 구간 — 기동이 빠른 가스터빈·양수/수력이 적합.</div></details></div>
+    <div class="prob"><div class="q">태양광 발전이 다른 발전 방식과 근본적으로 다른 점(기계 관점)과, 계통 연계에 필요한 장치는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 회전 기계 없이 반도체(PV)가 빛을 <strong>직접 DC로</strong> 변환한다. 계통에 넣으려면 DC→AC 변환 장치인 <strong>인버터</strong>(전력전자 교재)가 필수다.</div></details></div>
+    <div class="prob"><div class="q">주상 변압기 하나가 주택에 120 V와 240 V를 동시에 공급하는 방법은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 2차 권선에 <strong>중간탭(center tap)</strong>을 두고 접지하여, 탭~양단 = 120 V 두 회로와 양단~양단 = 240 V(건조기·레인지용)를 함께 제공한다(분상, split-phase).</div></details></div>
+    <div class="prob"><div class="q">캐나다에서 가장 큰 비중의 발전원은 무엇이며, 앨버타주의 주력은 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 캐나다 전체 — <strong>수력</strong>(약 60%, 그래서 전기를 "hydro"라고 부르는 지역이 많다). 앨버타 — <strong>천연가스</strong> 중심 + 빠르게 성장하는 풍력·태양광.</div></details></div>
+    <div class="prob"><div class="q">모선(bus)이란 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 변전소·배전반에서 여러 회로(선로, 변압기, 발전기)가 공통으로 접속되는 굵은 도체(구리/알루미늄 바). 계통 해석에서 "버스"는 접속점(노드)을 뜻하는 기본 단위다.</div></details></div>
+    <div class="prob"><div class="q">그리드가 "거대한 하나의 기계"라고 불리는 이유를 주파수 관점에서 설명해 보라. (5장 예고)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 계통에 연결된 모든 동기 발전기는 전기적으로 묶여 <strong>정확히 같은 주파수(60 Hz)로 함께</strong> 회전한다. 어디선가 수요가 늘면 계통 전체의 주파수가 함께 미세하게 떨어지고, 모든 발전기가 함께 반응한다 — 대륙 규모의 축이 하나로 이어진 기계처럼 동작한다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="3" class="done-check"><label>3장 완료!</label></div>
+</section>
+
+<!-- ============ 4장 ============ -->
+<section class="chapter" id="ch4">
+  <h1>4장. 송전 손실과 고전압의 이유</h1>
+  <p class="ch-sub">Transmission Losses — 왜 수십만 볼트로 보내는가, 그리고 전압 강하 관리</p>
+
+  <h2>1. 송전 손실 <span class="en">(line loss)</span></h2>
+  <p>송전선은 길이가 수백 km라 저항 R을 무시할 수 없습니다. 선로에서 열로 사라지는 전력:</p>
+  <div class="formula">P<sub>loss</sub> = I² × R &nbsp;&nbsp;&nbsp; [손실은 전류의 <strong>제곱</strong>에 비례]</div>
+  <p>보내려는 전력이 P = √3·V<sub>L</sub>·I<sub>L</sub>·cosθ로 정해져 있다면, <strong>전압을 n배 올리면 전류는 1/n</strong>이 되고 손실은 <strong>1/n²</strong>이 됩니다. 이것이 고전압 송전의 존재 이유 전부입니다.</p>
+  <div class="analogy"><strong>물류 트럭</strong>으로 생각해 보세요. 같은 양의 화물(전력)을 보낼 때, 작은 트럭 100대(저전압·대전류)는 고속도로 통행료·연료(손실)가 많이 들지만, 대형 트럭 10대(고전압·소전류)는 훨씬 적게 듭니다. 대신 대형 트럭에는 넓은 도로와 큰 터미널(절연·철탑·변압기)이 필요하죠 — 그것이 고전압 설비 비용입니다.</div>
+  <div class="caution">"전압을 올리면 손실이 준다"에서 줄어드는 것은 <strong>선로 전류</strong> 때문이지 전압 자체의 효과가 아닙니다. P<sub>loss</sub> = V²/R로 잘못 적용해 "전압이 오르면 손실 증가"라고 답하는 오류가 흔합니다 — 그 식의 V는 <strong>선로 저항 양단의 전압 강하</strong>이지 송전 전압이 아닙니다. 손실 계산은 항상 I²R로 하세요.</div>
+
+  <h2>2. 전압 강하와 전압 조정 <span class="en">(voltage drop and regulation)</span></h2>
+  <p>선로 임피던스 때문에 수전단 전압은 송전단보다 낮아집니다(부하가 클수록 심함).</p>
+  <div class="formula">전압 변동률 <span class="en">(voltage regulation)</span> = (V<sub>무부하</sub> − V<sub>전부하</sub>) / V<sub>전부하</sub> × 100%</div>
+  <p>수용가 전압을 허용 범위(북미 통상 ±5%)로 유지하는 도구들:</p>
+  <ul>
+    <li><strong>탭 절환 변압기 <span class="en">(tap changer, OLTC)</span></strong>: 변압기 권선비를 단계적으로 바꿔 전압 보정.</li>
+    <li><strong>커패시터 뱅크</strong>: 무효전력을 현지 공급해 전류·전압 강하 감소(1장과 연결).</li>
+    <li><strong>전압 조정기 <span class="en">(voltage regulator)</span></strong>: 배전 선로 중간에 설치하는 자동 승압 장치.</li>
+  </ul>
+
+  <h2>3. 고전압의 대가</h2>
+  <ul>
+    <li>절연 비용: 애자 <span class="en">(insulator)</span> 길이·철탑 높이·이격 거리 증가.</li>
+    <li><strong>코로나 방전 <span class="en">(corona discharge)</span></strong>: 초고압 도체 표면에서 공기가 국소 방전되어 손실·소음·잡음 발생 → 복도체 <span class="en">(bundled conductors)</span>로 완화.</li>
+    <li>변압기·차단기 등 기기 가격 상승. → 결국 "송전 거리와 전력량이 클수록 더 높은 전압이 경제적"이라는 균형점에서 전압이 선택됩니다.</li>
+  </ul>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>선로 손실</td><td>line loss (I²R loss)</td><td>전류 제곱 비례</td></tr>
+    <tr><td>전압 강하</td><td>voltage drop</td><td>선로 임피던스 탓</td></tr>
+    <tr><td>전압 변동률</td><td>voltage regulation</td><td>(무부하−전부하)/전부하</td></tr>
+    <tr><td>탭 절환 장치</td><td>tap changer (OLTC: on-load tap changer)</td><td>권선비 미세 조정</td></tr>
+    <tr><td>전압 조정기</td><td>voltage regulator</td><td>배전 선로용</td></tr>
+    <tr><td>애자</td><td>insulator</td><td>선로-철탑 절연</td></tr>
+    <tr><td>코로나 방전</td><td>corona discharge</td><td>초고압의 부작용</td></tr>
+    <tr><td>복도체</td><td>bundled conductors</td><td>코로나 완화</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 4-1. 전압을 10배 올리면</div>
+    <p>10 MW를 저항 5 Ω의 선로로 보낸다(PF 1, 단상 등가로 근사). (a) 25 kV로 보낼 때와 (b) 250 kV로 보낼 때의 선로 손실을 비교하라.</p>
+    <ol class="steps">
+      <li><strong>(a) 25 kV:</strong> I = P/V = 10⁷/25,000 = 400 A. 손실 = I²R = 400² × 5 = 800,000 W = 0.8 MW (전체의 8%!).</li>
+      <li><strong>(b) 250 kV:</strong> I = 10⁷/250,000 = 40 A. 손실 = 40² × 5 = 8,000 W = 8 kW (0.08%).</li>
+      <li><strong>결론:</strong> 전압 10배 → 전류 1/10 → 손실 1/100. 이 두 줄의 계산이 송전탑이 존재하는 이유다.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 4-2. 전압 변동률</div>
+    <p>어느 배전 선로의 수전단 전압이 무부하 시 7.35 kV, 전부하 시 7.0 kV다. 전압 변동률을 구하고 평가하라.</p>
+    <ol class="steps">
+      <li><strong>공식 적용:</strong> VR = (7,350 − 7,000)/7,000 × 100 = 5%.</li>
+      <li><strong>평가:</strong> 통상 허용 한계(±5%)의 경계 수준. 부하가 더 늘면 한계를 넘으므로 커패시터 뱅크 추가나 조정기 설치를 검토해야 한다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">같은 전력을 보낼 때 송전 전압을 2배로 하면 선로 손실은 몇 배가 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 1/4</span><br>전류가 1/2 → I²R 손실은 (1/2)² = 1/4.</div></details></div>
+    <div class="prob"><div class="q">손실 공식 P = I²R과 P = V²/R 중 송전 손실 계산에 어느 것을 써야 하며, 왜 다른 하나는 함정인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: I²R.</span><br>V²/R의 V는 <strong>선로 저항 양단의 전압 강하</strong>여야 하는데, 이를 송전 전압으로 잘못 넣으면 "전압↑ = 손실↑"라는 반대 결론이 나온다. 선로에 흐르는 전류는 명확하므로 I²R이 안전하다.</div></details></div>
+    <div class="prob"><div class="q">5 MW를 PF 1로 (a) 50 kV, (b) 500 kV로 보낼 때 선로 전류를 각각 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: (a) 100 A, (b) 10 A</span><br>I = P/V. 전압 10배 = 전류 1/10.</div></details></div>
+    <div class="prob"><div class="q">선로 저항 2 Ω에 150 A가 흐른다. 손실 전력은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 45 kW</span><br>P = I²R = 150² × 2 = 45,000 W.</div></details></div>
+    <div class="prob"><div class="q">역률이 낮으면 송전 손실이 커지는 이유를 1장과 연결해 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 같은 유효전력 P를 보내도 PF가 낮으면 선로 전류 I = P/(√3·V·PF)가 커진다. 손실은 I²에 비례하므로 PF 0.7이면 PF 1.0 대비 손실이 (1/0.7)² ≈ 2배가 된다. 역률 개선이 계통 손실 대책이기도 한 이유다.</div></details></div>
+    <div class="prob"><div class="q">전압 변동률(voltage regulation)의 공식을 쓰고, 값이 작을수록 좋은 이유를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> VR = (V<sub>NL</sub>−V<sub>FL</sub>)/V<sub>FL</sub>×100%. 작을수록 부하 변동에도 수용가 전압이 일정하다는 뜻 — 기기들은 정격 전압 ±5% 안에서 설계되므로 변동이 크면 조명 깜빡임·기기 수명 저하가 생긴다.</div></details></div>
+    <div class="prob"><div class="q">OLTC(부하 시 탭 절환 장치)는 무엇을 조절해 전압을 맞추는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 변압기의 <strong>권선비(탭 위치)</strong>를 부하가 걸린 상태에서 단계적으로(예: ±10%, 32스텝) 바꿔 2차 전압을 목표 범위로 유지한다.</div></details></div>
+    <div class="prob"><div class="q">코로나 방전이란 무엇이며 어떤 손해를 주는가? 완화책은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 초고압 도체 표면의 강한 전기장이 주변 공기를 국소적으로 이온화해 방전하는 현상. 전력 손실, "지지직" 소음, 라디오 잡음, 오존 발생을 일으킨다. 완화책: 도체 지름을 키우거나 한 상에 여러 가닥을 묶는 <strong>복도체(bundled conductors)</strong>로 표면 전기장을 낮춘다.</div></details></div>
+    <div class="prob"><div class="q">그렇게 유리한 고전압을 가정까지 그대로 쓰지 않는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 절연 거리·기기 크기·감전 위험이 전압과 함께 커진다. 집 안에서 240 kV를 다루려면 방마다 변전소급 절연이 필요하다. 그래서 "이동은 고전압, 사용은 저전압"으로 나누고 그 사이를 변압기가 잇는다.</div></details></div>
+    <div class="prob"><div class="q">장거리·대용량일수록 더 높은 송전 전압을 쓰는 이유를 "손실 절감 vs 설비 비용"의 균형으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 고전압화의 이득(손실 절감)은 거리와 전송량에 비례해 커지고, 비용(절연·철탑·기기)은 한 번 투자로 고정된다. 짧고 작은 선로는 이득이 비용을 못 넘지만, 길고 큰 선로는 손실 절감액이 압도적이라 500 kV급이 정당화된다. 각 전압 등급은 이 경제성 계산의 결과다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="4" class="done-check"><label>4장 완료!</label></div>
+</section>
+
+<!-- ============ 5장 ============ -->
+<section class="chapter" id="ch5">
+  <h1>5장. 계통 보호와 운영의 큰 그림</h1>
+  <p class="ch-sub">Grid Protection &amp; Operations — 60 Hz를 지키는 사람들과 장치들</p>
+
+  <h2>1. 수급 균형과 주파수 <span class="en">(supply-demand balance and frequency)</span></h2>
+  <p>전기는 대규모로 저장하기 어려워 <strong>생산과 소비가 매 순간 일치</strong>해야 합니다. 균형의 지표가 <strong>계통 주파수 <span class="en">(system frequency)</span></strong>입니다:</p>
+  <ul>
+    <li>수요 &gt; 공급 → 발전기들이 부하에 끌려 감속 → 주파수 <strong>하락</strong> (59.9 Hz…).</li>
+    <li>공급 &gt; 수요 → 발전기 가속 → 주파수 <strong>상승</strong>.</li>
+    <li>제어 계층: 각 발전기의 <strong>조속기 <span class="en">(governor)</span></strong>가 초 단위로 1차 대응 → 중앙 급전(AGC)이 분 단위로 복원 → 운영자가 예비력 <span class="en">(reserve)</span>을 배치.</li>
+  </ul>
+  <div class="analogy">계통 주파수는 <strong>여럿이 함께 밟는 2인용(수십만 인용!) 자전거의 페달 속도</strong>입니다. 오르막(수요 증가)을 만나면 모두의 페달이 함께 무거워지며 느려지고(주파수 하락), 뒤에서 더 세게 밟아 주는 사람(예비력 투입)이 나서야 속도가 회복됩니다. 페달 속도는 전 구간에서 하나 — 계통 주파수가 어디서나 같은 이유입니다.</div>
+
+  <h2>2. 고장과 보호의 원칙 <span class="en">(faults and protection)</span></h2>
+  <p><strong>고장 <span class="en">(fault)</span></strong> — 대표적으로 <strong>단락 <span class="en">(short circuit)</span></strong>과 <strong>지락 <span class="en">(ground fault)</span></strong> — 이 나면 정격의 수십 배 전류가 흐릅니다. 보호 시스템의 3요소:</p>
+  <ol>
+    <li><strong>계기용 변성기 <span class="en">(instrument transformers: CT/PT)</span></strong>: 대전류·고전압을 계전기가 다룰 수 있는 작은 신호(5 A, 120 V)로 축소 — 계통의 "감각 기관".</li>
+    <li><strong>보호 계전기 <span class="en">(protective relay)</span></strong>: 신호를 보고 고장 여부를 판단하는 "두뇌".</li>
+    <li><strong>차단기 <span class="en">(circuit breaker)</span></strong>: 계전기의 트립 <span class="en">(trip)</span> 명령으로 회로를 끊는 "근육".</li>
+  </ol>
+  <p>보호의 2대 원칙:</p>
+  <ul>
+    <li><strong>선택성(협조) <span class="en">(selectivity/coordination)</span></strong>: 고장 지점에서 <strong>가장 가까운</strong> 차단기만 동작해 정전 범위를 최소화.</li>
+    <li><strong>신속성 + 백업</strong>: 주보호가 실패하면 상위(백업) 보호가 시간 지연 후 동작.</li>
+  </ul>
+  <p>기기별 계전기 종류(과전류, 차동, 거리 계전기 등)와 접지·산업 네트워크는 자매 교재 <strong>/protection-and-networks/</strong>에서 상세히 다룹니다.</p>
+
+  <h2>3. N-1 기준과 광역 정전 <span class="en">(N-1 criterion and blackouts)</span></h2>
+  <ul>
+    <li><strong>N-1 기준 <span class="en">(N-1 criterion)</span></strong>: 설비 <strong>하나</strong>(발전기 1대, 선로 1회선)가 갑자기 빠져도 계통이 버티도록 운영하는 신뢰도 기준.</li>
+    <li><strong>연쇄 고장 <span class="en">(cascading failure)</span></strong>: 한 선로 탈락 → 남은 선로 과부하 → 추가 탈락 → … 눈덩이처럼 번지는 광역 정전 <span class="en">(blackout)</span>의 전형적 경로 (2003년 북미 대정전).</li>
+    <li>최후의 수단: <strong>부하 차단 <span class="en">(load shedding)</span></strong> — 주파수가 위험 수준으로 떨어지면 일부 지역을 의도적으로 정전시켜 계통 전체의 붕괴를 막는다.</li>
+    <li><strong>SCADA <span class="en">(Supervisory Control And Data Acquisition)</span></strong>: 변전소·발전소를 원격 감시·제어하는 중앙 시스템. 운영센터의 "계기판+리모컨".</li>
+  </ul>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>정상 운영 <span class="en">(normal)</span></th><th>비상 운영 <span class="en">(emergency)</span></th></tr>
+    <tr><td>주파수</td><td>60 Hz ± 0.05</td><td>큰 편차 (예: 59.5 Hz 이하)</td></tr>
+    <tr><td>목표</td><td>경제적 급전, N-1 유지</td><td>계통 붕괴 방지 — 범위 최소화</td></tr>
+    <tr><td>수단</td><td>AGC, 예비력, 전압 조정</td><td>보호 동작, 부하 차단, 계통 분리</td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>계통 주파수</td><td>system frequency (60 Hz)</td><td>수급 균형의 지표</td></tr>
+    <tr><td>조속기 / 예비력</td><td>governor / (spinning) reserve</td><td>1차 제어 / 여유 용량</td></tr>
+    <tr><td>고장 / 단락 / 지락</td><td>fault / short circuit / ground fault</td><td>—</td></tr>
+    <tr><td>계기용 변류기 / 변압기</td><td>CT (current transformer) / PT (potential transformer)</td><td>보호의 감각 기관</td></tr>
+    <tr><td>보호 계전기 / 트립</td><td>protective relay / trip</td><td>판단 / 차단 명령</td></tr>
+    <tr><td>선택성(보호 협조)</td><td>selectivity (coordination)</td><td>가까운 차단기만</td></tr>
+    <tr><td>N-1 기준</td><td>N-1 criterion</td><td>설비 1개 상실 대비</td></tr>
+    <tr><td>연쇄 고장 / 광역 정전</td><td>cascading failure / blackout</td><td>—</td></tr>
+    <tr><td>부하 차단</td><td>load shedding</td><td>최후의 방어</td></tr>
+    <tr><td>스카다</td><td>SCADA</td><td>원격 감시 제어</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 5-1. 주파수로 수급 읽기</div>
+    <p>운영센터 계기가 59.92 Hz를 가리키고 있다. (a) 수급 상태를 진단하고 (b) 운영자가 취할 조치를 순서대로 말하라.</p>
+    <ol class="steps">
+      <li><strong>(a) 진단:</strong> 60 Hz 미달 = <strong>수요가 공급을 초과</strong>. 발전기들이 부하에 끌려 함께 감속 중이다.</li>
+      <li><strong>(b) 조치:</strong> ① 이미 조속기들이 자동으로 출력을 올리고 있음(1차) → ② AGC/운영자가 예비력(대기 중 발전기) 출력 증가 지시(2차) → ③ 부족이 지속되면 추가 발전기 기동, 최악의 경우 부하 차단 준비.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 5-2. 보호 협조(선택성)</div>
+    <p>발전소—변전소 A—변전소 B—공장으로 이어진 방사상 계통에서, 공장 인입선에 단락이 났다. 어느 차단기가 동작해야 하며, 그 상위 차단기는 왜 시간 지연을 갖는가?</p>
+    <ol class="steps">
+      <li><strong>동작해야 할 것:</strong> 고장점에서 가장 가까운 <strong>공장 인입선 차단기</strong>만. 그래야 변전소 B의 다른 수용가는 정전되지 않는다(선택성).</li>
+      <li><strong>상위의 시간 지연:</strong> 변전소 B의 차단기는 <strong>백업</strong>이다. 주보호가 정상 동작할 시간을 주기 위해 의도적으로 조금 늦게(예: 0.3~0.5 s 후) 동작하도록 정정한다. 주보호 실패 시에만 개입한다.</li>
+      <li><strong>핵심:</strong> "아래는 빠르게, 위로 갈수록 느리게" — 시간-전류 협조의 기본 원리다(/protection-and-networks/에서 곡선으로 다룬다).</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">계통 주파수가 60 Hz 아래로 떨어졌다면 수요와 공급 중 어느 쪽이 큰 상태인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 수요 &gt; 공급.</span><br>부족한 에너지를 발전기 회전자의 관성에서 꺼내 쓰면서 발전기들이 감속하고, 그 회전 속도가 곧 주파수다.</div></details></div>
+    <div class="prob"><div class="q">전기를 "저장하기 어렵다"는 성질이 계통 운영을 어떻게 특별하게 만드는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 생산과 소비를 <strong>실시간으로 매 순간</strong> 일치시켜야 한다. 재고를 쌓아 두는 일반 공산품과 달리, 수요 예측·예비력 확보·초 단위 자동 제어(조속기, AGC)가 필수가 된다. (배터리 ESS가 이 제약을 완화하는 중이다.)</div></details></div>
+    <div class="prob"><div class="q">보호 시스템의 3요소(감각/두뇌/근육)를 장치 이름으로 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 감각 = CT/PT(계기용 변성기), 두뇌 = 보호 계전기(protective relay), 근육 = 차단기(circuit breaker).</div></details></div>
+    <div class="prob"><div class="q">CT(변류기)의 역할은? 왜 계전기에 대전류를 직접 연결하지 않는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 수천 A의 선로 전류를 표준 소전류(5 A 또는 1 A)로 비례 축소해 계전기·계측기에 전달한다. 대전류·고전압을 직접 다루면 계전기 절연·크기·안전이 불가능하므로 변성기로 "신호화"한다.</div></details></div>
+    <div class="prob"><div class="q">보호의 "선택성(selectivity)"이란 무엇이며 왜 중요한가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 고장 지점에서 <strong>가장 가까운 차단기만</strong> 동작하게 하는 성질. 이것이 지켜져야 고장난 가지 하나만 떨어지고 건전한 나머지 계통은 계속 공급된다 — 정전 범위 최소화의 핵심이다.</div></details></div>
+    <div class="prob"><div class="q">N-1 기준을 설명하고, 이를 지키며 운영하면 무엇이 좋아지는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 어떤 설비 하나가 예고 없이 탈락해도(발전기 트립, 선로 낙뢰) 과부하·정전 없이 버틸 수 있도록 여유를 두고 운영하는 신뢰도 기준. 단일 고장이 광역 정전으로 번지는 것을 예방한다.</div></details></div>
+    <div class="prob"><div class="q">연쇄 고장(cascading failure)의 전개 과정을 단계로 묘사하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 선로 하나 탈락 → ② 그 조류(전력 흐름)가 이웃 선로로 몰려 과부하 → ③ 과부하 보호로 이웃 선로도 탈락 → ④ 남은 선로에 더 큰 과부하 → 반복 확산 → ⑤ 발전기 탈락·주파수 붕괴 → 광역 정전. 2003년 북미 대정전(5천만 명)이 전형적 사례다.</div></details></div>
+    <div class="prob"><div class="q">부하 차단(load shedding)은 왜 "일부러 정전을 일으키는" 것인가? 정당화되는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 주파수가 위험 수준까지 떨어지면 발전기들이 자체 보호로 연쇄 탈락해 <strong>계통 전체가 붕괴</strong>한다(복구에 수일). 일부 지역(예: 수요의 10%)을 몇십 분 정전시키는 작은 희생으로 전체 붕괴를 막는 것이므로, 최후의 수단으로 자동화되어 있다(UFLS).</div></details></div>
+    <div class="prob"><div class="q">SCADA는 무엇의 약자이며 운영센터에서 어떤 역할을 하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Supervisory Control And Data Acquisition. 흩어진 변전소·발전소의 계측값(전압, 전류, 차단기 상태)을 실시간 수집해 표시하고, 원격으로 차단기 조작·설정 변경을 내리는 감시·제어 시스템이다. PLC·산업 네트워크(/protection-and-networks/)와 기술적으로 친척이다.</div></details></div>
+    <div class="prob"><div class="q">"아래는 빠르게, 위는 느리게"라는 보호 협조 원칙에서 상위 차단기에 시간 지연을 두는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 상위 차단기는 하위(주보호)의 <strong>백업</strong>이므로, 주보호가 먼저 동작할 시간을 준 뒤에도 고장이 지속될 때만 개입해야 한다. 동시에 동작하면 건전 구간까지 광범위하게 정전되어 선택성이 깨진다.</div></details></div>
+  </div>
+
+  <div class="keypoint">🎉 P·Q·S와 역률에서 출발해 3상, 계통 구조, 송전 손실, 보호·운영까지 — ELEC 302·361의 큰 그림을 완성했습니다. 보호 계전기의 종류와 접지, 산업 통신은 자매 교재 <strong>/protection-and-networks/</strong>에서 이어집니다.</div>
+
+  <div class="done-box"><input type="checkbox" data-ch="5" class="done-check"><label>5장 완료! 전체 과정 수료 🎓</label></div>
+</section>
+
+<!-- ###CH_END### -->
+
+</main>
+</div>
+
+<script>
+const CHAPTERS = [
+  {id:0, title:"학습 안내", short:"개요", desc:"이 교재의 사용법과 전체 목차"},
+  {id:1, title:"1장. 교류 전력 복습과 역률 개선", short:"1장", desc:"P·Q·S, 전력 삼각형, 커패시터로 역률 보상"},
+  {id:2, title:"2장. 3상 시스템 — Y와 Δ", short:"2장", desc:"선간/상 전압·전류, √3, 3상 전력 계산"},
+  {id:3, title:"3장. 발전-송전-배전 계통 구조", short:"3장", desc:"발전 방식, 변전소, 전압 단계, 캐나다의 계통"},
+  {id:4, title:"4장. 송전 손실과 고전압의 이유", short:"4장", desc:"I²R 손실, 승압 송전, 전압 강하와 조정"},
+  {id:5, title:"5장. 계통 보호와 운영의 큰 그림", short:"5장", desc:"주파수-수급 균형, N-1, 보호 개요, 정전의 전개"}
+];
+const KEY = "eet-grid-progress";
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ progress = {}; }
+
+function saveProgress(){ try{ localStorage.setItem(KEY, JSON.stringify(progress)); }catch(e){} }
+
+function buildNav(){
+  const nav = document.getElementById("navList");
+  nav.innerHTML = "";
+  CHAPTERS.forEach(c => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.dataset.ch = c.id;
+    const done = c.id > 0 && progress[c.id];
+    btn.innerHTML = `<span class="check">${c.id===0 ? "🏠" : (done ? "✔" : "·")}</span><span>${c.title}</span>`;
+    btn.onclick = () => showChapter(c.id);
+    li.appendChild(btn); nav.appendChild(li);
+  });
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  const total = CHAPTERS.length - 1;
+  const done = Object.keys(progress).filter(k => progress[k]).length;
+  document.getElementById("progressFill").style.width = (done/total*100) + "%";
+  document.getElementById("progressLabel").textContent = `${done} / ${total} 챕터 완료`;
+}
+
+function buildToc(){
+  const wrap = document.getElementById("tocCards");
+  wrap.innerHTML = "";
+  CHAPTERS.slice(1).forEach(c => {
+    const d = document.createElement("div");
+    d.className = "toc-card";
+    d.innerHTML = `<span class="badge">${progress[c.id] ? "✔ 완료" : ""}</span><div class="t">${c.title}</div><div class="d">${c.desc}</div>`;
+    d.onclick = () => showChapter(c.id);
+    wrap.appendChild(d);
+  });
+}
+
+function buildChapterNavs(){
+  CHAPTERS.forEach(c => {
+    if(c.id === 0) return;
+    const sec = document.getElementById("ch"+c.id);
+    if(!sec) return;
+    const nav = document.createElement("div");
+    nav.className = "ch-nav";
+    const prev = c.id - 1, next = c.id + 1;
+    let html = "";
+    html += `<button onclick="showChapter(${prev})">← ${prev===0 ? "학습 안내" : CHAPTERS[prev].title}</button>`;
+    if(next < CHAPTERS.length){
+      html += `<button onclick="showChapter(${next})">${CHAPTERS[next].title} →</button>`;
+    } else {
+      html += `<button onclick="showChapter(0)">🏠 처음으로</button>`;
+    }
+    nav.innerHTML = html;
+    sec.appendChild(nav);
+  });
+}
+
+function showChapter(n){
+  document.querySelectorAll("section.chapter").forEach(s => s.classList.remove("visible"));
+  const sec = document.getElementById("ch"+n);
+  if(sec) sec.classList.add("visible");
+  document.querySelectorAll("#navList button").forEach(b => b.classList.toggle("active", +b.dataset.ch === n));
+  if(n === 0) buildToc();
+  window.scrollTo({top:0});
+  try{ localStorage.setItem(KEY+"-last", n); }catch(e){}
+}
+
+document.addEventListener("change", e => {
+  if(e.target.classList && e.target.classList.contains("done-check")){
+    progress[e.target.dataset.ch] = e.target.checked;
+    saveProgress(); buildNav();
+  }
+});
+
+function initChecks(){
+  document.querySelectorAll(".done-check").forEach(cb => {
+    cb.checked = !!progress[cb.dataset.ch];
+  });
+}
+
+buildNav();
+buildChapterNavs();
+initChecks();
+let last = 0;
+try{ last = parseInt(localStorage.getItem(KEY+"-last")) || 0; }catch(e){}
+showChapter(last);
+</script>
+</body>
+</html>

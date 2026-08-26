@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>회전기와 변압기 개념 학습 — SAIT EET 예습</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --card:#ffffff; --ink:#1c2733; --sub:#5a6b7b;
+    --accent:#b91c1c; --accent-soft:#fdeaea; --ok:#1a8a5a; --ok-soft:#e3f4ec;
+    --warn:#b05c00; --warn-soft:#fff3e0; --line:#dde3ea; --code:#f0f3f7;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
+       background:var(--bg); color:var(--ink); line-height:1.75; font-size:16px;}
+  .layout{display:flex; min-height:100vh;}
+
+  aside{width:270px; flex-shrink:0; background:var(--card); border-right:1px solid var(--line);
+        padding:22px 16px; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  aside h2{font-size:17px; margin-bottom:4px;}
+  aside .sub{font-size:12.5px; color:var(--sub); margin-bottom:14px;}
+  aside .sub a{color:var(--sub);}
+  .progress-wrap{margin-bottom:16px;}
+  .progress-bar{height:10px; background:var(--line); border-radius:6px; overflow:hidden;}
+  .progress-fill{height:100%; width:0%; background:var(--ok); transition:width .3s;}
+  .progress-label{font-size:12.5px; color:var(--sub); margin-top:4px;}
+  .navlist{list-style:none;}
+  .navlist li{margin-bottom:2px;}
+  .navlist button{width:100%; text-align:left; border:none; background:none; cursor:pointer;
+        padding:8px 10px; border-radius:8px; font-size:14px; font-family:inherit; color:var(--ink);
+        display:flex; align-items:center; gap:8px; line-height:1.4;}
+  .navlist button:hover{background:var(--accent-soft);}
+  .navlist button.active{background:var(--accent); color:#fff; font-weight:bold;}
+  .navlist .check{width:18px; flex-shrink:0; text-align:center; font-size:13px; color:var(--ok);}
+  .navlist button.active .check{color:#fff;}
+
+  main{flex:1; padding:34px 44px 80px; max-width:900px;}
+  section.chapter{display:none;}
+  section.chapter.visible{display:block;}
+  h1{font-size:26px; margin-bottom:6px;}
+  .ch-sub{color:var(--sub); font-size:14px; margin-bottom:24px;}
+  h2{font-size:20px; margin:34px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--accent-soft);}
+  h3{font-size:16.5px; margin:22px 0 8px; color:var(--accent);}
+  p{margin-bottom:12px;}
+  ul,ol{margin:0 0 12px 24px;}
+  li{margin-bottom:6px;}
+  strong{color:#0b3d91;}
+  .en{color:var(--sub); font-size:0.92em;}
+
+  .analogy{background:var(--warn-soft); border-left:4px solid var(--warn);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .analogy::before{content:"💡 비유로 이해하기"; display:block; font-weight:bold; color:var(--warn); font-size:13.5px; margin-bottom:4px;}
+  .keypoint{background:var(--accent-soft); border-left:4px solid var(--accent);
+           padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .keypoint::before{content:"📌 핵심 정리"; display:block; font-weight:bold; color:var(--accent); font-size:13.5px; margin-bottom:4px;}
+  .caution{background:#fdecec; border-left:4px solid #c0392b; padding:12px 16px; border-radius:0 8px 8px 0; margin:14px 0;}
+  .caution::before{content:"⚠️ 헷갈리기 쉬운 부분"; display:block; font-weight:bold; color:#c0392b; font-size:13.5px; margin-bottom:4px;}
+
+  .formula{background:var(--code); border:1px solid var(--line); border-radius:8px;
+           padding:10px 16px; margin:12px 0; font-size:17px; text-align:center;
+           font-family:'Cambria Math',Georgia,serif; overflow-x:auto;}
+  sub,sup{font-size:0.72em;}
+
+  .ladder{background:#1c2733; color:#d7e3ee; border-radius:10px; padding:14px 18px; margin:12px 0;
+          font-family:Consolas,'Courier New',monospace; font-size:14px; line-height:1.6; overflow-x:auto; white-space:pre;}
+
+  .tablewrap{overflow-x:auto; margin:14px 0;}
+  table{border-collapse:collapse; width:100%; background:var(--card); font-size:14.5px;}
+  th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+  th{background:var(--accent-soft); font-size:14px;}
+  table.compare th:first-child, table.compare td:first-child{background:#fafbfc; font-weight:bold; white-space:nowrap;}
+
+  .example{background:var(--card); border:1px solid var(--line); border-radius:12px;
+           padding:18px 20px; margin:16px 0;}
+  .example .ex-title{font-weight:bold; color:var(--ok); margin-bottom:8px; font-size:15.5px;}
+  .example .steps{margin-left:4px;}
+  .example .steps li{margin-bottom:8px;}
+
+  .problems{counter-reset:prob; margin-top:8px;}
+  .prob{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 18px; margin-bottom:14px;}
+  .prob .q{margin-bottom:10px;}
+  .prob .q::before{counter-increment:prob; content:"문제 " counter(prob) ". "; font-weight:bold; color:var(--accent);}
+  details{margin-top:8px;}
+  details summary{cursor:pointer; display:inline-block; background:var(--accent-soft); color:var(--accent);
+        padding:6px 14px; border-radius:20px; font-size:13.5px; font-weight:bold; user-select:none; list-style:none;}
+  details summary::-webkit-details-marker{display:none;}
+  details summary:hover{background:var(--accent); color:#fff;}
+  details[open] summary{background:var(--ok-soft); color:var(--ok);}
+  details .answer{background:var(--ok-soft); border-radius:8px; padding:12px 16px; margin-top:10px; font-size:15px;}
+  details .answer .a-label{font-weight:bold; color:var(--ok);}
+
+  .done-box{margin:36px 0 20px; background:var(--ok-soft); border:1.5px dashed var(--ok);
+        border-radius:12px; padding:14px 18px; display:flex; align-items:center; gap:10px; font-size:15.5px;}
+  .done-box input{width:20px; height:20px; accent-color:var(--ok); cursor:pointer;}
+
+  .ch-nav{display:flex; justify-content:space-between; margin-top:14px; gap:12px;}
+  .ch-nav button{border:1px solid var(--line); background:var(--card); border-radius:10px;
+        padding:12px 18px; cursor:pointer; font-family:inherit; font-size:14.5px; color:var(--ink); max-width:48%;}
+  .ch-nav button:hover{border-color:var(--accent); color:var(--accent);}
+  .ch-nav .spacer{flex:1;}
+
+  .toc-card{background:var(--card); border:1px solid var(--line); border-radius:12px;
+        padding:16px 20px; margin-bottom:12px; cursor:pointer;}
+  .toc-card:hover{border-color:var(--accent);}
+  .toc-card .t{font-weight:bold; font-size:16px;}
+  .toc-card .d{font-size:13.5px; color:var(--sub); margin-top:2px;}
+  .toc-card .badge{float:right; font-size:12.5px; color:var(--ok); font-weight:bold;}
+
+  #menuToggle{display:none;}
+  @media (max-width:820px){
+    .layout{flex-direction:column;}
+    aside{width:100%; height:auto; position:static; border-right:none; border-bottom:1px solid var(--line);}
+    main{padding:22px 18px 60px;}
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside>
+  <h2>⚙️ 회전기와 변압기</h2>
+  <div class="sub">SAIT EET 2학년 ELEC 306·352·353 예습용 · <a href="../">← Study Hub</a></div>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 챕터 완료</div>
+  </div>
+  <ul class="navlist" id="navList"></ul>
+</aside>
+
+<main id="main">
+
+<!-- ============ 홈(개요) ============ -->
+<section class="chapter" id="ch0">
+  <h1>학습 안내</h1>
+  <p class="ch-sub">캐나다 SAIT — Electrical Engineering Technology 2학년 기계·변압기 과목(ELEC 306 Machine Applications, ELEC 352 Rotating Machines, ELEC 353 Transformer Applications) 예습 교재</p>
+  <p>전기 에너지를 <strong>움직임으로 바꾸는 모터</strong>, 움직임을 <strong>전기로 바꾸는 발전기</strong>, 그리고 전압을 <strong>바꿔 주는 변압기</strong> — 이 셋을 묶어 <strong>전기기기 <span class="en">(electrical machines)</span></strong>라 부릅니다. 산업 현장 전기 기술자가 가장 자주 만지는 장비들이며, SAIT 2학년의 실습 중심 과목입니다.</p>
+  <ul>
+    <li>모든 용어는 <strong>문제에 나오기 전에 반드시 먼저 정의</strong>합니다.</li>
+    <li>핵심 용어는 <strong>영어를 병기</strong>합니다. 모터 명판(nameplate)부터 교재까지 모두 영어입니다.</li>
+    <li>비슷한 개념(직권 vs 분권, 동기 vs 유도 등)은 <strong>비교표</strong>로 짚습니다.</li>
+    <li>연습문제 정답·해설은 <strong>접혀 있습니다</strong>. 먼저 풀고 확인하세요.</li>
+    <li>챕터 끝의 <strong>완료 체크</strong>로 진행 상황이 저장됩니다.</li>
+  </ul>
+  <h2>챕터 목차</h2>
+  <div id="tocCards"></div>
+  <div class="keypoint">선수 지식: 회로이론 교재의 교류(8~10장)와 전자기 유도의 기초. 3상 전력의 심화(Y/Δ 계산)는 자매 교재 <strong>/power-generation-grid/</strong>에서 다루므로, 여기서는 모터에 필요한 만큼만 도입합니다.</div>
+</section>
+
+<!-- ============ 1장 ============ -->
+<section class="chapter" id="ch1">
+  <h1>1장. 전자기 유도 — 모든 기기의 원리</h1>
+  <p class="ch-sub">Electromagnetic Induction — 변압기·모터·발전기를 관통하는 두 가지 법칙</p>
+
+  <h2>1. 자기장과 자속 <span class="en">(magnetic field and flux)</span></h2>
+  <ul>
+    <li><strong>자기장 <span class="en">(magnetic field, B)</span></strong>: 자석이나 전류 주위에 생기는, 자기력이 미치는 공간.</li>
+    <li><strong>자속 <span class="en">(magnetic flux, Φ, 단위 웨버 Wb)</span></strong>: 어떤 면을 통과하는 자기장의 총량. "자기장 다발"이라고 생각하면 됩니다.</li>
+    <li><strong>전자석 <span class="en">(electromagnet)</span></strong>: 코일에 전류를 흘리면 자기장이 생긴다(외르스테드/앙페르). 감은 수가 많고 전류가 클수록, 철심 <span class="en">(iron core)</span>이 있을수록 강해집니다.</li>
+  </ul>
+
+  <h2>2. 패러데이의 법칙 — 발전기 작용 <span class="en">(Faraday's law, generator action)</span></h2>
+  <div class="keypoint">코일을 통과하는 <strong>자속이 변하면</strong>, 코일에 전압(기전력)이 유도된다. 유도 전압의 크기는 <strong>자속의 변화율</strong>과 <strong>감은 수</strong>에 비례한다: e = N·(ΔΦ/Δt)</div>
+  <ul>
+    <li>중요한 것은 자속의 <strong>변화</strong>입니다. 강한 자석이라도 가만히 있으면 전압은 0.</li>
+    <li>변화를 만드는 방법: ① 도체를 자기장 속에서 <strong>움직이기</strong>(발전기), ② 자기장 자체를 <strong>교류로 흔들기</strong>(변압기).</li>
+    <li><strong>렌츠의 법칙 <span class="en">(Lenz's law)</span></strong>: 유도 전류는 자속 변화를 <strong>방해하는 방향</strong>으로 흐른다 — 에너지 보존의 표현이며, 모터의 역기전력(3장)의 근원.</li>
+  </ul>
+  <div class="analogy">패러데이 법칙은 <strong>자전거 발전등</strong>입니다. 바퀴가 돌아야(자속 변화) 불이 켜지고, 빨리 돌수록(변화율 큼) 밝아집니다. 바퀴를 세우면(변화 없음) 아무리 강한 자석이 들어 있어도 불은 꺼집니다.</div>
+
+  <h2>3. 모터 작용 <span class="en">(motor action)</span></h2>
+  <p>반대 방향의 인과도 성립합니다: <strong>자기장 속의 도체에 전류를 흘리면 힘을 받는다</strong> (F = BIL). 힘의 방향은 전류·자기장에 모두 수직입니다. 이 힘으로 회전을 만드는 것이 모터입니다.</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>발전기 작용 <span class="en">(generator action)</span></th><th>모터 작용 <span class="en">(motor action)</span></th></tr>
+    <tr><td>입력 → 출력</td><td>운동(회전) → 전기</td><td>전기 → 운동(회전)</td></tr>
+    <tr><td>지배 법칙</td><td>패러데이: 움직임이 전압을 유도</td><td>F = BIL: 전류가 힘을 받음</td></tr>
+    <tr><td>실체</td><td colspan="2" style="text-align:center;"><strong>같은 기계 — 방향만 다르다.</strong> 모든 모터는 발전기가 될 수 있고, 그 반대도 성립</td></tr>
+  </table></div>
+  <div class="caution">모터가 도는 동안에도 도체는 자기장 속에서 움직이므로 <strong>발전기 작용이 동시에</strong> 일어나, 공급 전압을 거스르는 <strong>역기전력 <span class="en">(back EMF, counter EMF)</span></strong>이 생깁니다. "모터는 돌면서 스스로 발전한다" — 3장 DC 모터 이해의 열쇠이니 여기서 꼭 잡고 가세요.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>자기장 / 자속</td><td>magnetic field (B) / magnetic flux (Φ)</td><td>Wb (weber)</td></tr>
+    <tr><td>전자석 / 철심</td><td>electromagnet / iron core</td><td>—</td></tr>
+    <tr><td>전자기 유도</td><td>electromagnetic induction</td><td>자속 변화 → 전압</td></tr>
+    <tr><td>패러데이의 법칙</td><td>Faraday's law</td><td>e = N·ΔΦ/Δt</td></tr>
+    <tr><td>렌츠의 법칙</td><td>Lenz's law</td><td>변화를 방해하는 방향</td></tr>
+    <tr><td>발전기 작용 / 모터 작용</td><td>generator action / motor action</td><td>운동↔전기</td></tr>
+    <tr><td>역기전력</td><td>back EMF (counter EMF)</td><td>모터 속의 발전기</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 1-1. 유도 전압 계산</div>
+    <p>200회 감은 코일을 통과하는 자속이 0.1초 동안 0.02 Wb에서 0.05 Wb로 늘었다. 유도 전압은?</p>
+    <ol class="steps">
+      <li><strong>변화율:</strong> ΔΦ/Δt = (0.05−0.02)/0.1 = 0.3 Wb/s.</li>
+      <li><strong>패러데이 법칙:</strong> e = N·ΔΦ/Δt = 200 × 0.3 = 60 V.</li>
+      <li><strong>답:</strong> 60 V. 같은 변화라도 더 빨리(Δt 작게) 일어나면 전압이 커진다.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 1-2. 발전기와 모터 작용 구분</div>
+    <p>다음 상황이 발전기 작용인지 모터 작용인지 판별하라: (a) 스피커의 보이스코일이 신호 전류를 받아 진동판을 민다. (b) 다이내믹 마이크의 진동판이 소리에 흔들려 신호를 만든다. (c) 전기차가 내리막에서 회생제동한다.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> 전류 → 힘 = <strong>모터 작용</strong>.</li>
+      <li><strong>(b)</strong> 움직임 → 전압 = <strong>발전기 작용</strong>. (스피커와 마이크는 같은 구조의 역방향!)</li>
+      <li><strong>(c)</strong> 바퀴의 회전(운동)으로 전기를 만들어 배터리 충전 = <strong>발전기 작용</strong>. 구동 모터가 그대로 발전기로 전환된 것.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <p>정답을 보지 말고 먼저 풀어 보세요.</p>
+  <div class="problems">
+    <div class="prob"><div class="q">자속(Φ)의 정의와 단위를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 어떤 면을 통과하는 자기장의 총량. 단위는 웨버(Wb, weber).</div></details></div>
+    <div class="prob"><div class="q">패러데이의 법칙을 한 문장으로 쓰고, 유도 전압을 키우는 요인 두 가지를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 코일을 지나는 자속이 변하면 그 변화율에 비례하는 전압이 유도된다(e = N·ΔΦ/Δt). 키우는 요인: 감은 수 N 증가, 자속 변화율(속도·자기장 세기) 증가.</div></details></div>
+    <div class="prob"><div class="q">강력한 자석 위에 코일을 가만히 올려 두면 전압이 유도되는가? 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 유도되지 않는다.</span><br>자속이 아무리 강해도 <strong>변화가 없으면</strong>(ΔΦ/Δt = 0) 전압은 0이다. 유도의 조건은 "변화"다.</div></details></div>
+    <div class="prob"><div class="q">150회 코일에서 자속이 0.05초 동안 0.01 Wb 변했다. 유도 전압은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 30 V</span><br>e = 150 × (0.01/0.05) = 150 × 0.2 = 30 V.</div></details></div>
+    <div class="prob"><div class="q">렌츠의 법칙이 "에너지 보존의 표현"인 이유를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 유도 전류가 자속 변화를 <strong>돕는</strong> 방향이라면, 변화가 변화를 낳아 에너지가 공짜로 불어나는 영구기관이 된다. 방해하는 방향이기에 전기를 얻으려면 그만큼 기계적 일(자석을 미는 힘)을 해야 한다 — 발전기 핸들이 부하를 걸면 무거워지는 이유다.</div></details></div>
+    <div class="prob"><div class="q">모터 작용의 힘 공식 F = BIL에서 각 기호의 의미를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> F = 도체가 받는 힘(N), B = 자속 밀도(T, tesla), I = 도체 전류(A), L = 자기장 속 도체의 길이(m).</div></details></div>
+    <div class="prob"><div class="q">자속 밀도 0.8 T의 자기장 속에서 길이 0.3 m 도체에 10 A가 흐른다. 힘은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 2.4 N</span><br>F = BIL = 0.8 × 10 × 0.3 = 2.4 N.</div></details></div>
+    <div class="prob"><div class="q">"모터와 발전기는 같은 기계"라는 말의 의미를 전기차 회생제동으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 가속할 때는 배터리 전기로 모터를 돌리고(모터 작용), 감속할 때는 바퀴의 운동 에너지가 같은 기계를 발전기로 돌려 전기를 만들어 배터리로 회수한다(발전기 작용). 하드웨어는 동일하고 에너지 흐름의 방향만 바뀐다.</div></details></div>
+    <div class="prob"><div class="q">돌고 있는 모터 내부에 생기는 역기전력(back EMF)은 어떤 작용의 결과이며, 공급 전압과 어떤 관계인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 회전하는 도체가 자기장을 가르며 만드는 <strong>발전기 작용</strong>의 결과다. 렌츠 법칙에 따라 공급 전압을 <strong>거스르는 방향</strong>으로 생겨, 모터 전류를 제한하는 역할을 한다(빠를수록 역기전력↑, 전류↓).</div></details></div>
+    <div class="prob"><div class="q">변압기에는 움직이는 부품이 없다. 그런데 어떻게 유도가 일어나는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 1차 코일에 흐르는 <strong>교류</strong>가 만드는 자속이 스스로 커졌다 작아졌다를 반복하므로, 도체를 움직이지 않아도 자속의 <strong>변화</strong>가 계속 일어난다. 그래서 변압기는 AC 전용이다(2장에서 계속).</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="1" class="done-check"><label>1장 완료! (체크하면 진행 상황에 저장됩니다)</label></div>
+</section>
+
+<!-- ============ 2장 ============ -->
+<section class="chapter" id="ch2">
+  <h1>2장. 변압기</h1>
+  <p class="ch-sub">Transformers — 권선비 하나로 전압·전류·임피던스가 모두 바뀐다</p>
+
+  <h2>1. 구조와 원리 <span class="en">(transformer basics)</span></h2>
+  <p><strong>변압기 <span class="en">(transformer)</span></strong>는 철심 하나에 두 개의 코일을 감은 장치입니다: 전원이 연결되는 <strong>1차 권선 <span class="en">(primary winding)</span></strong>, 부하가 연결되는 <strong>2차 권선 <span class="en">(secondary winding)</span></strong>. 1차의 교류가 철심에 교번 자속을 만들고, 그 자속이 2차 권선을 지나며(상호 유도 <span class="en">mutual induction</span>) 2차에 전압을 유도합니다. <strong>움직이는 부품이 없어</strong> 효율이 95~99%로 모든 전기기기 중 최고입니다.</p>
+  <div class="caution">변압기는 <strong>AC 전용</strong>입니다. DC를 넣으면 자속이 변하지 않아 2차 전압이 0일 뿐 아니라, 1차 권선의 리액턴스가 사라져 저항만 남아 <strong>과전류로 타 버립니다</strong>. "변압기가 DC를 못 쓰는 이유"는 시험 단골입니다.</div>
+
+  <h2>2. 권선비와 전압·전류 변환 <span class="en">(turns ratio)</span></h2>
+  <div class="formula">V<sub>P</sub>/V<sub>S</sub> = N<sub>P</sub>/N<sub>S</sub> = a &nbsp;&nbsp;&nbsp;&nbsp; I<sub>S</sub>/I<sub>P</sub> = N<sub>P</sub>/N<sub>S</sub> &nbsp;&nbsp;&nbsp; [이상 변압기: V<sub>P</sub>I<sub>P</sub> = V<sub>S</sub>I<sub>S</sub>]</div>
+  <ul>
+    <li><strong>권선비 <span class="en">(turns ratio, a = N<sub>P</sub>/N<sub>S</sub>)</span></strong>: 1차와 2차의 감은 수 비율. 전압은 권선수에 <strong>비례</strong>.</li>
+    <li><strong>승압 변압기 <span class="en">(step-up transformer)</span></strong>: N<sub>S</sub> &gt; N<sub>P</sub> → 2차 전압이 높다.</li>
+    <li><strong>강압 변압기 <span class="en">(step-down transformer)</span></strong>: N<sub>S</sub> &lt; N<sub>P</sub> → 2차 전압이 낮다.</li>
+    <li>전력은 보존되므로(이상 변압기) 전압을 올리면 전류는 그만큼 <strong>줄어듭니다</strong>.</li>
+  </ul>
+  <div class="analogy">변압기는 <strong>자전거 기어(변속기)</strong>입니다. 큰 기어에서 작은 기어로 바꾸면 바퀴는 빨리 돌지만(전압↑) 미는 힘은 약해집니다(전류↓). 기어가 힘×속도(동력)를 만들 수 없고 비율만 바꾸듯, 변압기도 전력을 만들지 못하고 <strong>전압:전류의 비율만</strong> 바꿉니다.</div>
+
+  <h2>3. 임피던스 변환과 정격 <span class="en">(impedance transformation, ratings)</span></h2>
+  <ul>
+    <li>2차에 연결된 임피던스 Z<sub>S</sub>는 1차에서 <strong>a²배</strong>로 보입니다: Z<sub>P</sub> = a²·Z<sub>S</sub>. (오디오 매칭, 계기용 변압기의 원리)</li>
+    <li>변압기 정격은 <strong>kVA(피상전력)</strong>로 표기합니다 — 부하의 역률을 변압기가 알 수 없으므로 W가 아닌 VA로 정합니다(회로 교재 10장과 연결).</li>
+    <li>손실: <strong>동손 <span class="en">(copper loss, I²R)</span></strong>(권선 저항, 부하에 비례)과 <strong>철손 <span class="en">(iron/core loss)</span></strong>(히스테리시스+와전류, 부하와 무관). 효율 η = P<sub>out</sub>/(P<sub>out</sub>+손실).</li>
+  </ul>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>동손 <span class="en">(copper loss)</span></th><th>철손 <span class="en">(core/iron loss)</span></th></tr>
+    <tr><td>발생 장소</td><td>권선(구리선)의 저항</td><td>철심</td></tr>
+    <tr><td>원인</td><td>I²R 발열</td><td>히스테리시스 + 와전류 <span class="en">(eddy current)</span></td></tr>
+    <tr><td>부하 의존성</td><td>부하 전류의 제곱에 비례</td><td>부하와 <strong>무관</strong> (전압·주파수에 의존)</td></tr>
+    <tr><td>줄이는 방법</td><td>굵은 권선</td><td>규소강판 적층 <span class="en">(laminated core)</span></td></tr>
+  </table></div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>변압기</td><td>transformer</td><td>AC 전용</td></tr>
+    <tr><td>1차 / 2차 권선</td><td>primary / secondary winding</td><td>전원측 / 부하측</td></tr>
+    <tr><td>상호 유도</td><td>mutual induction</td><td>동작 원리</td></tr>
+    <tr><td>권선비</td><td>turns ratio (a = N<sub>P</sub>/N<sub>S</sub>)</td><td>전압비와 같음</td></tr>
+    <tr><td>승압 / 강압</td><td>step-up / step-down</td><td>—</td></tr>
+    <tr><td>동손 / 철손</td><td>copper loss / core (iron) loss</td><td>I²R / 히스테리시스·와전류</td></tr>
+    <tr><td>적층 철심</td><td>laminated core</td><td>와전류 억제</td></tr>
+    <tr><td>피상전력 정격</td><td>kVA rating</td><td>변압기 명판 표기</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 2-1. 권선비 계산</div>
+    <p>1차 480 V, 2차 120 V인 강압 변압기가 있다. (a) 권선비, (b) 2차에 10 A가 흐를 때 1차 전류, (c) 이 변압기가 공급하는 피상전력을 구하라. (이상 변압기)</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> a = V<sub>P</sub>/V<sub>S</sub> = 480/120 = 4 (4:1 강압).</li>
+      <li><strong>(b)</strong> 전류는 반대 비율: I<sub>P</sub> = I<sub>S</sub>/a = 10/4 = 2.5 A.</li>
+      <li><strong>(c)</strong> S = V<sub>S</sub>I<sub>S</sub> = 120 × 10 = 1,200 VA = 1.2 kVA. (검산: 1차측 480 × 2.5 = 1,200 VA ✓ — 전력 보존)</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 2-2. 변압기 효율</div>
+    <p>어떤 변압기가 2차로 9.5 kW를 공급하고 있다. 동손 300 W, 철손 200 W일 때 효율을 구하라.</p>
+    <ol class="steps">
+      <li><strong>입력 전력:</strong> P<sub>in</sub> = P<sub>out</sub> + 손실 = 9,500 + 300 + 200 = 10,000 W.</li>
+      <li><strong>효율:</strong> η = 9,500/10,000 = 0.95 = 95%.</li>
+      <li><strong>답:</strong> 95%. 회전 부품이 없는 변압기는 전기기기 중 효율이 가장 높은 축에 든다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">변압기가 DC에서 동작하지 않는 이유 두 가지(유도 관점, 안전 관점)를 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① DC는 자속이 일정해 ΔΦ/Δt = 0 → 2차에 전압이 유도되지 않는다. ② 1차 권선에 리액턴스가 없어져 낮은 권선 저항만 남아 과대 전류가 흘러 소손된다.</div></details></div>
+    <div class="prob"><div class="q">N_P = 1,000회, N_S = 50회, 1차 전압 240 V일 때 2차 전압은? 승압인가 강압인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 12 V, 강압</span><br>V<sub>S</sub> = 240 × 50/1000 = 12 V.</div></details></div>
+    <div class="prob"><div class="q">권선비 1:5(승압) 변압기의 1차에 120 V, 2 A가 들어간다. 2차 전압과 전류는? (이상 변압기)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 600 V, 0.4 A</span><br>전압 ×5 = 600 V, 전류 ÷5 = 0.4 A. 전력 240 VA는 양쪽이 같다.</div></details></div>
+    <div class="prob"><div class="q">"변압기는 전력을 증폭하지 못한다"를 권선비 공식으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> V<sub>S</sub> = V<sub>P</sub>/a이면 I<sub>S</sub> = a·I<sub>P</sub>이므로 V<sub>S</sub>I<sub>S</sub> = V<sub>P</sub>I<sub>P</sub>. 전압이 커진 만큼 전류가 정확히 줄어 전력(곱)은 불변이다(실제로는 손실만큼 오히려 감소).</div></details></div>
+    <div class="prob"><div class="q">변압기 명판이 W가 아닌 kVA로 표기되는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 변압기의 발열 한계는 전압(철손)과 전류(동손)로 정해지는데, 부하의 <strong>역률은 변압기가 결정할 수 없다</strong>. 같은 전류라도 역률에 따라 W는 달라지므로, 역률과 무관한 V×A(피상전력)로 정격을 정한다.</div></details></div>
+    <div class="prob"><div class="q">동손과 철손의 차이를 "부하 의존성" 기준으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 동손은 권선 저항의 I²R 발열로 <strong>부하 전류의 제곱에 비례</strong>한다. 철손(히스테리시스·와전류)은 자속(전압·주파수)이 만드는 손실로 <strong>부하와 무관하게 일정</strong>하다 — 무부하 상태에서도 발생한다.</div></details></div>
+    <div class="prob"><div class="q">변압기 철심을 통짜 철 대신 얇은 강판을 절연해 겹쳐(적층) 만드는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 교번 자속이 철심 자체에 유도하는 소용돌이 전류(<strong>와전류, eddy current</strong>)를 차단하기 위해서다. 얇은 판 사이의 절연이 와전류의 경로를 끊어 철손을 크게 줄인다.</div></details></div>
+    <div class="prob"><div class="q">권선비 a = 2인 변압기 2차에 8 Ω 스피커를 연결했다. 1차에서 보이는 임피던스는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 32 Ω</span><br>Z<sub>P</sub> = a²Z<sub>S</sub> = 4 × 8 = 32 Ω. 임피던스는 권선비의 제곱으로 변환된다.</div></details></div>
+    <div class="prob"><div class="q">출력 4.75 kW, 총손실 250 W인 변압기의 효율은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 95%</span><br>η = 4750/(4750+250) = 4750/5000 = 0.95.</div></details></div>
+    <div class="prob"><div class="q">동네 전봇대 위의 주상 변압기(pole-mounted transformer)는 승압용인가 강압용인가? 그 앞뒤의 대략적 전압 흐름을 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 강압용.</span><br>배전 선로의 중전압(수 kV~수십 kV)을 가정용 저전압(북미 120/240 V)으로 낮춘다. 전체 흐름: 발전소(승압, 송전용 수백 kV) → 변전소(강압) → 배전선 → 주상 변압기(최종 강압) → 가정. 상세한 계통 구조는 /power-generation-grid/ 교재에서 다룬다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="2" class="done-check"><label>2장 완료!</label></div>
+</section>
+
+<!-- ============ 3장 ============ -->
+<section class="chapter" id="ch3">
+  <h1>3장. DC 모터</h1>
+  <p class="ch-sub">DC Motors — 역기전력, 그리고 직권·분권·복권의 성격 차이</p>
+
+  <h2>1. 구조 <span class="en">(construction)</span></h2>
+  <ul>
+    <li><strong>고정자(계자) <span class="en">(stator / field)</span></strong>: 자기장을 만드는 고정 부분 — 영구자석 또는 <strong>계자 권선 <span class="en">(field winding)</span></strong>.</li>
+    <li><strong>회전자(전기자) <span class="en">(rotor / armature)</span></strong>: 전류를 받아 힘(토크)을 만들어 도는 부분. DC 모터에서는 회전자가 전기자입니다.</li>
+    <li><strong>정류자 <span class="en">(commutator)</span></strong> + <strong>브러시 <span class="en">(brush)</span></strong>: 회전자가 반 바퀴 돌 때마다 전기자 전류의 방향을 기계적으로 뒤집어, 토크가 항상 같은 방향이 되게 하는 장치. (마모되는 소모품 — DC 모터의 약점)</li>
+    <li><strong>토크 <span class="en">(torque, T)</span></strong>: 회전시키는 힘(N·m). T ∝ Φ·I<sub>A</sub> (자속 × 전기자 전류).</li>
+  </ul>
+
+  <h2>2. 역기전력과 속도 <span class="en">(back EMF and speed)</span></h2>
+  <p>1장에서 예고한 대로, 도는 모터는 스스로 발전해 <strong>역기전력 E<sub>b</sub></strong>를 만듭니다. 전기자 회로의 전압 방정식:</p>
+  <div class="formula">V = E<sub>b</sub> + I<sub>A</sub>R<sub>A</sub> &nbsp;&nbsp;→&nbsp;&nbsp; I<sub>A</sub> = (V − E<sub>b</sub>) / R<sub>A</sub> &nbsp;&nbsp;&nbsp; [E<sub>b</sub> ∝ 속도 × 자속]</div>
+  <ul>
+    <li><strong>기동 순간</strong>: 속도 0 → E<sub>b</sub> = 0 → I<sub>A</sub> = V/R<sub>A</sub>. R<sub>A</sub>가 매우 작으므로 <strong>정격의 5~10배 기동 전류</strong>가 흐릅니다(기동기가 필요한 이유, 5장).</li>
+    <li><strong>부하 증가</strong>: 속도 약간 감소 → E<sub>b</sub> 감소 → I<sub>A</sub> 증가 → 토크 증가로 새 평형. 모터가 "알아서" 부하에 맞추는 원리.</li>
+    <li><strong>속도 제어</strong>: 전기자 전압을 낮추면 감속, 계자(자속)를 <strong>약하게</strong> 하면 오히려 <strong>증속</strong>(약계자 제어).</li>
+  </ul>
+  <div class="analogy">역기전력은 <strong>러닝머신 위에서 달리기</strong>와 같습니다. 벨트가 빨라질수록(속도↑) 내가 앞으로 나아가기가 힘들어지듯(유효 전압↓), 모터가 빨라질수록 역기전력이 공급 전압을 밀어내 전류가 줄어듭니다. 정지 상태(벨트 정지)에서는 아무 저항이 없어 전류가 왈칵 쏟아지고요 — 그것이 기동 전류입니다.</div>
+
+  <h2>3. 직권·분권·복권 <span class="en">(series, shunt, compound)</span></h2>
+  <p>계자 권선을 전기자와 <strong>어떻게 연결하느냐</strong>에 따라 성격이 완전히 달라집니다.</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>직권 <span class="en">(series)</span></th><th>분권 <span class="en">(shunt)</span></th><th>복권 <span class="en">(compound)</span></th></tr>
+    <tr><td>계자 연결</td><td>전기자와 <strong>직렬</strong></td><td>전기자와 <strong>병렬</strong></td><td>직렬+병렬 둘 다</td></tr>
+    <tr><td>기동 토크</td><td><strong>매우 큼</strong> (T ∝ I²)</td><td>보통</td><td>큼</td></tr>
+    <tr><td>속도 특성</td><td>부하에 따라 크게 변함</td><td>거의 <strong>일정</strong></td><td>중간</td></tr>
+    <tr><td>무부하 시</td><td><strong>폭주 위험!</strong> (과속)</td><td>안전</td><td>안전</td></tr>
+    <tr><td>대표 용도</td><td>기중기, 전동차, 시동 전동기</td><td>공작기계, 팬, 정속 부하</td><td>프레스, 엘리베이터</td></tr>
+  </table></div>
+  <div class="caution">직권 모터는 <strong>부하 없이 돌리면 안 됩니다</strong>. 부하가 없으면 전류·자속이 작아지는데, 속도는 자속에 반비례해 상승하므로 이론상 무한대로 가속(폭주, runaway)해 원심력으로 파손됩니다. 그래서 직권 모터는 벨트가 아닌 직결 부하에만 씁니다. 시험·실무 모두의 중요 안전 상식입니다.</div>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>고정자 / 회전자</td><td>stator / rotor</td><td>고정 / 회전 부분</td></tr>
+    <tr><td>계자 / 전기자</td><td>field / armature</td><td>자기장 담당 / 전류·토크 담당</td></tr>
+    <tr><td>정류자 / 브러시</td><td>commutator / brush</td><td>전류 방향 반전 장치</td></tr>
+    <tr><td>토크</td><td>torque (N·m)</td><td>T ∝ Φ·I<sub>A</sub></td></tr>
+    <tr><td>역기전력</td><td>back EMF (E<sub>b</sub>)</td><td>속도×자속에 비례</td></tr>
+    <tr><td>기동 전류</td><td>starting (inrush) current</td><td>정격의 5~10배</td></tr>
+    <tr><td>직권 / 분권 / 복권</td><td>series / shunt / compound</td><td>계자 연결 방식</td></tr>
+    <tr><td>폭주</td><td>runaway (overspeed)</td><td>직권 무부하 위험</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 3-1. 역기전력과 전기자 전류</div>
+    <p>240 V 분권 모터의 전기자 저항이 0.5 Ω이다. (a) 기동 순간의 전기자 전류, (b) 정격 속도에서 역기전력이 230 V일 때의 전기자 전류를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a) 기동:</strong> E<sub>b</sub> = 0 → I<sub>A</sub> = 240/0.5 = <strong>480 A</strong>. (엄청난 돌입 전류!)</li>
+      <li><strong>(b) 정격:</strong> I<sub>A</sub> = (240−230)/0.5 = 10/0.5 = <strong>20 A</strong>.</li>
+      <li><strong>결론:</strong> 기동 전류가 정격의 24배 — 기동 저항기나 전압을 서서히 올리는 기동 장치가 반드시 필요하다(5장).</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 3-2. 모터 종류 선정</div>
+    <p>다음 부하에 알맞은 DC 모터 종류를 고르고 이유를 대라: (a) 무거운 짐을 끌어올리는 기중기(호이스트), (b) 일정 속도가 중요한 선반(공작기계).</p>
+    <ol class="steps">
+      <li><strong>(a) 직권 모터.</strong> 기동 토크가 전류의 제곱에 비례해 매우 크므로, 정지 상태의 무거운 짐을 끌어올리는 데 최적. 부하가 항상 걸려 있으므로 폭주 위험도 없다.</li>
+      <li><strong>(b) 분권 모터.</strong> 계자가 전원에 병렬이라 자속이 일정하고, 부하가 변해도 속도가 거의 일정(정속 특성)해 가공 품질이 유지된다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">계자(field)와 전기자(armature)의 역할을 각각 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 계자는 자기장(자속)을 만들고, 전기자는 전류를 받아 자기장 속에서 힘(토크)을 만들어 회전한다.</div></details></div>
+    <div class="prob"><div class="q">정류자(commutator)의 역할은 무엇인가? 없다면 어떻게 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 회전자가 반 바퀴 돌 때마다 전기자 전류 방향을 기계적으로 반전시켜 토크가 <strong>항상 같은 방향</strong>이 되게 한다. 없으면 반 바퀴마다 토크 방향이 뒤집혀 연속 회전이 불가능하다(제자리 진동).</div></details></div>
+    <div class="prob"><div class="q">DC 모터의 기동 전류가 정격보다 훨씬 큰 이유를 V = E_b + I_A·R_A로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 정지 상태에서는 속도가 0이라 E<sub>b</sub> = 0이므로 I<sub>A</sub> = V/R<sub>A</sub>. 전기자 저항 R<sub>A</sub>는 매우 작게 설계되므로(효율 때문) 전류가 정격의 5~10배로 치솟는다. 속도가 붙으면 E<sub>b</sub>가 커지며 전류가 정상으로 내려온다.</div></details></div>
+    <div class="prob"><div class="q">120 V 모터, R_A = 0.4 Ω, 운전 중 E_b = 112 V. 전기자 전류는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 20 A</span><br>I<sub>A</sub> = (120−112)/0.4 = 8/0.4 = 20 A.</div></details></div>
+    <div class="prob"><div class="q">부하가 갑자기 무거워지면 모터 전류가 저절로 늘어나는 과정을 순서대로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 부하↑ → 속도 약간↓ → E<sub>b</sub>(∝속도)↓ → (V−E<sub>b</sub>)↑ → I<sub>A</sub>↑ → 토크(∝I<sub>A</sub>)↑ → 새로운 평형에서 회전 유지. 역기전력이 자동 조절기 역할을 한다.</div></details></div>
+    <div class="prob"><div class="q">직권 모터의 계자와 전기자는 어떻게 연결되며, 기동 토크가 특별히 큰 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 직렬 연결 — 같은 전류가 계자와 전기자에 흐른다. 따라서 T ∝ Φ·I<sub>A</sub> ∝ I·I = <strong>I²</strong>. 큰 기동 전류가 자속까지 함께 키워 토크가 전류 제곱으로 커진다.</div></details></div>
+    <div class="prob"><div class="q">직권 모터를 무부하로 돌리면 위험한 이유를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 무부하 → 전류↓ → 자속↓. 속도는 대략 V/자속에 비례하므로 자속이 0에 가까워지면 속도가 급상승(폭주)해 원심력으로 회전자가 파손될 수 있다. 그래서 직권 모터는 부하와 직결하고, 벨트 구동(벨트 끊김 = 무부하)을 금한다.</div></details></div>
+    <div class="prob"><div class="q">분권 모터가 "정속 특성"을 갖는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 계자 권선이 전원에 <strong>병렬</strong>이라 계자 전류·자속이 부하와 무관하게 일정하다. 속도는 (V−I<sub>A</sub>R<sub>A</sub>)/자속에 비례하는데 I<sub>A</sub>R<sub>A</sub> 강하가 작으므로 부하가 변해도 속도 변화가 몇 % 이내로 작다.</div></details></div>
+    <div class="prob"><div class="q">분권 모터의 계자 저항을 키워 계자 전류를 줄이면(약계자) 속도는 어떻게 되는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 빨라진다.</span><br>속도 ∝ (V−I<sub>A</sub>R<sub>A</sub>)/Φ이므로 자속 Φ가 줄면 속도가 올라간다. 직관과 반대라 시험에 자주 나온다(단, 토크 여유는 줄어든다). 계자 회로가 <strong>단선되면</strong> 극단적 약계자로 위험한 과속이 된다.</div></details></div>
+    <div class="prob"><div class="q">브러시·정류자가 없는 "BLDC(브러시리스 DC) 모터"는 정류자의 역할을 무엇으로 대체하는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 전력전자 <strong>인버터(전자식 스위칭)</strong>가 회전자 위치 센서(홀 센서 등) 신호에 맞춰 권선 전류를 전자적으로 전환한다. 기계식 정류자의 마모·불꽃 문제가 사라져 드론·전기차·팬에 널리 쓰인다 — 전력전자 교재와 이어지는 지점이다.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="3" class="done-check"><label>3장 완료!</label></div>
+</section>
+
+<!-- ============ 4장 ============ -->
+<section class="chapter" id="ch4">
+  <h1>4장. 3상 유도 전동기</h1>
+  <p class="ch-sub">Three-Phase Induction Motors — 산업 현장의 일꾼, 전 세계 전력의 절반을 쓰는 모터</p>
+
+  <h2>1. 3상 전력 한눈에 <span class="en">(three-phase power, 도입)</span></h2>
+  <p><strong>3상 교류 <span class="en">(three-phase AC)</span></strong>는 <strong>120°씩 위상이 어긋난 사인파 3개</strong>를 한 세트로 보내는 방식입니다. 모터 관점의 핵심 이점 두 가지만 여기서 짚습니다(Y/Δ 결선 계산은 /power-generation-grid/ 교재 담당).</p>
+  <ul>
+    <li>세 상의 합산 전력이 <strong>시간에 대해 일정</strong> → 토크가 매끈(진동↓).</li>
+    <li>세 코일에 3상을 흘리면 <strong>회전 자기장 <span class="en">(rotating magnetic field)</span></strong>이 저절로 생긴다 → 기동 장치 없이도 스스로 도는 모터를 만들 수 있다.</li>
+  </ul>
+  <div class="analogy">회전 자기장은 <strong>파도타기 응원(웨이브)</strong>입니다. 관중(고정자 코일) 한 명 한 명은 제자리에서 일어났다 앉을 뿐이지만(각 상의 교류), 타이밍이 120°씩 어긋나 있어 "일어남"이라는 파도(자기장의 N극)는 경기장을 빙글빙글 돕니다. 움직이는 부품 없이 회전을 만드는 마법입니다.</div>
+
+  <h2>2. 유도 전동기의 원리 <span class="en">(induction motor)</span></h2>
+  <p><strong>3상 유도 전동기 <span class="en">(three-phase induction motor)</span></strong>의 회전자는 <strong>농형 <span class="en">(squirrel-cage rotor)</span></strong> — 알루미늄 막대를 끝고리로 단락한 "다람쥐 쳇바퀴" 모양의 단순한 도체 덩어리입니다. 전원도, 브러시도 연결되지 않습니다.</p>
+  <ol>
+    <li>고정자의 3상 전류가 <strong>회전 자기장</strong>을 만든다.</li>
+    <li>회전 자기장이 회전자 막대를 스치며 지나가면 (상대 운동 = 자속 변화) 막대에 전압이 <strong>유도</strong>되고 전류가 흐른다 — 변압기와 같은 원리라 "유도" 전동기.</li>
+    <li>이 전류가 자기장 속에서 힘을 받아(F = BIL) 회전자가 자기장을 <strong>쫓아 돈다</strong>.</li>
+  </ol>
+  <div class="keypoint">회전자는 회전 자기장을 <strong>절대 따라잡을 수 없습니다</strong>. 따라잡으면 상대 운동이 0 → 유도 전류 0 → 토크 0이 되기 때문입니다. 이 "약간 뒤처짐"이 유도 전동기의 존재 조건이며, 그 뒤처짐의 비율이 슬립입니다.</div>
+
+  <h2>3. 동기 속도와 슬립 <span class="en">(synchronous speed and slip)</span></h2>
+  <div class="formula">N<sub>s</sub> = 120f / P &nbsp;&nbsp;[동기 속도(rpm) = 120 × 주파수 ÷ 극수] &nbsp;&nbsp;&nbsp;&nbsp; s = (N<sub>s</sub> − N<sub>r</sub>) / N<sub>s</sub> &nbsp;&nbsp;[슬립]</div>
+  <ul>
+    <li><strong>동기 속도 <span class="en">(synchronous speed, N<sub>s</sub>)</span></strong>: 회전 자기장의 속도. 60 Hz에서 2극 = 3,600, 4극 = 1,800, 6극 = 1,200 rpm.</li>
+    <li><strong>극수 <span class="en">(number of poles, P)</span></strong>: 고정자 권선이 만드는 자극(N/S)의 수. 극수가 많을수록 느리다.</li>
+    <li><strong>슬립 <span class="en">(slip, s)</span></strong>: 동기 속도 대비 실제 회전자 속도(N<sub>r</sub>)의 뒤처짐 비율. 정격 운전 시 보통 <strong>2~5%</strong>.</li>
+  </ul>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>동기 속도 N<sub>s</sub></th><th>회전자 속도 N<sub>r</sub></th></tr>
+    <tr><td>무엇의 속도?</td><td><strong>자기장</strong>의 회전 속도</td><td>실제 <strong>축</strong>의 회전 속도</td></tr>
+    <tr><td>결정 요인</td><td>주파수와 극수만 (120f/P)</td><td>N<sub>s</sub>와 부하(슬립)</td></tr>
+    <tr><td>예 (60 Hz, 4극)</td><td>1,800 rpm</td><td>약 1,750 rpm (명판 값)</td></tr>
+  </table></div>
+  <div class="caution">명판(nameplate)의 1,750 rpm을 보고 "이상한 숫자"라고 생각하면 안 됩니다 — 1,800 rpm(동기 속도)에서 슬립 약 2.8%를 뺀 <strong>실제 정격 속도</strong>입니다. 명판 rpm에서 극수를 역산하는 문제(1,750 → 4극)가 시험 단골입니다.</div>
+
+  <h2>4. 유도 전동기의 특성</h2>
+  <ul>
+    <li>구조가 단순(농형 회전자 + 브러시 없음) → <strong>튼튼하고 저렴, 유지보수 최소</strong> — 산업 표준인 이유.</li>
+    <li>기동 전류: 직입 기동 시 정격의 <strong>6~8배</strong> (5장의 기동 방식이 필요한 이유).</li>
+    <li>속도는 전원 주파수에 묶여 있음 → 속도 제어에는 <strong>주파수를 바꾸는 VFD</strong>가 필요(5장).</li>
+    <li>단상 유도 전동기(가정용 팬 등)는 회전 자기장이 스스로 생기지 않아 <strong>기동 권선/커패시터</strong>로 첫 회전 방향을 만들어 준다.</li>
+  </ul>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>3상 교류</td><td>three-phase AC</td><td>120° 간격 3파</td></tr>
+    <tr><td>회전 자기장</td><td>rotating magnetic field</td><td>3상의 선물</td></tr>
+    <tr><td>유도 전동기</td><td>induction motor</td><td>유도로 회전자 전류 공급</td></tr>
+    <tr><td>농형 회전자</td><td>squirrel-cage rotor</td><td>단락 도체 막대</td></tr>
+    <tr><td>동기 속도</td><td>synchronous speed (N<sub>s</sub> = 120f/P)</td><td>자기장의 속도</td></tr>
+    <tr><td>극수</td><td>number of poles</td><td>2, 4, 6, …</td></tr>
+    <tr><td>슬립</td><td>slip (s)</td><td>정격 2~5%</td></tr>
+    <tr><td>명판</td><td>nameplate</td><td>정격 정보 표</td></tr>
+    <tr><td>기동 전류</td><td>starting (locked-rotor) current</td><td>정격의 6~8배</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 4-1. 동기 속도와 슬립</div>
+    <p>60 Hz, 6극 유도 전동기가 1,164 rpm으로 돌고 있다. (a) 동기 속도, (b) 슬립을 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> N<sub>s</sub> = 120×60/6 = 1,200 rpm.</li>
+      <li><strong>(b)</strong> s = (1200−1164)/1200 = 36/1200 = 0.03 = <strong>3%</strong>.</li>
+      <li><strong>답:</strong> 1,200 rpm, 슬립 3% — 정상 범위(2~5%)의 건강한 운전 상태다.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 4-2. 명판에서 극수 역산</div>
+    <p>명판에 60 Hz, 3,450 rpm이라 적힌 유도 전동기의 극수와 슬립을 구하라.</p>
+    <ol class="steps">
+      <li><strong>후보 동기 속도:</strong> 3,600(2극), 1,800(4극)… 중 3,450보다 살짝 큰 값 = 3,600 rpm.</li>
+      <li><strong>극수:</strong> P = 120f/N<sub>s</sub> = 120×60/3600 = <strong>2극</strong>.</li>
+      <li><strong>슬립:</strong> s = (3600−3450)/3600 ≈ 0.042 = 4.2%.</li>
+      <li><strong>요령:</strong> 명판 rpm 바로 위의 표준 동기 속도(3600/1800/1200/900)를 찾으면 극수가 바로 나온다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">3상 교류에서 세 상의 위상 간격은 몇 도인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 120°</span><br>360°를 3등분. 이 어긋남이 회전 자기장을 만든다.</div></details></div>
+    <div class="prob"><div class="q">"유도" 전동기라는 이름의 유래를 회전자에 전원이 연결되지 않는다는 사실과 함께 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 회전자 전류를 전선으로 공급하지 않고, 회전 자기장과 회전자의 상대 운동이 변압기처럼 전압을 <strong>유도(induction)</strong>해 만들기 때문이다. 그래서 브러시·정류자가 필요 없다.</div></details></div>
+    <div class="prob"><div class="q">60 Hz에서 2극, 4극, 8극 모터의 동기 속도를 각각 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 3,600 / 1,800 / 900 rpm</span><br>N<sub>s</sub> = 120×60/P.</div></details></div>
+    <div class="prob"><div class="q">4극 60 Hz 모터가 1,746 rpm으로 돈다. 슬립은?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 3%</span><br>N<sub>s</sub> = 1800. s = (1800−1746)/1800 = 0.03.</div></details></div>
+    <div class="prob"><div class="q">유도 전동기의 회전자가 동기 속도에 도달할 수 없는 이유를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 동기 속도가 되면 자기장과 회전자의 <strong>상대 운동이 0</strong> → 회전자에 유도되는 전압·전류가 0 → 토크가 0이 되어 감속한다. 토크를 내려면 반드시 약간 뒤처져(슬립) 상대 운동을 유지해야 한다.</div></details></div>
+    <div class="prob"><div class="q">부하가 늘면 유도 전동기의 슬립은 어떻게 변하는가? 그 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 커진다.</span><br>부하↑ → 속도 약간↓ → 상대 운동(슬립)↑ → 회전자 유도 전류·토크↑로 새 평형. DC 모터의 역기전력 자동 조절과 같은 구조의 자기 조절이다.</div></details></div>
+    <div class="prob"><div class="q">농형(squirrel-cage) 회전자의 구조를 묘사하고, 이 구조 덕에 얻는 장점을 두 가지 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 철심 홈에 알루미늄(구리) 막대를 넣고 양 끝을 고리(end ring)로 단락한, 쳇바퀴 모양의 도체 구조. 장점: ① 권선·브러시·정류자가 없어 <strong>튼튼하고 유지보수가 거의 불필요</strong>, ② 제작이 단순해 <strong>저렴</strong>하다.</div></details></div>
+    <div class="prob"><div class="q">50 Hz 지역(유럽)에서 4극 모터의 동기 속도는? 같은 모터를 60 Hz에서 쓰면?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 1,500 rpm → 1,800 rpm</span><br>N<sub>s</sub> = 120×50/4 = 1500. 주파수가 속도를 결정한다는 사실이 VFD(주파수 가변 = 속도 가변)의 근거다.</div></details></div>
+    <div class="prob"><div class="q">가정용 단상 선풍기 모터가 기동 커패시터를 갖는 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 단상 전원은 위상이 하나뿐이라 <strong>회전 자기장이 저절로 생기지 않는다</strong>(맥동 자기장뿐). 커패시터가 보조 권선의 전류 위상을 앞당겨 임시 2상을 만들어 회전 방향을 정해 주고, 기동 후에는 관성과 주권선으로 회전을 유지한다.</div></details></div>
+    <div class="prob"><div class="q">명판: 460 V, 60 Hz, 1,175 rpm. 이 모터의 극수와 슬립을 구하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 6극, 슬립 약 2.1%</span><br>1,175 바로 위 표준 동기 속도 = 1,200 rpm → P = 120×60/1200 = 6극. s = (1200−1175)/1200 ≈ 0.021.</div></details></div>
+  </div>
+
+  <div class="done-box"><input type="checkbox" data-ch="4" class="done-check"><label>4장 완료!</label></div>
+</section>
+
+<!-- ============ 5장 ============ -->
+<section class="chapter" id="ch5">
+  <h1>5장. 동기기와 모터 기동 방식</h1>
+  <p class="ch-sub">Synchronous Machines &amp; Motor Starting — 발전소의 심장, 그리고 6~8배 기동 전류를 다스리는 법</p>
+
+  <h2>1. 동기기 <span class="en">(synchronous machine)</span></h2>
+  <p><strong>동기 전동기/발전기 <span class="en">(synchronous motor/generator)</span></strong>는 회전자에 DC 여자 <span class="en">(excitation)</span>(또는 영구자석)로 만든 <strong>고정된 자극</strong>을 갖고, 회전 자기장에 <strong>자석처럼 물려서 정확히 동기 속도로</strong> 도는 기계입니다. 슬립 = 0.</p>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>유도 전동기 <span class="en">(induction)</span></th><th>동기 전동기 <span class="en">(synchronous)</span></th></tr>
+    <tr><td>회전 속도</td><td>동기 속도보다 약간 느림 (슬립 2~5%)</td><td><strong>정확히 동기 속도</strong> (슬립 0)</td></tr>
+    <tr><td>회전자</td><td>농형 (전원 연결 없음)</td><td>DC 여자 권선 또는 영구자석</td></tr>
+    <tr><td>기동</td><td>스스로 기동</td><td>스스로 기동 불가 — 보조 수단 필요</td></tr>
+    <tr><td>역률</td><td>지상(유도성)만</td><td>여자 조절로 <strong>역률 제어 가능</strong>(진상도!)</td></tr>
+    <tr><td>대표 용도</td><td>산업 범용 모터</td><td>발전기(발전소의 표준), 대형 정속 부하, 역률 보상</td></tr>
+  </table></div>
+  <p>발전소의 발전기는 사실상 전부 <strong>동기 발전기</strong>입니다 — 계통 주파수(60 Hz)를 정확히 지켜야 하기 때문입니다. 또 동기 전동기는 여자를 과하게 하면 <strong>진상 역률</strong>로 운전되어 공장 전체의 역률을 개선하는 "동기 콘덴서" 역할도 합니다(전력계통 교재의 역률 개선과 연결).</p>
+
+  <h2>2. 왜 기동 방식이 필요한가</h2>
+  <p>유도 전동기를 전원에 그대로 붙이면(직입 기동) 기동 전류가 정격의 <strong>6~8배</strong> 흐릅니다. 모터 자체는 짧은 시간이라 견디지만, 문제는 <strong>계통</strong>입니다: 같은 회로의 전압이 순간적으로 꺼져(전압 강하, voltage dip) 조명이 깜빡이고 다른 장비가 오동작하며, 기계에는 급격한 토크 충격이 갑니다.</p>
+  <div class="analogy">기동 방식은 <strong>수동변속기 차의 출발</strong>과 같습니다. 1단 없이 4단으로 급출발하면(직입 기동) 엔진이 울컥하고 동승자가 쏠리듯, 큰 모터를 그냥 붙이면 전기적·기계적 충격이 옵니다. 클러치를 천천히 이어 주는 것(소프트스타터), 기어를 낮은 단부터 올리는 것(Y-Δ, VFD)이 기동 방식입니다.</div>
+
+  <h2>3. 대표 기동 방식 비교</h2>
+  <div class="tablewrap"><table class="compare">
+    <tr><th></th><th>직입 기동 <span class="en">(DOL, direct-on-line / across-the-line)</span></th><th>와이-델타 기동 <span class="en">(star-delta, Y-Δ)</span></th><th>소프트스타터 <span class="en">(soft starter)</span></th><th>VFD <span class="en">(variable frequency drive)</span></th></tr>
+    <tr><td>방법</td><td>전전압을 바로 인가</td><td>기동은 Y결선(상전압 1/√3), 가속 후 Δ로 전환</td><td>SCR로 전압을 서서히 상승(위상 제어)</td><td>정류→DC→인버터로 <strong>전압·주파수를 함께</strong> 0부터 상승</td></tr>
+    <tr><td>기동 전류</td><td>6~8배 (최대)</td><td>직입의 <strong>1/3</strong></td><td>2~4배로 조절 가능</td><td>정격 근처까지 억제 가능</td></tr>
+    <tr><td>기동 토크</td><td>최대</td><td>직입의 1/3 (경부하 기동용)</td><td>전압²에 비례해 감소</td><td>저속에서도 정격 토크 가능</td></tr>
+    <tr><td>속도 제어</td><td>불가</td><td>불가</td><td>불가 (기동 전용)</td><td><strong>가능 — 유일</strong></td></tr>
+    <tr><td>비용</td><td>최저</td><td>낮음</td><td>중간</td><td>높음 (그러나 에너지 절감으로 회수)</td></tr>
+  </table></div>
+  <ul>
+    <li><strong>DOL</strong>: 소형 모터(수 kW 이하)의 표준. PLC 교재의 스타트/스톱 회로 + 전자접촉기가 바로 이것.</li>
+    <li><strong>Y-Δ</strong>: Y결선에서는 각 권선에 선간 전압의 1/√3만 걸려 전류·토크가 1/3로 준다. 팬·펌프처럼 가볍게 시작하는 부하에 적합. 전환 순간의 충격이 단점.</li>
+    <li><strong>소프트스타터</strong>: SCR 위상 제어(전력전자 교재 4장!)로 전압을 램프처럼 올림. 기동 후에는 바이패스 접촉기로 우회.</li>
+    <li><strong>VFD</strong>: 내부가 "정류기 + DC 링크 + PWM 인버터"(전력전자 교재의 총집합). 주파수를 바꿔 <strong>운전 중 속도 제어</strong>까지 되는 유일한 방식. V/f 비를 일정하게 유지하며 올린다.</li>
+  </ul>
+
+  <h2>핵심 용어 정리 (한국어 = English)</h2>
+  <div class="tablewrap"><table>
+    <tr><th>한국어</th><th>English</th><th>비고</th></tr>
+    <tr><td>동기 전동기 / 발전기</td><td>synchronous motor / generator</td><td>슬립 0</td></tr>
+    <tr><td>여자</td><td>excitation (DC field)</td><td>회전자 자극 만들기</td></tr>
+    <tr><td>직입 기동</td><td>DOL (direct-on-line) starting</td><td>전전압 기동</td></tr>
+    <tr><td>와이-델타 기동</td><td>star-delta (wye-delta, Y-Δ) starting</td><td>전류 1/3</td></tr>
+    <tr><td>소프트스타터</td><td>soft starter</td><td>SCR 전압 램프</td></tr>
+    <tr><td>가변 주파수 드라이브</td><td>VFD (variable frequency drive)</td><td>속도 제어 가능</td></tr>
+    <tr><td>전압 강하(순간)</td><td>voltage dip (sag)</td><td>기동 전류의 부작용</td></tr>
+    <tr><td>V/f 일정 제어</td><td>constant V/f (volts-per-hertz) control</td><td>VFD의 기본 원리</td></tr>
+  </table></div>
+
+  <h2>예제 풀이</h2>
+  <div class="example">
+    <div class="ex-title">예제 5-1. 기동 방식별 기동 전류 비교</div>
+    <p>정격 전류 40 A, 직입 기동 전류가 정격의 7배인 모터가 있다. (a) 직입 기동 전류, (b) Y-Δ 기동 시 기동 전류를 구하라.</p>
+    <ol class="steps">
+      <li><strong>(a)</strong> 40 × 7 = <strong>280 A</strong>.</li>
+      <li><strong>(b)</strong> Y-Δ는 직입의 1/3: 280/3 ≈ <strong>93 A</strong>.</li>
+      <li><strong>주의:</strong> 토크도 1/3이 되므로, 무거운 부하가 걸린 채로는 가속하지 못해 Y 상태에 머물다 과열될 수 있다 — 경부하 기동 조건 확인이 필수.</li>
+    </ol>
+  </div>
+  <div class="example">
+    <div class="ex-title">예제 5-2. 기동/제어 방식 선정</div>
+    <p>다음 요구에 맞는 방식을 고르라: (a) 3 kW 컨베이어, 속도 고정, 최저 비용. (b) 200 kW 급수 펌프, 유량을 계절에 따라 30~100%로 조절, 에너지 절감이 핵심.</p>
+    <ol class="steps">
+      <li><strong>(a) DOL.</strong> 소용량이라 기동 전류 충격이 작고, 속도 제어가 필요 없으니 접촉기+과부하 계전기의 직입 기동이 가장 경제적이다.</li>
+      <li><strong>(b) VFD.</strong> 속도(유량) 제어가 필요한 유일한 방식. 펌프 동력은 속도의 세제곱에 비례하므로, 유량 50% 운전 시 이론상 동력이 1/8 — 밸브 조절 방식 대비 막대한 에너지를 절감해 VFD 비용을 회수한다.</li>
+    </ol>
+  </div>
+
+  <h2>연습문제 (10문제)</h2>
+  <div class="problems">
+    <div class="prob"><div class="q">동기 전동기와 유도 전동기의 회전 속도 차이를 "슬립"으로 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 유도 전동기는 토크를 내기 위해 반드시 슬립(2~5%)이 필요해 동기 속도보다 느리게 돌지만, 동기 전동기는 회전자 자극이 회전 자기장에 자석처럼 물려 <strong>슬립 0으로 정확히 동기 속도</strong>로 돈다.</div></details></div>
+    <div class="prob"><div class="q">발전소의 발전기가 동기기인 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 계통의 주파수(60 Hz)는 곧 발전기의 회전 속도이므로, 속도가 주파수에 정확히 고정되는 <strong>동기 발전기</strong>여야 계통 주파수를 정밀하게 유지·공유할 수 있다.</div></details></div>
+    <div class="prob"><div class="q">과여자 동기 전동기가 공장에서 "돈 버는" 부가 기능은 무엇인가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 역률 개선.</span><br>여자를 강하게 하면 진상(용량성) 역률로 운전되어, 공장의 유도성 부하가 끌어가는 무효전력을 상쇄한다(동기 콘덴서 효과). 역률 페널티 요금을 줄여 준다.</div></details></div>
+    <div class="prob"><div class="q">직입 기동(DOL)의 문제점을 계통 관점과 기계 관점에서 각각 쓰라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 계통 — 6~8배의 기동 전류가 선로 전압을 순간 강하시켜(voltage dip) 조명 깜빡임·타 장비 오동작을 일으킨다. 기계 — 최대 토크가 한 번에 걸려 벨트·커플링·기어에 충격을 준다.</div></details></div>
+    <div class="prob"><div class="q">Y-Δ 기동에서 기동 전류가 1/3이 되는 이유를 설명하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> Y결선에서는 각 권선에 선간 전압의 1/√3이 걸려 권선 전류가 1/√3, 게다가 Y결선의 선전류는 권선 전류와 같아서 Δ 직입 대비 선전류가 (1/√3)×(1/√3) = <strong>1/3</strong>이 된다. 토크도 전압²에 비례해 1/3.</div></details></div>
+    <div class="prob"><div class="q">소프트스타터의 내부 소자와 동작 원리는? (전력전자 교재와 연결)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 역병렬 <strong>SCR</strong>(상당 트라이악) 쌍이 각 상에 들어 있고, <strong>위상 제어</strong>로 점호각을 서서히 줄여 모터 전압을 램프처럼 올린다. 가속 완료 후엔 바이패스 접촉기로 SCR을 우회해 손실을 없앤다.</div></details></div>
+    <div class="prob"><div class="q">VFD의 내부 3단 구성을 쓰고, 각 단이 전력전자 교재의 어느 장에 해당하는지 연결하라.</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> ① 정류기(AC→DC — 정류회로 2장), ② DC 링크(커패시터 평활 — 필터 3장), ③ PWM 인버터(DC→가변 주파수 AC — PWM·스위칭 5장). VFD는 전력전자 과목의 종합 세트다.</div></details></div>
+    <div class="prob"><div class="q">VFD가 주파수를 낮출 때 전압도 같은 비율로 낮추는(V/f 일정) 이유는?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 모터 자속은 대략 V/f에 비례한다. 주파수만 낮추면 자속이 과대해져 철심이 포화되어 과열되고, 전압만 낮추면 자속·토크가 부족해진다. V/f를 일정하게 유지해야 자속이 정격으로 유지되어 저속에서도 정격 토크를 낼 수 있다.</div></details></div>
+    <div class="prob"><div class="q">정격 전류 60 A, 직입 기동 배수 7배인 모터를 소프트스타터로 기동 전류 3배로 제한했다. 기동 전류는 몇 A 줄었는가?</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답: 240 A 감소 (420 → 180 A)</span><br>직입 420 A, 소프트스타터 180 A.</div></details></div>
+    <div class="prob"><div class="q">팬·펌프 부하에 VFD를 적용하면 에너지 절감이 특히 큰 이유는? (상사 법칙)</div>
+      <details><summary>정답 및 해설 보기</summary><div class="answer"><span class="a-label">정답:</span> 원심 팬·펌프의 축동력은 속도의 <strong>세제곱</strong>에 비례한다(상사 법칙, affinity laws). 유량을 80%로 줄이면 동력은 0.8³ ≈ 51%, 절반이 된다. 댐퍼·밸브로 조이는 방식은 모터가 여전히 전속력으로 돌며 에너지를 낭비하는 것과 대조적이다.</div></details></div>
+  </div>
+
+  <div class="keypoint">🎉 유도 → 변압기 → DC 모터 → 유도 전동기 → 동기기·기동까지, ELEC 306·352·353의 큰 그림을 완성했습니다. 3상 Y/Δ 계산과 계통 쪽 시야는 자매 교재 <strong>/power-generation-grid/</strong>에서 이어집니다.</div>
+
+  <div class="done-box"><input type="checkbox" data-ch="5" class="done-check"><label>5장 완료! 전체 과정 수료 🎓</label></div>
+</section>
+
+<!-- ###CH_END### -->
+
+</main>
+</div>
+
+<script>
+const CHAPTERS = [
+  {id:0, title:"학습 안내", short:"개요", desc:"이 교재의 사용법과 전체 목차"},
+  {id:1, title:"1장. 전자기 유도 — 모든 기기의 원리", short:"1장", desc:"패러데이 법칙, 모터 작용과 발전기 작용"},
+  {id:2, title:"2장. 변압기", short:"2장", desc:"권선비, 승압/강압, 전류·임피던스 변환, 효율"},
+  {id:3, title:"3장. DC 모터", short:"3장", desc:"구조, 역기전력, 직권·분권·복권 특성"},
+  {id:4, title:"4장. 3상 유도 전동기", short:"4장", desc:"회전 자기장, 동기 속도, 슬립, 명판 읽기"},
+  {id:5, title:"5장. 동기기와 모터 기동 방식", short:"5장", desc:"동기 전동기·발전기, DOL, Y-Δ 기동, 소프트스타터, VFD"}
+];
+const KEY = "eet-machines-progress";
+let progress = {};
+try { progress = JSON.parse(localStorage.getItem(KEY)) || {}; } catch(e){ progress = {}; }
+
+function saveProgress(){ try{ localStorage.setItem(KEY, JSON.stringify(progress)); }catch(e){} }
+
+function buildNav(){
+  const nav = document.getElementById("navList");
+  nav.innerHTML = "";
+  CHAPTERS.forEach(c => {
+    const li = document.createElement("li");
+    const btn = document.createElement("button");
+    btn.dataset.ch = c.id;
+    const done = c.id > 0 && progress[c.id];
+    btn.innerHTML = `<span class="check">${c.id===0 ? "🏠" : (done ? "✔" : "·")}</span><span>${c.title}</span>`;
+    btn.onclick = () => showChapter(c.id);
+    li.appendChild(btn); nav.appendChild(li);
+  });
+  updateProgressBar();
+}
+
+function updateProgressBar(){
+  const total = CHAPTERS.length - 1;
+  const done = Object.keys(progress).filter(k => progress[k]).length;
+  document.getElementById("progressFill").style.width = (done/total*100) + "%";
+  document.getElementById("progressLabel").textContent = `${done} / ${total} 챕터 완료`;
+}
+
+function buildToc(){
+  const wrap = document.getElementById("tocCards");
+  wrap.innerHTML = "";
+  CHAPTERS.slice(1).forEach(c => {
+    const d = document.createElement("div");
+    d.className = "toc-card";
+    d.innerHTML = `<span class="badge">${progress[c.id] ? "✔ 완료" : ""}</span><div class="t">${c.title}</div><div class="d">${c.desc}</div>`;
+    d.onclick = () => showChapter(c.id);
+    wrap.appendChild(d);
+  });
+}
+
+function buildChapterNavs(){
+  CHAPTERS.forEach(c => {
+    if(c.id === 0) return;
+    const sec = document.getElementById("ch"+c.id);
+    if(!sec) return;
+    const nav = document.createElement("div");
+    nav.className = "ch-nav";
+    const prev = c.id - 1, next = c.id + 1;
+    let html = "";
+    html += `<button onclick="showChapter(${prev})">← ${prev===0 ? "학습 안내" : CHAPTERS[prev].title}</button>`;
+    if(next < CHAPTERS.length){
+      html += `<button onclick="showChapter(${next})">${CHAPTERS[next].title} →</button>`;
+    } else {
+      html += `<button onclick="showChapter(0)">🏠 처음으로</button>`;
+    }
+    nav.innerHTML = html;
+    sec.appendChild(nav);
+  });
+}
+
+function showChapter(n){
+  document.querySelectorAll("section.chapter").forEach(s => s.classList.remove("visible"));
+  const sec = document.getElementById("ch"+n);
+  if(sec) sec.classList.add("visible");
+  document.querySelectorAll("#navList button").forEach(b => b.classList.toggle("active", +b.dataset.ch === n));
+  if(n === 0) buildToc();
+  window.scrollTo({top:0});
+  try{ localStorage.setItem(KEY+"-last", n); }catch(e){}
+}
+
+document.addEventListener("change", e => {
+  if(e.target.classList && e.target.classList.contains("done-check")){
+    progress[e.target.dataset.ch] = e.target.checked;
+    saveProgress(); buildNav();
+  }
+});
+
+function initChecks(){
+  document.querySelectorAll(".done-check").forEach(cb => {
+    cb.checked = !!progress[cb.dataset.ch];
+  });
+}
+
+buildNav();
+buildChapterNavs();
+initChecks();
+let last = 0;
+try{ last = parseInt(localStorage.getItem(KEY+"-last")) || 0; }catch(e){}
+showChapter(last);
+</script>
+</body>
+</html>
