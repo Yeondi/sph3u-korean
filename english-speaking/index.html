@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="영어 문장을 직접 조립하고 변형한 뒤 말하기로 연결하는 한국어 학습 도구. 무료 브라우저 진도·간격 복습 지원.">
+  <title>English Speaking Lab · Yeondi's Study Hub</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="content.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">학습 내용으로 건너뛰기</a>
+<div class="layout">
+  <aside>
+    <a class="back" href="../">← Study Hub</a>
+    <h2>English Speaking Lab</h2>
+    <p class="muted small">문장 구성 → 변형 → 실시간 회화</p>
+    <label for="progress">공개된 챕터 학습 진도</label>
+    <progress id="progress" value="0" max="3"></progress>
+    <p id="progress-label" class="small"></p>
+    <nav aria-label="학습 챕터" id="navigation"></nav>
+    <p class="small muted">전체 10장 중 3장 공개<br>4~10장은 준비 중입니다.</p>
+  </aside>
+  <main id="main" tabindex="-1"></main>
+</div>
+<div id="notice" role="status" aria-live="polite"></div>
+<noscript>이 학습 도구는 JavaScript가 필요합니다. 브라우저 설정에서 JavaScript를 켜 주세요.</noscript>
+</body>
+</html>
